@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trinity Prayer House | Madukkarai, Coimbatore</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;color:#1c1c1c;background:#fff;overflow-x:hidden}
+:root{
+  --navy:#1b2d45;--navy-dark:#111e2e;--gold:#b8966a;--gold-light:#d4b48a;
+  --cream:#f7f4ef;--warm-gray:#f0ece6;--border:#d8d2c8;
+  --text-muted:#6b6560;--text-body:#3a3530;
+}
+
+/* ══ PAGE SYSTEM ══ */
+.page{display:none;min-height:100vh}
+.page.active{display:block}
+
+/* ══ NAVBAR ══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(17,30,46,0.97);backdrop-filter:blur(10px);
+  height:70px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;border-bottom:1px solid rgba(184,150,106,0.2);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;cursor:pointer}
+.nav-logo-mark{
+  width:42px;height:42px;border-radius:50%;
+  border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-family:'EB Garamond',serif;font-size:1.3rem;font-style:italic;flex-shrink:0;
+}
+.nav-logo-text strong{display:block;font-family:'EB Garamond',serif;font-size:0.95rem;font-weight:500;color:#fff;letter-spacing:0.03em}
+.nav-logo-text span{font-size:0.62rem;color:rgba(255,255,255,0.4);letter-spacing:0.12em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;list-style:none;gap:0}
+.nav-links a{
+  display:block;padding:0 0.9rem;height:70px;line-height:70px;
+  font-size:0.73rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;
+  color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.2s;cursor:pointer;
+  white-space:nowrap;
+}
+.nav-links a:hover,.nav-links a.active-nav{color:var(--gold-light)}
+.nav-cta{
+  padding:0.5rem 1.3rem;border:1.5px solid var(--gold);border-radius:3px;
+  font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold);text-decoration:none;cursor:pointer;transition:all 0.2s;white-space:nowrap;
+}
+.nav-cta:hover{background:var(--gold);color:var(--navy-dark)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+.hamburger span{display:block;width:22px;height:1.5px;background:#fff}
+.mob-menu{
+  display:none;flex-direction:column;
+  position:fixed;top:70px;left:0;right:0;background:var(--navy-dark);z-index:999;
+  border-top:1px solid rgba(184,150,106,0.2);
+  max-height:calc(100vh - 70px);overflow-y:auto;
+}
+.mob-menu.open{display:flex}
+.mob-menu a{
+  padding:1rem 2rem;font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer;
+}
+.mob-menu a:hover{color:var(--gold-light)}
+
+/* ══ SECTION UTILS ══ */
+.sec-label{
+  font-size:0.66rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:0.7rem;margin-bottom:0.6rem;
+}
+.sec-label.center{justify-content:center}
+.sec-label::after{content:'';height:1px;background:var(--gold);opacity:0.4;flex:0 0 36px}
+.sec-label.center::before{content:'';height:1px;background:var(--gold);opacity:0.4;flex:0 0 36px}
+h2.serif{font-family:'EB Garamond',serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:400;line-height:1.25;color:var(--navy)}
+h2.serif em{font-style:italic;color:var(--gold)}
+.btn-gold{
+  display:inline-block;padding:0.85rem 2.2rem;background:var(--gold);color:var(--navy-dark);
+  border:none;border-radius:3px;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background 0.2s;
+}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-outline-dark{
+  display:inline-block;padding:0.85rem 2.2rem;background:transparent;
+  border:1.5px solid rgba(255,255,255,0.4);color:#fff;border-radius:3px;
+  font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;transition:all 0.2s;
+}
+.btn-outline-dark:hover{border-color:#fff;background:rgba(255,255,255,0.08)}
+.btn-outline-navy{
+  display:inline-block;padding:0.75rem 2rem;background:transparent;
+  border:1.5px solid var(--navy);color:var(--navy);border-radius:3px;
+  font-size:0.73rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;transition:all 0.2s;
+}
+.btn-outline-navy:hover{background:var(--navy);color:#fff}
+
+/* ══════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════ */
+
+/* Hero */
+.hero{
+  min-height:100vh;background:#0a121e;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:120px 2rem 5rem;position:relative;overflow:hidden;
+}
+.hero-video-bg{
+  position:absolute;inset:0;z-index:0;
+}
+.hero-video-bg iframe{
+  width:100%;height:100%;position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(1.5);pointer-events:none;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(10,18,30,0.75) 0%,rgba(10,18,30,0.6) 50%,rgba(10,18,30,0.85) 100%);
+  z-index:1;
+}
+.hero-content{position:relative;z-index:2;max-width:760px}
+.hero-eyebrow{
+  font-size:0.66rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:1.6rem;display:flex;align-items:center;justify-content:center;gap:1rem;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';flex:0 0 50px;height:1px;background:var(--gold);opacity:0.5}
+.hero h1{
+  font-family:'EB Garamond',serif;font-size:clamp(2.8rem,7vw,5.5rem);
+  color:#fff;font-weight:400;line-height:1.15;margin-bottom:1.4rem;
+}
+.hero h1 em{font-style:italic;color:var(--gold-light)}
+.hero-sub{
+  font-family:'EB Garamond',serif;font-size:1.25rem;font-style:italic;
+  color:rgba(255,255,255,0.65);line-height:1.8;max-width:560px;margin:0 auto 2.8rem;
+}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* Welcome video section */
+.welcome-video-section{background:#fff;padding:5rem 2rem}
+.wv-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:4rem;align-items:center}
+.wv-embed{border-radius:8px;overflow:hidden;aspect-ratio:16/9;background:#000;box-shadow:0 12px 40px rgba(0,0,0,0.15)}
+.wv-embed iframe{width:100%;height:100%;display:block}
+.wv-text .sec-label{margin-bottom:0.6rem}
+.wv-text h2{font-family:'EB Garamond',serif;font-size:2.2rem;font-weight:400;color:var(--navy);line-height:1.3;margin-bottom:1rem}
+.wv-text h2 em{font-style:italic;color:var(--gold)}
+.wv-text p{color:var(--text-body);font-size:0.97rem;line-height:1.9;font-weight:300;margin-bottom:0.9rem}
+.wv-text a{
+  display:inline-block;margin-top:0.5rem;font-size:0.72rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none;
+  border-bottom:1.5px solid var(--gold);padding-bottom:2px;transition:color 0.2s;
+}
+.wv-text a:hover{color:var(--gold)}
+
+/* Service Times strip */
+.service-strip{background:var(--navy);padding:3.5rem 2rem}
+.ss-inner{max-width:1000px;margin:0 auto}
+.ss-head{text-align:center;margin-bottom:2.5rem}
+.ss-head h2{font-family:'EB Garamond',serif;font-size:2rem;font-weight:400;color:#fff}
+.ss-head h2 em{color:var(--gold-light);font-style:italic}
+.ss-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;border:1px solid rgba(184,150,106,0.2);border-radius:4px;overflow:hidden}
+.ss-item{padding:2rem 1.5rem;text-align:center;border-right:1px solid rgba(184,150,106,0.15);transition:background 0.2s}
+.ss-item:last-child{border-right:none}
+.ss-item:hover{background:rgba(184,150,106,0.08)}
+.ss-time{font-family:'EB Garamond',serif;font-size:2.4rem;color:#fff;line-height:1;margin-bottom:0.3rem}
+.ss-name{font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.06em}
+.ss-desc{font-size:0.78rem;color:rgba(255,255,255,0.45);font-style:italic;font-family:'EB Garamond',serif;margin-bottom:1rem}
+.ss-btn{font-size:0.66rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,150,106,0.4);padding-bottom:1px;cursor:pointer}
+
+/* Welcome card pair */
+.wc-pair{background:var(--cream)}
+.wc-row{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;min-height:380px}
+.wc-row+.wc-row{border-top:1px solid var(--border)}
+.wc-row.rev{direction:rtl}
+.wc-row.rev>*{direction:ltr}
+.wc-img{
+  display:flex;align-items:center;justify-content:center;min-height:340px;
+  font-family:'EB Garamond',serif;font-size:9rem;font-style:italic;overflow:hidden;
+}
+.wc-img.i1{background:linear-gradient(135deg,#1b2d45,#2d4a6e);color:rgba(184,150,106,0.25)}
+.wc-img.i2{background:linear-gradient(135deg,#2c1810,#5a3020);color:rgba(184,150,106,0.2)}
+.wc-txt{padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:center;background:#fff}
+.wc-txt h3{font-family:'EB Garamond',serif;font-size:1.9rem;font-weight:400;color:var(--navy);margin-bottom:0.9rem;line-height:1.3}
+.wc-txt h3 em{font-style:italic;color:var(--gold)}
+.wc-txt p{color:var(--text-body);font-size:0.95rem;line-height:1.9;font-weight:300;margin-bottom:0.7rem}
+.wc-txt p em{font-style:italic;color:var(--text-muted)}
+.wc-lnk{display:inline-block;margin-top:1rem;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:1.5px solid var(--gold);padding-bottom:2px;transition:color 0.2s}
+.wc-lnk:hover{color:var(--gold)}
+
+/* Home events preview */
+.home-events{background:#fff;padding:5rem 2rem}
+.he-inner{max-width:900px;margin:0 auto}
+.he-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem}
+.he-view{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:1px;cursor:pointer;transition:color 0.2s}
+.he-view:hover{color:var(--gold)}
+.ev-row{display:grid;grid-template-columns:64px 1fr;gap:1.5rem;align-items:start;padding:1.4rem 0;border-bottom:1px solid var(--border)}
+.ev-row:first-of-type{border-top:1px solid var(--border)}
+.ev-dbox{text-align:center}
+.ev-dbox .mo{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)}
+.ev-dbox .dy{font-family:'EB Garamond',serif;font-size:2rem;color:var(--navy);line-height:1.1}
+.ev-info h4{font-family:'EB Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--navy);margin-bottom:0.2rem}
+.ev-info h4 em{font-style:italic;color:var(--gold)}
+.ev-meta{font-size:0.73rem;font-weight:700;letter-spacing:0.05em;color:var(--text-muted);margin-bottom:0.3rem}
+.ev-info p{font-size:0.87rem;color:var(--text-body);line-height:1.65;font-weight:300}
+
+/* Newsletter */
+.nl-section{background:var(--navy);padding:5rem 2rem;text-align:center}
+.nl-inner{max-width:600px;margin:0 auto}
+.nl-inner h2{font-family:'EB Garamond',serif;font-size:2.4rem;color:#fff;font-weight:400;margin-bottom:0.8rem}
+.nl-inner h2 em{font-style:italic;color:var(--gold-light)}
+.nl-inner p{color:rgba(255,255,255,0.55);font-size:0.95rem;line-height:1.8;font-weight:300;margin-bottom:2rem}
+.nl-form{display:flex;gap:0.75rem;max-width:440px;margin:0 auto}
+.nl-form input{flex:1;padding:0.8rem 1rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:3px;color:#fff;font-family:'Lato',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s}
+.nl-form input::placeholder{color:rgba(255,255,255,0.3)}
+.nl-form input:focus{border-color:var(--gold)}
+.nl-form button{padding:0.8rem 1.5rem;background:var(--gold);color:var(--navy-dark);border:none;border-radius:3px;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;white-space:nowrap}
+.nl-form button:hover{background:var(--gold-light)}
+.nl-unsub{font-size:0.72rem;color:rgba(255,255,255,0.25);margin-top:1rem;font-style:italic;font-family:'EB Garamond',serif}
+
+/* ══════════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════════ */
+.page-hero{
+  padding:140px 2rem 5rem;text-align:center;
+  background:linear-gradient(160deg,var(--navy-dark) 0%,var(--navy) 100%);
+  position:relative;overflow:hidden;
+}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(184,150,106,0.1) 0%,transparent 65%)}
+.page-hero-inner{position:relative;max-width:700px;margin:0 auto}
+.page-hero h1{font-family:'EB Garamond',serif;font-size:clamp(2.5rem,6vw,4.5rem);color:#fff;font-weight:400;margin-bottom:1rem}
+.page-hero h1 em{font-style:italic;color:var(--gold-light)}
+.page-hero p{font-family:'EB Garamond',serif;font-size:1.2rem;font-style:italic;color:rgba(255,255,255,0.6);line-height:1.8}
+
+.about-intro{background:#fff;padding:5rem 2rem}
+.ai-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.ai-text h2{font-family:'EB Garamond',serif;font-size:2.2rem;font-weight:400;color:var(--navy);margin-bottom:1.2rem}
+.ai-text h2 em{font-style:italic;color:var(--gold)}
+.ai-text p{color:var(--text-body);font-size:0.97rem;line-height:1.9;font-weight:300;margin-bottom:1rem}
+.ai-quote{background:var(--navy);color:var(--gold-light);padding:2.8rem;border-radius:6px;font-family:'EB Garamond',serif;font-size:1.25rem;font-style:italic;line-height:1.8;position:relative}
+.ai-quote::before{content:'\201C';font-size:5rem;color:rgba(184,150,106,0.2);position:absolute;top:-0.5rem;left:1.2rem;line-height:1;font-style:normal}
+.ai-quote cite{display:block;font-style:normal;font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(212,180,138,0.6);margin-top:1.2rem}
+
+.vision-section{background:var(--cream);padding:5rem 2rem}
+.vs-inner{max-width:1100px;margin:0 auto}
+.vs-head{text-align:center;margin-bottom:3.5rem}
+.vision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.vg-item{background:#fff;padding:2.5rem 2rem;transition:background 0.2s}
+.vg-item:hover{background:var(--warm-gray)}
+.vg-icon{font-size:2rem;margin-bottom:1.2rem}
+.vg-item h4{font-family:'EB Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--navy);margin-bottom:0.6rem}
+.vg-item p{font-size:0.88rem;color:var(--text-body);line-height:1.75;font-weight:300}
+
+.pastor-section{background:#fff;padding:5rem 2rem}
+.ps-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start}
+.ps-photo{background:linear-gradient(135deg,var(--navy),#2d4a6e);border-radius:8px;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:6rem;color:rgba(184,150,106,0.3);font-family:'EB Garamond',serif;font-style:italic}
+.ps-text h3{font-family:'EB Garamond',serif;font-size:2rem;font-weight:400;color:var(--navy);margin-bottom:0.3rem}
+.ps-title{font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:block}
+.ps-text p{color:var(--text-body);font-size:0.97rem;line-height:1.9;font-weight:300;margin-bottom:1rem}
+.ps-sign{font-family:'EB Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--gold);margin-top:0.5rem}
+
+/* ══════════════════════════════════════
+   GALLERY PAGE
+══════════════════════════════════════ */
+.gallery-section{background:#fff;padding:5rem 2rem}
+.gallery-inner{max-width:1200px;margin:0 auto}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:3rem;
+}
+.gal-item{
+  aspect-ratio:1;border-radius:4px;overflow:hidden;cursor:pointer;
+  position:relative;
+}
+.gal-item:nth-child(7){grid-column:span 2;aspect-ratio:2/1}
+.gal-img{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'EB Garamond',serif;font-style:italic;font-size:1.2rem;
+  transition:transform 0.4s;position:relative;
+}
+.gal-item:hover .gal-img{transform:scale(1.04)}
+.gal-img.g1{background:linear-gradient(135deg,#1b2d45,#2d4a6e);color:rgba(184,150,106,0.5)}
+.gal-img.g2{background:linear-gradient(135deg,#2c1810,#5a3020);color:rgba(184,150,106,0.5)}
+.gal-img.g3{background:linear-gradient(135deg,#14302a,#1f5044);color:rgba(184,150,106,0.5)}
+.gal-img.g4{background:linear-gradient(135deg,#2a1430,#503060);color:rgba(184,150,106,0.5)}
+.gal-img.g5{background:linear-gradient(135deg,#301414,#603030);color:rgba(184,150,106,0.5)}
+.gal-img.g6{background:linear-gradient(135deg,#1a2410,#384820);color:rgba(184,150,106,0.5)}
+.gal-img.g7{background:linear-gradient(135deg,#1b2d45,#3a1810);color:rgba(184,150,106,0.5)}
+.gal-overlay{
+  position:absolute;inset:0;background:rgba(17,30,46,0);
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.3s;
+}
+.gal-item:hover .gal-overlay{background:rgba(17,30,46,0.55)}
+.gal-caption{color:#fff;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0;transition:opacity 0.3s}
+.gal-item:hover .gal-caption{opacity:1}
+/* Lightbox */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(10,18,30,0.95);z-index:2000;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox-inner{position:relative;max-width:800px;width:90%;text-align:center}
+.lightbox-img{width:100%;aspect-ratio:4/3;border-radius:6px}
+.lightbox-close{
+  position:absolute;top:-2.5rem;right:0;
+  background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer;opacity:0.7;
+}
+.lightbox-close:hover{opacity:1}
+.lightbox-label{color:var(--gold);font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-top:1rem}
+
+/* ══════════════════════════════════════
+   EVENTS PAGE
+══════════════════════════════════════ */
+.events-page{background:#fff;padding:5rem 2rem}
+.ep-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start}
+.events-list-wrap h3{font-family:'EB Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--navy);margin-bottom:1.5rem}
+.ev-card{
+  background:#fff;border:1px solid var(--border);border-left:4px solid var(--gold);
+  border-radius:0 6px 6px 0;padding:1.5rem;margin-bottom:1rem;
+  transition:box-shadow 0.2s;
+}
+.ev-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.08)}
+.ev-card-top{display:flex;gap:1.2rem;align-items:flex-start}
+.ev-card-date{min-width:56px;text-align:center;background:var(--navy);color:#fff;border-radius:4px;padding:0.5rem 0.4rem}
+.ev-card-date .mo{font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)}
+.ev-card-date .dy{font-family:'EB Garamond',serif;font-size:1.8rem;line-height:1}
+.ev-card-info h4{font-family:'EB Garamond',serif;font-size:1.15rem;font-weight:400;color:var(--navy);margin-bottom:0.2rem}
+.ev-card-info h4 em{font-style:italic;color:var(--gold)}
+.ev-card-meta{font-size:0.73rem;font-weight:700;color:var(--text-muted);letter-spacing:0.04em;margin-bottom:0.4rem}
+.ev-card-info p{font-size:0.86rem;color:var(--text-body);line-height:1.65;font-weight:300}
+/* Calendar widget */
+.calendar-widget{background:var(--cream);border:1px solid var(--border);border-radius:8px;overflow:hidden;position:sticky;top:90px}
+.cal-header{background:var(--navy);padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center}
+.cal-header h4{font-family:'EB Garamond',serif;font-size:1.2rem;color:#fff;font-weight:400}
+.cal-nav{background:none;border:none;color:var(--gold-light);font-size:1.2rem;cursor:pointer;padding:0.2rem 0.5rem;transition:color 0.2s}
+.cal-nav:hover{color:#fff}
+.cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);padding:0.8rem 0.5rem 0}
+.cal-days-header span{text-align:center;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);padding:0.3rem 0.5rem 1rem;gap:2px}
+.cal-day{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  font-size:0.82rem;color:var(--text-body);border-radius:50%;cursor:default;
+  transition:background 0.15s;
+}
+.cal-day.other-month{color:var(--border)}
+.cal-day.today{background:var(--gold);color:#fff;font-weight:700}
+.cal-day.has-event{background:rgba(27,45,69,0.1);color:var(--navy);font-weight:700;cursor:pointer}
+.cal-day.has-event:hover{background:var(--navy);color:#fff}
+.cal-legend{padding:1rem 1.5rem;border-top:1px solid var(--border)}
+.cal-legend p{font-size:0.75rem;color:var(--text-muted);font-style:italic;font-family:'EB Garamond',serif}
+.cal-event-dots{padding:0 1.5rem 1rem}
+.ced-item{display:flex;gap:0.6rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border)}
+.ced-item:last-child{border-bottom:none}
+.ced-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.ced-item span{font-size:0.78rem;color:var(--text-body);font-weight:300}
+.ced-item strong{font-size:0.72rem;color:var(--gold);display:block}
+
+/* ══════════════════════════════════════
+   SERMONS PAGE
+══════════════════════════════════════ */
+.sermons-page{background:#fff;padding:5rem 2rem}
+.sp-inner{max-width:1100px;margin:0 auto}
+.sermons-filter{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.sf-btn{
+  padding:0.5rem 1.2rem;border:1.5px solid var(--border);border-radius:3px;
+  font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--text-muted);background:#fff;cursor:pointer;transition:all 0.2s;
+}
+.sf-btn.active,.sf-btn:hover{border-color:var(--navy);color:var(--navy);background:var(--cream)}
+.sermons-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin-bottom:3rem}
+.sermon-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:box-shadow 0.2s,transform 0.2s}
+.sermon-card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.1);transform:translateY(-3px)}
+.sc-video{position:relative;aspect-ratio:16/9;background:#000}
+.sc-video iframe{width:100%;height:100%;display:block}
+.sc-body{padding:1.4rem}
+.sc-series{font-size:0.66rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem}
+.sc-body h4{font-family:'EB Garamond',serif;font-size:1.15rem;font-weight:400;color:var(--navy);margin-bottom:0.4rem;line-height:1.35}
+.sc-body p{font-size:0.85rem;color:var(--text-body);line-height:1.65;font-weight:300;margin-bottom:0.75rem}
+.sc-date{font-size:0.73rem;color:var(--text-muted);font-weight:600}
+.yt-channel-btn{text-align:center;padding:2rem 0}
+.yt-channel-btn a{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.85rem 2rem;background:#ff0000;color:#fff;
+  border:none;border-radius:3px;font-size:0.78rem;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:background 0.2s;
+}
+.yt-channel-btn a:hover{background:#cc0000}
+
+/* ══════════════════════════════════════
+   CONTACT PAGE
+══════════════════════════════════════ */
+.contact-page{background:#fff;padding:5rem 2rem}
+.cp-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.3fr;gap:4rem}
+.cp-left h2{font-family:'EB Garamond',serif;font-size:2rem;font-weight:400;color:var(--navy);margin-bottom:2rem}
+.cp-item{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start}
+.cp-icon{
+  width:44px;height:44px;border-radius:8px;background:var(--navy);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+}
+.cp-item h5{font-size:0.66rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem}
+.cp-item p,.cp-item a{font-size:0.9rem;color:var(--text-body);line-height:1.65;text-decoration:none;font-weight:300;transition:color 0.2s}
+.cp-item a:hover{color:var(--navy)}
+/* Social icons */
+.social-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-top:2rem}
+.social-card{
+  display:flex;align-items:center;gap:0.9rem;padding:0.9rem 1rem;
+  border:1px solid var(--border);border-radius:6px;text-decoration:none;
+  transition:all 0.2s;
+}
+.social-card:hover{border-color:var(--navy);background:var(--cream)}
+.social-icon{width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.social-icon.fb{background:#1877f2;color:#fff}
+.social-icon.ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff}
+.social-icon.yt{background:#ff0000;color:#fff}
+.social-icon.wa{background:#25d366;color:#fff}
+.social-card-text strong{display:block;font-size:0.8rem;font-weight:700;color:var(--navy);margin-bottom:0.1rem}
+.social-card-text span{font-size:0.72rem;color:var(--text-muted)}
+/* Contact form */
+.cp-form{background:var(--cream);border-radius:10px;padding:2.5rem}
+.cp-form h3{font-family:'EB Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--navy);margin-bottom:1.8rem}
+.fg{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem}
+.fg label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy)}
+.fg input,.fg select,.fg textarea{
+  padding:0.75rem 1rem;border:1px solid var(--border);border-radius:4px;
+  font-family:'Lato',sans-serif;font-size:0.9rem;color:var(--text-body);
+  background:#fff;outline:none;transition:border-color 0.2s;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--navy)}
+.fg textarea{min-height:100px;resize:vertical}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-submit{
+  width:100%;padding:0.95rem;background:var(--navy);color:#fff;
+  border:none;border-radius:4px;font-family:'Lato',sans-serif;
+  font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s;margin-top:0.5rem;
+}
+.form-submit:hover{background:var(--gold);color:var(--navy-dark)}
+/* Map */
+.map-section{background:var(--cream);padding:0}
+.map-wrap{width:100%;height:400px;border-top:3px solid var(--gold)}
+.map-wrap iframe{width:100%;height:100%;display:block;border:none}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{background:var(--navy-dark);padding:4rem 2rem 2rem;border-top:1px solid rgba(184,150,106,0.15)}
+.ft-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.ft-brand .fl{display:flex;align-items:center;gap:12px;text-decoration:none;cursor:pointer;margin-bottom:1.2rem}
+.ft-brand p{font-size:0.83rem;color:rgba(255,255,255,0.38);line-height:1.8;font-weight:300;max-width:220px}
+.ft-col h5{font-size:0.63rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.ft-col ul a{text-decoration:none;font-size:0.82rem;color:rgba(255,255,255,0.42);transition:color 0.2s;cursor:pointer}
+.ft-col ul a:hover{color:#fff}
+.ft-contact-item{margin-bottom:0.9rem}
+.ft-contact-item h6{font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.2rem}
+.ft-contact-item p,.ft-contact-item a{font-size:0.8rem;color:rgba(255,255,255,0.42);text-decoration:none;transition:color 0.2s}
+.ft-contact-item a:hover{color:#fff}
+.ft-social{display:flex;gap:0.6rem;margin-top:1.5rem}
+.ft-social a{
+  width:34px;height:34px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);
+  display:flex;align-items:center;justify-content:center;font-size:0.9rem;
+  text-decoration:none;color:rgba(255,255,255,0.4);transition:all 0.2s;
+}
+.ft-social a:hover{background:var(--gold);color:var(--navy-dark);border-color:var(--gold)}
+.ft-bottom{max-width:1100px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.07);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft-bottom p{font-size:0.73rem;color:rgba(255,255,255,0.22)}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:960px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .wv-inner,.ai-inner,.ep-inner,.cp-inner{grid-template-columns:1fr;gap:2.5rem}
+  .wc-row,.wc-row.rev{grid-template-columns:1fr;direction:ltr}
+  .ps-inner{grid-template-columns:1fr;gap:2rem}
+  .ps-photo{aspect-ratio:16/9;max-height:280px}
+  .ft-inner{grid-template-columns:1fr 1fr;gap:2rem}
+  .fg-row{grid-template-columns:1fr}
+  .ep-inner{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gal-item:nth-child(7){grid-column:span 1;aspect-ratio:1}
+}
+@media(max-width:600px){
+  .ss-grid{grid-template-columns:1fr}
+  .ss-item{border-right:none;border-bottom:1px solid rgba(184,150,106,0.15)}
+  .ss-item:last-child{border-bottom:none}
+  .ft-inner{grid-template-columns:1fr}
+  .ft-bottom{flex-direction:column;text-align:center}
+  .nl-form{flex-direction:column}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .social-grid{grid-template-columns:1fr}
+  .he-head{flex-direction:column;align-items:flex-start;gap:0.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-mark">T</div>
+    <div class="nav-logo-text">
+      <strong>Trinity Prayer House</strong>
+      <span>Madukkarai, Coimbatore</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home">Home</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a onclick="showPage('gallery')" id="nav-gallery">Gallery</a></li>
+    <li><a onclick="showPage('events')" id="nav-events">Events</a></li>
+    <li><a onclick="showPage('sermons')" id="nav-sermons">Sermons</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <span class="nav-cta" onclick="showPage('contact')">Plan a Visit</span>
+    <button class="hamburger" onclick="document.querySelector('.mob-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mob-menu">
+  <a onclick="showPage('home');this.closest('.mob-menu').classList.remove('open')">Home</a>
+  <a onclick="showPage('about');this.closest('.mob-menu').classList.remove('open')">About</a>
+  <a onclick="showPage('gallery');this.closest('.mob-menu').classList.remove('open')">Gallery</a>
+  <a onclick="showPage('events');this.closest('.mob-menu').classList.remove('open')">Events</a>
+  <a onclick="showPage('sermons');this.closest('.mob-menu').classList.remove('open')">Sermons</a>
+  <a onclick="showPage('contact');this.closest('.mob-menu').classList.remove('open')">Contact</a>
+</div>
+
+<!-- ════════════════════════════════════
+     HOME PAGE
+════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- Hero with YouTube background -->
+  <section class="hero">
+    <div class="hero-video-bg">
+      <!-- Replace VIDEO_ID with your actual YouTube video ID e.g. dQw4w9WgXcQ -->
+      <iframe src="https://www.youtube.com/embed/Z_8HZvFbnP0?autoplay=1&mute=1&loop=1&playlist=Z_8HZvFbnP0&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Trinity Prayer House · Madukkarai, Coimbatore</div>
+      <h1>Find Peace in a<br>Life of <em>Prayer</em></h1>
+      <p class="hero-sub">Develop deeper relationships with God and others through worship, fellowship, and spiritual formation in community.</p>
+      <div class="hero-btns">
+        <span class="btn-gold" onclick="showPage('contact')">Plan a Visit</span>
+        <span class="btn-outline-dark" onclick="showPage('sermons')">Watch Online</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Welcome video section -->
+  <section class="welcome-video-section">
+    <div class="wv-inner">
+      <div class="wv-embed">
+        <!-- Replace with your church welcome/intro YouTube video ID -->
+        <iframe src="https://www.youtube.com/embed/Z_8HZvFbnP0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="wv-text">
+        <div class="sec-label">Welcome</div>
+        <h2>Welcome to<br><em>Trinity Prayer House</em></h2>
+        <p>We are a Spirit-filled Christian community in Madukkarai, Coimbatore. Our church is a family — a place where every heart is welcomed, every life is valued, and every person can encounter the living God.</p>
+        <p>Whether you're visiting for the first time or looking for a church home, we are glad you're here.</p>
+        <a onclick="showPage('about')">About Our Church →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Times -->
+  <section class="service-strip">
+    <div class="ss-inner">
+      <div class="ss-head">
+        <h2>Sunday <em>Service Times</em></h2>
+      </div>
+      <div class="ss-grid">
+        <div class="ss-item">
+          <div class="ss-time">6:00 AM</div>
+          <div class="ss-name">Morning Worship</div>
+          <div class="ss-desc">45 minutes · All welcome</div>
+          <span class="ss-btn" onclick="showPage('contact')">Plan a Visit</span>
+        </div>
+        <div class="ss-item">
+          <div class="ss-time">9:00 AM</div>
+          <div class="ss-name">Family Service</div>
+          <div class="ss-desc">With Children's Church · Livestreamed</div>
+          <span class="ss-btn" onclick="showPage('contact')">Plan a Visit</span>
+        </div>
+        <div class="ss-item">
+          <div class="ss-time">6:00 PM</div>
+          <div class="ss-name">Evening Worship</div>
+          <div class="ss-desc">Praise, Word & Prayer</div>
+          <span class="ss-btn" onclick="showPage('contact')">Plan a Visit</span>
+        </div>
+        <div class="ss-item">
+          <div class="ss-time">6:30 PM</div>
+          <div class="ss-name">Wednesday Prayer</div>
+          <div class="ss-desc">Midweek prayer meeting</div>
+          <span class="ss-btn" onclick="showPage('contact')">Plan a Visit</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Welcome cards -->
+  <div class="wc-pair">
+    <div class="wc-row">
+      <div class="wc-img i1">✝</div>
+      <div class="wc-txt">
+        <div class="sec-label">Our Church</div>
+        <h3>A Family Rooted in<br><em>Faith & Prayer</em></h3>
+        <p>Trinity Prayer House exists to be a lighthouse in Madukkarai — a place where the broken are healed, the lost are found, and believers are strengthened to live for Christ.</p>
+        <p><em>We believe a life of prayer transforms not just what we do, but who we are.</em></p>
+        <span class="wc-lnk" onclick="showPage('about')">About Our Church →</span>
+      </div>
+    </div>
+    <div class="wc-row rev">
+      <div class="wc-img i2">♥</div>
+      <div class="wc-txt">
+        <div class="sec-label">Community</div>
+        <h3>We'd Love to<br>Get to Know <em>You</em></h3>
+        <p>Our ministry is rooted in spiritual fellowship and real friendship. No matter where you are on your faith journey, you are welcome here. This is your family.</p>
+        <p><em>Reach out to our Pastoral Team to start a conversation — we would love to hear from you.</em></p>
+        <span class="wc-lnk" onclick="showPage('contact')">Connect With Us →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upcoming Events preview -->
+  <section class="home-events">
+    <div class="he-inner">
+      <div class="he-head">
+        <div>
+          <div class="sec-label">Calendar</div>
+          <h2 class="serif">Upcoming <em>Events</em></h2>
+        </div>
+        <span class="he-view" onclick="showPage('events')">View All Events →</span>
+      </div>
+      <div class="ev-row">
+        <div class="ev-dbox"><div class="mo">May</div><div class="dy">18</div></div>
+        <div class="ev-info">
+          <div class="ev-meta">Sunday · 4:00 PM · Church Hall</div>
+          <h4>Youth <em>Praise Night</em></h4>
+          <p>An evening of powerful worship and testimonies for all young people aged 13–30.</p>
+        </div>
+      </div>
+      <div class="ev-row">
+        <div class="ev-dbox"><div class="mo">May</div><div class="dy">25</div></div>
+        <div class="ev-info">
+          <div class="ev-meta">Sunday · 9:00 PM · Church Hall</div>
+          <h4>All-Night <em>Prayer & Fasting</em></h4>
+          <p>A night set apart for prayer and intercession as the church seeks God together.</p>
+        </div>
+      </div>
+      <div class="ev-row">
+        <div class="ev-dbox"><div class="mo">Jun</div><div class="dy">1</div></div>
+        <div class="ev-info">
+          <div class="ev-meta">Sunday · 5:00 PM · Open Grounds</div>
+          <h4>Community <em>Outreach</em></h4>
+          <p>Reaching Madukkarai with food, prayer, and the love of Christ. Volunteers welcome!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="nl-section">
+    <div class="nl-inner">
+      <div class="sec-label" style="justify-content:center;color:var(--gold)">Stay Connected</div>
+      <h2>Stay <em>Connected</em></h2>
+      <p>Subscribe to our weekly newsletter and keep up with everything happening at Trinity Prayer House. Unsubscribe any time.</p>
+      <div class="nl-form">
+        <input type="email" placeholder="Your email address">
+        <button onclick="alert('Thank you! God bless you 🙏')">Subscribe</button>
+      </div>
+      <p class="nl-unsub">Unsubscribe at any time.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="ft-inner">
+      <div class="ft-brand">
+        <div class="fl" onclick="showPage('home')">
+          <div class="nav-logo-mark">T</div>
+          <div class="nav-logo-text">
+            <strong>Trinity Prayer House</strong>
+            <span>Madukkarai, Coimbatore</span>
+          </div>
+        </div>
+        <p>Equipping people to know God, grow in faith, and serve our community through the love of Jesus Christ.</p>
+        <div class="ft-social">
+          <a href="https://facebook.com" target="_blank" title="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" title="Instagram">◎</a>
+          <a href="https://youtube.com" target="_blank" title="YouTube">▶</a>
+          <a href="https://wa.me/91XXXXXXXXXX" target="_blank" title="WhatsApp">✉</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a onclick="showPage('home')">Home</a></li>
+          <li><a onclick="showPage('about')">About</a></li>
+          <li><a onclick="showPage('gallery')">Gallery</a></li>
+          <li><a onclick="showPage('events')">Events</a></li>
+          <li><a onclick="showPage('sermons')">Sermons</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a>Sunday 6:00 AM</a></li>
+          <li><a>Sunday 9:00 AM</a></li>
+          <li><a>Sunday 6:00 PM</a></li>
+          <li><a>Wednesday 6:30 PM</a></li>
+          <li><a>Friday 6:30 PM</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h5>Contact</h5>
+        <div class="ft-contact-item"><h6>Phone</h6><a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a></div>
+        <div class="ft-contact-item"><h6>Email</h6><a href="mailto:info@trinityprayer.org">info@trinityprayer.org</a></div>
+        <div class="ft-contact-item"><h6>Location</h6><p>Madukkarai, Coimbatore<br>Tamil Nadu, India</p></div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>© 2025 Trinity Prayer House Madukkarai · All Rights Reserved</p>
+      <p>Built with love for God's glory 🙏</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════
+     ABOUT PAGE
+════════════════════════════════════ -->
+<div id="page-about" class="page">
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="sec-label center" style="color:var(--gold);justify-content:center">Who We Are</div>
+      <h1>About <em>Trinity</em></h1>
+      <p>A Spirit-filled church family rooted in the love of Jesus Christ, serving Madukkarai since our founding.</p>
+    </div>
+  </section>
+
+  <!-- About intro -->
+  <section class="about-intro">
+    <div class="ai-inner">
+      <div class="ai-text">
+        <div class="sec-label">Our Story</div>
+        <h2>Welcome to<br><em>Trinity Prayer House</em></h2>
+        <p>Trinity Prayer House Madukkarai is a vibrant, Spirit-filled Christian community located in the heart of Madukkarai, Coimbatore. We are a church that believes the Bible is the living Word of God, that Jesus Christ is Lord and Saviour, and that the Holy Spirit is actively moving in the world today.</p>
+        <p>Our church was founded with a simple yet powerful vision: to be a place of genuine encounter with God — where people from all walks of life can come as they are and leave transformed by His grace.</p>
+        <p>From our Sunday worship services to our midweek gatherings, community outreach, and youth programmes, everything we do flows from our love for God and our love for the people of Madukkarai.</p>
+      </div>
+      <div class="ai-quote">
+        For where two or three gather in my name, there am I with them.
+        <cite>— Matthew 18:20</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision & Values -->
+  <section class="vision-section">
+    <div class="vs-inner">
+      <div class="vs-head">
+        <div class="sec-label center">Purpose</div>
+        <h2 class="serif" style="text-align:center">Our Vision <em>& Values</em></h2>
+      </div>
+      <div class="vision-grid">
+        <div class="vg-item">
+          <div class="vg-icon">📖</div>
+          <h4>Rooted in the Word</h4>
+          <p>We believe the Bible is the living, authoritative Word of God. Our teaching is grounded in Scripture, practical for everyday life, and delivered with clarity and love.</p>
+        </div>
+        <div class="vg-item">
+          <div class="vg-icon">🔥</div>
+          <h4>Spirit-Led Worship</h4>
+          <p>We cultivate an atmosphere where the Holy Spirit moves freely. Authentic praise, heartfelt prayer, and the presence of God are the heartbeat of our gatherings.</p>
+        </div>
+        <div class="vg-item">
+          <div class="vg-icon">🤝</div>
+          <h4>Community & Fellowship</h4>
+          <p>We love and serve one another. From the youngest child to the oldest member, everyone belongs here and every story matters in the family of God.</p>
+        </div>
+        <div class="vg-item">
+          <div class="vg-icon">🌍</div>
+          <h4>Outreach & Mission</h4>
+          <p>Called to go beyond our walls — we serve the people of Madukkarai and beyond with the compassion, generosity, and love of Christ in practical ways.</p>
+        </div>
+        <div class="vg-item">
+          <div class="vg-icon">🙏</div>
+          <h4>A House of Prayer</h4>
+          <p>Prayer is not just something we do — it is who we are. We believe in the power of prayer to transform hearts, heal lives, and change communities.</p>
+        </div>
+        <div class="vg-item">
+          <div class="vg-icon">✝</div>
+          <h4>Christ at the Centre</h4>
+          <p>Everything we do centres on the person and work of Jesus Christ — his life, death, resurrection, and coming return. He is our hope, our peace, and our salvation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pastor section -->
+  <section class="pastor-section">
+    <div class="ps-inner">
+      <div class="ps-photo">✝</div>
+      <div class="ps-text">
+        <div class="sec-label">Leadership</div>
+        <h3>Pastor's Welcome</h3>
+        <span class="ps-title">Senior Pastor · Trinity Prayer House, Madukkarai</span>
+        <p>We are so glad you found us. Trinity Prayer House exists to be a lighthouse in Madukkarai — a place where the broken are healed, the lost are found, and the faithful are strengthened in their walk with God.</p>
+        <p>No matter where you are in your journey — whether you've walked with Christ for decades or are just beginning to ask questions about faith — our doors and hearts are open to you. Come, experience God's love, and grow with us as a family in Christ.</p>
+        <p>We believe that church is not simply a building or a Sunday service. It is a living community of people committed to loving God, loving one another, and loving our neighbours. That is Trinity Prayer House.</p>
+        <div class="ps-sign">In His Service,<br>The Pastoral Team, Trinity Prayer House</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-inner">
+      <div class="ft-brand">
+        <div class="fl" onclick="showPage('home')">
+          <div class="nav-logo-mark">T</div>
+          <div class="nav-logo-text"><strong>Trinity Prayer House</strong><span>Madukkarai, Coimbatore</span></div>
+        </div>
+        <p>Equipping people to know God, grow in faith, and serve our community.</p>
+        <div class="ft-social">
+          <a href="https://facebook.com" target="_blank">f</a>
+          <a href="https://instagram.com" target="_blank">◎</a>
+          <a href="https://youtube.com" target="_blank">▶</a>
+          <a href="#" target="_blank">✉</a>
+        </div>
+      </div>
+      <div class="ft-col"><h5>Navigate</h5><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('gallery')">Gallery</a></li><li><a onclick="showPage('events')">Events</a></li><li><a onclick="showPage('sermons')">Sermons</a></li></ul></div>
+      <div class="ft-col"><h5>Services</h5><ul><li><a>Sunday 6:00 AM</a></li><li><a>Sunday 9:00 AM</a></li><li><a>Sunday 6:00 PM</a></li><li><a>Wednesday 6:30 PM</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-item"><h6>Phone</h6><a>+91 XXXXX XXXXX</a></div><div class="ft-contact-item"><h6>Email</h6><a>info@trinityprayer.org</a></div><div class="ft-contact-item"><h6>Address</h6><p>Madukkarai, Coimbatore</p></div></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 Trinity Prayer House Madukkarai</p><p>Built with love 🙏</p></div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════
+     GALLERY PAGE
+════════════════════════════════════ -->
+<div id="page-gallery" class="page">
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="sec-label center" style="color:var(--gold);justify-content:center">Our Community</div>
+      <h1>Life at <em>Trinity</em></h1>
+      <p>Moments of worship, fellowship, and love that define who we are as a church family.</p>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-inner">
+      <div class="sec-label">Photos</div>
+      <h2 class="serif">Our <em>Gallery</em></h2>
+      <p style="color:var(--text-muted);font-size:0.9rem;margin-top:0.5rem;font-weight:300">Click any photo to view it larger. Replace these placeholders with your real church photos.</p>
+
+      <div class="gallery-grid">
+        <div class="gal-item" onclick="openLightbox('Sunday Worship Service')">
+          <div class="gal-img g1">Sunday Worship<div class="gal-overlay"><span class="gal-caption">Sunday Worship</span></div></div>
+        </div>
+        <div class="gal-item" onclick="openLightbox('Youth Fellowship Night')">
+          <div class="gal-img g2">Youth Night<div class="gal-overlay"><span class="gal-caption">Youth Fellowship</span></div></div>
+        </div>
+        <div class="gal-item" onclick="openLightbox('Prayer Meeting')">
+          <div class="gal-img g3">Prayer<div class="gal-overlay"><span class="gal-caption">Prayer Meeting</span></div></div>
+        </div>
+        <div class="gal-item" onclick="openLightbox('Children\'s Ministry')">
+          <div class="gal-img g4">Children<div class="gal-overlay"><span class="gal-caption">Children's Ministry</span></div></div>
+        </div>
+        <div class="gal-item" onclick="openLightbox('Community Outreach')">
+          <div class="gal-img g5">Outreach<div class="gal-overlay"><span class="gal-caption">Community Outreach</span></div></div>
+        </div>
+        <div class="gal-item" onclick="openLightbox('Bible Study Group')">
+          <div class="gal-img g6">Bible Study<div class="gal-overlay"><span class="gal-caption">Bible Study</span></div></div>
+        </div>
+        <div class="gal-item" onclick="openLightbox('Special Celebration Service')">
+          <div class="gal-img g7">Celebration<div class="gal-overlay"><span class="gal-caption">Special Celebration</span></div></div>
+        </div>
+        <div class="gal-item" onclick="openLightbox('Baptism Service')">
+          <div class="gal-img g1">Baptism<div class="gal-overlay"><span class="gal-caption">Baptism Service</span></div></div>
+        </div>
+        <div class="gal-item" onclick="openLightbox('Christmas Service')">
+          <div class="gal-img g2">Christmas<div class="gal-overlay"><span class="gal-caption">Christmas Service</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-inner" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+      <div class="lightbox-img" id="lightbox-img" style="background:linear-gradient(135deg,#1b2d45,#2d4a6e);display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-style:italic;font-size:2rem;color:rgba(184,150,106,0.5)">Photo</div>
+      <div class="lightbox-label" id="lightbox-label"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="ft-inner">
+      <div class="ft-brand"><div class="fl" onclick="showPage('home')"><div class="nav-logo-mark">T</div><div class="nav-logo-text"><strong>Trinity Prayer House</strong><span>Madukkarai, Coimbatore</span></div></div><p>Equipping people to know God and grow in faith.</p><div class="ft-social"><a href="https://facebook.com" target="_blank">f</a><a href="https://instagram.com" target="_blank">◎</a><a href="https://youtube.com" target="_blank">▶</a><a href="#">✉</a></div></div>
+      <div class="ft-col"><h5>Navigate</h5><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('gallery')">Gallery</a></li><li><a onclick="showPage('events')">Events</a></li><li><a onclick="showPage('sermons')">Sermons</a></li></ul></div>
+      <div class="ft-col"><h5>Services</h5><ul><li><a>Sunday 6:00 AM</a></li><li><a>Sunday 9:00 AM</a></li><li><a>Sunday 6:00 PM</a></li><li><a>Wednesday 6:30 PM</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-item"><h6>Phone</h6><a>+91 XXXXX XXXXX</a></div><div class="ft-contact-item"><h6>Email</h6><a>info@trinityprayer.org</a></div><div class="ft-contact-item"><h6>Address</h6><p>Madukkarai, Coimbatore</p></div></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 Trinity Prayer House Madukkarai</p><p>Built with love 🙏</p></div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════
+     EVENTS PAGE
+════════════════════════════════════ -->
+<div id="page-events" class="page">
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="sec-label center" style="color:var(--gold);justify-content:center">What's Happening</div>
+      <h1>Church <em>Events</em></h1>
+      <p>Join us for these special gatherings, programmes, and celebrations throughout the year.</p>
+    </div>
+  </section>
+
+  <section class="events-page">
+    <div class="ep-inner">
+      <div class="events-list-wrap">
+        <div class="sec-label">Upcoming</div>
+        <h2 class="serif" style="margin-bottom:1.5rem">All <em>Events</em></h2>
+
+        <div class="ev-card">
+          <div class="ev-card-top">
+            <div class="ev-card-date"><div class="mo">May</div><div class="dy">18</div></div>
+            <div class="ev-card-info">
+              <div class="ev-card-meta">📍 Church Hall &nbsp;·&nbsp; Sunday 4:00 PM</div>
+              <h4>Youth <em>Praise Night</em></h4>
+              <p>An evening of powerful worship, testimonies, and fellowship for all young people aged 13–30. Come and experience the presence of God together.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ev-card">
+          <div class="ev-card-top">
+            <div class="ev-card-date"><div class="mo">May</div><div class="dy">25</div></div>
+            <div class="ev-card-info">
+              <div class="ev-card-meta">📍 Church Hall &nbsp;·&nbsp; Sunday 9:00 PM</div>
+              <h4>All-Night Prayer <em>&amp; Fasting</em></h4>
+              <p>A night set apart for prayer, intercession, and seeking the face of God together as a church family. All members welcome.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ev-card">
+          <div class="ev-card-top">
+            <div class="ev-card-date"><div class="mo">Jun</div><div class="dy">1</div></div>
+            <div class="ev-card-info">
+              <div class="ev-card-meta">📍 Open Grounds &nbsp;·&nbsp; Sunday 5:00 PM</div>
+              <h4>Community <em>Outreach</em> Programme</h4>
+              <p>Reaching the people of Madukkarai with food, prayer, and the love of Christ. Volunteers are warmly welcome — speak to a leader to sign up.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ev-card">
+          <div class="ev-card-top">
+            <div class="ev-card-date"><div class="mo">Jun</div><div class="dy">15</div></div>
+            <div class="ev-card-info">
+              <div class="ev-card-meta">📍 Church Hall &nbsp;·&nbsp; Daily 10:00 AM</div>
+              <h4>Children's <em>Vacation Bible School</em></h4>
+              <p>A week of fun, learning, and Scripture for children aged 5–12. Register your child at the church office or contact us below.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ev-card">
+          <div class="ev-card-top">
+            <div class="ev-card-date"><div class="mo">Jul</div><div class="dy">6</div></div>
+            <div class="ev-card-info">
+              <div class="ev-card-meta">📍 Church Hall &nbsp;·&nbsp; Sunday 3:00 PM</div>
+              <h4>Baptism <em>Sunday</em></h4>
+              <p>A special service celebrating new life in Christ. If you would like to be baptised, please speak to a pastor before this date.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ev-card">
+          <div class="ev-card-top">
+            <div class="ev-card-date"><div class="mo">Aug</div><div class="dy">10</div></div>
+            <div class="ev-card-info">
+              <div class="ev-card-meta">📍 Church Grounds &nbsp;·&nbsp; Sunday 4:00 PM</div>
+              <h4>Annual <em>Church Picnic</em></h4>
+              <p>A day of food, games, fellowship, and fun for the whole family. Come and celebrate the goodness of God with your church family.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar Widget -->
+      <div>
+        <div class="calendar-widget">
+          <div class="cal-header">
+            <button class="cal-nav" onclick="prevMonth()">‹</button>
+            <h4 id="cal-month-label">May 2025</h4>
+            <button class="cal-nav" onclick="nextMonth()">›</button>
+          </div>
+          <div class="cal-days-header">
+            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-legend"><p>Highlighted dates have events</p></div>
+          <div class="cal-event-dots" id="cal-events-list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-inner">
+      <div class="ft-brand"><div class="fl" onclick="showPage('home')"><div class="nav-logo-mark">T</div><div class="nav-logo-text"><strong>Trinity Prayer House</strong><span>Madukkarai, Coimbatore</span></div></div><p>Equipping people to know God and grow in faith.</p><div class="ft-social"><a href="https://facebook.com" target="_blank">f</a><a href="https://instagram.com" target="_blank">◎</a><a href="https://youtube.com" target="_blank">▶</a><a href="#">✉</a></div></div>
+      <div class="ft-col"><h5>Navigate</h5><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('gallery')">Gallery</a></li><li><a onclick="showPage('events')">Events</a></li><li><a onclick="showPage('sermons')">Sermons</a></li></ul></div>
+      <div class="ft-col"><h5>Services</h5><ul><li><a>Sunday 6:00 AM</a></li><li><a>Sunday 9:00 AM</a></li><li><a>Sunday 6:00 PM</a></li><li><a>Wednesday 6:30 PM</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-item"><h6>Phone</h6><a>+91 XXXXX XXXXX</a></div><div class="ft-contact-item"><h6>Email</h6><a>info@trinityprayer.org</a></div><div class="ft-contact-item"><h6>Address</h6><p>Madukkarai, Coimbatore</p></div></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 Trinity Prayer House Madukkarai</p><p>Built with love 🙏</p></div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════
+     SERMONS PAGE
+════════════════════════════════════ -->
+<div id="page-sermons" class="page">
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="sec-label center" style="color:var(--gold);justify-content:center">The Word</div>
+      <h1>Sermons & <em>Messages</em></h1>
+      <p>Be strengthened, equipped, and encouraged by the living Word of God from our Sunday services and special programmes.</p>
+    </div>
+  </section>
+
+  <section class="sermons-page">
+    <div class="sp-inner">
+      <div class="sec-label">Messages</div>
+      <h2 class="serif" style="margin-bottom:1.5rem">Recent <em>Sermons</em></h2>
+
+      <div class="sermons-filter">
+        <button class="sf-btn active">All Sermons</button>
+        <button class="sf-btn">Faith</button>
+        <button class="sf-btn">Prayer</button>
+        <button class="sf-btn">Grace</button>
+        <button class="sf-btn">Holy Spirit</button>
+        <button class="sf-btn">Family</button>
+      </div>
+
+      <div class="sermons-grid">
+
+        <!-- Sermon 1 – replace VIDEO_ID with real YouTube IDs from your church channel -->
+        <div class="sermon-card">
+          <div class="sc-video">
+            <iframe src="https://www.youtube.com/embed/Z_8HZvFbnP0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="sc-body">
+            <div class="sc-series">Series: Faith</div>
+            <h4>Walking By Faith, Not By Sight</h4>
+            <p>Trusting God completely even when our circumstances seem impossible. Based on 2 Corinthians 5:7.</p>
+            <div class="sc-date">May 4, 2025</div>
+          </div>
+        </div>
+
+        <!-- Sermon 2 -->
+        <div class="sermon-card">
+          <div class="sc-video">
+            <iframe src="https://www.youtube.com/embed/Z_8HZvFbnP0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="sc-body">
+            <div class="sc-series">Series: Prayer</div>
+            <h4>The Power of Persistent Prayer</h4>
+            <p>Jesus taught us to pray and never give up. Discover how consistent prayer transforms our hearts and lives.</p>
+            <div class="sc-date">Apr 27, 2025</div>
+          </div>
+        </div>
+
+        <!-- Sermon 3 -->
+        <div class="sermon-card">
+          <div class="sc-video">
+            <iframe src="https://www.youtube.com/embed/Z_8HZvFbnP0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="sc-body">
+            <div class="sc-series">Series: Grace</div>
+            <h4>Grace Greater Than All Our Sin</h4>
+            <p>No failure is beyond God's grace. Exploring the boundless love of the Father who runs to meet us.</p>
+            <div class="sc-date">Apr 20, 2025</div>
+          </div>
+        </div>
+
+        <!-- Sermon 4 -->
+        <div class="sermon-card">
+          <div class="sc-video">
+            <iframe src="https://www.youtube.com/embed/Z_8HZvFbnP0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="sc-body">
+            <div class="sc-series">Series: Holy Spirit</div>
+            <h4>Living in the Power of the Holy Spirit</h4>
+            <p>The Holy Spirit is not just for special occasions — He is for everyday life. A message on Spirit-led living.</p>
+            <div class="sc-date">Apr 13, 2025</div>
+          </div>
+        </div>
+
+        <!-- Sermon 5 -->
+        <div class="sermon-card">
+          <div class="sc-video">
+            <iframe src="https://www.youtube.com/embed/Z_8HZvFbnP0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="sc-body">
+            <div class="sc-series">Series: Family</div>
+            <h4>Building a Home on the Rock</h4>
+            <p>God's design for the family and how to build a household that honours Christ in every season.</p>
+            <div class="sc-date">Apr 6, 2025</div>
+          </div>
+        </div>
+
+        <!-- Sermon 6 -->
+        <div class="sermon-card">
+          <div class="sc-video">
+            <iframe src="https://www.youtube.com/embed/Z_8HZvFbnP0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="sc-body">
+            <div class="sc-series">Series: Faith</div>
+            <h4>When God Seems Silent</h4>
+            <p>What do we do when Heaven feels quiet? A message of hope and endurance for those in seasons of waiting.</p>
+            <div class="sc-date">Mar 30, 2025</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="yt-channel-btn">
+        <a href="https://youtube.com/@TrinityPrayerHouse" target="_blank">▶ &nbsp; View All Sermons on YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-inner">
+      <div class="ft-brand"><div class="fl" onclick="showPage('home')"><div class="nav-logo-mark">T</div><div class="nav-logo-text"><strong>Trinity Prayer House</strong><span>Madukkarai, Coimbatore</span></div></div><p>Equipping people to know God and grow in faith.</p><div class="ft-social"><a href="https://facebook.com" target="_blank">f</a><a href="https://instagram.com" target="_blank">◎</a><a href="https://youtube.com" target="_blank">▶</a><a href="#">✉</a></div></div>
+      <div class="ft-col"><h5>Navigate</h5><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('gallery')">Gallery</a></li><li><a onclick="showPage('events')">Events</a></li><li><a onclick="showPage('sermons')">Sermons</a></li></ul></div>
+      <div class="ft-col"><h5>Services</h5><ul><li><a>Sunday 6:00 AM</a></li><li><a>Sunday 9:00 AM</a></li><li><a>Sunday 6:00 PM</a></li><li><a>Wednesday 6:30 PM</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-item"><h6>Phone</h6><a>+91 XXXXX XXXXX</a></div><div class="ft-contact-item"><h6>Email</h6><a>info@trinityprayer.org</a></div><div class="ft-contact-item"><h6>Address</h6><p>Madukkarai, Coimbatore</p></div></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 Trinity Prayer House Madukkarai</p><p>Built with love 🙏</p></div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════
+     CONTACT PAGE
+════════════════════════════════════ -->
+<div id="page-contact" class="page">
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="sec-label center" style="color:var(--gold);justify-content:center">Get in Touch</div>
+      <h1>Contact <em>Us</em></h1>
+      <p>We would love to hear from you. Reach out, visit us, or connect with us on social media.</p>
+    </div>
+  </section>
+
+  <section class="contact-page">
+    <div class="cp-inner">
+      <!-- Left: info + socials -->
+      <div class="cp-left">
+        <h2>Find Us</h2>
+        <div class="cp-item">
+          <div class="cp-icon">📍</div>
+          <div>
+            <h5>Address</h5>
+            <p>Trinity Prayer House<br>Madukkarai, Coimbatore – 641105<br>Tamil Nadu, India</p>
+          </div>
+        </div>
+        <div class="cp-item">
+          <div class="cp-icon">📞</div>
+          <div>
+            <h5>Phone</h5>
+            <a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-top:2px">Monday – Saturday, 9 AM – 6 PM</p>
+          </div>
+        </div>
+        <div class="cp-item">
+          <div class="cp-icon">✉</div>
+          <div>
+            <h5>Email</h5>
+            <a href="mailto:info@trinityprayer.org">info@trinityprayer.org</a>
+          </div>
+        </div>
+        <div class="cp-item">
+          <div class="cp-icon">🕊</div>
+          <div>
+            <h5>Sunday Services</h5>
+            <p>6:00 AM · 9:00 AM · 6:00 PM</p>
+          </div>
+        </div>
+
+        <!-- Social media cards -->
+        <div style="margin-top:2rem">
+          <div class="sec-label" style="margin-bottom:1rem">Connect Online</div>
+          <div class="social-grid">
+            <a href="https://facebook.com/TrinityPrayerHouse" target="_blank" class="social-card">
+              <div class="social-icon fb">f</div>
+              <div class="social-card-text">
+                <strong>Facebook</strong>
+                <span>@TrinityPrayerHouse</span>
+              </div>
+            </a>
+            <a href="https://instagram.com/TrinityPrayerHouse" target="_blank" class="social-card">
+              <div class="social-icon ig">◎</div>
+              <div class="social-card-text">
+                <strong>Instagram</strong>
+                <span>@TrinityPrayerHouse</span>
+              </div>
+            </a>
+            <a href="https://youtube.com/@TrinityPrayerHouse" target="_blank" class="social-card">
+              <div class="social-icon yt">▶</div>
+              <div class="social-card-text">
+                <strong>YouTube</strong>
+                <span>@TrinityPrayerHouse</span>
+              </div>
+            </a>
+            <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="social-card">
+              <div class="social-icon wa">✉</div>
+              <div class="social-card-text">
+                <strong>WhatsApp</strong>
+                <span>Chat with us</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: contact form -->
+      <div class="cp-form">
+        <h3>Send a Message</h3>
+        <div class="fg-row">
+          <div class="fg"><label>First Name</label><input type="text" placeholder="John"></div>
+          <div class="fg"><label>Last Name</label><input type="text" placeholder="Paul"></div>
+        </div>
+        <div class="fg"><label>Email Address</label><input type="email" placeholder="john@example.com"></div>
+        <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
+        <div class="fg">
+          <label>Reason for Contact</label>
+          <select>
+            <option>General Enquiry</option>
+            <option>Prayer Request</option>
+            <option>New Visitor — Plan a Visit</option>
+            <option>Volunteering</option>
+            <option>Pastoral Counselling</option>
+            <option>Events & Programmes</option>
+            <option>Baptism</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label>Message</label><textarea placeholder="How can we help you?"></textarea></div>
+        <button class="form-submit" onclick="alert('Thank you for your message! We will get back to you soon.\n\nGod bless you! 🙏')">Send Message</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Map -->
+  <section class="map-section">
+    <div class="map-wrap">
+      <!-- Embedded Google Map for Madukkarai, Coimbatore -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31382.03822478741!2d76.92534!3d10.95000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba85a7e1c3e2c8b%3A0x4e3a6f7d8e9b1a2c!2sMadukkarai%2C%20Coimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-inner">
+      <div class="ft-brand"><div class="fl" onclick="showPage('home')"><div class="nav-logo-mark">T</div><div class="nav-logo-text"><strong>Trinity Prayer House</strong><span>Madukkarai, Coimbatore</span></div></div><p>Equipping people to know God and grow in faith.</p><div class="ft-social"><a href="https://facebook.com" target="_blank">f</a><a href="https://instagram.com" target="_blank">◎</a><a href="https://youtube.com" target="_blank">▶</a><a href="#">✉</a></div></div>
+      <div class="ft-col"><h5>Navigate</h5><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('gallery')">Gallery</a></li><li><a onclick="showPage('events')">Events</a></li><li><a onclick="showPage('sermons')">Sermons</a></li></ul></div>
+      <div class="ft-col"><h5>Services</h5><ul><li><a>Sunday 6:00 AM</a></li><li><a>Sunday 9:00 AM</a></li><li><a>Sunday 6:00 PM</a></li><li><a>Wednesday 6:30 PM</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-item"><h6>Phone</h6><a>+91 XXXXX XXXXX</a></div><div class="ft-contact-item"><h6>Email</h6><a>info@trinityprayer.org</a></div><div class="ft-contact-item"><h6>Address</h6><p>Madukkarai, Coimbatore</p></div></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 Trinity Prayer House Madukkarai</p><p>Built with love 🙏</p></div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════ -->
+<script>
+// ── Page routing ──
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active-nav'));
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active-nav');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+// ── Sermon filter buttons ──
+document.querySelectorAll('.sf-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.sf-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ── Gallery lightbox ──
+function openLightbox(label) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-label').textContent = label;
+  document.getElementById('lightbox-img').textContent = label;
+  lb.classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// ── Calendar ──
+const eventDates = {
+  '2025-5': [18, 25],
+  '2025-6': [1, 15],
+  '2025-7': [6],
+  '2025-8': [10]
+};
+const eventNames = {
+  '2025-5-18': 'Youth Praise Night',
+  '2025-5-25': 'All-Night Prayer & Fasting',
+  '2025-6-1':  'Community Outreach',
+  '2025-6-15': 'Vacation Bible School',
+  '2025-7-6':  'Baptism Sunday',
+  '2025-8-10': 'Annual Church Picnic'
+};
+const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+let calYear = 2025, calMonth = 4; // 0-indexed, May = 4
+
+function renderCalendar() {
+  const grid = document.getElementById('cal-grid');
+  const label = document.getElementById('cal-month-label');
+  const eventsList = document.getElementById('cal-events-list');
+  if (!grid) return;
+
+  label.textContent = monthNames[calMonth] + ' ' + calYear;
+
+  const first = new Date(calYear, calMonth, 1).getDay();
+  const days = new Date(calYear, calMonth + 1, 0).getDate();
+  const today = new Date();
+  const key = calYear + '-' + (calMonth + 1);
+  const highlighted = eventDates[key] || [];
+
+  grid.innerHTML = '';
+  for (let i = 0; i < first; i++) {
+    const d = document.createElement('div');
+    d.className = 'cal-day other-month';
+    grid.appendChild(d);
+  }
+  for (let d = 1; d <= days; d++) {
+    const el = document.createElement('div');
+    el.className = 'cal-day';
+    el.textContent = d;
+    const isToday = (d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear());
+    if (isToday) el.classList.add('today');
+    if (highlighted.includes(d)) { el.classList.add('has-event'); }
+    grid.appendChild(el);
+  }
+
+  // Events list below calendar
+  eventsList.innerHTML = '';
+  highlighted.forEach(d => {
+    const ek = calYear + '-' + (calMonth + 1) + '-' + d;
+    if (eventNames[ek]) {
+      const item = document.createElement('div');
+      item.className = 'ced-item';
+      item.innerHTML = `<div class="ced-dot"></div><div><strong>${monthNames[calMonth]} ${d}</strong><span>${eventNames[ek]}</span></div>`;
+      eventsList.appendChild(item);
+    }
+  });
+}
+
+function prevMonth() {
+  calMonth--;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCalendar();
+}
+function nextMonth() {
+  calMonth++;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCalendar();
+}
+
+// Render on load + when events page is shown
+renderCalendar();
+const origShowPage = showPage;
+window.showPage = function(name) {
+  origShowPage(name);
+  if (name === 'events') setTimeout(renderCalendar, 50);
+};
+</script>
+</body>
+</html>
