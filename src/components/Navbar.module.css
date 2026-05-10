@@ -1,0 +1,127 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1.5rem 0;
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+
+.navbar.scrolled {
+  background-color: rgba(17, 30, 46, 0.85); /* Sacred Navy with transparency */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--pure-white);
+}
+
+.logoMark {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--divine-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--divine-gold);
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.churchName {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.location {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.navbar.scrolled .location {
+  color: var(--pure-white);
+  opacity: 0.7;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLinks a:not(.btn-primary) {
+  color: var(--pure-white);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  transition: color 0.2s;
+}
+
+.navLinks a:not(.btn-primary):hover {
+  color: var(--divine-gold);
+}
+
+.mobileToggle {
+  display: none;
+  color: var(--pure-white);
+}
+
+@media (max-width: 992px) {
+  .navLinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--sacred-navy);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+  }
+
+  .navLinks.open {
+    right: 0;
+  }
+
+  .navLinks a:not(.btn-primary) {
+    font-size: 1.1rem;
+  }
+
+  .navLinks a.btn-primary {
+    margin-left: 0 !important;
+    margin-top: 1rem;
+  }
+
+  .mobileToggle {
+    display: block;
+  }
+}

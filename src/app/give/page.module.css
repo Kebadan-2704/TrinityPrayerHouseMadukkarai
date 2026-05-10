@@ -1,0 +1,187 @@
+.pageWrap {
+  padding-top: 80px;
+  background-color: var(--sacred-cream);
+  min-height: 100vh;
+}
+
+.headerSection {
+  position: relative;
+  background-color: var(--sacred-navy);
+  color: var(--pure-white);
+  text-align: center;
+  padding: 8rem 0;
+  overflow: hidden;
+}
+
+.headerBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.gradientOrb {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 80vw;
+  background: radial-gradient(circle, rgba(184, 150, 106, 0.15) 0%, rgba(27, 45, 69, 0) 60%);
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+.secLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--divine-gold);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.headerSection h1 {
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: var(--pure-white);
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.headerSection i {
+  color: var(--divine-gold);
+  font-weight: 400;
+}
+
+.headerSection p {
+  max-width: 650px;
+  margin: 0 auto;
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+}
+
+.giveGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: -4rem auto 0;
+  position: relative;
+  z-index: 10;
+}
+
+.primaryGiveCard, .secondaryCard {
+  background-color: var(--pure-white);
+  border-radius: 12px;
+  padding: 3rem;
+  box-shadow: 0 20px 40px rgba(27, 45, 69, 0.05);
+  border: 1px solid rgba(27, 45, 69, 0.05);
+}
+
+.secondaryMethods {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.secondaryCard {
+  padding: 2.5rem;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cardHeader h2 {
+  font-size: 1.75rem;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.cardHeader h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.cardDesc {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.accountDetails {
+  background-color: var(--sacred-cream);
+  border-radius: 8px;
+  padding: 2rem;
+  border: 1px solid var(--border);
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.detailRow:first-child { padding-top: 0; }
+.detailRow:last-child { padding-bottom: 0; border-bottom: none; }
+
+.detailRow span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.detailRow strong {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  color: var(--text-body);
+  text-align: right;
+}
+
+.upiNumber {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.5rem;
+  color: var(--sacred-navy);
+  margin: 1.5rem 0 1rem;
+  line-height: 1;
+}
+
+.subNote {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+@media (max-width: 992px) {
+  .giveGrid {
+    grid-template-columns: 1fr;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .primaryGiveCard, .secondaryCard {
+    padding: 2rem;
+  }
+  
+  .detailRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .detailRow strong {
+    text-align: left;
+  }
+}

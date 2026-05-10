@@ -1,0 +1,161 @@
+.footer {
+  background-color: var(--navy-dark);
+  color: var(--pure-white);
+  padding-top: 5rem;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+
+.brandCol .logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.logoMark {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--divine-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--divine-gold);
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.churchName {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.location {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.mission {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 300px;
+}
+
+.socials {
+  display: flex;
+  gap: 1rem;
+}
+
+.socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--pure-white);
+  transition: all 0.3s ease;
+}
+
+.socials a:hover {
+  background-color: var(--divine-gold);
+  border-color: var(--divine-gold);
+}
+
+.heading {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--divine-gold);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.navCol ul {
+  list-style: none;
+}
+
+.navCol li {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.navCol a {
+  transition: color 0.2s ease;
+}
+
+.navCol a:hover {
+  color: var(--pure-white);
+}
+
+.contactCol ul {
+  list-style: none;
+}
+
+.contactCol li {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contactCol li svg {
+  color: var(--divine-gold);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.contactCol span {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.2rem;
+}
+
+.contactCol p {
+  font-size: 0.95rem;
+  color: var(--pure-white);
+}
+
+.bottomBar {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 992px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
