@@ -1,0 +1,27 @@
+.pageWrap { padding-top: 0; background: var(--surface); min-height: 100vh; }
+
+.headerSection { position: relative; background: var(--primary); color: #fff; text-align: center; padding: 10rem 0 6rem; overflow: hidden; }
+.headerBg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+.headerOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(15,15,30,0.85) 0%, rgba(26,26,46,0.95) 100%); z-index: 2; }
+
+.secLabel { font-family: 'Inter', sans-serif; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 1rem; font-weight: 700; }
+.headerSection h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); color: #fff; line-height: 1.1; margin-bottom: 1.5rem; }
+.headerSubtext { max-width: 600px; margin: 0 auto; font-size: 1.1rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+.contentSection { padding: 5rem 0; background: var(--surface); }
+.contentGrid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+@media (min-width: 992px) { .contentGrid { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; } }
+
+.textContent h2 { font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem; }
+.textContent p { color: var(--text-body); line-height: 1.7; font-size: 1.05rem; margin-bottom: 1.5rem; }
+
+.gallerySection { padding: 2rem 0 6rem; background: var(--surface); }
+.galleryGrid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media (min-width: 768px) { .galleryGrid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+
+.galleryImageWrap { position: relative; width: 100%; padding-bottom: 75%; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.galleryImageWrap:hover img { transform: scale(1.05); }
+.galleryImageWrap img { transition: transform 0.6s var(--ease-out); }
+
+.backBtn { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s ease; }
+.backBtn:hover { color: var(--accent); }

@@ -1,0 +1,105 @@
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(10, 15, 25, 0.92);
+  backdrop-filter: blur(20px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: overlayIn 0.4s ease;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  animation: modalSlide 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+}
+
+@keyframes modalSlide {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.crossIcon {
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+.subtitle {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+
+.langGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.langBtn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.08);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.langBtn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+.langBtn.active {
+  background: rgba(184, 150, 106, 0.15);
+  border-color: var(--accent);
+}
+
+.flag {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.langLabel {
+  font-weight: 700;
+  font-size: 1rem;
+  flex: 1;
+}
+
+.langNative {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.45);
+}

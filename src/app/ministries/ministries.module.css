@@ -1,0 +1,25 @@
+.headerSection { position: relative; background: var(--primary); color: #fff; text-align: center; padding: 8rem 0 5rem; overflow: hidden; }
+.headerBg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+.headerOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(15,15,30,0.9) 0%, rgba(26,26,46,0.75) 100%); z-index: 2; }
+.secLabel { font-family: 'Inter', sans-serif; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 1rem; font-weight: 700; }
+.headerSection h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); color: #fff; line-height: 1.1; margin-bottom: 1rem; }
+.headerSection i { color: var(--accent); }
+.headerSubtext { max-width: 550px; margin: 0 auto; font-size: 1rem; color: rgba(255,255,255,0.7); }
+
+.ministrySection { background: var(--surface); }
+.ministryGrid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 768px) { .ministryGrid { grid-template-columns: repeat(2, 1fr); gap: 2rem; } }
+
+.ministryCard { background: var(--surface-alt); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border); display: flex; flex-direction: column; transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out); }
+.ministryCard:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.cardImageWrap { position: relative; width: 100%; padding-bottom: 55%; overflow: hidden; }
+.cardImageWrap img { transition: transform 0.6s var(--ease-out); }
+.ministryCard:hover .cardImageWrap img { transform: scale(1.05); }
+.cardImageOverlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; background: linear-gradient(to top, rgba(15,15,30,0.3) 0%, transparent 100%); z-index: 1; }
+.cardContent { padding: 2rem; flex: 1; display: flex; flex-direction: column; }
+@media (max-width: 768px) { .cardContent { padding: 1.5rem; } }
+.cardContent h2 { font-size: 1.6rem; margin-bottom: 0.8rem; }
+.cardContent p { color: var(--text-body); line-height: 1.7; flex: 1; font-size: 0.92rem; }
+
+.exploreLink { display: inline-block; margin-top: 1.5rem; color: var(--accent); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s ease, transform 0.3s ease; }
+.ministryCard:hover .exploreLink { color: var(--primary); transform: translateX(5px); }

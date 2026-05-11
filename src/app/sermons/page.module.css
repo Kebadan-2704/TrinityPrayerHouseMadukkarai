@@ -1,136 +1,70 @@
-.pageWrap {
-  padding-top: 80px; /* offset for fixed navbar */
-}
+.pageWrap { padding-top: 0; }
 
-.headerSection {
-  background-color: var(--sacred-navy);
-  color: var(--pure-white);
-  text-align: center;
-  padding: 6rem 0;
-}
+.headerSection { position: relative; background: var(--primary); color: #fff; text-align: center; padding: 8rem 0 5rem; overflow: hidden; }
+.headerBg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+.headerOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(15,15,30,0.9) 0%, rgba(26,26,46,0.75) 100%); z-index: 2; }
+.secLabel { font-family: 'Inter', sans-serif; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 1rem; font-weight: 700; }
+.headerSection h1 { font-size: clamp(2.2rem, 6vw, 4.5rem); color: #fff; line-height: 1.1; margin-bottom: 1rem; }
+.headerSection i { color: var(--accent); }
+.headerP { max-width: 550px; margin: 0 auto; font-size: 0.95rem; color: rgba(255,255,255,0.7); }
+@media (min-width: 768px) { .headerP { font-size: 1.05rem; } }
 
-.secLabel {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--divine-gold);
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
+.featuredSection { background: var(--surface-alt); padding: 3rem 0; border-bottom: 1px solid var(--border); }
+@media (min-width: 768px) { .featuredSection { padding: 5rem 0; } }
+.featuredGrid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; }
+@media (min-width: 992px) { .featuredGrid { grid-template-columns: 1.4fr 1fr; gap: 4rem; } }
 
-.headerSection h1 {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  color: var(--pure-white);
-  margin-bottom: 1.5rem;
-}
+.embedWrap { position: relative; padding-bottom: 56.25%; height: 0; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-lg); }
+.embedWrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-.headerSection i {
-  color: var(--divine-gold);
-}
+.featuredInfo h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 0.6rem; }
+.featuredDate { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 1rem; }
+.featuredDesc { color: var(--text-body); line-height: 1.7; margin-bottom: 1.5rem; font-size: 0.92rem; }
 
-.headerSection p {
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.8);
-}
+.editorialLink { display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-primary); border-bottom: 1px solid var(--accent); padding-bottom: 0.4rem; transition: gap 0.3s ease, color 0.3s ease; }
+.editorialLink:hover { gap: 1rem; color: var(--accent); }
 
-.sermonsSection {
-  background-color: var(--pure-white);
-}
+.sermonsSection { background: var(--surface); }
+.filterWrap { margin-bottom: 2rem; }
+@media (min-width: 768px) { .filterWrap { margin-bottom: 3rem; } }
+.archiveTitle { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1.5rem; }
+.archiveTitle i { color: var(--accent); }
 
-.filterWrap h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-}
+.filterBtns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.filterBtn { padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid var(--border); background: var(--surface-alt); color: var(--text-body); transition: all 0.25s ease; -webkit-tap-highlight-color: transparent; }
+@media (min-width: 768px) { .filterBtn { padding: 0.6rem 1.4rem; font-size: 0.75rem; } }
+.filterBtn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.filterBtn:hover:not(.active) { border-color: var(--primary); }
 
-.filterWrap i {
-  color: var(--divine-gold);
-}
+.sermonGrid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+@media (min-width: 600px) { .sermonGrid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+@media (min-width: 992px) { .sermonGrid { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
 
-.filterBtns {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 3rem;
-}
+.sermonCard { background: var(--surface-alt); border-radius: var(--radius-md); overflow: hidden; transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.sermonCard:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
 
-.filterBtn {
-  padding: 0.6rem 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  transition: all 0.2s;
-}
+.scVideoThumb { position: relative; padding-bottom: 56.25%; cursor: pointer; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+.thumbImg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease-out); }
+.scVideoThumb:hover .thumbImg { transform: scale(1.06); }
+.thumbOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(15,15,30,0.5) 0%, transparent 60%); z-index: 1; }
 
-.filterBtn:hover {
-  border-color: var(--sacred-navy);
-  color: var(--sacred-navy);
-}
+.playBtn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: rgba(255,255,255,0.12); backdrop-filter: blur(6px); border: 1.5px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); transition: all 0.3s var(--ease-out); z-index: 2; }
+@media (min-width: 768px) { .playBtn { width: 52px; height: 52px; } }
+.playBtn svg { width: 18px; height: 18px; margin-left: 2px; }
+.scVideoThumb:hover .playBtn { background: var(--accent); color: #fff; transform: translate(-50%, -50%) scale(1.1); }
 
-.filterBtn.active {
-  background-color: var(--sacred-navy);
-  color: var(--pure-white);
-  border-color: var(--sacred-navy);
-}
+.scBody { padding: 1.1rem; }
+@media (min-width: 768px) { .scBody { padding: 1.4rem; } }
+.scSeries { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.3rem; font-weight: 700; }
+.scTitle { font-size: 1rem; margin-bottom: 0.5rem; line-height: 1.3; color: var(--text-primary); }
+@media (min-width: 768px) { .scTitle { font-size: 1.1rem; } }
+.scDate { font-size: 0.78rem; color: var(--text-muted); }
 
-.sermonGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.sermonCard {
-  background-color: var(--sacred-cream);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.sermonCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-}
-
-.scVideo {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  background-color: #000;
-}
-
-.scVideo iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.scBody {
-  padding: 1.5rem;
-}
-
-.scSeries {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--divine-gold);
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-}
-
-.scTitle {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-  line-height: 1.3;
-}
-
-.scDate {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
+.modalOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15,15,30,0.96); backdrop-filter: blur(12px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem; animation: modalFadeIn 0.3s ease; }
+@keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modalContent { position: relative; width: 100%; max-width: 900px; background: #000; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); animation: modalScaleUp 0.35s var(--ease-out); }
+@keyframes modalScaleUp { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+.closeBtn { position: absolute; top: -38px; right: 4px; color: #fff; font-size: 1.8rem; cursor: pointer; background: none; border: none; transition: color 0.2s; padding: 0.5rem; }
+.closeBtn:hover { color: var(--accent); }
+.videoWrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+.videoWrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
