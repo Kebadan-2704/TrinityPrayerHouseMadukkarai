@@ -28,11 +28,11 @@ export default function Navbar() {
 
   const navItems = [
     { href: '/', label: t.home },
-    { href: '/new-here', label: t.newHere },
     { href: '/about', label: t.about },
     { href: '/sermons', label: t.sermons },
     { href: '/ministries', label: t.ministries },
     { href: '/events', label: t.events },
+    { href: '/special-meeting', label: 'Special Meeting' },
     { href: '/prayer', label: t.prayerPage },
     { href: '/give', label: t.giving },
     { href: '/contact', label: t.contact },

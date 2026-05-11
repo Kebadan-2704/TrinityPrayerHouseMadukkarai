@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
@@ -14,12 +15,36 @@ import { useLang } from '@/components/LangContext';
 export default function Home() {
   const { t } = useLang();
 
+  const heroImages = [
+    '/hero-bg.jpg',
+    '/slide-2.jpg',
+    '/slide-3.jpg',
+    '/slide-4.jpg',
+    '/slide-5.jpg'
+  ];
+
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImgIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       {/* ===== HERO with Particles ===== */}
       <section className={styles.hero}>
         <div className={styles.heroBg}>
-          <Image src="/church-interior.png" alt="Trinity Prayer House" fill style={{ objectFit: 'cover' }} priority />
+          {heroImages.map((src, idx) => (
+            <div 
+              key={src} 
+              className={`${styles.heroImgSlide} ${idx === currentImgIndex ? styles.active : ''}`}
+            >
+              <img src={src} alt="Trinity Prayer House" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+          ))}
           <div className={styles.heroOverlay}></div>
         </div>
         <FloatingParticles />
@@ -74,13 +99,13 @@ export default function Home() {
             <Parallax speed={0.15}>
               <div className={styles.imgMosaic}>
                 <div className={styles.mosaicLarge}>
-                  <Image src="/worship.png" alt="Worship" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
+                  <Image src="/new-worship.jpg" alt="Worship" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
                 <div className={styles.mosaicSmall}>
-                  <Image src="/prayer.png" alt="Prayer" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 50vw, 25vw" />
+                  <Image src="/mosaic-small-1.jpg" alt="Prayer" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
                 <div className={styles.mosaicSmall}>
-                  <Image src="/community.png" alt="Community" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 50vw, 25vw" />
+                  <Image src="/mosaic-small-2.jpg" alt="Community" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
               </div>
             </Parallax>
@@ -149,11 +174,17 @@ export default function Home() {
 
       {/* ===== COMMUNITY GALLERY with hover effects ===== */}
       <section className={styles.communityBand}>
+        <div className="container">
+          <ScrollReveal delay={100}>
+            <div className={`${styles.secLabel} text-center`}>Gallery</div>
+            <h2 className={`text-center ${styles.sectionHeading}`}>Special <i>Meeting</i></h2>
+          </ScrollReveal>
+        </div>
         <div className={`container ${styles.communityGrid}`}>
           {[
-            { src: '/community.png', alt: 'Church Community', label: t.about },
-            { src: '/bible.png', alt: 'Bible Study', label: t.bibleStudy },
-            { src: '/youth.png', alt: 'Youth Ministry', label: t.ministries },
+            { src: '/community-new-1.jpg', alt: 'Church Community', label: t.about },
+            { src: '/community-new-2.jpg', alt: 'Special Meeting', label: 'Special Meeting' },
+            { src: '/community-new-3.jpg', alt: 'Youth Ministry', label: t.ministries },
           ].map((img, i) => (
             <ScrollReveal key={i} delay={100 * (i + 1)} className={styles.communityImgWrap}>
               <Image src={img.src} alt={img.alt} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 33vw" />
