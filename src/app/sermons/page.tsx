@@ -6,7 +6,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 import { useLang } from '@/components/LangContext';
 
 const SERMONS = [
-  { id: 1, title: 'Sunday Service — Mother\\'s Day Special', series: 'Worship', category: 'Worship', youtubeId: 'dngkoXyTIFU', date: 'May 10, 2026' },
+  { id: 1, title: "Sunday Service — Mother's Day Special", series: 'Worship', category: 'Worship', youtubeId: 'dngkoXyTIFU', date: 'May 10, 2026' },
   { id: 2, title: 'Sunday Morning Service', series: 'Worship', category: 'Worship', youtubeId: 'NxzTbNiGhzw', date: 'May 4, 2026' },
   { id: 3, title: 'Fasting Prayer & Communion', series: 'Prayer', category: 'Prayer', youtubeId: 'CHTNywEu6xk', date: 'Apr 27, 2025' },
   { id: 4, title: 'Evening Worship Service', series: 'Worship', category: 'Worship', youtubeId: 'ggkIWO7wlXU', date: 'Apr 20, 2025' },
