@@ -142,7 +142,7 @@ export default function Home() {
             </Link>
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.latestSermonVideo}>
-            <YouTubeEmbed videoId="HdCWiWpGx_A" title="Latest Sermon" />
+            <YouTubeEmbed videoId="dngkoXyTIFU" title="Latest Sermon" />
           </ScrollReveal>
         </div>
       </section>
