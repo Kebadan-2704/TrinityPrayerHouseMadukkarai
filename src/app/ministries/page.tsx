@@ -8,16 +8,29 @@ import { useLang } from '@/components/LangContext';
 export default function Ministries() {
   const { t } = useLang();
   const ministries = [
-    { id: 'kids', title: t.kidsMin, subtitle: t.ministriesLabel, desc: t.kidsDesc, image: '/kids_ministry.png' },
-    { id: 'youth', title: t.youthMin, subtitle: t.ministriesLabel, desc: t.youthDesc, image: '/youth_ministry.png' },
-    { id: 'prayer', title: t.prayerMin, subtitle: t.ministriesLabel, desc: t.prayerDesc, image: '/prayer_ministry.png' },
-    { id: 'womens', title: t.womenMin, subtitle: t.ministriesLabel, desc: t.womenDesc, image: '/womens_ministry.png' },
+    { id: 'kids', title: t.kidsMin, subtitle: t.ministriesLabel, desc: t.kidsDesc, image: '/kids_ministry_new.jpg' },
+    { id: 'youth', title: t.youthMin, subtitle: t.ministriesLabel, desc: t.youthDesc, image: '/youth_ministry_new.jpg' },
+    { id: 'mens', title: t.mensMin, subtitle: t.ministriesLabel, desc: t.mensDesc, image: '/mens_ministry_new.jpg' },
+    { id: 'womens', title: t.womenMin, subtitle: t.ministriesLabel, desc: t.womenDesc, image: '/womens_ministry_new.jpg' },
+    { id: 'hindi', title: t.hindiMin, subtitle: t.ministriesLabel, desc: t.hindiDesc, image: '/hindi_ministry_new.jpg' },
+    { id: 'oldage', title: t.oldAgeMin, subtitle: t.ministriesLabel, desc: t.oldAgeDesc, image: '/oldage_ministry_new.jpg' },
+    { id: 'branches', title: t.branchMin, subtitle: t.ministriesLabel, desc: t.branchDesc, image: '/prayer_ministry.png' },
   ];
   return (
     <div className="pageWrap">
       <section className={styles.headerSection}>
         <div className={styles.headerBg}>
-          <Image src="/youth.png" alt="" fill style={{ objectFit: 'cover' }} />
+          <Image
+            src="/youth.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center 80%' /* Adjust '80%' to 'center', 'bottom', or a percentage to manually shift the image up/down */
+            }}
+          />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -34,7 +47,7 @@ export default function Ministries() {
             <Link href={`/ministries/${min.id}`} key={min.id} style={{ textDecoration: 'none' }}>
               <ScrollReveal delay={100 * (index + 1)} className={styles.ministryCard}>
                 <div className={styles.cardImageWrap}>
-                  <Image src={min.image} alt={min.title} fill style={{ objectFit: 'cover' }} />
+                  <Image src={min.image} alt={min.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
                   <div className={styles.cardImageOverlay}></div>
                 </div>
                 <div className={styles.cardContent}>

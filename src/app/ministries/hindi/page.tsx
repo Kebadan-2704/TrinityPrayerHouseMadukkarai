@@ -5,19 +5,19 @@ import Link from 'next/link';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
-export default function PrayerMinistryPage() {
+export default function HindiMinistryPage() {
   return (
     <div className={styles.pageWrap}>
       <section className={styles.headerSection}>
         <div className={styles.headerBg}>
-          <Image src="/prayer_ministry.png" alt="Prayer Ministry" fill style={{ objectFit: 'cover' }} priority />
+          <Image src="/prayer_ministry.png" alt="Hindi Ministry" fill style={{ objectFit: 'cover' }} priority />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <ScrollReveal delay={100}>
             <div className={styles.secLabel}>MINISTRY</div>
-            <h1>Prayer Ministry</h1>
-            <p className={styles.headerSubtext}>Intercessory prayer covering the church, city, and nation. We believe in the power of united prayer.</p>
+            <h1>Hindi Ministry</h1>
+            <p className={styles.headerSubtext}>Reaching out to the Hindi-speaking community with worship and the Word.</p>
           </ScrollReveal>
         </div>
       </section>
@@ -27,16 +27,16 @@ export default function PrayerMinistryPage() {
           <Link href="/ministries" className={styles.backBtn}>&larr; Back to Ministries</Link>
           <div className={styles.contentGrid}>
             <ScrollReveal className={styles.textContent}>
-              <h2>Standing in the Gap</h2>
+              <h2>Worship in Our Heart Language</h2>
               <p>
-                Prayer is the engine room of Trinity Prayer House. Our intercessory team meets regularly to stand in the gap for our church family, our leaders, our city, and the nations. We firmly believe that every great movement of God is birthed in prayer.
+                Our Hindi Ministry is dedicated to serving the Hindi-speaking population in and around Madukkarai. We believe that language should never be a barrier to encountering God's love.
               </p>
               <p>
-                Whether you are seeking prayer or feeling called to join our intercessors, there is a place for you. We host early morning prayer sessions, all-night prayer watches, and dedicated healing services.
+                Join us for our special Hindi services where we worship, study the Bible, and fellowship together. We are building a family of believers who encourage and support one another in Christ.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>
-               <Image src="/prayer_gallery_2.png" alt="Prayer group" fill style={{ objectFit: 'cover' }} />
+               <Image src="/prayer_gallery_2.png" alt="Hindi Ministry group" fill style={{ objectFit: 'cover' }} />
             </ScrollReveal>
           </div>
         </div>
