@@ -10,7 +10,7 @@ export default function About() {
     <div className="pageWrap">
       <section className={styles.headerSection}>
         <div className={styles.headerBg}>
-          <Image src="/church-interior.png" alt="" fill style={{ objectFit: 'cover' }} priority />
+          <Image src="/old.jpg" alt="" fill style={{ objectFit: 'cover' }} priority />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -36,10 +36,10 @@ export default function About() {
           </ScrollReveal>
           <ScrollReveal delay={400} className={styles.sideContent}>
             <div className={styles.pastorCard}>
-              <div className={styles.pastorImageWrap}><Image src="/pastor.png" alt="Pastor Vasanth Sathyanathan" fill style={{ objectFit: 'cover' }} /></div>
+              <div className={styles.pastorImageWrap}><Image src="/sath.png" alt="Pastor Vasanth Sathyanathan" fill style={{ objectFit: 'cover', objectPosition: '50% 3%' }} /></div>
               <div className={styles.pastorInfo}>
                 <div className={styles.secLabel}>{t.seniorPastor}</div>
-                <h3>Vasanth Sathyanathan</h3>
+                <h3>Pastor Sathyanathan</h3>
                 <p>{t.pastorDesc}</p>
               </div>
             </div>
@@ -50,14 +50,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className={styles.gallerySection}>
-        <div className={`container ${styles.galleryGrid}`}>
-          <ScrollReveal delay={100} className={styles.galleryImg}><Image src="/community.png" alt="Community" fill style={{ objectFit: 'cover' }} /></ScrollReveal>
-          <ScrollReveal delay={200} className={styles.galleryImg}><Image src="/bible.png" alt="Bible" fill style={{ objectFit: 'cover' }} /></ScrollReveal>
-          <ScrollReveal delay={300} className={styles.galleryImg}><Image src="/prayer.png" alt="Prayer" fill style={{ objectFit: 'cover' }} /></ScrollReveal>
-          <ScrollReveal delay={400} className={styles.galleryImg}><Image src="/youth.png" alt="Youth" fill style={{ objectFit: 'cover' }} /></ScrollReveal>
-        </div>
-      </section>
+
     </div>
   );
 }

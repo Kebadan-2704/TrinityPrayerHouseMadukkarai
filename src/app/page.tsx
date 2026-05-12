@@ -14,6 +14,14 @@ import { useLang } from '@/components/LangContext';
 
 export default function Home() {
   const { t } = useLang();
+  const [latestSermon, setLatestSermon] = useState<{ videoId: string; title: string; date: string } | null>(null);
+
+  useEffect(() => {
+    fetch('/api/latest-sermon')
+      .then(res => res.json())
+      .then(data => setLatestSermon(data))
+      .catch(err => console.error('Failed to fetch latest sermon:', err));
+  }, []);
 
   const heroImages = [
     '/hero-bg.jpg',
@@ -78,7 +86,7 @@ export default function Home() {
           <Counter end={50} suffix="+" label={t.statsYears} />
           <Counter end={5000} suffix="+" label={t.statsLives} />
           <Counter end={200} suffix="+" label={t.statsSermons} />
-          <Counter end={4} label={t.statsServices} />
+          <Counter end={10} label={t.statsServices} />
         </div>
       </section>
 
@@ -138,8 +146,10 @@ export default function Home() {
             {[
               { h: t.sunWorship, time: '9:30', ampm: 'AM', desc: t.sunDesc, icon: <Sun size={22} strokeWidth={1.5} /> },
               { h: t.hindiService, time: '6:30', ampm: 'PM', desc: t.hindiDesc, icon: <Heart size={22} strokeWidth={1.5} /> },
-              { h: t.bibleStudy, time: '7:30', ampm: 'PM', desc: t.bibleDesc, icon: <BookOpen size={22} strokeWidth={1.5} /> },
+              { h: t.bibleStudy, time: '6:30', ampm: 'PM', desc: t.bibleDesc, icon: <BookOpen size={22} strokeWidth={1.5} /> },
               { h: t.promiseService, time: '6:30', ampm: 'AM', desc: t.promiseDesc, icon: <Sparkles size={22} strokeWidth={1.5} /> },
+              { h: 'Fasting Prayer', time: '10:30', ampm: 'AM', desc: '1st Saturday of Every Month', icon: <Sun size={22} strokeWidth={1.5} /> },
+              { h: 'Night Prayer', time: '10:00', ampm: 'PM', desc: '4th Friday of Every Month', icon: <Heart size={22} strokeWidth={1.5} /> },
             ].map((s, i) => (
               <ScrollReveal key={i} delay={120 * (i + 1)} className={styles.serviceItem}>
                 <div className={styles.serviceCard}>
@@ -159,15 +169,15 @@ export default function Home() {
         <div className={`container ${styles.latestSermonGrid}`}>
           <ScrollReveal delay={100} className={styles.latestSermonText}>
             <div className={styles.secLabel}>{t.latestMessage}</div>
-            <h2>{t.latestTitle} <i>{t.latestTitleI}</i></h2>
-            <p>{t.latestDesc}</p>
+            <h2>{latestSermon?.title || t.latestTitle}</h2>
+            <p>{latestSermon?.date || t.latestDesc}</p>
             <Link href="/sermons" className={`${styles.editorialLink} ${styles.editorialLinkLight}`}>
               {t.seeAllSermons}
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </Link>
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.latestSermonVideo}>
-            <YouTubeEmbed videoId="dngkoXyTIFU" title="Latest Sermon" />
+            <YouTubeEmbed videoId={latestSermon?.videoId || "dngkoXyTIFU"} title="Latest Sermon" />
           </ScrollReveal>
         </div>
       </section>

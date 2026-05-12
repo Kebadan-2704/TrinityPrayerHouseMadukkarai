@@ -54,7 +54,7 @@ export default function Footer() {
           <ul>
             <li><Phone size={13} /><div><span>{t.phone}</span><p>+91 9786888999</p></div></li>
             <li><Mail size={13} /><div><span>{t.email}</span><p>trinityprayerhouse.mdk@gmail.com</p></div></li>
-            <li><MapPin size={13} /><div><span>{t.address}</span><p>Ukkadam Bypass Road, Madukkarai, Coimbatore - 641105</p></div></li>
+            <li><MapPin size={13} /><div><span>{t.address}</span><p>16/300, Gandhi Nagar, Madukkarai, Coimbatore - 641105</p></div></li>
           </ul>
         </div>
       </div>

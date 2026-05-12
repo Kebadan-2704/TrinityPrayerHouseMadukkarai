@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     telephone: '+919786888999',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Ukkadam Bypass Road',
+      streetAddress: '16/300, Gandhi Nagar',
       addressLocality: 'Madukkarai, Coimbatore',
       addressRegion: 'Tamil Nadu',
       postalCode: '641105',

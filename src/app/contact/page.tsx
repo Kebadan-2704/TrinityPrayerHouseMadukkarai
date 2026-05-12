@@ -47,7 +47,7 @@ export default function Contact() {
             <div className={styles.infoList}>
               <div className={styles.infoItem}>
                 <div className={styles.iconWrap}><MapPin size={20} /></div>
-                <div><h4>{t.address}</h4><p>Trinity Prayer House<br/>Ukkadam Bypass Road,<br/>Madukkarai, Coimbatore - 641105</p></div>
+                <div><h4>{t.address}</h4><p style={{ whiteSpace: 'nowrap' }}>Trinity Prayer House<br/>16/300, Gandhi Nagar,<br/>Madukkarai, Coimbatore - 641105</p></div>
               </div>
               <div className={styles.infoItem}>
                 <div className={styles.iconWrap}><Phone size={20} /></div>

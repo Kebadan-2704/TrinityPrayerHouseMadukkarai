@@ -127,7 +127,7 @@
 @media (min-width: 768px) { .serviceStrip { padding: 7rem 0; } }
 
 .serviceGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem; }
-@media (min-width: 768px) { .serviceGrid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+@media (min-width: 768px) { .serviceGrid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
 
 .serviceCard {
   background: var(--surface); border-radius: var(--radius-md); padding: 1.5rem;
