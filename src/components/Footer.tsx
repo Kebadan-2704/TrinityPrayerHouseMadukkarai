@@ -47,6 +47,7 @@ export default function Footer() {
             <li>{t.sunWorship}: 9:30 AM</li>
             <li>{t.hindiService}: Sun, 6:30 PM</li>
             <li>{t.bibleStudy}: Thu, 7:30 PM</li>
+            <li><Link href="https://meet.google.com/gct-xkdh-cni" target="_blank" rel="noopener noreferrer" style={{ color: '#c7a760' }}>Online Meet: Everyday, 9:00 PM</Link></li>
           </ul>
         </div>
         <div className={styles.contactCol}>

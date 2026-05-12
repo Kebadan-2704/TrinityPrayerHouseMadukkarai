@@ -20,14 +20,16 @@ const meetings = [
       '/special-meetings/meeting1/photo7.jpg',
     ],
   },
-  { id: 2, title: 'Special Meeting 2', ytId: 'dngkoXyTIFU', photos: ['/community-new-2.jpg'] },
-  { id: 3, title: 'Special Meeting 3', ytId: 'dngkoXyTIFU', photos: ['/community-new-2.jpg'] },
-  { id: 4, title: 'Special Meeting 4', ytId: 'dngkoXyTIFU', photos: ['/community-new-2.jpg'] },
-  { id: 5, title: 'Special Meeting 5', ytId: 'dngkoXyTIFU', photos: ['/community-new-2.jpg'] },
-  { id: 6, title: 'Special Meeting 6', ytId: 'dngkoXyTIFU', photos: ['/community-new-2.jpg'] },
-  { id: 7, title: 'Special Meeting 7', ytId: 'dngkoXyTIFU', photos: ['/community-new-2.jpg'] },
-  { id: 8, title: 'Special Meeting 8', ytId: 'dngkoXyTIFU', photos: ['/community-new-2.jpg'] },
-  { id: 9, title: 'Special Meeting 9', ytId: 'dngkoXyTIFU', photos: ['/community-new-2.jpg'] },
+  { id: 2, title: 'Maraven Live Praise & Worship', ytId: 'bwTC3XHRVxo', photos: ['/community-new-2.jpg'] },
+  { id: 3, title: 'Revival Word And Worship Night', ytId: 'auok0w_qM-E', photos: ['/community-new-2.jpg'] },
+  { id: 4, title: 'Revival Word & Worship By Pas. Joel Thomasraj', ytId: '7nuz6nZYsQI', photos: ['/community-new-2.jpg'] },
+  { id: 5, title: 'Prophetic Revival Meeting', ytId: 'OGG6IRLEPpk', photos: ['/community-new-2.jpg'] },
+  { id: 6, title: 'Special Palm Sunday Service', ytId: 'VfxL550hYNg', photos: ['/community-new-2.jpg'] },
+  { id: 7, title: 'BreakThrough Worship Night', ytId: 'K9wxb_oXWsw', photos: ['/community-new-2.jpg'] },
+  { id: 8, title: 'Special Sunday Service with Pas. Ranjith Jeba', ytId: 'zFcqm31QImE', photos: ['/community-new-2.jpg'] },
+  { id: 9, title: 'Special Sunday Service with Rev. Johnson Memana', ytId: '353-Tk-FxF8', photos: ['/community-new-2.jpg'] },
+  { id: 10, title: 'Prayer Month Special Meeting Day-1 with EVG K.A Abraham', ytId: 'DNnbwlOfDC0', photos: ['/community-new-2.jpg'] },
+  { id: 11, title: 'Prayer Month Special Meeting Day-2 with EVG K.A Abraham', ytId: 'oNbbb_cyMvE', photos: ['/community-new-2.jpg'] },
 ];
 
 // ── Per-meeting photo carousel component ──
@@ -85,8 +87,12 @@ export default function SpecialMeeting() {
             src="/special-meetings/meeting1/photo1.jpg"
             alt="Special Meeting"
             fill
-            style={{ objectFit: 'cover' }}
             priority
+            sizes="100vw"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center 70%' /* ← Adjust to reposition: 'center top', 'center bottom', 'center 60%', etc. */
+            }}
           />
           <div className={styles.headerOverlay}></div>
         </div>

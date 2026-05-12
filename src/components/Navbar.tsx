@@ -32,6 +32,7 @@ export default function Navbar() {
     { href: '/sermons', label: t.sermons },
     { href: '/ministries', label: t.ministries },
     { href: '/special-meeting', label: 'Special Meeting' },
+    { href: '/online-meet', label: 'Online Meet' },
     { href: '/prayer', label: t.prayerPage },
     { href: '/give', label: t.giving },
     { href: '/contact', label: t.contact },

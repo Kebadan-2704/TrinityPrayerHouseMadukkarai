@@ -9,7 +9,7 @@ import Counter from '@/components/ui/Counter';
 import Parallax from '@/components/ui/Parallax';
 import FloatingParticles from '@/components/ui/FloatingParticles';
 import YouTubeEmbed from '@/components/ui/YouTubeEmbed';
-import { Sun, Heart, BookOpen, Sparkles } from 'lucide-react';
+import { Sun, Heart, BookOpen, Sparkles, Video } from 'lucide-react';
 import { useLang } from '@/components/LangContext';
 
 export default function Home() {
@@ -148,6 +148,7 @@ export default function Home() {
               { h: t.hindiService, time: '6:30', ampm: 'PM', desc: t.hindiDesc, icon: <Heart size={22} strokeWidth={1.5} /> },
               { h: t.bibleStudy, time: '6:30', ampm: 'PM', desc: t.bibleDesc, icon: <BookOpen size={22} strokeWidth={1.5} /> },
               { h: t.promiseService, time: '6:30', ampm: 'AM', desc: t.promiseDesc, icon: <Sparkles size={22} strokeWidth={1.5} /> },
+              { h: 'Daily Online Meet', time: '9:00', ampm: 'PM', desc: <Link href="/online-meet" style={{ color: '#c7a760' }}>Join Everyday via Google Meet</Link>, icon: <Video size={22} strokeWidth={1.5} /> },
               { h: 'Fasting Prayer', time: '10:30', ampm: 'AM', desc: '1st Saturday of Every Month', icon: <Sun size={22} strokeWidth={1.5} /> },
               { h: 'Night Prayer', time: '10:00', ampm: 'PM', desc: '4th Friday of Every Month', icon: <Heart size={22} strokeWidth={1.5} /> },
             ].map((s, i) => (
