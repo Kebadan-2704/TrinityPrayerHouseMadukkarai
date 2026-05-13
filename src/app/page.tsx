@@ -111,31 +111,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== WELCOME with Parallax Images ===== */}
+      {/* ===== WELCOME with Single Image ===== */}
       <section className={`section-padding ${styles.welcomeSection}`}>
         <div className={`container ${styles.welcomeGrid}`}>
-          <ScrollReveal delay={100} className={styles.welcomeText}>
+          <ScrollReveal delay={100} className={styles.welcomeImageWrap}>
+            <Parallax speed={0.15}>
+              <div style={{ position: 'relative', paddingBottom: '80%', borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)' }}>
+                <Image src="/founder-photo.jpg" alt="Our Founders" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
+              </div>
+            </Parallax>
+          </ScrollReveal>
+          <ScrollReveal delay={300} className={styles.welcomeText}>
             <div className={styles.secLabel}>{t.ourStory}</div>
             <h2>{t.welcomeH2a}<br/>{t.welcomeH2b}</h2>
             <p className={styles.leadText}>{t.welcomeP1}</p>
             <p>{t.welcomeP2}</p>
-            <Link href="/about" className={styles.editorialLink}>
+            <Link href="/vision" className={styles.editorialLink}>
               {t.discoverHistory}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </Link>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ===== MISSION Section ===== */}
+      <section className={`section-padding ${styles.welcomeSection}`} style={{ paddingTop: 0 }}>
+        <div className={`container ${styles.welcomeGrid}`}>
+          <ScrollReveal delay={100} className={styles.welcomeText}>
+            <div className={styles.secLabel}>{t.missionUs}</div>
+            <h2>{t.missionH1a} {t.missionH1b}<br/>{t.missionH1c}</h2>
+            <p className={styles.leadText}>{t.missionP1}</p>
+            <p>{t.missionP2}</p>
+            <Link href="/mission" className={styles.editorialLink}>
+              Discover Our Mission
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </Link>
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.welcomeImageWrap}>
             <Parallax speed={0.15}>
-              <div className={styles.imgMosaic}>
-                <div className={styles.mosaicLarge}>
-                  <Image src="/new-worship.jpg" alt="Worship" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
-                </div>
-                <div className={styles.mosaicSmall}>
-                  <Image src="/mosaic-small-1.jpg" alt="Prayer" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 50vw, 25vw" />
-                </div>
-                <div className={styles.mosaicSmall}>
-                  <Image src="/mosaic-small-2.jpg" alt="Community" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 50vw, 25vw" />
-                </div>
+              <div style={{ position: 'relative', paddingBottom: '80%', borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)' }}>
+                <Image src="/community-new-2.jpg" alt="Our Mission" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
               </div>
             </Parallax>
           </ScrollReveal>
@@ -231,7 +246,7 @@ export default function Home() {
         </div>
         <div className={`container ${styles.communityGrid}`}>
           {[
-            { href: '/about', src: '/community-new-1.jpg', alt: 'Church Community', label: t.about },
+            { href: '/vision', src: '/community-new-1.jpg', alt: 'Church Community', label: t.about },
             { href: '/special-meeting', src: '/community-new-2.jpg', alt: 'Special Meetings', label: 'Special Meetings' },
             { href: '/ministries', src: '/community-new-3.jpg', alt: 'Youth Ministry', label: t.ministries },
           ].map((item, i) => (

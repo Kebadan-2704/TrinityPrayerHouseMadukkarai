@@ -69,7 +69,8 @@ export default function Footer() {
           <ul>
             <li><Link href="/">{t.home}</Link></li>
             <li><Link href="/new-here">{t.newHere}</Link></li>
-            <li><Link href="/about">{t.about}</Link></li>
+            <li><Link href="/vision">{t.about}</Link></li>
+            <li><Link href="/mission">{t.mission}</Link></li>
             <li><Link href="/sermons">{t.sermons}</Link></li>
             <li><Link href="/special-meeting">{t.events}</Link></li>
             <li><Link href="/online-meet">{t.googleMeet}</Link></li>

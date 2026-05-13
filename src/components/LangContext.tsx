@@ -7,7 +7,7 @@ export type Language = 'en' | 'ta' | 'hi';
 const translations = {
   en: {
     // Nav
-    home: 'Home', about: 'About', sermons: 'Sermons', ministries: 'Ministries',
+    home: 'Home', about: 'Vision', mission: 'Mission', sermons: 'Sermons', ministries: 'Ministries',
     events: 'Special Meetings', googleMeet: 'Google Meet', giving: 'Giving', contact: 'Contact', planVisit: 'Plan a Visit', prayerPage: 'Prayer', newHere: 'New Here?',
     // Hero
     eyebrow: 'TRINITY PRAYER HOUSE · MADUKKARAI',
@@ -45,12 +45,19 @@ const translations = {
     phone: 'Phone / WhatsApp', email: 'Email', address: 'Address',
     rights: 'All rights reserved.',
     builtWith: 'Built with ❤️ for the Kingdom.',
-    // About
-    aboutUs: 'ABOUT US', aboutH1a: 'Our', aboutH1b: 'History', aboutH1c: '& Calling',
+    // About/Vision
+    aboutUs: 'VISION', aboutH1a: 'Our', aboutH1b: 'History', aboutH1c: '& Calling',
     aboutSub: 'Building the church at the foothill to reach the unreached since 1976.',
     legacyTitle: 'A Legacy of Prayer',
     aboutP1: 'Trinity Prayer House Ministries was founded by our father Pastor D.A. Sathyanathan through the Lord\'s vision — to build a church at the foothill to reach the unreached around the world.',
     aboutP2: 'Trinity Prayer House — Madukkarai is our main branch, and the church is under the pastoring of our Senior Pastor Vasanth Sathyanathan. For decades, we have stood on the foundation of God\'s Word.',
+    
+    // Mission
+    missionUs: 'MISSION', missionH1a: 'Our', missionH1b: 'Mission', missionH1c: '& Purpose',
+    missionSub: 'Empowering believers to reach their full potential in Christ.',
+    missionLegacyTitle: 'A Call to Serve',
+    missionP1: 'Our mission is to spread the Gospel of Jesus Christ to the ends of the earth and make disciples of all nations.',
+    missionP2: 'We are committed to loving God, loving people, and serving our community with compassion and excellence.',
     val1h: '01. Worship', val1p: 'A lifestyle of reverence to God.',
     val2h: '02. Word', val2p: 'Anchored in the truth of the Scriptures.',
     val3h: '03. Warfare', val3p: 'Intercessory prayer to shift atmospheres.',
@@ -103,7 +110,7 @@ const translations = {
     prayerSuccess: 'Prayer Received', prayerSuccessDesc: 'Our intercessory team will be praying for you. God bless you.',
   },
   ta: {
-    home: 'முகப்பு', about: 'எங்களைப் பற்றி', sermons: 'பிரசங்கங்கள்', ministries: 'ஊழியங்கள்',
+    home: 'முகப்பு', about: 'தரிசனம்', mission: 'பணி', sermons: 'பிரசங்கங்கள்', ministries: 'ஊழியங்கள்',
     events: 'சிறப்பு கூட்டங்கள்', googleMeet: 'கூகுள் மீட்', giving: 'காணிக்கை', contact: 'தொடர்பு', prayerPage: 'ஜெபம்', planVisit: 'வருகை திட்டம்', newHere: 'புதிதாக வந்தவரா?',
     eyebrow: 'டிரினிட்டி ஜெப இல்லம் · மடுக்கரை',
     heroTitle1: 'ஒரு இடம்', heroTitle2: 'சந்திப்பு', heroTitle3: '&', heroTitle4: 'அமைதி',
@@ -139,6 +146,11 @@ const translations = {
     legacyTitle: 'ஜெபத்தின் பாரம்பரியம்',
     aboutP1: 'டிரினிட்டி ஜெப இல்ல ஊழியங்கள் போதகர் D.A. சத்தியநாதன் அவர்களால் கர்த்தரின் தரிசனத்தின்படி நிறுவப்பட்டது — மலையடிவாரத்தில் திருச்சபை கட்டி, உலகம் முழுவதும் அடையப்படாதவர்களை அடைவதற்காக.',
     aboutP2: 'டிரினிட்டி ஜெப இல்லம் — மடுக்கரை எங்கள் முக்கிய கிளையாகும், மூத்த போதகர் வசந்த் சத்தியநாதன் அவர்களின் மேய்ப்பில் உள்ளது. பல தசாப்தங்களாக, தேவனுடைய வார்த்தையின் அடித்தளத்தில் நிற்கிறோம்.',
+    missionUs: 'பணி', missionH1a: 'எங்கள்', missionH1b: 'பணி', missionH1c: '& நோக்கம்',
+    missionSub: 'விசுவாசிகளை கிறிஸ்துவுக்குள் முழு திறனையும் அடைய அதிகாரமளித்தல்.',
+    missionLegacyTitle: 'சேவைக்கான அழைப்பு',
+    missionP1: 'எங்கள் நோக்கம் இயேசு கிறிஸ்துவின் நற்செய்தியை பூமியின் கடையாந்தரம் வரை பரப்பி எல்லா ஜாதிகளையும் சீஷராக்குவதாகும்.',
+    missionP2: 'கடவுளை நேசிக்கவும், மக்களை நேசிக்கவும், எங்கள் சமூகத்திற்கு இரக்கத்துடனும் சிறப்புடனும் சேவை செய்ய நாங்கள் கடமைப்பட்டுள்ளோம்.',
     val1h: '01. ஆராதனை', val1p: 'கடவுளுக்கு பயபக்தியான வாழ்க்கை முறை.',
     val2h: '02. வார்த்தை', val2p: 'வேதாகமத்தின் சத்தியத்தில் நிலைநிறுத்தப்பட்டது.',
     val3h: '03. போர்', val3p: 'வளிமண்டலங்களை மாற்ற பரிந்துரை ஜெபம்.',
@@ -183,7 +195,7 @@ const translations = {
     prayerSuccess: 'ஜெபம் பெறப்பட்டது', prayerSuccessDesc: 'எங்கள் பரிந்துரை குழு உங்களுக்காக ஜெபிக்கும். கடவுள் உங்களை ஆசீர்வதிப்பார்.',
   },
   hi: {
-    home: 'होम', about: 'हमारे बारे में', sermons: 'उपदेश', ministries: 'सेवकाई',
+    home: 'होम', about: 'दर्शन', mission: 'मिशन', sermons: 'उपदेश', ministries: 'सेवकाई',
     events: 'विशेष बैठकें', googleMeet: 'गूगल मीट', giving: 'दान', contact: 'संपर्क', prayerPage: 'प्रार्थना', planVisit: 'यात्रा की योजना', newHere: 'क्या आप नए हैं?',
     eyebrow: 'ट्रिनिटी प्रेयर हाउस · मदुक्करै',
     heroTitle1: 'एक स्थान', heroTitle2: 'मुलाकात', heroTitle3: 'और', heroTitle4: 'शांति',
@@ -219,6 +231,11 @@ const translations = {
     legacyTitle: 'प्रार्थना की विरासत',
     aboutP1: 'ट्रिनिटी प्रेयर हाउस मिनिस्ट्रीज की स्थापना पादरी D.A. सत्यनाथन ने प्रभु की दृष्टि से की — पहाड़ी की तलहटी में चर्च बनाकर दुनिया भर में अनपहुँचे लोगों तक पहुँचना।',
     aboutP2: 'ट्रिनिटी प्रेयर हाउस — मदुक्करै हमारी मुख्य शाखा है, और चर्च वरिष्ठ पादरी वसंत सत्यनाथन की देखरेख में है। दशकों से, हम परमेश्वर के वचन की नींव पर खड़े हैं।',
+    missionUs: 'मिशन', missionH1a: 'हमारा', missionH1b: 'मिशन', missionH1c: 'और उद्देश्य',
+    missionSub: 'विश्वासियों को मसीह में अपनी पूरी क्षमता तक पहुँचने के लिए सशक्त बनाना।',
+    missionLegacyTitle: 'सेवा का आह्वान',
+    missionP1: 'हमारा मिशन यीशु मसीह के सुसमाचार को पृथ्वी के छोर तक फैलाना और सभी राष्ट्रों को शिष्य बनाना है।',
+    missionP2: 'हम परमेश्वर से प्रेम करने, लोगों से प्रेम करने और करुणा और उत्कृष्टता के साथ अपने समुदाय की सेवा करने के लिए प्रतिबद्ध हैं।',
     val1h: '01. आराधना', val1p: 'परमेश्वर के प्रति श्रद्धा की जीवनशैली।',
     val2h: '02. वचन', val2p: 'पवित्रशास्त्र की सच्चाई में स्थापित।',
     val3h: '03. युद्ध', val3p: 'वातावरण बदलने के लिए मध्यस्थ प्रार्थना।',

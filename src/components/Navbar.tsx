@@ -42,7 +42,8 @@ export default function Navbar() {
 
   const desktopNavItems = [
     { href: '/', label: t.home },
-    { href: '/about', label: t.about },
+    { href: '/vision', label: t.about },
+    { href: '/mission', label: t.mission },
     { href: '/sermons', label: t.sermons },
     { href: '/ministries', label: t.ministries },
     { href: '/special-meeting', label: t.events },
@@ -54,7 +55,8 @@ export default function Navbar() {
 
   const mobileNavItems = [
     { href: '/', label: t.home },
-    { href: '/about', label: t.about },
+    { href: '/vision', label: t.about },
+    { href: '/mission', label: t.mission },
     { href: '/sermons', label: t.sermons },
     { href: '/ministries', label: t.ministries },
     { href: '/special-meeting', label: t.events },

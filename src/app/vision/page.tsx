@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import styles from './about.module.css';
+import styles from './vision.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import { useLang } from '@/components/LangContext';
 

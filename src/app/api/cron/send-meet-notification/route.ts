@@ -39,7 +39,7 @@ export async function GET(request: Request) {
     });
 
     // 3. Send pushes to everyone in parallel
-    const sendPromises = subscriptions.map(async (sub) => {
+    const sendPromises = subscriptions.map(async (sub: any) => {
       const pushSubscription = {
         endpoint: sub.endpoint,
         keys: {
