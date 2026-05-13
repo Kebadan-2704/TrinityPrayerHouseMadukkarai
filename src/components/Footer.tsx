@@ -80,11 +80,13 @@ export default function Footer() {
         <motion.div className={styles.navCol} variants={footerColVariants}>
           <h4 className={styles.heading}>{t.services}</h4>
           <ul>
-            <li>{t.promiseService}: 1st, 6:30 AM</li>
+            <li>{t.promiseService}: 1st of Every Month, 6:30 AM</li>
             <li>{t.sunWorship}: 9:30 AM</li>
             <li>{t.hindiService}: Sun, 6:30 PM</li>
-            <li>{t.bibleStudy}: Thu, 7:30 PM</li>
-            <li><Link href="https://meet.google.com/gct-xkdh-cni" target="_blank" rel="noopener noreferrer" style={{ color: '#c7a760' }}>Online Meet: Everyday, 9:00 PM</Link></li>
+            <li>{t.bibleStudy}: Thu, 6:30 PM</li>
+            <li><Link href="/online-meet" style={{ color: '#c7a760' }}>Daily Online Meet: Everyday, 9:00 PM</Link></li>
+            <li>Fasting Prayer: 1st Sat, 10:30 AM</li>
+            <li>Night Prayer: 4th Fri, 10:00 PM</li>
           </ul>
         </motion.div>
         <motion.div className={styles.contactCol} variants={footerColVariants}>
