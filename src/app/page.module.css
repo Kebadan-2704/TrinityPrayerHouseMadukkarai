@@ -89,6 +89,12 @@
 @keyframes slideRight { to { opacity: 1; transform: translateX(0); } }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
+/* Golden shimmer for italic text */
+@keyframes goldShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
 .heroEyebrow {
   font-family: var(--font-sans);
   font-size: 0.55rem;
@@ -284,6 +290,11 @@
   inset: 0;
   background: radial-gradient(ellipse 80% 100% at 50% 0%, rgba(212, 185, 120, 0.08), transparent 55%);
   pointer-events: none;
+  animation: statsGlow 5s ease-in-out infinite;
+}
+@keyframes statsGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 @media (min-width: 768px) { .statsBar { padding: 4.25rem 0; } }
 
@@ -317,7 +328,24 @@
   margin-bottom: 2rem;
   text-wrap: balance;
 }
-.sectionHeading i { color: var(--accent); font-style: italic; font-weight: 500; }
+.sectionHeading i {
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 500;
+  background: linear-gradient(
+    90deg,
+    var(--accent-muted) 0%,
+    var(--accent-bright) 25%,
+    #f0e6c8 50%,
+    var(--accent-bright) 75%,
+    var(--accent-muted) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 4s ease-in-out infinite;
+}
 @media (min-width: 768px) { .sectionHeading { margin-bottom: 2.75rem; } }
 
 .editorialLink {
@@ -340,7 +368,7 @@
   border-color: var(--accent-muted);
 }
 .editorialLink svg { transition: transform 0.35s var(--ease-out); flex-shrink: 0; }
-.editorialLink:hover svg { transform: translateX(5px); }
+.editorialLink:hover svg { transform: translateX(5px) rotate(-45deg); }
 
 .editorialLinkLight { color: #fff; border-color: var(--accent); }
 .editorialLinkLight:hover { color: var(--accent-bright); border-color: var(--accent-bright); }
@@ -359,6 +387,7 @@
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border), transparent);
   opacity: 0.8;
+  animation: lineGrow 2s var(--ease-out) both;
 }
 
 .welcomeGrid {
@@ -404,8 +433,12 @@
   overflow: hidden;
   box-shadow: var(--shadow-md);
 }
-.imgMosaic img { transition: transform 0.75s var(--ease-out); }
-.imgMosaic > div:hover img { transform: scale(1.05); }
+.imgMosaic img { transition: transform 0.75s var(--ease-out), filter 0.5s ease; filter: saturate(0.95); }
+.imgMosaic > div:hover img { transform: scale(1.05); filter: saturate(1.15) brightness(1.05); }
+.mosaicLarge { transition: box-shadow 0.5s var(--ease-out); }
+.mosaicLarge:hover { box-shadow: var(--shadow-xl), 0 0 0 2px rgba(212, 185, 120, 0.25); }
+.mosaicSmall { transition: box-shadow 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
+.mosaicSmall:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 @media (min-width: 768px) { .imgMosaic { gap: 1.05rem; } }
 
 /* ===== PRAYER BAND ===== */
@@ -448,6 +481,11 @@
   opacity: 0.45;
   margin-bottom: 1.25rem;
   filter: drop-shadow(0 0 24px rgba(212, 185, 120, 0.35));
+  animation: breatheGlow 3.5s ease-in-out infinite;
+}
+@keyframes breatheGlow {
+  0%, 100% { filter: drop-shadow(0 0 24px rgba(212, 185, 120, 0.35)); opacity: 0.45; }
+  50% { filter: drop-shadow(0 0 48px rgba(212, 185, 120, 0.65)); opacity: 0.75; }
 }
 .prayerQuote {
   font-family: var(--font-display);
@@ -524,23 +562,17 @@
 }
 .serviceCard:hover::before { opacity: 1; }
 
-.serviceCard:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(212, 185, 120, 0.12);
-  border-color: rgba(212, 185, 120, 0.25);
-}
+.serviceCard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(212, 185, 120, 0.35); }
+.serviceCard:hover .serviceIcon { transform: scale(1.15) rotate(-5deg); }
 
 .serviceIcon {
-  margin-bottom: 0.85rem;
-  color: var(--accent-muted);
-  display: flex;
-  align-items: center;
-  transition: color 0.3s ease, transform 0.35s var(--ease-spring);
-}
-.serviceCard:hover .serviceIcon {
+  display: inline-flex;
   color: var(--accent);
-  transform: scale(1.06);
+  margin-bottom: 0.5rem;
+  opacity: 0.75;
+  transition: transform 0.4s var(--ease-spring), color 0.3s ease;
 }
+@media (min-width: 768px) { .serviceIcon { margin-bottom: 0.85rem; } }
 
 .serviceItem h3 {
   font-family: var(--font-display);
@@ -665,6 +697,7 @@
   box-shadow: var(--shadow-md);
   border: 1px solid var(--border-light);
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease, border-color 0.6s ease;
+  will-change: transform;
 }
 .communityImgWrap:hover {
   transform: translateY(-8px);
@@ -802,7 +835,7 @@
   gap: 0.65rem;
 }
 .ytBtn svg { transition: transform 0.35s var(--ease-spring); }
-.ytBtn:hover svg { transform: scale(1.12); }
+.ytBtn:hover svg { transform: scale(1.22) rotate(-8deg); }
 
 @media (prefers-reduced-motion: reduce) {
   .ytSection::before { animation: none; }
