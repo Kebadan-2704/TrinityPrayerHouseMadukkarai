@@ -28,22 +28,25 @@
 @media (min-width: 768px) {
   .footer { padding: 5rem 0 0; }
 }
+@media (max-width: 480px) {
+  .footer { padding: 2.5rem 0 0; }
+}
 
 .footerGrid {
   position: relative;
   z-index: 1;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.75rem;
-  padding-bottom: 3.25rem;
+  gap: 2rem;
+  padding-bottom: 2.25rem;
 }
 
 @media (min-width: 600px) {
-  .footerGrid { grid-template-columns: repeat(2, 1fr); }
+  .footerGrid { grid-template-columns: repeat(2, 1fr); gap: 2.25rem; }
 }
 
 @media (min-width: 992px) {
-  .footerGrid { grid-template-columns: 1.55fr 1fr 1fr 1.35fr; gap: 2.75rem; }
+  .footerGrid { grid-template-columns: 1.55fr 1fr 1fr 1.35fr; gap: 2.75rem; padding-bottom: 3.25rem; }
 }
 
 .logo {
@@ -93,8 +96,8 @@
 
 .mission {
   font-family: var(--font-sans);
-  font-size: 0.88rem;
-  margin-bottom: 1.5rem;
+  font-size: 0.84rem;
+  margin-bottom: 1.25rem;
   line-height: 1.65;
   max-width: 300px;
   font-weight: 500;
@@ -103,12 +106,12 @@
 
 .socials {
   display: flex;
-  gap: 0.55rem;
+  gap: 0.45rem;
 }
 
 .socials a {
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
@@ -118,6 +121,9 @@
   transition: all 0.3s var(--ease-out);
   -webkit-tap-highlight-color: transparent;
   background: rgba(255, 255, 255, 0.03);
+}
+@media (min-width: 768px) {
+  .socials a { width: 42px; height: 42px; }
 }
 
 .socials a:hover {
@@ -142,7 +148,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0.4rem;
 }
 
 .navCol li,
@@ -162,7 +168,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.15rem;
 }
 
 .contactCol li {
