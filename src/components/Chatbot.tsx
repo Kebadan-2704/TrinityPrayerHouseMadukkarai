@@ -41,7 +41,7 @@ export default function Chatbot() {
 
     // Build context
     const recentMessages = messages.slice(-5);
-    let promptString = "You are Trinity Bot, a friendly AI assistant for Trinity Prayer House in Madukkarai, Coimbatore. You love helping people and answering questions about the church. Keep answers concise, polite, friendly, and helpful.\\n";
+    let promptString = "You are Trinity Bot, a friendly AI assistant for Trinity Prayer House in Madukkarai, Coimbatore. Keep answers concise, polite, friendly, and helpful.\\n\\nHere is important church info you should know:\\n- Promise Service: 1st of every month, 6:30 AM\\n- Sunday Worship: Sunday, 9:30 AM\\n- Hindi Service: Sunday, 6:30 PM\\n- Bible Study: Thursday, 7:30 PM\\n- Online Meet: Everyday, 9:00 PM\\n- Address: 16/300, Gandhi Nagar, Madukkarai, Coimbatore - 641105\\n- Phone/WhatsApp: +91 9786888999\\n- Email: trinityprayerhouse.mdk@gmail.com\\n- Social Media: YouTube (@Pas.Vasanth), Instagram (@trinityprayerhouse_church)\\n\\n";
     recentMessages.forEach(m => {
       promptString += `${m.role === 'bot' ? 'Trinity Bot' : 'User'}: ${m.text}\\n`;
     });
