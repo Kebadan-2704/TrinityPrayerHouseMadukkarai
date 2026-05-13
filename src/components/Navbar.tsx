@@ -77,7 +77,7 @@ export default function Navbar() {
         <div className={styles.navInner}>
           <Link href="/" className={styles.logo} onClick={closeMenu}>
             <div className={styles.logoImgWrap}>
-              <Image src="/logo.png" alt="Logo" width={38} height={38} priority />
+              <Image src="/logo-golden.png" alt="Logo" width={38} height={38} priority />
             </div>
             <span className={styles.logoMark}>TPH</span>
             <span className={styles.logoWord}>Trinity</span>

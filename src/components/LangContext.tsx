@@ -95,7 +95,7 @@ const translations = {
     emailLabel: 'Email Address', subject: 'Subject', message: 'Your Message', sendBtn: 'Send Message',
     successTitle: 'Message Sent!', successDesc: 'Thank you for reaching out. Our team will get back to you soon.',
     // Counter stats
-    statsYears: 'Years of Ministry', statsLives: 'Lives Touched', statsSermons: 'YouTube Sermons', statsServices: 'Weekly Services',
+    statsYears: 'Years of Ministry', statsLives: 'Lives Touched', statsSermons: 'YouTube Sermons', statsServices: 'Monthly Services',
     // Footer
     footerGlory: 'To God be the glory.',
     // Prayer Request
@@ -276,10 +276,10 @@ interface LangContextType {
 
 const LangContext = createContext<LangContextType>({
   lang: 'en',
-  setLang: () => {},
+  setLang: () => { },
   t: translations.en,
   showPicker: false,
-  setShowPicker: () => {},
+  setShowPicker: () => { },
 });
 
 export const useLang = () => useContext(LangContext);

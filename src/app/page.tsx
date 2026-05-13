@@ -191,6 +191,20 @@ export default function Home() {
                 </div>
               </ScrollReveal>
             ))}
+            
+            {/* View More Ministries Card */}
+            <ScrollReveal delay={120 * 8} className={`${styles.serviceItem} ${styles.viewMoreWrapper}`}>
+              <Link href="/ministries" className={`${styles.serviceCard} ${styles.viewMoreCard}`}>
+                <div className={styles.viewMoreText}>
+                  <h3>Explore All Ministries</h3>
+                  <p>Discover our Kids, Youth, Womens, Mens & Old Age ministries.</p>
+                </div>
+                <div className={styles.viewMoreBtn}>
+                  View More 
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+              </Link>
+            </ScrollReveal>
           </div>
         </div>
       </section>

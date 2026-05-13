@@ -49,7 +49,7 @@ export default function Footer() {
         <motion.div className={styles.brandCol} variants={footerColVariants}>
           <div className={styles.logo}>
             <div className={styles.logoImgWrap}>
-              <Image src="/logo.png" alt="Logo" width={44} height={44} />
+              <Image src="/logo-golden.png" alt="Logo" width={44} height={44} />
             </div>
             <div className={styles.logoText}>
               <span className={styles.churchName}>Trinity Prayer House</span>
