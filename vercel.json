@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/send-meet-notification",
+      "schedule": "20 15 * * *"
+    }
+  ]
+}

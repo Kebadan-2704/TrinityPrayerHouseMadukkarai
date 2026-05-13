@@ -47,3 +47,22 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
+self.addEventListener('push', (event) => {
+  const data = event.data ? event.data.json() : {};
+  event.waitUntil(
+    self.registration.showNotification(data.title || 'Trinity Prayer House', {
+      body: data.body || 'We will have a meet in 10 minutes. Join us!',
+      icon: '/tph-icon-192.png',
+      badge: '/tph-icon-192.png',
+      data: { url: data.url || '/online-meet' }
+    })
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow(event.notification.data.url)
+  );
+});

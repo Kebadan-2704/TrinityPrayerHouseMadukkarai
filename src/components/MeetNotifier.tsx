@@ -2,19 +2,44 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Video, X, Bell } from 'lucide-react';
+import { Video, X, Bell, BellRing } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+
+// Helper to convert VAPID key
+function urlBase64ToUint8Array(base64String: string) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
 
 export default function MeetNotifier() {
   const [showWarning, setShowWarning] = useState(false);
   const [showLive, setShowLive] = useState(false);
   const [dismissedLive, setDismissedLive] = useState(false);
   const [dismissedWarning, setDismissedWarning] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isSubscribing, setIsSubscribing] = useState(false);
   
   const notifiedRef = useRef(false);
 
   useEffect(() => {
-    // Attempt to request notification permission for native push
+    // Check if already subscribed to web push
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      navigator.serviceWorker.ready.then(registration => {
+        registration.pushManager.getSubscription().then(subscription => {
+          setIsSubscribed(!!subscription);
+        });
+      });
+    }
     if ('Notification' in window && Notification.permission === 'default') {
       try {
         Notification.requestPermission().catch(() => {});
@@ -70,6 +95,42 @@ export default function MeetNotifier() {
     const interval = setInterval(checkTime, 20000); // Check every 20 seconds
     return () => clearInterval(interval);
   }, [showWarning, showLive]);
+
+  const subscribeToPush = async () => {
+    if (!('serviceWorker' in navigator && 'PushManager' in window)) {
+      alert('Push notifications are not supported in your browser.');
+      return;
+    }
+    
+    setIsSubscribing(true);
+    try {
+      const registration = await navigator.serviceWorker.ready;
+      
+      const subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!)
+      });
+
+      // Send to our API
+      const res = await fetch('/api/push/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(subscription)
+      });
+
+      if (res.ok) {
+        setIsSubscribed(true);
+        alert('You will now receive daily notifications when the meet starts!');
+      } else {
+        throw new Error('Failed to save subscription');
+      }
+    } catch (err) {
+      console.error('Failed to subscribe:', err);
+      alert('Failed to enable notifications. Please ensure you have allowed permissions.');
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
 
   // Determine which banner to show
   const isWarningActive = showWarning && !dismissedWarning;
@@ -127,22 +188,45 @@ export default function MeetNotifier() {
               </span>
             </div>
           </Link>
-          <button 
-            onClick={() => isLiveActive ? setDismissedLive(true) : setDismissedWarning(true)} 
-            style={{ 
-              background: isLiveActive ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.1)', 
-              border: 'none', 
-              color: isLiveActive ? '#121420' : '#fff', 
-              cursor: 'pointer', 
-              padding: '8px', 
-              display: 'flex',
-              borderRadius: '50%',
-              transition: 'background 0.2s'
-            }}
-            aria-label="Dismiss"
-          >
-            <X size={18} />
-          </button>
+          
+          <div style={{ display: 'flex', gap: '8px' }}>
+            {!isLiveActive && !isSubscribed && (
+              <button 
+                onClick={subscribeToPush}
+                disabled={isSubscribing}
+                title="Enable daily notifications"
+                style={{ 
+                  background: 'rgba(199, 167, 96, 0.2)', 
+                  border: 'none', 
+                  color: '#c7a760', 
+                  cursor: 'pointer', 
+                  padding: '8px', 
+                  display: 'flex',
+                  borderRadius: '50%',
+                  transition: 'background 0.2s'
+                }}
+              >
+                <BellRing size={18} />
+              </button>
+            )}
+            
+            <button 
+              onClick={() => isLiveActive ? setDismissedLive(true) : setDismissedWarning(true)} 
+              style={{ 
+                background: isLiveActive ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.1)', 
+                border: 'none', 
+                color: isLiveActive ? '#121420' : '#fff', 
+                cursor: 'pointer', 
+                padding: '8px', 
+                display: 'flex',
+                borderRadius: '50%',
+                transition: 'background 0.2s'
+              }}
+              aria-label="Dismiss"
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
       </motion.div>
     </AnimatePresence>
