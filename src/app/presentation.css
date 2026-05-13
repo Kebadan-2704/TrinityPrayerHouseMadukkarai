@@ -1,0 +1,144 @@
+/* ===== Claude-style presentation: slides, rails, lifted cards ===== */
+
+.page-transition-root {
+  width: 100%;
+}
+
+/* Alternating rhythm for marketing sections (optional class on wrappers) */
+.pres-band {
+  position: relative;
+  overflow: clip;
+}
+
+.pres-band-soft {
+  background:
+    radial-gradient(ellipse 85% 50% at 100% -10%, rgba(212, 185, 120, 0.06), transparent),
+    radial-gradient(ellipse 70% 40% at 0% 100%, rgba(28, 28, 56, 0.04), transparent),
+    var(--surface);
+}
+
+.pres-band-elevated {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(212, 185, 120, 0.07), transparent 55%),
+    var(--surface-alt);
+}
+
+.pres-band-muted {
+  background: linear-gradient(180deg, var(--surface-warm) 0%, var(--surface) 48%, var(--surface-alt) 100%);
+}
+
+/* Rail accent for “slide decks” — left chrome like product sites */
+.pres-rail {
+  position: relative;
+}
+.pres-rail::before {
+  content: '';
+  position: absolute;
+  top: clamp(5rem, 12vh, 8rem);
+  bottom: clamp(4rem, 10vh, 7rem);
+  left: calc(50% - min(620px, 50vw - 1.25rem));
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--accent) 0%, rgba(212, 185, 120, 0.15) 55%, transparent 100%);
+  opacity: 0.35;
+  pointer-events: none;
+}
+@media (max-width: 1100px) {
+  .pres-rail::before { display: none; }
+}
+
+.pres-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-muted);
+}
+
+.pres-kicker-light {
+  color: var(--accent-bright);
+}
+
+/* Glass / keynote card */
+.pres-card {
+  background: rgba(255, 252, 247, 0.85);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(212, 185, 120, 0.18);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    var(--shadow-lg);
+}
+
+.pres-card-static {
+  background: var(--surface-elevated);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+}
+
+/* Typography scale for keynote titles inside light sections */
+.pres-display {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.35rem);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.pres-display i {
+  color: var(--accent-muted);
+  font-style: italic;
+}
+
+.pres-lede {
+  font-size: clamp(1rem, 1.85vw, 1.125rem);
+  line-height: 1.72;
+  color: var(--text-muted);
+  max-width: 36rem;
+}
+
+/* Lift on hover utility */
+.hover-lift {
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out), border-color 0.35s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+}
+
+/* Shine sweep on hover (subtle premium) */
+.shine-frame {
+  position: relative;
+  overflow: hidden;
+}
+.shine-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.85s var(--ease-out);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+.shine-frame:hover::after {
+  transform: translateX(100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shine-frame::after {
+    display: none;
+  }
+  .hover-lift:hover {
+    transform: none;
+  }
+}

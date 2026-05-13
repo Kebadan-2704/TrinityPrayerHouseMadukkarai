@@ -3,17 +3,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './page.module.css';
-import { useLang } from '@/components/LangContext';
+
 import { Clock, MapPin, Coffee, Heart, Music, Users } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function NewHerePage() {
-  const { t } = useLang();
 
   return (
     <div className={styles.pageWrap}>
       {/* Header */}
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}></div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <ScrollReveal>
@@ -36,7 +35,7 @@ export default function NewHerePage() {
               <div className={styles.secLabel}>WHAT TO EXPECT</div>
               <h2>Come as you are.</h2>
               <p className={styles.leadText}>
-                At Trinity Prayer House, you'll be welcomed into a friendly, casual environment by people who are excited to see you. We want you to have an idea of what to expect when you arrive.
+                At Trinity Prayer House, you&apos;ll be welcomed into a friendly, casual environment by people who are excited to see you. We want you to have an idea of what to expect when you arrive.
               </p>
               
               <ul className={styles.featureList}>

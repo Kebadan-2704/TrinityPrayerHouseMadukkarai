@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './page.module.css';
 import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
 import { useLang } from '@/components/LangContext';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function Contact() {
   const { t } = useLang();
@@ -31,15 +32,17 @@ export default function Contact() {
 
   return (
     <div className={styles.pageWrap}>
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}></div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className={styles.secLabel}>{t.connectWithUs}</div>
-          <h1>{t.contactH1a} <i>{t.contactH1b}</i></h1>
-          <p>{t.contactSub}</p>
+          <ScrollReveal variant="blurIn">
+            <div className={styles.secLabel}>{t.connectWithUs}</div>
+            <h1>{t.contactH1a} <i>{t.contactH1b}</i></h1>
+            <p>{t.contactSub}</p>
+          </ScrollReveal>
         </div>
       </section>
-      <section className={`section-padding ${styles.contactSection}`}>
+      <section className={`section-padding ${styles.contactSection} pres-band-muted pres-rail`}>
         <div className={`container ${styles.contactGrid}`}>
           <div className={styles.infoCol}>
             <h2>{t.hereToServe}</h2>
@@ -60,7 +63,7 @@ export default function Contact() {
             </div>
           </div>
           <div className={styles.formCol}>
-            <div className={styles.formCard}>
+            <div className={`${styles.formCard} pres-card-static hover-lift`}>
               <h3>{t.sendMessage}</h3>
               {submitted ? (
                 <div className={styles.successMsg}>

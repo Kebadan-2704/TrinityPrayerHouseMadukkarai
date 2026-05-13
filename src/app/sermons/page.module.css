@@ -3,13 +3,13 @@
 .headerSection { position: relative; background: var(--primary); color: #fff; text-align: center; padding: 8rem 0 5rem; overflow: hidden; }
 .headerBg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 .headerOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(15,15,30,0.9) 0%, rgba(26,26,46,0.75) 100%); z-index: 2; }
-.secLabel { font-family: 'Inter', sans-serif; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 1rem; font-weight: 700; }
+.secLabel { font-family: var(--font-sans); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.28em; color: var(--accent-muted); margin-bottom: 1rem; font-weight: 800; }
 .headerSection h1 { font-size: clamp(2.2rem, 6vw, 4.5rem); color: #fff; line-height: 1.1; margin-bottom: 1rem; }
 .headerSection i { color: var(--accent); }
 .headerP { max-width: 550px; margin: 0 auto; font-size: 0.95rem; color: rgba(255,255,255,0.7); }
 @media (min-width: 768px) { .headerP { font-size: 1.05rem; } }
 
-.featuredSection { background: var(--surface-alt); padding: 3rem 0; border-bottom: 1px solid var(--border); }
+.featuredSection { background: transparent; padding: clamp(3rem, 8vw, 5.5rem) 0; border-bottom: 1px solid var(--border-light); }
 @media (min-width: 768px) { .featuredSection { padding: 5rem 0; } }
 .featuredGrid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; }
 @media (min-width: 992px) { .featuredGrid { grid-template-columns: 1.4fr 1fr; gap: 4rem; } }
@@ -40,8 +40,7 @@
 @media (min-width: 600px) { .sermonGrid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
 @media (min-width: 992px) { .sermonGrid { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
 
-.sermonCard { background: var(--surface-alt); border-radius: var(--radius-md); overflow: hidden; transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-.sermonCard:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.sermonCard { background: var(--surface-elevated); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(212, 185, 120, 0.12); box-shadow: var(--shadow-sm), 0 1px 0 rgba(255,255,255,0.85) inset; }
 
 .scVideoThumb { position: relative; padding-bottom: 56.25%; cursor: pointer; overflow: hidden; -webkit-tap-highlight-color: transparent; }
 .thumbImg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease-out); }

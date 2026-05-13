@@ -40,12 +40,23 @@ export default function Navbar() {
 
   const closeMenu = () => setIsOpen(false);
 
-  const navItems = [
+  const desktopNavItems = [
     { href: '/', label: t.home },
     { href: '/about', label: t.about },
     { href: '/sermons', label: t.sermons },
     { href: '/ministries', label: t.ministries },
-    { href: '/special-meeting', label: 'Special Meeting' },
+    { href: '/special-meeting', label: t.events },
+    { href: '/prayer', label: t.prayerPage },
+    { href: '/give', label: t.giving },
+    { href: '/contact', label: t.contact },
+  ];
+
+  const mobileNavItems = [
+    { href: '/', label: t.home },
+    { href: '/about', label: t.about },
+    { href: '/sermons', label: t.sermons },
+    { href: '/ministries', label: t.ministries },
+    { href: '/special-meeting', label: t.events },
     { href: '/online-meet', label: 'Online Meet' },
     { href: '/prayer', label: t.prayerPage },
     { href: '/give', label: t.giving },
@@ -56,7 +67,13 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`} aria-label="Primary">
+      <motion.nav
+        className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}
+        aria-label="Primary"
+        initial={reduceMotion ? false : { y: -16, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
         <div className={styles.navInner}>
           <Link href="/" className={styles.logo} onClick={closeMenu}>
             <div className={styles.logoImgWrap}>
@@ -67,7 +84,7 @@ export default function Navbar() {
           </Link>
 
           <div className={styles.desktopNav}>
-            {navItems.map((item) => (
+            {desktopNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -112,7 +129,7 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       <AnimatePresence>
         {isOpen ? (
@@ -128,7 +145,7 @@ export default function Navbar() {
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className={styles.mobileMenuInner}>
-              {navItems.map((item, i) => (
+              {mobileNavItems.map((item, i) => (
                 <motion.div
                   key={item.href}
                   initial={reduceMotion ? false : { opacity: 0, x: -16 }}

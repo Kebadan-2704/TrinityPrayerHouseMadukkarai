@@ -14,6 +14,7 @@ const translations = {
     heroTitle1: 'A Place of', heroTitle2: 'Encounter', heroTitle3: '&', heroTitle4: 'Peace',
     heroSub: 'We are a Spirit-filled church family building authentic community and pursuing deeper relationships with God since 1976.',
     watchLatest: 'Watch Latest Message',
+    watchIntroVideo: 'Watch Intro Film',
     // Welcome
     ourStory: 'OUR STORY',
     welcomeH2a: 'Rooted in Prayer.', welcomeH2b: 'Built on Love.',
@@ -108,6 +109,7 @@ const translations = {
     heroTitle1: 'ஒரு இடம்', heroTitle2: 'சந்திப்பு', heroTitle3: '&', heroTitle4: 'அமைதி',
     heroSub: '1976 ஆம் ஆண்டு முதல் கடவுளுடன் ஆழமான உறவுகளை பின்பற்றும் ஆவிக்குரிய திருச்சபை குடும்பம்.',
     watchLatest: 'சமீபத்திய செய்தி',
+    watchIntroVideo: 'அறிமுக வீடியோ',
     ourStory: 'எங்கள் கதை',
     welcomeH2a: 'ஜெபத்தில் வேரூன்றியது.', welcomeH2b: 'அன்பில் கட்டப்பட்டது.',
     welcomeP1: 'டிரினிட்டி ஜெப இல்ல ஊழியங்கள் போதகர் D.A. சத்தியநாதன் அவர்களால் கர்த்தரின் தரிசனத்தின்படி நிறுவப்பட்டது.',
@@ -187,6 +189,7 @@ const translations = {
     heroTitle1: 'एक स्थान', heroTitle2: 'मुलाकात', heroTitle3: 'और', heroTitle4: 'शांति',
     heroSub: '1976 से परमेश्वर के साथ गहरे संबंधों का अनुसरण करने वाला आत्मा से भरा चर्च परिवार।',
     watchLatest: 'नवीनतम संदेश देखें',
+    watchIntroVideo: 'परिचय वीडियो देखें',
     ourStory: 'हमारी कहानी',
     welcomeH2a: 'प्रार्थना में जड़ें।', welcomeH2b: 'प्यार पर बना।',
     welcomeP1: 'ट्रिनिटी प्रेयर हाउस मिनिस्ट्रीज की स्थापना पादरी D.A. सत्यनाथन ने प्रभु की दृष्टि से की थी।',
@@ -289,6 +292,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const saved = localStorage.getItem('tph-lang') as Language | null;
     if (saved && translations[saved]) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLangState(saved);
       document.documentElement.lang = saved;
     } else {

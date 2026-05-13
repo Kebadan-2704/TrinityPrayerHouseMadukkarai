@@ -8,7 +8,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 export default function YouthMinistryPage() {
   return (
     <div className={styles.pageWrap}>
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image src="/youth_ministry.png" alt="Youth Ministry" fill style={{ objectFit: 'cover' }} priority />
           <div className={styles.headerOverlay}></div>

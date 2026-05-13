@@ -20,7 +20,7 @@ export default function PrayerPage() {
 
   return (
     <div className={styles.pageWrap}>
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}></div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className={styles.secLabel}>{t.prayerRequest}</div>

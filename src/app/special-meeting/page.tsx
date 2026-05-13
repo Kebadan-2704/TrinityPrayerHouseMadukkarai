@@ -81,7 +81,7 @@ export default function SpecialMeeting() {
   return (
     <div className={styles.pageWrap}>
       {/* ── Hero Banner ── */}
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image
             src="/special-meetings/meeting1/photo1.jpg"

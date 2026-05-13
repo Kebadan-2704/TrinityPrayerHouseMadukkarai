@@ -8,7 +8,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 export default function HindiMinistryPage() {
   return (
     <div className={styles.pageWrap}>
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image src="/prayer_ministry.png" alt="Hindi Ministry" fill style={{ objectFit: 'cover' }} priority />
           <div className={styles.headerOverlay}></div>
@@ -29,7 +29,7 @@ export default function HindiMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Worship in Our Heart Language</h2>
               <p>
-                Our Hindi Ministry is dedicated to serving the Hindi-speaking population in and around Madukkarai. We believe that language should never be a barrier to encountering God's love.
+                Our Hindi Ministry is dedicated to serving the Hindi-speaking population in and around Madukkarai. We believe that language should never be a barrier to encountering God&apos;s love.
               </p>
               <p>
                 Join us for our special Hindi services where we worship, study the Bible, and fellowship together. We are building a family of believers who encourage and support one another in Christ.

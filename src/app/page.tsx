@@ -8,9 +8,11 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 import Counter from '@/components/ui/Counter';
 import Parallax from '@/components/ui/Parallax';
 import FloatingParticles from '@/components/ui/FloatingParticles';
+import CinematicHeroBackdrop from '@/components/ui/CinematicHeroBackdrop';
 import YouTubeEmbed from '@/components/ui/YouTubeEmbed';
-import { Sun, Heart, BookOpen, Sparkles, Video } from 'lucide-react';
+import { Sun, Heart, BookOpen, Sparkles, Video, Play } from 'lucide-react';
 import { useLang } from '@/components/LangContext';
+import { HERO_INTRO_VIDEO_URL } from '@/lib/siteMedia';
 
 export default function Home() {
   const { t } = useLang();
@@ -40,6 +42,7 @@ export default function Home() {
   ];
 
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
+  const [heroBgVideoPlaying, setHeroBgVideoPlaying] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -53,17 +56,23 @@ export default function Home() {
       {/* ===== HERO with Particles ===== */}
       <section className={styles.hero}>
         <div className={styles.heroBg}>
-          {heroImages.map((src, idx) => (
-            <div 
-              key={src} 
-              className={`${styles.heroImgSlide} ${idx === currentImgIndex ? styles.active : ''}`}
-            >
-              <img src={src} alt="Trinity Prayer House" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </div>
-          ))}
-          <div className={styles.heroOverlay}></div>
+          <CinematicHeroBackdrop onVideoActive={setHeroBgVideoPlaying} />
+          <div
+            className={`${styles.heroSlidesWrap} ${heroBgVideoPlaying ? styles.heroSlidesHidden : ''}`}
+          >
+            {heroImages.map((src, idx) => (
+              <div
+                key={src}
+                className={`${styles.heroImgSlide} ${idx === currentImgIndex ? styles.active : ''}`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt="Trinity Prayer House" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+            ))}
+          </div>
+          <div className={styles.heroOverlay} />
+          <FloatingParticles />
         </div>
-        <FloatingParticles />
         <div className={styles.heroContent}>
           <div className="container">
             <div className={styles.heroTextWrap}>
@@ -82,6 +91,15 @@ export default function Home() {
                   {t.planVisit}
                 </Link>
                 <Link href="/sermons" className={`btn-outline ${styles.heroBtn}`}>{t.watchLatest}</Link>
+                <a
+                  href={HERO_INTRO_VIDEO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.heroVideoLink} ${styles.heroBtn}`}
+                >
+                  <Play size={17} strokeWidth={2.25} aria-hidden />
+                  {t.watchIntroVideo}
+                </a>
               </div>
             </div>
           </div>

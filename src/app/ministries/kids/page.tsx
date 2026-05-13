@@ -8,7 +8,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 export default function KidsMinistryPage() {
   return (
     <div className={styles.pageWrap}>
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image src="/kids_ministry.png" alt="Kids Ministry" fill style={{ objectFit: 'cover' }} priority />
           <div className={styles.headerOverlay}></div>
@@ -29,7 +29,7 @@ export default function KidsMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Nurturing Young Hearts</h2>
               <p>
-                Our Kids Ministry is dedicated to providing a safe, fun, and engaging environment where children can learn about God's love. We believe that spiritual growth starts early, and we are committed to partnering with parents to build a strong biblical foundation.
+                Our Kids Ministry is dedicated to providing a safe, fun, and engaging environment where children can learn about God&apos;s love. We believe that spiritual growth starts early, and we are committed to partnering with parents to build a strong biblical foundation.
               </p>
               <p>
                 Through interactive lessons, worship, and age-appropriate activities, children discover their identity in Christ and learn to apply biblical truths to their everyday lives.

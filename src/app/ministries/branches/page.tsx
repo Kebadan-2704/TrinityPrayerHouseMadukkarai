@@ -8,7 +8,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 export default function BranchChurchesPage() {
   return (
     <div className={styles.pageWrap}>
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image src="/prayer_ministry.png" alt="Branch Churches" fill style={{ objectFit: 'cover' }} priority />
           <div className={styles.headerOverlay}></div>

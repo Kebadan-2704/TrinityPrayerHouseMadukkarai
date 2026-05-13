@@ -7,7 +7,7 @@ import Image from 'next/image';
 export default function OnlineMeet() {
   return (
     <div className={styles.pageWrap}>
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image
             src="/prayer.png"
@@ -41,7 +41,7 @@ export default function OnlineMeet() {
             </div>
             <h2>Join Our Everyday Meet</h2>
             <p className={styles.cardDesc}>
-              We invite you to be part of our daily spiritual fellowship from the comfort of your home. Let's come together to pray, share the word, and grow in faith.
+              We invite you to be part of our daily spiritual fellowship from the comfort of your home. Let&apos;s come together to pray, share the word, and grow in faith.
             </p>
             
             <div className={styles.infoGrid}>

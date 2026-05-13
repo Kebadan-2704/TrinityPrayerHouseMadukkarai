@@ -8,7 +8,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 export default function WomensMinistryPage() {
   return (
     <div className={styles.pageWrap}>
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image src="/womens_ministry.png" alt="Women's Ministry" fill style={{ objectFit: 'cover' }} priority />
           <div className={styles.headerOverlay}></div>
@@ -16,7 +16,7 @@ export default function WomensMinistryPage() {
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <ScrollReveal delay={100}>
             <div className={styles.secLabel}>MINISTRY</div>
-            <h1>Women's Ministry</h1>
+            <h1>Women&apos;s Ministry</h1>
             <p className={styles.headerSubtext}>Equipping and encouraging women to grow in faith, leadership, and community.</p>
           </ScrollReveal>
         </div>
@@ -29,7 +29,7 @@ export default function WomensMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Daughters of the King</h2>
               <p>
-                Our Women's Ministry is designed to connect women of all ages and backgrounds. Through Bible studies, retreats, and fellowship events, we create spaces for authentic relationship building and mutual encouragement.
+                Our Women&apos;s Ministry is designed to connect women of all ages and backgrounds. Through Bible studies, retreats, and fellowship events, we create spaces for authentic relationship building and mutual encouragement.
               </p>
               <p>
                 We believe that every woman has a unique God-given purpose. Our goal is to equip you to rise up as a strong leader in your home, workplace, and community, rooted deeply in the love of Christ.

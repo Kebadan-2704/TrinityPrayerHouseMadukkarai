@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './ministries.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import StaggerIn, { StaggerItem } from '@/components/ui/StaggerIn';
 import { useLang } from '@/components/LangContext';
 
 export default function Ministries() {
@@ -18,7 +19,7 @@ export default function Ministries() {
   ];
   return (
     <div className="pageWrap">
-      <section className={styles.headerSection}>
+      <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image
             src="/youth.jpg"
@@ -28,36 +29,40 @@ export default function Ministries() {
             sizes="100vw"
             style={{
               objectFit: 'cover',
-              objectPosition: 'center 80%' /* Adjust '80%' to 'center', 'bottom', or a percentage to manually shift the image up/down */
+              objectPosition: 'center 80%',
             }}
           />
-          <div className={styles.headerOverlay}></div>
+          <div className={styles.headerOverlay} />
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <ScrollReveal delay={100}>
+          <ScrollReveal delay={100} variant="blurIn">
             <div className={styles.secLabel}>{t.ministriesLabel}</div>
             <h1>{t.ministriesH1a} <i>{t.ministriesH1b}</i></h1>
             <p className={styles.headerSubtext}>{t.ministriesSub}</p>
           </ScrollReveal>
         </div>
       </section>
-      <section className={`section-padding ${styles.ministrySection}`}>
-        <div className={`container ${styles.ministryGrid}`}>
-          {ministries.map((min, index) => (
-            <Link href={`/ministries/${min.id}`} key={min.id} style={{ textDecoration: 'none' }}>
-              <ScrollReveal delay={100 * (index + 1)} className={styles.ministryCard}>
-                <div className={styles.cardImageWrap}>
-                  <Image src={min.image} alt={min.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
-                  <div className={styles.cardImageOverlay}></div>
-                </div>
-                <div className={styles.cardContent}>
-                  <h2>{min.title}</h2>
-                  <p>{min.desc}</p>
-                  <span className={styles.exploreLink}>Explore Ministry &rarr;</span>
-                </div>
-              </ScrollReveal>
-            </Link>
-          ))}
+      <section className={`section-padding ${styles.ministrySection} pres-band-soft pres-rail`}>
+        <div className="container">
+          <StaggerIn className={styles.ministryGrid}>
+            {ministries.map((min) => (
+              <StaggerItem key={min.id}>
+                <Link href={`/ministries/${min.id}`} className={`${styles.ministryCardLink} hover-lift shine-frame`}>
+                  <article className={styles.ministryCard}>
+                    <div className={styles.cardImageWrap}>
+                      <Image src={min.image} alt={min.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
+                      <div className={styles.cardImageOverlay} />
+                    </div>
+                    <div className={styles.cardContent}>
+                      <h2>{min.title}</h2>
+                      <p>{min.desc}</p>
+                      <span className={styles.exploreLink}>Explore ministry →</span>
+                    </div>
+                  </article>
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerIn>
         </div>
       </section>
     </div>

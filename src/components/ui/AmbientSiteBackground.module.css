@@ -1,0 +1,62 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.mesh {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(ellipse 55% 45% at 15% 25%, rgba(212, 185, 120, 0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 55% at 85% 15%, rgba(130, 110, 220, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 45% 40% at 70% 85%, rgba(212, 185, 120, 0.06) 0%, transparent 52%),
+    radial-gradient(ellipse 60% 50% at 40% 60%, rgba(80, 100, 180, 0.055) 0%, transparent 55%);
+  animation: meshDrift 28s ease-in-out infinite alternate;
+  filter: blur(0px);
+}
+
+.aurora {
+  position: absolute;
+  inset: -30%;
+  background: conic-gradient(
+    from 220deg at 50% 50%,
+    rgba(212, 185, 120, 0.06),
+    rgba(100, 85, 200, 0.05),
+    rgba(212, 185, 120, 0.05),
+    rgba(60, 90, 160, 0.06),
+    rgba(212, 185, 120, 0.06)
+  );
+  opacity: 0.65;
+  animation: auroraSpin 52s linear infinite;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(20, 20, 40, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 20, 40, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black 15%, transparent 75%);
+}
+
+@keyframes meshDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(3%, -2%) scale(1.03); }
+  100% { transform: translate(-2%, 3%) scale(1.02); }
+}
+
+@keyframes auroraSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mesh,
+  .aurora {
+    animation: none;
+  }
+}

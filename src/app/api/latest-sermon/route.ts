@@ -18,7 +18,7 @@ export async function GET() {
     // Buffer time: Assuming stream lasts ~2 hours + 5 hours buffer = 7 hours
     const MIN_AGE_HOURS = 7;
 
-    const allSermons = items.map((item: any) => {
+    const allSermons = items.map((item: { snippet: { title: string, resourceId: { videoId: string }, publishedAt: string } }) => {
       const snippet = item.snippet;
       const title = snippet.title;
       const videoId = snippet.resourceId.videoId;
@@ -37,7 +37,7 @@ export async function GET() {
       };
     });
 
-    const filteredSermons = allSermons.filter((s: any) => {
+    const filteredSermons = allSermons.filter((s: { title: string; ageInHours: number; publishedDate: Date }) => {
       const titleLower = s.title.toLowerCase();
       
       // Check if it's a livestream (🔴, LIVE, or Sunday Service/Bible Study)
@@ -78,7 +78,7 @@ export async function GET() {
       return isLive && !isShort && !isFutureEvent;
     });
 
-    const formattedSermons = filteredSermons.map((s: any) => ({
+    const formattedSermons = filteredSermons.map((s: { videoId: string; title: string; date: string }) => ({
       videoId: s.videoId,
       title: s.title,
       date: s.date,
