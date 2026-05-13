@@ -58,8 +58,8 @@ export default function Footer() {
           </div>
           <p className={styles.mission}>{t.footerMission}</p>
           <div className={styles.socials}>
-            <a href="https://www.facebook.com/trinityprayerhouse" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF size={16} /></a>
-            <a href="https://www.instagram.com/vasanthsathyanathan.official" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram size={16} /></a>
+            <a href="https://www.facebook.com/share/1HXvvKSbNE/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF size={16} /></a>
+            <a href="https://www.instagram.com/trinityprayerhouse_church?igsh=MXEwcXpiaXh6a21jaQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram size={16} /></a>
             <a href="https://www.youtube.com/@Pas.Vasanth" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube size={16} /></a>
             <a href="https://wa.me/919786888999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><FaWhatsapp size={16} /></a>
           </div>
