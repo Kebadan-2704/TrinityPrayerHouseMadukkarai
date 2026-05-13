@@ -9,6 +9,7 @@ import WhatsAppButton from './ui/WhatsAppButton';
 import AmbientSiteBackground from './ui/AmbientSiteBackground';
 import Chatbot from './Chatbot';
 import SplashScreen from './ui/SplashScreen';
+import MeetNotifier from './MeetNotifier';
 
 export default function ClientProviders({ children }: { children: ReactNode }) {
   return (
@@ -17,6 +18,7 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
       <AmbientSiteBackground />
       <LangPicker />
       <Navbar />
+      <MeetNotifier />
       <main className="site-main">{children}</main>
       <Footer />
       <WhatsAppButton />
