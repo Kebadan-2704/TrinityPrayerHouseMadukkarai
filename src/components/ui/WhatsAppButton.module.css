@@ -1,34 +1,59 @@
 .fab {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 900;
-  width: 56px;
-  height: 56px;
+  bottom: 1.35rem;
+  right: 1.35rem;
+  z-index: 2900;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
-  background: #25D366;
+  background: linear-gradient(145deg, #2fe077 0%, #25d366 45%, #1fa855 100%);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4), 0 2px 8px rgba(0,0,0,0.15);
-  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.12),
+    0 12px 36px rgba(37, 211, 102, 0.45),
+    0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: transform 0.35s var(--ease-spring), box-shadow 0.35s ease;
   -webkit-tap-highlight-color: transparent;
-  animation: fabEntry 0.6s var(--ease-spring) 2s both;
+  animation: fabEntry 0.75s var(--ease-spring) 1.8s both;
 }
 
 .fab:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5), 0 4px 12px rgba(0,0,0,0.2);
+  transform: scale(1.08) translateY(-2px);
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.18),
+    0 18px 44px rgba(37, 211, 102, 0.5),
+    0 8px 20px rgba(0, 0, 0, 0.22);
 }
 
-.fab:active { transform: scale(0.95); }
+.fab:active {
+  transform: scale(0.96);
+}
 
 @keyframes fabEntry {
-  from { opacity: 0; transform: scale(0) translateY(20px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.4) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 @media (min-width: 768px) {
-  .fab { bottom: 2rem; right: 2rem; width: 60px; height: 60px; }
+  .fab {
+    bottom: 2rem;
+    right: 2rem;
+    width: 62px;
+    height: 62px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab {
+    animation: none;
+  }
 }

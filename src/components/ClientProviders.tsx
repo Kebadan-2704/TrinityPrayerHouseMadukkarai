@@ -12,7 +12,7 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
     <LangProvider>
       <LangPicker />
       <Navbar />
-      <main>{children}</main>
+      <main className="site-main">{children}</main>
       <Footer />
       <WhatsAppButton />
     </LangProvider>

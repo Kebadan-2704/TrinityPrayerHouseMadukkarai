@@ -1,53 +1,41 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import styles from './ScrollReveal.module.css';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface ScrollRevealProps {
-  children: React.ReactNode;
+  children: ReactNode;
   delay?: number;
   className?: string;
-  threshold?: number;
+  /** 0–1: how much of the element must be visible */
+  amount?: number;
 }
 
-export default function ScrollReveal({ 
-  children, 
-  delay = 0, 
-  className = '', 
-  threshold = 0.1 
+export default function ScrollReveal({
+  children,
+  delay = 0,
+  className = '',
+  amount = 0.15,
 }: ScrollRevealProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const domRef = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
 
-  useEffect(() => {
-    const currentRef = domRef.current;
-    
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Optional: unobserve once visible if we only want it to happen once
-          if (currentRef) observer.unobserve(currentRef);
-        }
-      });
-    }, { threshold });
-
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) observer.unobserve(currentRef);
-    };
-  }, [threshold]);
+  if (reduce) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
-    <div
-      ref={domRef}
-      className={`${styles.revealElement} ${isVisible ? styles.visible : ''} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount }}
+      transition={{
+        duration: 0.72,
+        delay: delay / 1000,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }

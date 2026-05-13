@@ -14,13 +14,21 @@ import { useLang } from '@/components/LangContext';
 
 export default function Home() {
   const { t } = useLang();
-  const [latestSermon, setLatestSermon] = useState<{ videoId: string; title: string; date: string } | null>(null);
+  const [latestSermon, setLatestSermon] = useState<{
+    videoId: string;
+    title: string;
+    date: string;
+    displayTitle?: string;
+  } | null>(null);
 
   useEffect(() => {
     fetch('/api/latest-sermon')
-      .then(res => res.json())
-      .then(data => setLatestSermon(data))
-      .catch(err => console.error('Failed to fetch latest sermon:', err));
+      .then((res) => res.json())
+      .then((data) => {
+        const latest = data?.latest ?? data;
+        if (latest?.videoId) setLatestSermon(latest);
+      })
+      .catch((err) => console.error('Failed to fetch latest sermon:', err));
   }, []);
 
   const heroImages = [
@@ -38,7 +46,7 @@ export default function Home() {
       setCurrentImgIndex((prev) => (prev + 1) % heroImages.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [heroImages.length]);
 
   return (
     <>
@@ -77,6 +85,10 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+        <div className={styles.heroScroll} aria-hidden="true">
+          <span>Scroll</span>
+          <div className={styles.scrollChevron} />
         </div>
       </section>
 
@@ -170,7 +182,7 @@ export default function Home() {
         <div className={`container ${styles.latestSermonGrid}`}>
           <ScrollReveal delay={100} className={styles.latestSermonText}>
             <div className={styles.secLabel}>{t.latestMessage}</div>
-            <h2>{latestSermon?.title || t.latestTitle}</h2>
+            <h2>{latestSermon?.displayTitle ?? latestSermon?.title ?? t.latestTitle}</h2>
             <p>{latestSermon?.date || t.latestDesc}</p>
             <Link href="/sermons" className={`${styles.editorialLink} ${styles.editorialLinkLight}`}>
               {t.seeAllSermons}
@@ -178,7 +190,10 @@ export default function Home() {
             </Link>
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.latestSermonVideo}>
-            <YouTubeEmbed videoId={latestSermon?.videoId || "dngkoXyTIFU"} title="Latest Sermon" />
+            <YouTubeEmbed
+              videoId={latestSermon?.videoId || 'dngkoXyTIFU'}
+              title={latestSermon?.displayTitle ?? latestSermon?.title ?? 'Latest sermon'}
+            />
           </ScrollReveal>
         </div>
       </section>

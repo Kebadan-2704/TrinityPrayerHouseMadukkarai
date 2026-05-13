@@ -1,36 +1,211 @@
-.footer { background: var(--primary); color: rgba(255,255,255,0.65); padding: 3rem 0 0; }
-@media (min-width: 768px) { .footer { padding: 4.5rem 0 0; } }
-
-.footerGrid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; padding-bottom: 3rem; }
-@media (min-width: 600px) { .footerGrid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 992px) { .footerGrid { grid-template-columns: 1.5fr 1fr 1fr 1.3fr; gap: 2.5rem; } }
-
-.logo { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1.25rem; }
-.logoImgWrap { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
-.logoImgWrap img { width: 100%; height: 100%; object-fit: cover; }
-.logoText { display: flex; flex-direction: column; }
-.churchName { font-family: 'EB Garamond', serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
-.location { font-size: 0.55rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.35); text-transform: uppercase; }
-.mission { font-size: 0.85rem; margin-bottom: 1.5rem; line-height: 1.6; max-width: 280px; }
-
-.socials { display: flex; gap: 0.5rem; }
-.socials a {
-  width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);
-  display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5);
-  transition: all 0.25s ease; -webkit-tap-highlight-color: transparent;
+.footer {
+  position: relative;
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-deep) 100%);
+  color: rgba(255, 255, 255, 0.62);
+  padding: 3.5rem 0 0;
+  overflow: hidden;
 }
-.socials a:hover { border-color: var(--accent); color: var(--accent); background: rgba(201,169,110,0.08); }
 
-.heading { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 1.25rem; font-weight: 700; }
-.navCol ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-.navCol li, .navCol a { font-size: 0.85rem; transition: color 0.2s ease; }
-.navCol a:hover { color: #fff; }
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 5%, var(--accent-muted) 35%, var(--accent) 50%, var(--accent-muted) 65%, transparent 95%);
+  opacity: 0.85;
+}
 
-.contactCol ul { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; }
-.contactCol li { display: flex; gap: 0.65rem; align-items: flex-start; }
-.contactCol li svg { color: var(--accent); flex-shrink: 0; margin-top: 3px; }
-.contactCol span { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); }
-.contactCol p { font-size: 0.85rem; color: rgba(255,255,255,0.7); overflow-wrap: break-word; }
+.footer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212, 185, 120, 0.06), transparent 60%);
+  pointer-events: none;
+}
 
-.bottomBar { border-top: 1px solid rgba(255,255,255,0.06); padding: 1.2rem 0; }
-.bottomBar p { font-size: 0.72rem; color: rgba(255,255,255,0.3); }
+@media (min-width: 768px) {
+  .footer { padding: 5rem 0 0; }
+}
+
+.footerGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.75rem;
+  padding-bottom: 3.25rem;
+}
+
+@media (min-width: 600px) {
+  .footerGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 992px) {
+  .footerGrid { grid-template-columns: 1.55fr 1fr 1fr 1.35fr; gap: 2.75rem; }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.35rem;
+}
+
+.logoImgWrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(212, 185, 120, 0.22);
+}
+
+.logoImgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.churchName {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.location {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.38);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.mission {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.65;
+  max-width: 300px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.socials {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.socials a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.48);
+  transition: all 0.3s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.socials a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(212, 185, 120, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+}
+
+.heading {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  margin-bottom: 1.35rem;
+  font-weight: 800;
+  opacity: 0.95;
+}
+
+.navCol ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.navCol li,
+.navCol a {
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.navCol a:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.contactCol ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.contactCol li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.contactCol li svg {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 4px;
+  opacity: 0.9;
+}
+
+.contactCol span {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.38);
+  font-weight: 700;
+}
+
+.contactCol p {
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.72);
+  overflow-wrap: break-word;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.bottomBar {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.35rem 0;
+}
+
+.bottomBar p {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.32);
+  font-weight: 500;
+}
