@@ -70,8 +70,8 @@ export default function Navbar() {
       <motion.nav
         className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}
         aria-label="Primary"
-        initial={reduceMotion ? false : { y: -16, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={reduceMotion ? { x: "-50%", y: 0, opacity: 1 } : { x: "-50%", y: -16, opacity: 0 }}
+        animate={{ x: "-50%", y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className={styles.navInner}>
