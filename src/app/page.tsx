@@ -91,15 +91,6 @@ export default function Home() {
                   {t.planVisit}
                 </Link>
                 <Link href="/sermons" className={`btn-outline ${styles.heroBtn}`}>{t.watchLatest}</Link>
-                <a
-                  href={HERO_INTRO_VIDEO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${styles.heroVideoLink} ${styles.heroBtn}`}
-                >
-                  <Play size={17} strokeWidth={2.25} aria-hidden />
-                  {t.watchIntroVideo}
-                </a>
               </div>
             </div>
           </div>
@@ -234,19 +225,27 @@ export default function Home() {
       <section className={styles.communityBand}>
         <div className="container">
           <ScrollReveal delay={100}>
-            <div className={`${styles.secLabel} text-center`}>Gallery</div>
-            <h2 className={`text-center ${styles.sectionHeading}`}>Special <i>Meeting</i></h2>
+            <div className={`${styles.secLabel} text-center`}>Discover</div>
+            <h2 className={`text-center ${styles.sectionHeading}`}>Our <i>Community</i></h2>
           </ScrollReveal>
         </div>
         <div className={`container ${styles.communityGrid}`}>
           {[
-            { src: '/community-new-1.jpg', alt: 'Church Community', label: t.about },
-            { src: '/community-new-2.jpg', alt: 'Special Meeting', label: 'Special Meeting' },
-            { src: '/community-new-3.jpg', alt: 'Youth Ministry', label: t.ministries },
-          ].map((img, i) => (
-            <ScrollReveal key={i} delay={100 * (i + 1)} className={styles.communityImgWrap}>
-              <Image src={img.src} alt={img.alt} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 33vw" />
-              <div className={styles.communityLabel}><span>{img.label}</span></div>
+            { href: '/about', src: '/community-new-1.jpg', alt: 'Church Community', label: t.about },
+            { href: '/special-meeting', src: '/community-new-2.jpg', alt: 'Special Meetings', label: 'Special Meetings' },
+            { href: '/ministries', src: '/community-new-3.jpg', alt: 'Youth Ministry', label: t.ministries },
+          ].map((item, i) => (
+            <ScrollReveal key={i} delay={100 * (i + 1)}>
+              <Link href={item.href} className={styles.communityImgWrap}>
+                <Image src={item.src} alt={item.alt} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 33vw" />
+                <div className={styles.communityOverlay}></div>
+                <div className={styles.communityLabel}>
+                  <span>{item.label}</span>
+                  <div className={styles.communityIcon}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                  </div>
+                </div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>

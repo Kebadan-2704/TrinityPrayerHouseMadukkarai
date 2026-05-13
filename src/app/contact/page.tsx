@@ -113,16 +113,18 @@ export default function Contact() {
 
       {/* ===== MAP ===== */}
       <section className={styles.mapSection}>
-        <iframe
-          src="https://www.google.com/maps?q=Trinity+Prayer+House+Madukkarai+Coimbatore&output=embed"
-          width="100%"
-          height="400"
-          style={{ border: 0, display: 'block' }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Trinity Prayer House Location"
-        />
+        <div className="container">
+          <iframe
+            src="https://www.google.com/maps?q=Trinity+Prayer+House+Madukkarai+Coimbatore&output=embed"
+            width="100%"
+            height="400"
+            style={{ border: 0, display: 'block' }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Trinity Prayer House Location"
+          />
+        </div>
       </section>
     </div>
   );

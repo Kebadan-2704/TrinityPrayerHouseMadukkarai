@@ -8,7 +8,7 @@ const translations = {
   en: {
     // Nav
     home: 'Home', about: 'About', sermons: 'Sermons', ministries: 'Ministries',
-    events: 'Events', giving: 'Giving', contact: 'Contact', planVisit: 'Plan a Visit', prayerPage: 'Prayer', newHere: 'New Here?',
+    events: 'Special Meetings', giving: 'Giving', contact: 'Contact', planVisit: 'Plan a Visit', prayerPage: 'Prayer', newHere: 'New Here?',
     // Hero
     eyebrow: 'TRINITY PRAYER HOUSE · MADUKKARAI',
     heroTitle1: 'A Place of', heroTitle2: 'Encounter', heroTitle3: '&', heroTitle4: 'Peace',
@@ -74,7 +74,7 @@ const translations = {
     oldAgeMin: 'Old Age Home', oldAgeMinDesc: 'Providing care, love, and spiritual support for the elderly.',
     branchMin: 'Branch Churches', branchMinDesc: 'Expanding the Kingdom of God through our network of local branch churches.',
     // Events
-    calendar: 'CALENDAR', eventsH1a: 'Upcoming', eventsH1b: 'Events',
+    calendar: 'CALENDAR', eventsH1a: 'Upcoming', eventsH1b: 'Special Meetings',
     eventsSub: 'Gather with us. Find community, grow in your faith, and participate in the life of our church.',
     details: 'Details',
     ev1Title: 'Mid-Week Bible Study', ev1Desc: 'Join us for a deep dive into the Book of Romans. Open to all ages.',
@@ -104,7 +104,7 @@ const translations = {
   },
   ta: {
     home: 'முகப்பு', about: 'எங்களைப் பற்றி', sermons: 'பிரசங்கங்கள்', ministries: 'ஊழியங்கள்',
-    events: 'நிகழ்வுகள்', giving: 'காணிக்கை', contact: 'தொடர்பு', prayerPage: 'ஜெபம்', planVisit: 'வருகை திட்டம்', newHere: 'புதிதாக வந்தவரா?',
+    events: 'சிறப்பு கூட்டங்கள்', giving: 'காணிக்கை', contact: 'தொடர்பு', prayerPage: 'ஜெபம்', planVisit: 'வருகை திட்டம்', newHere: 'புதிதாக வந்தவரா?',
     eyebrow: 'டிரினிட்டி ஜெப இல்லம் · மடுக்கரை',
     heroTitle1: 'ஒரு இடம்', heroTitle2: 'சந்திப்பு', heroTitle3: '&', heroTitle4: 'அமைதி',
     heroSub: '1976 ஆம் ஆண்டு முதல் கடவுளுடன் ஆழமான உறவுகளை பின்பற்றும் ஆவிக்குரிய திருச்சபை குடும்பம்.',
@@ -159,7 +159,7 @@ const translations = {
     hindiMin: 'இந்தி ஊழியம்', hindiMinDesc: 'ஆராதனை மற்றும் வார்த்தையுடன் இந்தி பேசும் சமூகத்தை அடைதல்.',
     oldAgeMin: 'முதியோர் இல்லம்', oldAgeMinDesc: 'முதியோர்களுக்கு கவனிப்பு, அன்பு மற்றும் ஆன்மீக ஆதரவை வழங்குதல்.',
     branchMin: 'கிளை திருச்சபைகள்', branchMinDesc: 'எங்கள் உள்ளூர் கிளை திருச்சபைகள் மூலம் கடவுளின் ராஜ்யத்தை விரிவுபடுத்துதல்.',
-    calendar: 'நாட்காட்டி', eventsH1a: 'வரவிருக்கும்', eventsH1b: 'நிகழ்வுகள்',
+    calendar: 'நாட்காட்டி', eventsH1a: 'வரவிருக்கும்', eventsH1b: 'சிறப்பு கூட்டங்கள்',
     eventsSub: 'எங்களுடன் சேருங்கள். சமூகத்தைக் கண்டறியுங்கள், உங்கள் விசுவாசத்தில் வளருங்கள்.',
     details: 'விவரங்கள்',
     ev1Title: 'வாராந்திர வேதப்படிப்பு', ev1Desc: 'ரோமர் புத்தகத்தில் ஆழ்ந்த ஆய்வுக்கு எங்களுடன் சேருங்கள். அனைத்து வயதினருக்கும்.',
@@ -184,7 +184,7 @@ const translations = {
   },
   hi: {
     home: 'होम', about: 'हमारे बारे में', sermons: 'उपदेश', ministries: 'सेवकाई',
-    events: 'कार्यक्रम', giving: 'दान', contact: 'संपर्क', prayerPage: 'प्रार्थना', planVisit: 'यात्रा की योजना', newHere: 'क्या आप नए हैं?',
+    events: 'विशेष बैठकें', giving: 'दान', contact: 'संपर्क', prayerPage: 'प्रार्थना', planVisit: 'यात्रा की योजना', newHere: 'क्या आप नए हैं?',
     eyebrow: 'ट्रिनिटी प्रेयर हाउस · मदुक्करै',
     heroTitle1: 'एक स्थान', heroTitle2: 'मुलाकात', heroTitle3: 'और', heroTitle4: 'शांति',
     heroSub: '1976 से परमेश्वर के साथ गहरे संबंधों का अनुसरण करने वाला आत्मा से भरा चर्च परिवार।',
@@ -239,7 +239,7 @@ const translations = {
     hindiMin: 'हिंदी सेवकाई', hindiMinDesc: 'आराधना और वचन के साथ हिंदी भाषी समुदाय तक पहुँचना।',
     oldAgeMin: 'वृद्धाश्रम', oldAgeMinDesc: 'बुजुर्गों के लिए देखभाल, प्रेम और आध्यात्मिक सहायता प्रदान करना।',
     branchMin: 'शाखा चर्च', branchMinDesc: 'हमारे स्थानीय शाखा चर्चों के नेटवर्क के माध्यम से परमेश्वर के राज्य का विस्तार करना।',
-    calendar: 'कैलेंडर', eventsH1a: 'आगामी', eventsH1b: 'कार्यक्रम',
+    calendar: 'कैलेंडर', eventsH1a: 'आगामी', eventsH1b: 'विशेष बैठकें',
     eventsSub: 'हमारे साथ जुड़ें। समुदाय खोजें, अपने विश्वास में बढ़ें।',
     details: 'विवरण',
     ev1Title: 'साप्ताहिक बाइबल अध्ययन', ev1Desc: 'रोमियों की पुस्तक में गहन अध्ययन के लिए हमारे साथ जुड़ें। सभी उम्र के लिए।',

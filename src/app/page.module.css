@@ -106,6 +106,14 @@
   background: linear-gradient(90deg, var(--accent), transparent);
   animation: lineGrow 1s var(--ease-out) 0.15s both;
 }
+.heroEyebrow::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(-90deg, var(--accent), transparent);
+  animation: lineGrow 1s var(--ease-out) 0.15s both;
+}
 @keyframes lineGrow { from { width: 0; opacity: 0; } to { width: 44px; opacity: 1; } }
 @media (min-width: 768px) { .heroEyebrow { font-size: 0.7rem; } }
 
@@ -621,44 +629,90 @@
 }
 
 .communityImgWrap {
+  display: block;
   position: relative;
-  padding-bottom: 62%;
+  padding-bottom: 72%;
   border-radius: var(--radius-xl);
   overflow: hidden;
   cursor: pointer;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--border-light);
-  transition: transform 0.5s var(--ease-out), box-shadow 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease, border-color 0.6s ease;
 }
 .communityImgWrap:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-xl);
+  border-color: rgba(212, 185, 120, 0.4);
 }
 .communityImgWrap img {
-  transition: transform 0.85s var(--ease-out), filter 0.5s ease;
-  filter: brightness(0.88) saturate(1.05);
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+  filter: brightness(0.92) saturate(1.05);
 }
 .communityImgWrap:hover img {
-  transform: scale(1.07);
-  filter: brightness(0.72) saturate(1.1);
+  transform: scale(1.08);
+  filter: brightness(0.65) saturate(1.15);
+}
+
+.communityOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 10, 20, 0.7) 0%, transparent 50%);
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+.communityImgWrap:hover .communityOverlay {
+  opacity: 0.9;
 }
 
 .communityLabel {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 1.65rem 1.35rem;
-  background: linear-gradient(to top, rgba(10, 10, 20, 0.88) 0%, transparent 100%);
+  bottom: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0.75rem 0.75rem 1.25rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
   z-index: 2;
-  transition: padding 0.45s var(--ease-out);
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  color: #fff;
 }
-.communityImgWrap:hover .communityLabel { padding-bottom: 2.1rem; }
+.communityImgWrap:hover .communityLabel {
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--primary-deep);
+  border-color: #fff;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
 .communityLabel span {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.communityIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  flex-shrink: 0;
+}
+.communityImgWrap:hover .communityIcon {
+  background: var(--accent);
   color: #fff;
+  transform: scale(1.08);
 }
 
 /* ===== YOUTUBE CTA ===== */

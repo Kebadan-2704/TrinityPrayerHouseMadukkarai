@@ -80,7 +80,6 @@ export default function Navbar() {
               <Image src="/logo-golden.png" alt="Logo" width={38} height={38} priority />
             </div>
             <span className={styles.logoMark}>TPH</span>
-            <span className={styles.logoWord}>Trinity</span>
           </Link>
 
           <div className={styles.desktopNav}>

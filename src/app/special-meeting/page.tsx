@@ -98,7 +98,7 @@ export default function SpecialMeeting() {
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <ScrollReveal delay={100}>
-            <div className={styles.secLabel}>Events</div>
+            <div className={styles.secLabel}>Special Meetings</div>
             <h1>Special <i>Meetings</i></h1>
             <p className={styles.headerP}>
               Join us for our special gatherings and divine encounters.

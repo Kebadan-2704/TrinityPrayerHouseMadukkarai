@@ -14,7 +14,7 @@ type Message = {
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: "Hello! I'm Sam from Trinity Prayer House. How can I help you today?" }
+    { role: 'bot', text: "Hello! I'm Trinity Bot from Trinity Prayer House. How can I help you today?" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -41,11 +41,11 @@ export default function Chatbot() {
 
     // Build context
     const recentMessages = messages.slice(-5);
-    let promptString = "You are Sam, a friendly member of Trinity Prayer House in Madukkarai, Coimbatore. You are the AI assistant for the church website. You love helping people and answering questions about the church. Keep answers concise, polite, friendly, and helpful.\\n";
+    let promptString = "You are Trinity Bot, a friendly AI assistant for Trinity Prayer House in Madukkarai, Coimbatore. You love helping people and answering questions about the church. Keep answers concise, polite, friendly, and helpful.\\n";
     recentMessages.forEach(m => {
-      promptString += `${m.role === 'bot' ? 'Sam' : 'User'}: ${m.text}\\n`;
+      promptString += `${m.role === 'bot' ? 'Trinity Bot' : 'User'}: ${m.text}\\n`;
     });
-    promptString += `User: ${userMessage}\\nSam:`;
+    promptString += `User: ${userMessage}\\nTrinity Bot:`;
 
     try {
       const url = `https://chatbot.codexapi.workers.dev/?prompt=${encodeURIComponent(promptString)}&model=gpt-5.1`;
@@ -77,10 +77,10 @@ export default function Chatbot() {
             <div className={styles.chatHeader}>
               <div className={styles.headerTitle}>
                 <div className={styles.headerIconWrap}>
-                  <Image src="/sam-avatar-v3.png" alt="Sam" width={38} height={38} className={styles.headerAvatar} />
+                  <Image src="/sam-avatar-v3.png" alt="Trinity Bot" width={38} height={38} className={styles.headerAvatar} />
                 </div>
                 <div>
-                  <h4>Sam</h4>
+                  <h4>Trinity Bot</h4>
                   <span>Online</span>
                 </div>
               </div>
@@ -94,18 +94,23 @@ export default function Chatbot() {
                 <div key={i} className={`${styles.messageWrap} ${msg.role === 'user' ? styles.userWrap : styles.botWrap}`}>
                   {msg.role === 'bot' && (
                     <div className={styles.avatar}>
-                      <Image src="/sam-avatar-v3.png" alt="Sam" width={28} height={28} className={styles.msgAvatar} />
+                      <Image src="/sam-avatar-v3.png" alt="Trinity Bot" width={28} height={28} className={styles.msgAvatar} />
                     </div>
                   )}
                   <div className={`${styles.message} ${msg.role === 'user' ? styles.userMsg : styles.botMsg}`}>
-                    {msg.text}
+                    {msg.text.split(/(\*\*.*?\*\*)/g).map((part, index) => {
+                      if (part.startsWith('**') && part.endsWith('**')) {
+                        return <strong key={index}>{part.slice(2, -2)}</strong>;
+                      }
+                      return <span key={index}>{part}</span>;
+                    })}
                   </div>
                 </div>
               ))}
               {isLoading && (
                 <div className={`${styles.messageWrap} ${styles.botWrap}`}>
                   <div className={styles.avatar}>
-                    <Image src="/sam-avatar-v3.png" alt="Sam" width={28} height={28} className={styles.msgAvatar} />
+                    <Image src="/sam-avatar-v3.png" alt="Trinity Bot" width={28} height={28} className={styles.msgAvatar} />
                   </div>
                   <div className={`${styles.message} ${styles.botMsg} ${styles.loadingMsg}`}>
                     <Loader2 size={16} className={styles.spinner} />
@@ -121,7 +126,7 @@ export default function Chatbot() {
                 type="text" 
                 value={input} 
                 onChange={e => setInput(e.target.value)} 
-                placeholder="Ask Sam anything..." 
+                placeholder="Ask Trinity Bot anything..." 
                 className={styles.inputField}
               />
               <button type="submit" disabled={!input.trim() || isLoading} className={styles.sendBtn} aria-label="Send message">
