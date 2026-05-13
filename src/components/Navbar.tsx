@@ -77,7 +77,7 @@ export default function Navbar() {
         <div className={styles.navInner}>
           <Link href="/" className={styles.logo} onClick={closeMenu}>
             <div className={styles.logoImgWrap}>
-              <Image src="/Trinity Prayer prayer Logo.png" alt="Logo" width={38} height={38} priority style={{ borderRadius: '8px' }} />
+              <Image src="/tph-logo.png" alt="Trinity Prayer House" width={38} height={38} priority style={{ borderRadius: '8px' }} />
             </div>
             <span className={styles.logoMark}>TPH</span>
           </Link>
