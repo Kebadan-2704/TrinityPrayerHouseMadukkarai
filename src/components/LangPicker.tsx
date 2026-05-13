@@ -5,10 +5,10 @@ import { useLang } from './LangContext';
 import type { Language } from './LangContext';
 import styles from './LangPicker.module.css';
 
-const languages: { code: Language; label: string; native: string; flag: string }[] = [
-  { code: 'en', label: 'English', native: 'English', flag: '🇬🇧' },
-  { code: 'ta', label: 'Tamil', native: 'தமிழ்', flag: '🇮🇳' },
-  { code: 'hi', label: 'Hindi', native: 'हिन्दी', flag: '🇮🇳' },
+const languages: { code: Language; label: string; native: string; flagUrl: string }[] = [
+  { code: 'en', label: 'English', native: 'English', flagUrl: 'https://flagcdn.com/w40/gb.png' },
+  { code: 'ta', label: 'Tamil', native: 'தமிழ்', flagUrl: 'https://flagcdn.com/w40/in.png' },
+  { code: 'hi', label: 'Hindi', native: 'हिन्दी', flagUrl: 'https://flagcdn.com/w40/in.png' },
 ];
 
 export default function LangPicker() {
@@ -55,7 +55,7 @@ export default function LangPicker() {
                   whileHover={reduce ? {} : { x: 4 }}
                   whileTap={reduce ? {} : { scale: 0.99 }}
                 >
-                  <span className={styles.flag}>{l.flag}</span>
+                  <img src={l.flagUrl} alt={l.label} className={styles.flag} width={28} height={20} />
                   <span className={styles.langLabel}>{l.label}</span>
                   <span className={styles.langNative}>{l.native}</span>
                 </motion.button>

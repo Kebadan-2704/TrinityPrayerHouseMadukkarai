@@ -9,6 +9,11 @@
   pointer-events: none;
 }
 
+/* When chat is open on mobile, raise above navbar */
+.chatWrapperOpen {
+  z-index: 9999;
+}
+
 @media (max-width: 768px) {
   .chatWrapper {
     left: 1.35rem;
@@ -85,6 +90,12 @@
     border-radius: 0;
     transform-origin: center;
     border: none;
+    z-index: 9999;
+  }
+
+  /* Hide the toggle FAB when chat is open on mobile */
+  .toggleOpen {
+    display: none;
   }
 }
 

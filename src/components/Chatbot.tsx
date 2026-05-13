@@ -64,7 +64,7 @@ export default function Chatbot() {
   };
 
   return (
-    <div className={styles.chatWrapper}>
+    <div className={`${styles.chatWrapper} ${isOpen ? styles.chatWrapperOpen : ''}`}>
       <AnimatePresence>
         {isOpen && (
           <motion.div 
