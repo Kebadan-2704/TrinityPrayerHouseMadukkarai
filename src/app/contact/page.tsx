@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import styles from './page.module.css';
 import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
+import { FaInstagram, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
 import { useLang } from '@/components/LangContext';
 
 export default function Contact() {
@@ -56,6 +57,17 @@ export default function Contact() {
               <div className={styles.infoItem}>
                 <div className={styles.iconWrap}><Mail size={20} /></div>
                 <div><h4>{t.email}</h4><p>trinityprayerhouse.mdk@gmail.com</p></div>
+              </div>
+              <div className={styles.socialIconsRow}>
+                <a href="https://www.instagram.com/trinityprayerhouse_church?igsh=MXEwcXpiaXh6a21jaQ==" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconInsta}`} aria-label="Instagram">
+                  <FaInstagram />
+                </a>
+                <a href="https://www.facebook.com/share/1HXvvKSbNE/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconFb}`} aria-label="Facebook">
+                  <FaFacebookF />
+                </a>
+                <a href="https://wa.me/919786888999" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconWa}`} aria-label="WhatsApp">
+                  <FaWhatsapp />
+                </a>
               </div>
             </div>
           </div>
