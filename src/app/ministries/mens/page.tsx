@@ -4,6 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import PhotoCarousel from '@/components/ui/PhotoCarousel';
+
+const mensImages = [
+  '/mens-ministry/growing-1.jpg',
+  '/mens-ministry/growing-2.jpg',
+  '/mens-ministry/growing-3.jpg',
+];
 
 export default function MensMinistryPage() {
   return (
@@ -36,7 +43,7 @@ export default function MensMinistryPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>
-               <Image src="/prayer_gallery_2.png" alt="Men's group" fill style={{ objectFit: 'cover' }} />
+              <PhotoCarousel images={mensImages} />
             </ScrollReveal>
           </div>
         </div>

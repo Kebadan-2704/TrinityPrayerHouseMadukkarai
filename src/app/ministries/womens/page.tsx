@@ -4,6 +4,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import PhotoCarousel from '@/components/ui/PhotoCarousel';
+
+const daughtersImages = [
+  '/womens-ministry/daughters-1.jpg',
+  '/womens-ministry/daughters-2.jpg',
+  '/womens-ministry/daughters-3.jpg',
+];
+
+const outreachImages = [
+  '/womens-ministry/outreach-1.jpg',
+  '/womens-ministry/outreach-2.jpg',
+  '/womens-ministry/outreach-3.jpg',
+];
 
 export default function WomensMinistryPage() {
   return (
@@ -25,7 +38,7 @@ export default function WomensMinistryPage() {
       <section className={styles.contentSection}>
         <div className="container">
           <Link href="/ministries" className={styles.backBtn}>&larr; Back to Ministries</Link>
-          <div className={styles.contentGrid}>
+          <div className={styles.contentGrid} style={{ marginBottom: '6rem' }}>
             <ScrollReveal className={styles.textContent}>
               <h2>Daughters of the King</h2>
               <p>
@@ -36,7 +49,22 @@ export default function WomensMinistryPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>
-               <Image src="/womens_gallery_2.png" alt="Women fellowship" fill style={{ objectFit: 'cover' }} />
+              <PhotoCarousel images={daughtersImages} />
+            </ScrollReveal>
+          </div>
+
+          <div className={styles.contentGrid}>
+            <ScrollReveal delay={200} className={styles.galleryImageWrap}>
+              <PhotoCarousel images={outreachImages} />
+            </ScrollReveal>
+            <ScrollReveal className={styles.textContent}>
+              <h2>Women&apos;s Outreach Program</h2>
+              <p>
+                Our Women’s Outreach Ministry to old age homes is a beautiful expression of Christ’s love through compassion, care, and fellowship. Through regular visits, the women of our church bring joy and encouragement to elderly residents by spending meaningful time with them, praying, singing worship songs, sharing God’s Word, and offering emotional support.
+              </p>
+              <p>
+                This ministry also extends practical help through the distribution of meals, essential supplies, clothing, and personal care items, ensuring that the elderly feel loved, remembered, and valued. Through these acts of kindness, we seek to be a source of comfort, hope, and God’s grace to those in their later years.
+              </p>
             </ScrollReveal>
           </div>
         </div>

@@ -4,6 +4,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import PhotoCarousel from '@/components/ui/PhotoCarousel';
+
+const worshipImages = [
+  '/hindi-ministry/worship-1.jpg',
+  '/hindi-ministry/worship-2.jpg',
+  '/hindi-ministry/worship-3.jpg',
+  '/hindi-ministry/worship-4.jpg',
+  '/hindi-ministry/worship-5.jpg',
+  '/hindi-ministry/worship-6.jpg',
+  '/hindi-ministry/worship-7.jpg',
+  '/hindi-ministry/worship-8.jpg',
+];
+
+const serviceMapUrl = 'https://maps.app.goo.gl/9k8FbskNZ5gP7mfL7';
+const serviceMapEmbedUrl = 'https://www.google.com/maps?q=Rotaract%20Club%20of%20Coimbatore%20Texcity%20Texcity%20Hall%2C%20behind%20Sungam%20Bypass%20Road%2C%20Shanmuga%20Nagar%2C%20Ramanathapuram%2C%20Coimbatore%2C%20Tamil%20Nadu%20641018&output=embed';
 
 export default function HindiMinistryPage() {
   return (
@@ -36,7 +51,34 @@ export default function HindiMinistryPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>
-               <Image src="/prayer_gallery_2.png" alt="Hindi Ministry group" fill style={{ objectFit: 'cover' }} />
+              <PhotoCarousel images={worshipImages} />
+            </ScrollReveal>
+          </div>
+
+          <div className={styles.serviceDetailsGrid}>
+            <ScrollReveal className={styles.serviceDetails}>
+              <h2>Service Details</h2>
+              <div className={styles.detailItem}>
+                <span className={styles.detailLabel}>Location</span>
+                <p>Rotaract Club of Coimbatore Texcity (Texcity Hall), behind Sungam Bypass Road, Shanmuga Nagar, Ramanathapuram, Coimbatore, Tamil Nadu - 641018</p>
+              </div>
+              <div className={styles.detailItem}>
+                <span className={styles.detailLabel}>Time</span>
+                <p>Every Sunday at 7:00 PM</p>
+              </div>
+              <a className={styles.mapLink} href={serviceMapUrl} target="_blank" rel="noopener noreferrer">
+                Open in Google Maps
+              </a>
+            </ScrollReveal>
+
+            <ScrollReveal delay={200} className={styles.mapWrap}>
+              <iframe
+                src={serviceMapEmbedUrl}
+                title="Hindi Ministry service location map"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
             </ScrollReveal>
           </div>
         </div>

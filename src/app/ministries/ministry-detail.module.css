@@ -23,5 +23,18 @@
 .galleryImageWrap:hover img { transform: scale(1.05); }
 .galleryImageWrap img { transition: transform 0.6s var(--ease-out); }
 
+.serviceDetailsGrid { display: grid; grid-template-columns: 1fr; gap: 3rem; margin-top: 6rem; align-items: stretch; }
+@media (min-width: 992px) { .serviceDetailsGrid { grid-template-columns: 1fr 1fr; gap: 4rem; } }
+
+.serviceDetails { display: flex; flex-direction: column; justify-content: center; }
+.serviceDetails h2 { font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem; }
+.detailItem { margin-bottom: 1.25rem; }
+.detailLabel { display: block; color: var(--accent); font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 0.5rem; text-transform: uppercase; }
+.detailItem p { color: var(--text-body); line-height: 1.7; font-size: 1.05rem; margin: 0; }
+.mapLink { align-self: flex-start; color: var(--primary); font-weight: 700; margin-top: 0.5rem; text-decoration: underline; text-underline-offset: 0.25em; }
+.mapLink:hover { color: var(--accent); }
+.mapWrap { border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); min-height: 360px; overflow: hidden; width: 100%; }
+.mapWrap iframe { border: 0; display: block; height: 100%; min-height: 360px; width: 100%; }
+
 .backBtn { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s ease; }
 .backBtn:hover { color: var(--accent); }
