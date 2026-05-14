@@ -15,7 +15,9 @@ const sundaySchoolImages = [
 const vbsImages = [
   '/kids-ministry/kids-1.jpg',
   '/kids-ministry/kids-2.jpg',
-  '/kids-ministry/kids-6.jpg'
+  '/kids-ministry/kids-8.jpg',
+  '/kids-ministry/kids-10.jpg',
+  '/kids-ministry/kids-9.jpg'
 ];
 
 export default function KidsMinistryPage() {
