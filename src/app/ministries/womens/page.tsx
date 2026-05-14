@@ -29,10 +29,10 @@ export default function WomensMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Daughters of the King</h2>
               <p>
-                Our Women&apos;s Ministry is designed to connect women of all ages and backgrounds. Through Bible studies, retreats, and fellowship events, we create spaces for authentic relationship building and mutual encouragement.
+                Our Women’s Ministry at Trinity Prayer House is a place of faith, encouragement, and genuine fellowship where women of all ages and backgrounds come together to grow in the presence of God. Through prayer meetings, Bible studies, worship, and heartfelt fellowship, we foster a loving community where every woman is welcomed, valued, and strengthened in her walk with Christ.
               </p>
               <p>
-                We believe that every woman has a unique God-given purpose. Our goal is to equip you to rise up as a strong leader in your home, workplace, and community, rooted deeply in the love of Christ.
+                Whether in seasons of joy, challenge, or spiritual growth, our Women’s Ministry stands together in faith, offering encouragement, support, and the truth of God’s Word. We are passionate about helping women deepen their relationship with God, discover their purpose, and use their God-given gifts to serve their families, the church, and the Kingdom with confidence and grace.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>

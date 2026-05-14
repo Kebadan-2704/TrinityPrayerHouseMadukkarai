@@ -29,10 +29,10 @@ export default function HindiMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Worship in Our Heart Language</h2>
               <p>
-                Our Hindi Ministry is dedicated to serving the Hindi-speaking population in and around Madukkarai. We believe that language should never be a barrier to encountering God&apos;s love.
+                Our Hindi Ministry at Trinity Prayer House is dedicated to creating a welcoming spiritual home for Hindi-speaking believers to worship, pray, and grow in faith in their heart language. We believe that God’s Word becomes even more personal and impactful when experienced in a language that speaks directly to the heart, which is why this ministry provides a meaningful space for worship, fellowship, and spiritual encouragement in Hindi.
               </p>
               <p>
-                Join us for our special Hindi services where we worship, study the Bible, and fellowship together. We are building a family of believers who encourage and support one another in Christ.
+                Whether you are new to the city or have been part of the community for years, our Hindi Ministry is a place of belonging, connection, and spiritual growth. Through worship services, prayer, fellowship, and the teaching of God’s Word, we seek to strengthen faith, build lasting relationships, and help every individual experience the love and presence of Christ in a familiar and comforting way.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>

@@ -29,10 +29,10 @@ export default function MensMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Growing Together</h2>
               <p>
-                Our Men&apos;s Ministry is dedicated to building strong, faithful men who lead in their homes, workplaces, and the community. We gather to study the Word, pray together, and encourage one another.
+                Our Men’s Ministry at Trinity Prayer House is a strong brotherhood of faith where men are encouraged to grow spiritually, build meaningful relationships, and become the leaders God has called them to be. Through prayer gatherings, Bible studies, fellowship, and discipleship, we create a supportive environment where men can be strengthened, challenged, and encouraged in their walk with Christ. Here, men stand together in faith, uplifting one another through every season of life.
               </p>
               <p>
-                Join us for powerful times of fellowship, teaching, and mentorship as we strive to become the men God has called us to be.
+                We believe that when men are grounded in God’s Word, they become pillars of strength in their families, church, and community. Our Men’s Ministry is committed to equipping men to lead with integrity, serve with humility, and boldly live out their faith in every area of life — becoming godly examples both within the church and beyond.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>

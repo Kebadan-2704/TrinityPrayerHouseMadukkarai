@@ -43,10 +43,7 @@ export default function KidsMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Sunday School - Every Sunday at 9:30am</h2>
               <p>
-                Our Kids Ministry is dedicated to providing a safe, fun, and engaging environment where children can learn about God&apos;s love. We believe that spiritual growth starts early, and we are committed to partnering with parents to build a strong biblical foundation.
-              </p>
-              <p>
-                Through interactive lessons, worship, and age-appropriate activities, children discover their identity in Christ and learn to apply biblical truths to their everyday lives.
+                Sunday School is a warm and engaging space where children are introduced to the love of God through age-appropriate lessons, Bible stories, and creative activities. Our dedicated teachers and volunteers create a nurturing environment where young hearts build a foundation of faith, grow in God's Word, and are reminded every week that they are seen, loved, and celebrated.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>
@@ -61,10 +58,7 @@ export default function KidsMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Vacation Bible Study (VBS)</h2>
               <p>
-                Every summer, our Vacation Bible Study (VBS) brings children together for an action-packed week of learning, singing, and growing in their faith. It is one of our most anticipated events of the year!
-              </p>
-              <p>
-                Children participate in creative crafts, energetic games, and meaningful Bible lessons designed to help them understand God&apos;s word in a way that is memorable and exciting.
+                Vacation Bible School is the highlight of the year for our kids! Held annually, VBS is a celebration of faith and fun where children explore God's Word through exciting themes, energetic worship, games, and crafts — making lasting memories, building new friendships, and leaving with a heart full of the knowledge of how deeply God loves them.
               </p>
             </ScrollReveal>
           </div>
