@@ -43,6 +43,8 @@ export default function Home() {
 
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [heroBgVideoPlaying, setHeroBgVideoPlaying] = useState(false);
+  const [foundersHovered, setFoundersHovered] = useState(false);
+  const [missionHovered, setMissionHovered] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -116,9 +118,50 @@ export default function Home() {
         <div className={`container ${styles.welcomeGrid}`}>
           <ScrollReveal delay={100} className={styles.welcomeImageWrap}>
             <Parallax speed={0.15}>
-              <div style={{ position: 'relative', paddingBottom: '80%', borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)' }}>
-                <Image src="/founder-photo.jpg" alt="Our Founders" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
-              </div>
+              {/* ── FOUNDERS IMAGE POSITION CONTROLS ────────────────────────────
+                  objectPositionX : move image left (0%) ↔ right (100%)
+                  objectPositionY : move image up   (0%) ↔ down  (100%)
+                  imageScale      : zoom in (>1) or out (<1), e.g. 1.2 = 20% zoom
+                  hoverScale      : extra zoom applied only on hover
+              ─────────────────────────────────────────────────────────────── */}
+              {(() => {
+                const objectPositionX = '50%'; // ← adjust horizontal crop
+                const objectPositionY = '20%'; // ← adjust vertical crop
+                const imageScale      = 1.0;   // ← base zoom level
+                const hoverScale      = 1.06;  // ← zoom on hover (1.06 = 6% bigger)
+                return (
+                  <div
+                    onMouseEnter={() => setFoundersHovered(true)}
+                    onMouseLeave={() => setFoundersHovered(false)}
+                    style={{
+                      position: 'relative',
+                      paddingBottom: '80%',
+                      borderRadius: 'var(--radius-lg)',
+                      overflow: 'hidden',
+                      cursor: 'pointer',
+                      transition: 'box-shadow 0.4s ease, transform 0.4s ease',
+                      boxShadow: foundersHovered
+                        ? '0 24px 60px rgba(16, 0, 59, 1)'
+                        : 'var(--shadow-lg)',
+                      transform: foundersHovered ? 'translateY(-4px)' : 'translateY(0)',
+                    }}
+                  >
+                    <Image
+                      src="/sathya-founders.png"
+                      alt="Our Founders"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      style={{
+                        objectFit: 'cover',
+                        objectPosition: `${objectPositionX} ${objectPositionY}`,
+                        transform: `scale(${foundersHovered ? hoverScale : imageScale})`,
+                        transformOrigin: `${objectPositionX} ${objectPositionY}`,
+                        transition: 'transform 0.5s ease',
+                      }}
+                    />
+                  </div>
+                );
+              })()}
             </Parallax>
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.welcomeText}>
@@ -138,10 +181,16 @@ export default function Home() {
       <section className={`section-padding ${styles.welcomeSection}`} style={{ paddingTop: 0 }}>
         <div className={`container ${styles.welcomeGrid}`}>
           <ScrollReveal delay={100} className={styles.welcomeText}>
-            <div className={styles.secLabel}>{t.missionUs}</div>
-            <h2>{t.missionH1a} {t.missionH1b}<br/>{t.missionH1c}</h2>
-            <p className={styles.leadText}>{t.missionP1}</p>
-            <p>{t.missionP2}</p>
+            <div className={styles.secLabel}>Our Legacy</div>
+            <h2>Continuing a Legacy of<br/><i>Faith &amp; Service</i></h2>
+            <p className={styles.leadText}>
+              Following in the footsteps of Pastor Sathyanathan, Pastor Vasanthh Sathyanathan
+              continues the divine calling of serving the Lord with faith, humility, and compassion.
+            </p>
+            <p>
+              Through prayer, ministry, and the preaching of God&apos;s Word, he remains committed
+              to leading souls to Christ and carrying forward a legacy of spiritual guidance and service.
+            </p>
             <Link href="/mission" className={styles.editorialLink}>
               Discover Our Mission
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -149,9 +198,50 @@ export default function Home() {
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.welcomeImageWrap}>
             <Parallax speed={0.15}>
-              <div style={{ position: 'relative', paddingBottom: '80%', borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)' }}>
-                <Image src="/community-new-2.jpg" alt="Our Mission" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
-              </div>
+              {/* ── MISSION IMAGE POSITION CONTROLS ──────────────────────────────
+                  objectPositionX : move image left (0%) ↔ right (100%)
+                  objectPositionY : move image up   (0%) ↔ down  (100%)
+                  imageScale      : base zoom level (1.0 = no zoom)
+                  hoverScale      : extra zoom applied only on hover
+              ─────────────────────────────────────────────────────────────── */}
+              {(() => {
+                const objectPositionX = '50%'; // ← adjust horizontal crop
+                const objectPositionY = '20%'; // ← adjust vertical crop
+                const imageScale      = 1.0;   // ← base zoom level
+                const hoverScale      = 1.06;  // ← zoom on hover (1.06 = 6% bigger)
+                return (
+                  <div
+                    onMouseEnter={() => setMissionHovered(true)}
+                    onMouseLeave={() => setMissionHovered(false)}
+                    style={{
+                      position: 'relative',
+                      paddingBottom: '80%',
+                      borderRadius: 'var(--radius-lg)',
+                      overflow: 'hidden',
+                      cursor: 'pointer',
+                      transition: 'box-shadow 0.4s ease, transform 0.4s ease',
+                      boxShadow: missionHovered
+                        ? '0 24px 60px rgba(16, 0, 59, 1)'
+                        : 'var(--shadow-lg)',
+                      transform: missionHovered ? 'translateY(-4px)' : 'translateY(0)',
+                    }}
+                  >
+                    <Image
+                      src="/vmain.jpeg"
+                      alt="Our Mission"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      style={{
+                        objectFit: 'cover',
+                        objectPosition: `${objectPositionX} ${objectPositionY}`,
+                        transform: `scale(${missionHovered ? hoverScale : imageScale})`,
+                        transformOrigin: `${objectPositionX} ${objectPositionY}`,
+                        transition: 'transform 0.5s ease',
+                      }}
+                    />
+                  </div>
+                );
+              })()}
             </Parallax>
           </ScrollReveal>
         </div>

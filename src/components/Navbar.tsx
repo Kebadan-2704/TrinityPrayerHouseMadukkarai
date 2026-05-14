@@ -41,7 +41,6 @@ export default function Navbar() {
   const closeMenu = () => setIsOpen(false);
 
   const desktopNavItems = [
-    { href: '/', label: t.home },
     { href: '/vision', label: t.about },
     { href: '/mission', label: t.mission },
     { href: '/sermons', label: t.sermons },
@@ -54,7 +53,6 @@ export default function Navbar() {
   ];
 
   const mobileNavItems = [
-    { href: '/', label: t.home },
     { href: '/vision', label: t.about },
     { href: '/mission', label: t.mission },
     { href: '/sermons', label: t.sermons },
