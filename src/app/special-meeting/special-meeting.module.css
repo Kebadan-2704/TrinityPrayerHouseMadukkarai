@@ -217,6 +217,18 @@
   border-top: 1px solid rgba(0,0,0,0.08);
 }
 
+/* Description paragraph below each meeting */
+.meetingDescription {
+  margin-top: 1.5rem;
+  font-size: 0.97rem;
+  line-height: 1.75;
+  color: #555;
+  max-width: 880px;
+  padding-left: 0.25rem;
+  border-left: 3px solid rgba(199, 167, 96, 0.4);
+  padding-left: 1rem;
+}
+
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .meetingContent {
