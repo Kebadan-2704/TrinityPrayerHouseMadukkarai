@@ -88,7 +88,7 @@ export default function Navbar() {
     { href: '/contact', label: t.contact },
   ];
 
-  const linkStagger = reduceMotion ? 0 : 0.05;
+  const linkStagger = reduceMotion ? 0 : 0.08;
 
   return (
     <>

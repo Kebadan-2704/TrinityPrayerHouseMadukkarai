@@ -86,57 +86,57 @@ const handleSubmit = async (e: React.FormEvent) => {
                   <HeartHandshake size={32} strokeWidth={1.5} />
                 </div>
 
-                {errorMsg && <div className={styles.formError}>{errorMsg}</div>}
+                 {errorMsg && <div className={styles.formError}>{errorMsg}</div>}
 
-                <div className={styles.formRow}>
-                  <div className={styles.inputGroup}>
-                    <input
-                      type="text"
-                      id="prayerName"
-                      required
-                      placeholder=" "
-                      value={name}
-                      onChange={e => setName(e.target.value)}
-                    />
-                    <label htmlFor="prayerName">{t.firstName}</label>
-                  </div>
-                  <div className={styles.inputGroup}>
-                    <input
-                      type="tel"
-                      id="prayerPhone"
-                      placeholder=" "
-                      value={phone}
-                      onChange={e => setPhone(e.target.value)}
-                    />
-                    <label htmlFor="prayerPhone">Phone (Optional)</label>
-                  </div>
-                </div>
+                 <div className={styles.formRow}>
+                   <div className={styles.inputGroup}>
+                     <input
+                       type="text"
+                       id="prayerName"
+                       required
+                       placeholder=" "
+                       value={name}
+                       onChange={e => setName(e.target.value)}
+                     />
+                     <label htmlFor="prayerName">{t.firstName}</label>
+                   </div>
+                   <div className={styles.inputGroup}>
+                     <input
+                       type="tel"
+                       id="prayerPhone"
+                       placeholder=" "
+                       value={phone}
+                       onChange={e => setPhone(e.target.value)}
+                     />
+                     <label htmlFor="prayerPhone">Phone (Optional)</label>
+                   </div>
 
-                 {/* Honeypot field — hidden from real users */}
-                 <div style={{ display: 'none' }}>
-                   <label htmlFor="prayerWebsite">Leave this empty if you are human</label>
-                   <input
-                     type="text"
-                     id="prayerWebsite"
-                     value={website}
-                     onChange={e => setWebsite(e.target.value)}
-                     autoComplete="off"
-                     tabIndex={-1}
-                     aria-hidden="true"
-                   />
+                   {/* Honeypot field — hidden from real users */}
+                   <div style={{ display: 'none' }}>
+                     <label htmlFor="prayerWebsite">Leave this empty if you are human</label>
+                     <input
+                       type="text"
+                       id="prayerWebsite"
+                       value={website}
+                       onChange={e => setWebsite(e.target.value)}
+                       autoComplete="off"
+                       tabIndex={-1}
+                       aria-hidden="true"
+                     />
+                   </div>
+
+                   <div className={styles.inputGroup}>
+                     <textarea
+                       id="prayerDetails"
+                       required
+                       placeholder=" "
+                       rows={6}
+                       value={prayerNeed}
+                       onChange={e => setPrayerNeed(e.target.value)}
+                     />
+                     <label htmlFor="prayerDetails">{t.prayerNeed}</label>
+                   </div>
                  </div>
-
-                 <div className={styles.inputGroup}>
-                  <textarea
-                    id="prayerDetails"
-                    required
-                    placeholder=" "
-                    rows={6}
-                    value={prayerNeed}
-                    onChange={e => setPrayerNeed(e.target.value)}
-                  />
-                  <label htmlFor="prayerDetails">{t.prayerNeed}</label>
-                </div>
 
                 <button type="submit" className={styles.submitBtn} disabled={status === 'submitting'}>
                   {status === 'submitting' ? (

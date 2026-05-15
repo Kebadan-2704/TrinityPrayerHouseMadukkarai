@@ -28,12 +28,15 @@ export default function MeetNotifier() {
   const [dismissedWarning, setDismissedWarning] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isSubscribing, setIsSubscribing] = useState(false);
-  
+   
   const notifiedRef = useRef(false);
-  const warnRef = useRef(showWarning);
-  const liveRef = useRef(showLive);
-  warnRef.current = showWarning;
-  liveRef.current = showLive;
+  const warnRef = useRef<boolean>(false);
+  const liveRef = useRef<boolean>(false);
+
+  useEffect(() => {
+    warnRef.current = showWarning;
+    liveRef.current = showLive;
+  }, [showWarning, showLive]);
 
   useEffect(() => {
     // Register service worker and check if already subscribed to web push
