@@ -19,7 +19,7 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
       <LangPicker />
       <Navbar />
       <MeetNotifier />
-      <main className="site-main">{children}</main>
+      <main className="site-main" id="main-content">{children}</main>
       <Footer />
       <WhatsAppButton />
       <Chatbot />

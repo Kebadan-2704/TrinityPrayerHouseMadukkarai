@@ -1,95 +1,91 @@
 'use client';
 
+import styles from './page.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './page.module.css';
+import { ArrowRight, Users, MapPin, Clock, Heart } from 'lucide-react';
 
-import { Clock, MapPin, Coffee, Heart, Music, Users } from 'lucide-react';
-import ScrollReveal from '@/components/ui/ScrollReveal';
-
-export default function NewHerePage() {
-
+export default function NewHere() {
   return (
     <div className={styles.pageWrap}>
-      {/* Header */}
-      <section className={`${styles.headerSection} mesh-editorial-header`}>
-        <div className={styles.headerBg}></div>
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <ScrollReveal>
-            <div className={styles.secLabel}>WELCOME HOME</div>
-            <h1>New Here?</h1>
-            <p>We know visiting a new church can be intimidating. Here is everything you need to know to make your first visit a great experience.</p>
-          </ScrollReveal>
+      {/* Hero */}
+      <section className={styles.heroSection}>
+        <div className={styles.heroBg}>
+          <Image
+            src="/worship.jpg"
+            alt="Welcome to Trinity Prayer House"
+            fill
+            style={{ objectFit: 'cover' }}
+            priority
+          />
+          <div className={styles.heroOverlay}></div>
         </div>
-      </section>
-
-      {/* What to Expect */}
-      <section className={styles.expectSection}>
-        <div className="container">
-          <div className={styles.grid2}>
-            <ScrollReveal delay={100} className={styles.expectImgWrap}>
-              {/* Use worship image as placeholder until real images are provided */}
-              <Image src="/worship.png" alt="Worship service" fill style={{ objectFit: 'cover' }} />
-            </ScrollReveal>
-            <ScrollReveal delay={200} className={styles.expectContent}>
-              <div className={styles.secLabel}>WHAT TO EXPECT</div>
-              <h2>Come as you are.</h2>
-              <p className={styles.leadText}>
-                At Trinity Prayer House, you&apos;ll be welcomed into a friendly, casual environment by people who are excited to see you. We want you to have an idea of what to expect when you arrive.
-              </p>
-              
-              <ul className={styles.featureList}>
-                <li>
-                  <div className={styles.featureIcon}><Clock size={20} /></div>
-                  <div>
-                    <h4>90-Minute Services</h4>
-                    <p>Our services are typically an hour and a half long, filled with engaging worship and a practical, Bible-based message.</p>
-                  </div>
-                </li>
-                <li>
-                  <div className={styles.featureIcon}><Music size={20} /></div>
-                  <div>
-                    <h4>Passionate Worship</h4>
-                    <p>We start with high-energy, spirit-filled worship. Feel free to participate in whatever way is comfortable for you.</p>
-                  </div>
-                </li>
-                <li>
-                  <div className={styles.featureIcon}><Heart size={20} /></div>
-                  <div>
-                    <h4>Friendly Community</h4>
-                    <p>No perfect people allowed. We are a community of broken people finding hope and healing in Jesus.</p>
-                  </div>
-                </li>
-              </ul>
-            </ScrollReveal>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div className={styles.heroContent}>
+            <h1>Welcome!</h1>
+            <p className={styles.heroSub}>
+              We&apos;re so glad you&apos;re here. Whether this is your first time at Trinity Prayer House
+              or you&apos;re looking for a church home, we want you to know — you belong here.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* FAQ Grid */}
-      <section className={styles.faqSection}>
+      {/* What to Expect */}
+      <section className={`section-padding ${styles.expectSection}`}>
         <div className="container">
-          <ScrollReveal className={styles.textCenter}>
-            <h2>Frequently Asked Questions</h2>
-            <p className={styles.faqSub}>Common questions from our first-time guests.</p>
-          </ScrollReveal>
+          <h2 className={styles.sectionTitle}>What to Expect</h2>
+          <div className={styles.expectGrid}>
+            {[
+              {
+                icon: <Clock size={28} />,
+                title: 'Service Times',
+                text: 'Sunday Worship at 9:30 AM, Hindi Service at 6:30 PM, Bible Study on Thursdays at 6:30 PM. We also have special meetings and prayer gatherings throughout the month.',
+              },
+              {
+                icon: <MapPin size={28} />,
+                title: 'Find Us',
+                text: 'Trinity Prayer House, 16/300 Gandhi Nagar, Madukkarai, Coimbatore - 641105. Free parking is available nearby.',
+              },
+              {
+                icon: <Users size={28} />,
+                title: 'Community',
+                text: 'We are a multi-generational, multilingual church family. You will find a warm welcome whether you are young or old, new to faith or have walked with God for years.',
+              },
+              {
+                icon: <Heart size={28} />,
+                title: 'For Your Kids',
+                text: 'We have a dedicated Kids Ministry with Sunday School during the morning service and special programs like Vacation Bible School throughout the year.',
+              },
+            ].map((item, i) => (
+              <div key={i} className={styles.expectCard} role="article" aria-label={item.title}>
+                <div className={styles.expectIcon} aria-hidden="true">{item.icon}</div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <div className={styles.faqGrid}>
-            <ScrollReveal delay={100} className={styles.faqCard}>
-              <div className={styles.faqIcon}><MapPin size={24} /></div>
-              <h3>Where do I park?</h3>
-              <p>We have dedicated parking spaces right in front of the church building. Our parking team will guide you to a spot when you arrive.</p>
-            </ScrollReveal>
-            <ScrollReveal delay={200} className={styles.faqCard}>
-              <div className={styles.faqIcon}><Coffee size={24} /></div>
-              <h3>What should I wear?</h3>
-              <p>Most of our congregation dresses casually. Whether you prefer jeans and a t-shirt or your Sunday best, you are welcome here!</p>
-            </ScrollReveal>
-            <ScrollReveal delay={300} className={styles.faqCard}>
-              <div className={styles.faqIcon}><Users size={24} /></div>
-              <h3>What about my kids?</h3>
-              <p>We have an excellent Kids Ministry that runs concurrently with our Sunday services. Your children will learn about Jesus in a safe, fun environment.</p>
-            </ScrollReveal>
+      {/* First Visit Tips */}
+      <section className={styles.tipsSection}>
+        <div className="container">
+          <h2 className={styles.sectionTitle}>First Visit Tips</h2>
+          <div className={styles.tipsGrid}>
+            {[
+              'Arrive 10–15 minutes early so we can greet you and help you find a seat.',
+              'Dress casually and comfortably — no dress code here.',
+              'Grab a cup of tea or coffee from our welcome counter.',
+              'Fill out a visitor card at the welcome desk so we can connect with you.',
+              'Stay after service for fellowship time with light refreshments.',
+              'Feel free to ask any questions — our team and congregation are here to help.',
+            ].map((tip, i) => (
+              <div key={i} className={styles.tipItem}>
+                <span className={styles.tipNumber}>{String(i + 1).padStart(2, '0')}</span>
+                <p>{tip}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -97,14 +93,16 @@ export default function NewHerePage() {
       {/* CTA */}
       <section className={styles.ctaSection}>
         <div className="container" style={{ textAlign: 'center' }}>
-          <ScrollReveal>
-            <h2>Ready to visit?</h2>
-            <p className={styles.ctaSub}>Join us this Sunday at 9:30 AM.</p>
-            <div className={styles.ctaButtons}>
-              <Link href="/contact" className="btn-primary">Get Directions</Link>
-              <Link href="/sermons" className="btn-outline">Watch Online First</Link>
-            </div>
-          </ScrollReveal>
+          <h2>Ready to Visit?</h2>
+          <p>We would love to welcome you in person. Join us this Sunday!</p>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+            <Link href="/online-meet" className={styles.ctaBtn}>
+              Join Online Meet
+            </Link>
+            <Link href="/contact" className={styles.ctaBtnOutline}>
+              Get in Touch
+            </Link>
+          </div>
         </div>
       </section>
     </div>

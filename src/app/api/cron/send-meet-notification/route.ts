@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server';
 import webpush from 'web-push';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseAdmin = createClient(
+  (process.env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, ''),
+  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+);
 
 // Configure Web Push with VAPID keys
 webpush.setVapidDetails(
@@ -10,15 +15,20 @@ webpush.setVapidDetails(
 );
 
 export async function GET(request: Request) {
-  // Optional: Add a simple security check so only Vercel Cron can call this
+  // Enforce auth: reject if CRON_SECRET is unset or header is missing/wrong
+  const expectedSecret = process.env.CRON_SECRET;
+  if (!expectedSecret) {
+    console.error('CRON_SECRET is not configured');
+    return new Response('Server misconfigured — CRON_SECRET not set', { status: 500 });
+  }
   const authHeader = request.headers.get('authorization');
-  if (process.env.CRON_SECRET && authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (authHeader !== `Bearer ${expectedSecret}`) {
     return new Response('Unauthorized', { status: 401 });
   }
 
   try {
-    // 1. Fetch all subscriptions from Supabase
-    const { data: subscriptions, error } = await supabase
+    // 1. Fetch all subscriptions from Supabase using the admin client
+    const { data: subscriptions, error } = await supabaseAdmin
       .from('push_subscriptions')
       .select('*');
 
@@ -39,7 +49,7 @@ export async function GET(request: Request) {
     });
 
     // 3. Send pushes to everyone in parallel
-    const sendPromises = subscriptions.map(async (sub: any) => {
+    const sendPromises = subscriptions.map(async (sub: { id: string; endpoint: string; p256dh: string; auth: string }) => {
       const pushSubscription = {
         endpoint: sub.endpoint,
         keys: {
@@ -50,11 +60,16 @@ export async function GET(request: Request) {
 
       try {
         await webpush.sendNotification(pushSubscription, payload);
-      } catch (err: any) {
+      } catch (err: unknown) {
         // If a subscription is no longer valid (e.g. user revoked permission), we delete it
-        if (err.statusCode === 404 || err.statusCode === 410) {
-          console.log(`Subscription ${sub.id} expired or unsubscribed. Deleting...`);
-          await supabase.from('push_subscriptions').delete().eq('id', sub.id);
+        if (typeof err === 'object' && err !== null && 'statusCode' in err) {
+          const statusCode = (err as { statusCode: number }).statusCode;
+          if (statusCode === 404 || statusCode === 410) {
+            console.log(`Subscription ${sub.id} expired or unsubscribed. Deleting...`);
+            await supabaseAdmin.from('push_subscriptions').delete().eq('id', sub.id);
+          } else {
+            console.error('Failed to send push to subscription:', sub.id, err);
+          }
         } else {
           console.error('Failed to send push to subscription:', sub.id, err);
         }

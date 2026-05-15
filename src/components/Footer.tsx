@@ -7,6 +7,7 @@ import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa'
 import { motion, useReducedMotion, Variants } from 'framer-motion';
 import { useLang } from './LangContext';
 import styles from './Footer.module.css';
+import MagneticEffect from '@/components/ui/MagneticEffect';
 
 export default function Footer() {
   const { t } = useLang();
@@ -58,17 +59,16 @@ export default function Footer() {
           </div>
           <p className={styles.mission}>{t.footerMission}</p>
           <div className={styles.socials}>
-            <a href="https://www.facebook.com/share/1HXvvKSbNE/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF size={16} /></a>
-            <a href="https://www.instagram.com/trinityprayerhouse_church?igsh=MXEwcXpiaXh6a21jaQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram size={16} /></a>
-            <a href="https://www.youtube.com/@Pas.Vasanth" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube size={16} /></a>
-            <a href="https://wa.me/919786888999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><FaWhatsapp size={16} /></a>
+            <MagneticEffect strength={0.4}><a href="https://www.facebook.com/share/1HXvvKSbNE/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF size={16} /></a></MagneticEffect>
+            <MagneticEffect strength={0.4}><a href="https://www.instagram.com/trinityprayerhouse_church?igsh=MXEwcXpiaXh6a21jaQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram size={16} /></a></MagneticEffect>
+            <MagneticEffect strength={0.4}><a href="https://www.youtube.com/@Pas.Vasanth" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube size={16} /></a></MagneticEffect>
+            <MagneticEffect strength={0.4}><a href="https://wa.me/919786888999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><FaWhatsapp size={16} /></a></MagneticEffect>
           </div>
         </motion.div>
         <motion.div className={styles.navCol} variants={footerColVariants}>
           <h4 className={styles.heading}>{t.navigate}</h4>
-          <ul>
+          <ul className={styles.linkList}>
             <li><Link href="/">{t.home}</Link></li>
-            <li><Link href="/new-here">{t.newHere}</Link></li>
             <li><Link href="/vision">{t.about}</Link></li>
             <li><Link href="/mission">{t.mission}</Link></li>
             <li><Link href="/sermons">{t.sermons}</Link></li>
@@ -81,27 +81,40 @@ export default function Footer() {
         </motion.div>
         <motion.div className={styles.navCol} variants={footerColVariants}>
           <h4 className={styles.heading}>{t.services}</h4>
-          <ul>
-            <li>{t.promiseService}: 1st of Every Month, 6:30 AM</li>
-            <li>{t.sunWorship}: 9:30 AM</li>
-            <li>{t.hindiService}: Sun, 6:30 PM</li>
-            <li>{t.bibleStudy}: Thu, 6:30 PM</li>
-            <li><Link href="/online-meet" style={{ color: '#c7a760' }}>Daily Online Meet: Everyday, 9:00 PM</Link></li>
-            <li>Fasting Prayer: 1st Sat, 10:30 AM</li>
-            <li>Night Prayer: 4th Fri, 10:00 PM</li>
+          <ul className={styles.serviceList}>
+            <li className={styles.serviceItem}>
+              <span className={styles.serviceName}>{t.promiseService}</span>
+              <span className={styles.serviceTime}>1st of Every Month, 6:30 AM</span>
+            </li>
+            <li className={styles.serviceItem}>
+              <span className={styles.serviceName}>{t.sunWorship}</span>
+              <span className={styles.serviceTime}>Sundays, 9:30 AM</span>
+            </li>
+            <li className={styles.serviceItem}>
+              <span className={styles.serviceName}>{t.hindiService}</span>
+              <span className={styles.serviceTime}>Sundays, 6:30 PM</span>
+            </li>
+            <li className={styles.serviceItem}>
+              <span className={styles.serviceName}>{t.bibleStudy}</span>
+              <span className={styles.serviceTime}>Thursdays, 6:30 PM</span>
+            </li>
+            <li className={styles.serviceItem}>
+              <Link href="/online-meet" className={styles.serviceName} style={{ color: '#c7a760' }}>Daily Online Meet</Link>
+              <span className={styles.serviceTime}>Everyday, 9:00 PM</span>
+            </li>
           </ul>
         </motion.div>
         <motion.div className={styles.contactCol} variants={footerColVariants}>
           <h4 className={styles.heading}>{t.contactUs}</h4>
           <ul>
-            <li><Phone size={13} /><div><span>{t.phone}</span><p>+91 9786888999</p></div></li>
-            <li><Mail size={13} /><div><span>{t.email}</span><p>trinityprayerhouse.mdk@gmail.com</p></div></li>
-            <li><MapPin size={13} /><div><span>{t.address}</span><p>16/300, Gandhi Nagar, Madukkarai, Coimbatore - 641105</p></div></li>
+            <li><Phone size={16} /><div><span>{t.phone}</span><p>+91 9786888999</p></div></li>
+            <li><Mail size={16} /><div><span>{t.email}</span><p>trinityprayerhouse.mdk@gmail.com</p></div></li>
+            <li><MapPin size={16} /><div><span>{t.address}</span><p>16/300, Gandhi Nagar, Madukkarai, Coimbatore - 641105</p></div></li>
           </ul>
         </motion.div>
       </motion.div>
       <div className={styles.bottomBar}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
           <p>&copy; {new Date().getFullYear()} Trinity Prayer House. {t.rights}</p>
           <p>{t.footerGlory}</p>
         </div>

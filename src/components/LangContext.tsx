@@ -302,14 +302,26 @@ const LangContext = createContext<LangContextType>({
 export const useLang = () => useContext(LangContext);
 
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Language>('en');
-  const [showPicker, setShowPicker] = useState(false);
+  const [lang, setLangState] = useState<Language>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('tph-lang') as Language | null;
+      if (saved && translations[saved]) return saved;
+    }
+    return 'en';
+  });
+  const [showPicker, setShowPicker] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('tph-lang') as Language | null;
+      if (saved && translations[saved]) return false;
+    }
+    return true;
+  });
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // One-shot hydration from localStorage on mount — runs exactly once, empty dep[]
     const saved = localStorage.getItem('tph-lang') as Language | null;
     if (saved && translations[saved]) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLangState(saved);
       document.documentElement.lang = saved;
     } else {

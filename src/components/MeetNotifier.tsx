@@ -30,11 +30,15 @@ export default function MeetNotifier() {
   const [isSubscribing, setIsSubscribing] = useState(false);
   
   const notifiedRef = useRef(false);
+  const warnRef = useRef(showWarning);
+  const liveRef = useRef(showLive);
+  warnRef.current = showWarning;
+  liveRef.current = showLive;
 
   useEffect(() => {
-    // Check if already subscribed to web push
+    // Register service worker and check if already subscribed to web push
     if ('serviceWorker' in navigator && 'PushManager' in window) {
-      navigator.serviceWorker.ready.then(registration => {
+      navigator.serviceWorker.register('/sw.js').then(registration => {
         registration.pushManager.getSubscription().then(subscription => {
           setIsSubscribed(!!subscription);
         });
@@ -43,7 +47,7 @@ export default function MeetNotifier() {
     if ('Notification' in window && Notification.permission === 'default') {
       try {
         Notification.requestPermission().catch(() => {});
-      } catch (e) {}
+      } catch { /* empty */ }
     }
 
     const checkTime = () => {
@@ -51,7 +55,7 @@ export default function MeetNotifier() {
       // Parse local time as IST (Asia/Kolkata)
       const istString = now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
       const istTime = new Date(istString);
-      
+
       const hours = istTime.getHours();
       const minutes = istTime.getMinutes();
 
@@ -72,9 +76,9 @@ export default function MeetNotifier() {
 
       // In-app warning banner between 8:50 PM and 9:00 PM (20:50 - 20:59)
       if (hours === 20 && minutes >= 50) {
-        if (!showWarning) setShowWarning(true);
+        if (!warnRef.current) setShowWarning(true);
       } else {
-        if (showWarning) {
+        if (warnRef.current) {
           setShowWarning(false);
           setDismissedWarning(false); // reset for next day
         }
@@ -82,9 +86,9 @@ export default function MeetNotifier() {
 
       // In-app live banner between 9:00 PM and 10:00 PM (21:00 - 21:59)
       if (hours === 21) {
-        if (!showLive) setShowLive(true);
+        if (!liveRef.current) setShowLive(true);
       } else {
-        if (showLive) {
+        if (liveRef.current) {
           setShowLive(false);
           setDismissedLive(false); // reset for next day
         }
@@ -94,7 +98,7 @@ export default function MeetNotifier() {
     checkTime();
     const interval = setInterval(checkTime, 20000); // Check every 20 seconds
     return () => clearInterval(interval);
-  }, [showWarning, showLive]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const subscribeToPush = async () => {
     if (!('serviceWorker' in navigator && 'PushManager' in window)) {
@@ -104,6 +108,7 @@ export default function MeetNotifier() {
     
     setIsSubscribing(true);
     try {
+      await navigator.serviceWorker.register('/sw.js');
       const registration = await navigator.serviceWorker.ready;
       
       const subscription = await registration.pushManager.subscribe({

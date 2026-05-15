@@ -36,7 +36,7 @@ export default function BranchChurchesPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>
-               <Image src="/prayer_gallery_2.png" alt="Branch Churches" fill style={{ objectFit: 'cover' }} />
+               <Image src="/prayer_gallery_2.png" alt="Branch church gathering" fill style={{ objectFit: 'cover' }} />
             </ScrollReveal>
           </div>
         </div>

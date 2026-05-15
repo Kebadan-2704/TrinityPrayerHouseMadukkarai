@@ -55,7 +55,8 @@ export default function LangPicker() {
                   whileHover={reduce ? {} : { x: 4 }}
                   whileTap={reduce ? {} : { scale: 0.99 }}
                 >
-                  <img src={l.flagUrl} alt={l.label} className={styles.flag} width={28} height={20} />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={l.flagUrl} alt={l.label} className={styles.flag} width={28} height={20} />
                   <span className={styles.langLabel}>{l.label}</span>
                   <span className={styles.langNative}>{l.native}</span>
                 </motion.button>

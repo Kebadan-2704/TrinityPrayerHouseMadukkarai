@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import styles from './special-meeting.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import StaggeredText from '@/components/ui/StaggeredText';
 import Image from 'next/image';
 
 // ── Meeting data — add more photos as arrays, one entry per meeting ──
@@ -144,10 +145,10 @@ export default function SpecialMeeting() {
       {/* ── Hero Banner ── */}
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image
-            src="/special-meetings/meeting1/photo1.jpg"
-            alt="Special Meeting"
-            fill
+<Image
+             src="/special-meetings/meeting1/photo1.jpg"
+             alt="Special meetings at Trinity Prayer House"
+             fill
             priority
             sizes="100vw"
             style={{
@@ -172,7 +173,6 @@ export default function SpecialMeeting() {
       <section className={styles.meetingsList}>
         <div className="container">
           {meetings.map((meeting, index) => {
-            const isEven = index % 2 === 1; // alternate layout each row
             return (
               <ScrollReveal key={meeting.id} delay={100} className={styles.meetingRow}>
                 {/* Heading */}
@@ -183,26 +183,47 @@ export default function SpecialMeeting() {
                   <h2>{meeting.title}</h2>
                 </div>
 
-                {/* Video + Photo grid — alternates order */}
-                <div
-                  className={styles.meetingContent}
-                  style={{ direction: isEven ? 'rtl' : 'ltr' }}
-                >
-                  <div className={styles.videoWrap} style={{ direction: 'ltr' }}>
-                    <iframe
-                      src={`https://www.youtube.com/embed/${meeting.ytId}?rel=0&modestbranding=1`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title={meeting.title}
-                    />
+                <div className={styles.meetingContentLayout}>
+                  <div className={styles.topRow}>
+                    <div className={styles.videoCol}>
+                      {/* Video */}
+                      <div className={styles.videoWrap}>
+                        <iframe
+                          src={`https://www.youtube.com/embed/${meeting.ytId}?rel=0&modestbranding=1`}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          title={meeting.title}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className={styles.textCol}>
+                      {/* Description paragraph */}
+                      <div className={styles.meetingDescription}>
+                        <StaggeredText text={meeting.description} el="p" />
+                      </div>
+                    </div>
                   </div>
-                  <div style={{ direction: 'ltr' }}>
-                    <PhotoCarousel photos={meeting.photos} title={meeting.title} />
+
+                  {/* Photos */}
+                  <div className={
+                    meeting.photos.length === 1
+                      ? styles.photoSingle
+                      : styles.photoGrid
+                  }>
+                    {meeting.photos.map((photo, i) => (
+                      <div key={i} className={styles.photoCard}>
+                        <Image 
+                          src={photo} 
+                          alt={`${meeting.title} photo ${i + 1}`} 
+                          fill 
+                          sizes={meeting.photos.length === 1 ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 33vw'}
+                          style={{ objectFit: 'cover' }} 
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
-
-                {/* Description paragraph */}
-                <p className={styles.meetingDescription}>{meeting.description}</p>
 
                 {index < meetings.length - 1 && <div className={styles.divider} />}
               </ScrollReveal>

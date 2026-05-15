@@ -10,9 +10,10 @@ import Parallax from '@/components/ui/Parallax';
 import FloatingParticles from '@/components/ui/FloatingParticles';
 import CinematicHeroBackdrop from '@/components/ui/CinematicHeroBackdrop';
 import YouTubeEmbed from '@/components/ui/YouTubeEmbed';
-import { Sun, Heart, BookOpen, Sparkles, Video, Play } from 'lucide-react';
+import MagneticEffect from '@/components/ui/MagneticEffect';
+import StaggeredText from '@/components/ui/StaggeredText';
+import { Sun, Heart, BookOpen, Sparkles, Video } from 'lucide-react';
 import { useLang } from '@/components/LangContext';
-import { HERO_INTRO_VIDEO_URL } from '@/lib/siteMedia';
 
 export default function Home() {
   const { t } = useLang();
@@ -49,7 +50,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImgIndex((prev) => (prev + 1) % heroImages.length);
-    }, 4000);
+    }, 8000);
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
@@ -62,13 +63,20 @@ export default function Home() {
           <div
             className={`${styles.heroSlidesWrap} ${heroBgVideoPlaying ? styles.heroSlidesHidden : ''}`}
           >
-            {heroImages.map((src, idx) => (
-              <div
-                key={src}
-                className={`${styles.heroImgSlide} ${idx === currentImgIndex ? styles.active : ''}`}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt="Trinity Prayer House" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+{heroImages.map((src, idx) => (
+               <div
+                 key={src}
+                 className={`${styles.heroImgSlide} ${idx === currentImgIndex ? styles.active : ''}`}
+                 style={{ position: 'absolute', inset: 0 }}
+               >
+                 <Image
+                  src={src}
+                  alt="Trinity Prayer House - Church community"
+                  fill
+                  priority={idx === 0}
+                  sizes="100vw"
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
             ))}
           </div>
@@ -84,15 +92,19 @@ export default function Home() {
               </h1>
               <p className={`${styles.heroSubtext} ${styles.animFadeUpDelay}`}>{t.heroSub}</p>
               <div className={`${styles.heroCtas} ${styles.animFadeUpDelay2}`}>
-                <Link
-                  href="https://www.google.com/maps/dir/?api=1&destination=Trinity+Prayer+House+Madukkarai+Coimbatore"
-                  target="_blank" rel="noopener noreferrer"
-                  className={`btn-primary ${styles.heroBtn}`}
-                >
-                  <span className={styles.btnPulse}></span>
-                  {t.planVisit}
-                </Link>
-                <Link href="/sermons" className={`btn-outline ${styles.heroBtn}`}>{t.watchLatest}</Link>
+                <MagneticEffect>
+                  <Link
+                    href="https://www.google.com/maps/dir/?api=1&destination=Trinity+Prayer+House+Madukkarai+Coimbatore"
+                    target="_blank" rel="noopener noreferrer"
+                    className={`btn-primary ${styles.heroBtn}`}
+                  >
+                    <span className={styles.btnPulse}></span>
+                    {t.planVisit}
+                  </Link>
+                </MagneticEffect>
+                <MagneticEffect>
+                  <Link href="/sermons" className={`btn-outline ${styles.heroBtn}`}>{t.watchLatest}</Link>
+                </MagneticEffect>
               </div>
             </div>
           </div>
@@ -166,7 +178,7 @@ export default function Home() {
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.welcomeText}>
             <div className={styles.secLabel}>{t.ourStory}</div>
-            <h2>{t.welcomeH2a}<br/>{t.welcomeH2b}</h2>
+            <h2><StaggeredText text={t.welcomeH2a} el="span" /><br/><StaggeredText text={t.welcomeH2b} el="span" /></h2>
             <p className={styles.leadText}>{t.welcomeP1}</p>
             <p>{t.welcomeP2}</p>
             <Link href="/vision" className={styles.editorialLink}>
@@ -256,7 +268,9 @@ export default function Home() {
         <div className={styles.prayerContent}>
           <ScrollReveal delay={100}>
             <div className={styles.crossSymbol}>✝</div>
-            <h2 className={styles.prayerQuote}>{t.imgCaption}</h2>
+            <h2 className={styles.prayerQuote}>
+              <StaggeredText text={t.imgCaption} el="span" />
+            </h2>
           </ScrollReveal>
         </div>
       </section>
@@ -310,7 +324,7 @@ export default function Home() {
         <div className={`container ${styles.latestSermonGrid}`}>
           <ScrollReveal delay={100} className={styles.latestSermonText}>
             <div className={styles.secLabel}>{t.latestMessage}</div>
-            <h2>{latestSermon?.displayTitle ?? latestSermon?.title ?? t.latestTitle}</h2>
+            <h2><StaggeredText text={latestSermon?.displayTitle ?? latestSermon?.title ?? t.latestTitle} el="span" /></h2>
             <p>{latestSermon?.date || t.latestDesc}</p>
             <Link href="/sermons" className={`${styles.editorialLink} ${styles.editorialLinkLight}`}>
               {t.seeAllSermons}
@@ -363,10 +377,12 @@ export default function Home() {
             <div className={styles.secLabel}>{t.watchOnline}</div>
             <h2 className={styles.sectionHeading}>{t.neverMiss} <i>{t.messageI}</i></h2>
             <p className={styles.ytDesc}>{t.ytSubDesc}</p>
-            <a href="https://www.youtube.com/@Pas.Vasanth?sub_confirmation=1" target="_blank" rel="noopener noreferrer" className={`btn-primary ${styles.ytBtn}`}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>
-              {t.subscribeYT}
-            </a>
+            <MagneticEffect strength={0.15}>
+              <a href="https://www.youtube.com/@Pas.Vasanth?sub_confirmation=1" target="_blank" rel="noopener noreferrer" className={`btn-primary ${styles.ytBtn}`}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>
+                {t.subscribeYT}
+              </a>
+            </MagneticEffect>
           </ScrollReveal>
         </div>
       </section>

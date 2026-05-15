@@ -10,7 +10,7 @@ export default function Mission() {
     <div className="pageWrap">
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/old.jpg" alt="" fill style={{ objectFit: 'cover' }} priority />
+          <Image src="/old.jpg" alt="Mission history photo" fill style={{ objectFit: 'cover' }} />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

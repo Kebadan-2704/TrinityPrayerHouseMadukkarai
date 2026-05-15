@@ -35,7 +35,7 @@
   mix-blend-mode: screen;
 }
 
-.video {
+.mediaLayer {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -43,10 +43,11 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 1s var(--ease-out);
+  will-change: opacity;
+  transition: opacity 1.5s ease-in-out;
 }
 
-.videoVisible {
+.mediaVisible {
   opacity: 1;
 }
 

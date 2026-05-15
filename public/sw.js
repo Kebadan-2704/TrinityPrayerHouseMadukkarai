@@ -1,9 +1,8 @@
-const CACHE_NAME = 'tph-cache-v1';
+const CACHE_NAME = 'tph-cache-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/manifest.json',
-  '/logo.png',
-  '/worship.png',
+  '/logo-black.png',
   '/prayer.png',
   '/youth.png',
   '/church-interior.png'
@@ -35,7 +34,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
-  
+
   event.respondWith(
     fetch(event.request).catch(() => {
       return caches.match(event.request).then((response) => {
@@ -49,20 +48,41 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('push', (event) => {
-  const data = event.data ? event.data.json() : {};
   event.waitUntil(
-    self.registration.showNotification(data.title || 'Trinity Prayer House', {
-      body: data.body || 'We will have a meet in 10 minutes. Join us!',
-      icon: '/tph-icon-192.png',
-      badge: '/tph-icon-192.png',
-      data: { url: data.url || '/online-meet' }
-    })
+    (async () => {
+      let data = {};
+      try {
+        data = event.data ? await event.data.json() : {};
+      } catch (_) { /* ignore malformed push payload */ }
+
+      try {
+        await self.registration.showNotification(
+          data.title || 'Trinity Prayer House',
+          {
+            body: data.body || 'We will have a meet in 10 minutes. Join us!',
+            icon: '/tph-icon-192.png',
+            badge: '/tph-icon-192.png',
+            data: { url: data.url || '/online-meet' }
+          }
+        );
+      } catch (_) { /* ignore notification permission errors */ }
+    })()
   );
 });
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
   event.waitUntil(
-    clients.openWindow(event.notification.data.url)
+    (async () => {
+      try {
+        const allClients = await clients.matchAll({ type: 'window', includeUncontrolled: true });
+        for (const client of allClients) {
+          if (client.url === event.notification.data.url && 'focus' in client) {
+            return client.focus();
+          }
+        }
+        await clients.openWindow(event.notification.data.url);
+      } catch (_) { /* ignore */ }
+    })()
   );
 });

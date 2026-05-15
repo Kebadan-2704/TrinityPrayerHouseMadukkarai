@@ -4,5 +4,8 @@
       "path": "/api/cron/send-meet-notification",
       "schedule": "20 15 * * *"
     }
+  ],
+  "rewrites": [
+    { "source": "/api/health", "destination": "/api/health-check" }
   ]
 }

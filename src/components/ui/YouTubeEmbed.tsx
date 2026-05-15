@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import styles from './YouTubeEmbed.module.css';
 
 interface YouTubeEmbedProps {
@@ -26,12 +27,13 @@ export default function YouTubeEmbed({ videoId, title = 'Video' }: YouTubeEmbedP
           onClick={() => setLoaded(true)}
           aria-label={`Play ${title}`}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
             alt={title}
             className={styles.thumb}
-            loading="lazy"
+            priority={false}
+            unoptimized
+            fill
           />
           <div className={styles.overlay} />
           <div className={styles.playBtn}>

@@ -17,7 +17,7 @@ export default function MensMinistryPage() {
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/prayer_ministry.png" alt="Men's Ministry" fill style={{ objectFit: 'cover' }} priority />
+          <Image src="/prayer_ministry.png" alt="Men's Ministry gathering" fill style={{ objectFit: 'cover' }} />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -36,10 +36,10 @@ export default function MensMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Growing Together</h2>
               <p>
-                Our Men’s Ministry at Trinity Prayer House is a strong brotherhood of faith where men are encouraged to grow spiritually, build meaningful relationships, and become the leaders God has called them to be. Through prayer gatherings, Bible studies, fellowship, and discipleship, we create a supportive environment where men can be strengthened, challenged, and encouraged in their walk with Christ. Here, men stand together in faith, uplifting one another through every season of life.
+                Our Men&apos;s Ministry at Trinity Prayer House is a strong brotherhood of faith where men are encouraged to grow spiritually, build meaningful relationships, and become the leaders God has called them to be. Through prayer gatherings, Bible studies, fellowship, and discipleship, we create a supportive environment where men can be strengthened, challenged, and encouraged in their walk with Christ.
               </p>
               <p>
-                We believe that when men are grounded in God’s Word, they become pillars of strength in their families, church, and community. Our Men’s Ministry is committed to equipping men to lead with integrity, serve with humility, and boldly live out their faith in every area of life — becoming godly examples both within the church and beyond.
+                We believe that when men are grounded in God&apos;s Word, they become pillars of strength in their families, church, and community. Our Men&apos;s Ministry is committed to equipping men to lead with integrity, serve with humility, and boldly live out their faith in every area of life.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>

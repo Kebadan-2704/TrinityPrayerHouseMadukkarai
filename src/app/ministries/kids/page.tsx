@@ -25,8 +25,7 @@ export default function KidsMinistryPage() {
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          {/* You can manually adjust the image position below by changing the objectPosition value (e.g., 'center 20%', 'top', 'bottom', etc.) */}
-          <Image src="/kids-ministry/kids-1.jpg" alt="Kids Ministry" fill style={{ objectFit: 'cover', objectPosition: 'center 60%' }} priority />
+          <Image src="/kids-ministry/kids-1.jpg" alt="Kids Ministry activities" fill style={{ objectFit: 'cover', objectPosition: 'center 60%' }} />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -45,7 +44,7 @@ export default function KidsMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Sunday School - Every Sunday at 9:30am</h2>
               <p>
-                Sunday School is a warm and engaging space where children are introduced to the love of God through age-appropriate lessons, Bible stories, and creative activities. Our dedicated teachers and volunteers create a nurturing environment where young hearts build a foundation of faith, grow in God's Word, and are reminded every week that they are seen, loved, and celebrated.
+                Sunday School is a warm and engaging space where children are introduced to the love of God through age-appropriate lessons, Bible stories, and creative activities. Our dedicated teachers and volunteers create a nurturing environment where young hearts build a foundation of faith, grow in God&apos;s Word, and are reminded every week that they are seen, loved, and celebrated.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>
@@ -60,7 +59,7 @@ export default function KidsMinistryPage() {
             <ScrollReveal className={styles.textContent}>
               <h2>Vacation Bible Study (VBS)</h2>
               <p>
-                Vacation Bible School is the highlight of the year for our kids! Held annually, VBS is a celebration of faith and fun where children explore God's Word through exciting themes, energetic worship, games, and crafts — making lasting memories, building new friendships, and leaving with a heart full of the knowledge of how deeply God loves them.
+                Vacation Bible School is the highlight of the year for our kids! Held annually, VBS is a celebration of faith and fun where children explore God&apos;s Word through exciting themes, energetic worship, games, and crafts — making lasting memories, building new friendships, and leaving with a heart full of the knowledge of how deeply God loves them.
               </p>
             </ScrollReveal>
           </div>

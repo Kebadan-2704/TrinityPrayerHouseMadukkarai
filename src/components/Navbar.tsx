@@ -8,10 +8,12 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useLang } from './LangContext';
 import { Globe } from 'lucide-react';
 import styles from './Navbar.module.css';
+import MagneticEffect from '@/components/ui/MagneticEffect';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMeetActive, setIsMeetActive] = useState(false);
   const pathname = usePathname();
   const { t, setShowPicker } = useLang();
   const reduceMotion = useReducedMotion();
@@ -20,6 +22,28 @@ export default function Navbar() {
     const handleScroll = () => setScrolled(window.scrollY > 48);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const checkTime = () => {
+      const now = new Date();
+      const istString = now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+      const istTime = new Date(istString);
+      
+      const hours = istTime.getHours();
+      const minutes = istTime.getMinutes();
+
+      // Between 8:50 PM and 10:00 PM (20:50 - 21:59)
+      if ((hours === 20 && minutes >= 50) || hours === 21) {
+        setIsMeetActive(true);
+      } else {
+        setIsMeetActive(false);
+      }
+    };
+
+    checkTime();
+    const interval = setInterval(checkTime, 60000); // Check every minute
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -76,12 +100,14 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className={styles.navInner}>
-          <Link href="/" className={styles.logo} onClick={closeMenu}>
-            <div className={styles.logoImgWrap}>
-              <Image src="/tph-logo.png" alt="Trinity Prayer House" width={38} height={38} priority style={{ borderRadius: '8px' }} />
-            </div>
-            <span className={styles.logoMark}>TPH</span>
-          </Link>
+          <MagneticEffect strength={0.1}>
+            <Link href="/" className={styles.logo} onClick={closeMenu}>
+              <div className={styles.logoImgWrap}>
+                <Image src="/tph-logo.png" alt="Trinity Prayer House" width={38} height={38} priority style={{ borderRadius: '8px' }} />
+              </div>
+              <span className={styles.logoMark}>TPH</span>
+            </Link>
+          </MagneticEffect>
 
           <div className={styles.desktopNav}>
             {desktopNavItems.map((item) => (
@@ -89,30 +115,56 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={`${styles.navLink} ${pathname === item.href ? styles.active : ''}`}
+                style={{ position: 'relative' }}
               >
                 <span>{item.label}</span>
+                {item.href === '/online-meet' && isMeetActive && (
+                  <span style={{
+                    position: 'absolute',
+                    top: '-8px',
+                    right: '-12px',
+                    backgroundColor: '#e74c3c',
+                    color: '#fff',
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    width: '20px',
+                    height: '20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '50%',
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.4)',
+                    border: '2px solid rgba(14, 14, 28, 0.95)'
+                  }}>
+                    1
+                  </span>
+                )}
                 {pathname === item.href ? <span className={styles.navUnderline} aria-hidden /> : null}
               </Link>
             ))}
           </div>
 
           <div className={styles.navActions}>
-            <button
-              type="button"
-              className={styles.langToggle}
-              onClick={() => setShowPicker(true)}
-              aria-label="Change language"
-            >
-              <Globe size={17} strokeWidth={1.75} />
-            </button>
-            <Link
-              href="https://www.google.com/maps/dir/?api=1&destination=Trinity+Prayer+House+Madukkarai+Coimbatore"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`btn-primary ${styles.ctaBtn}`}
-            >
-              {t.planVisit}
-            </Link>
+            <MagneticEffect strength={0.3}>
+              <button
+                type="button"
+                className={styles.langToggle}
+                onClick={() => setShowPicker(true)}
+                aria-label="Change language"
+              >
+                <Globe size={17} strokeWidth={1.75} />
+              </button>
+            </MagneticEffect>
+            <MagneticEffect strength={0.15}>
+              <Link
+                href="https://www.google.com/maps/dir/?api=1&destination=Trinity+Prayer+House+Madukkarai+Coimbatore"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`btn-primary ${styles.ctaBtn}`}
+              >
+                {t.planVisit}
+              </Link>
+            </MagneticEffect>
             <button
               type="button"
               className={styles.mobileToggle}
@@ -156,9 +208,28 @@ export default function Navbar() {
                     href={item.href}
                     className={`${styles.mobileLink} ${pathname === item.href ? styles.active : ''}`}
                     onClick={closeMenu}
+                    style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}
                   >
                     <span className={styles.mobileLinkNum}>{String(i + 1).padStart(2, '0')}</span>
                     {item.label}
+                    {item.href === '/online-meet' && isMeetActive && (
+                      <span style={{
+                        marginLeft: '8px',
+                        backgroundColor: '#e74c3c',
+                        color: '#fff',
+                        fontSize: '11px',
+                        fontWeight: 800,
+                        width: '20px',
+                        height: '20px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: '50%',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+                      }}>
+                        1
+                      </span>
+                    )}
                   </Link>
                 </motion.div>
               ))}

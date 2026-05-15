@@ -25,7 +25,7 @@ export default function HindiMinistryPage() {
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/prayer_ministry.png" alt="Hindi Ministry" fill style={{ objectFit: 'cover' }} priority />
+          <Image src="/prayer_ministry.png" alt="Hindi Ministry gathering" fill style={{ objectFit: 'cover' }} />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

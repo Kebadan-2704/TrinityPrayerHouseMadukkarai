@@ -1,109 +1,209 @@
 'use client';
 import { useState } from 'react';
 import styles from './page.module.css';
-import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowRight, Loader2, CheckCircle } from 'lucide-react';
 import { FaInstagram, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
 import { useLang } from '@/components/LangContext';
-import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function Contact() {
   const { t } = useLang();
-  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '', reason: 'General Enquiry', message: '' });
+const [formData, setFormData] = useState({
+     firstName: '',
+     lastName: '',
+     email: '',
+     phone: '',
+     reason: 'General Enquiry',
+     message: '',
+     website: '', // honeypot field for spam bots
+   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [focused, setFocused] = useState<Record<string, boolean>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.firstName) newErrors.firstName = 'Required';
-    if (!formData.email) newErrors.email = 'Required';
-    if (!formData.message) newErrors.message = 'Required';
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-  const handleSubmit = (e: React.FormEvent) => {
+const validate = () => {
+     const newErrors: Record<string, string> = {};
+     if (!formData.firstName.trim()) newErrors.firstName = 'Required';
+     if (!formData.email.trim()) newErrors.email = 'Required';
+     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Invalid email';
+     if (!formData.message.trim()) newErrors.message = 'Required';
+     // Simple bot check: hidden field should remain empty
+     if (formData.reason !== 'General Enquiry') {
+       setErrors({}); // silently ignore
+       return false;
+     }
+     setErrors(newErrors);
+     return Object.keys(newErrors).length === 0;
+   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      setSubmitted(true);
-      setTimeout(() => { setSubmitted(false); setFormData({ firstName: '', lastName: '', email: '', phone: '', reason: 'General Enquiry', message: '' }); }, 5000);
+    if (!validate() || isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        setFormData({ firstName: '', lastName: '', email: '', phone: '', reason: 'General Enquiry', message: '' });
+        setErrors({});
+        setTimeout(() => setSubmitted(false), 6000);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrors({ form: data.error || 'Something went wrong. Please try again.' });
+      }
+    } catch {
+      setErrors({ form: 'Network error. Please check your connection and try again.' });
+    } finally {
+      setIsSubmitting(false);
     }
   };
-  const handleFocus = (f: string) => setFocused({ ...focused, [f]: true });
-  const handleBlur = (f: string) => setFocused({ ...focused, [f]: false });
 
   return (
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
-        <div className={styles.headerBg}></div>
+        <div className={styles.headerBg} />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <ScrollReveal variant="blurIn">
-            <div className={styles.secLabel}>{t.connectWithUs}</div>
-            <h1>{t.contactH1a} <i>{t.contactH1b}</i></h1>
-            <p>{t.contactSub}</p>
-          </ScrollReveal>
+          <div className={styles.secLabel}>{t.connectWithUs}</div>
+          <h1>{t.contactH1a} <i>{t.contactH1b}</i></h1>
+          <p>{t.contactSub}</p>
         </div>
       </section>
-      <section className={`section-padding ${styles.contactSection} pres-band-muted pres-rail`}>
+
+      <section className={`section-padding ${styles.contactSection}`}>
         <div className={`container ${styles.contactGrid}`}>
+          {/* Info column */}
           <div className={styles.infoCol}>
             <h2>{t.hereToServe}</h2>
             <p className={styles.leadText}>{t.hereToServeDesc}</p>
             <div className={styles.infoList}>
-              <div className={styles.infoItem}>
-                <div className={styles.iconWrap}><MapPin size={20} /></div>
-                <div><h4>{t.address}</h4><p style={{ whiteSpace: 'nowrap' }}>Trinity Prayer House<br/>16/300, Gandhi Nagar,<br/>Madukkarai, Coimbatore - 641105</p></div>
-              </div>
-              <div className={styles.infoItem}>
-                <div className={styles.iconWrap}><Phone size={20} /></div>
-                <div><h4>{t.phone}</h4><p>+91 9786888999<br/>+91 9345902228</p></div>
-              </div>
-              <div className={styles.infoItem}>
-                <div className={styles.iconWrap}><Mail size={20} /></div>
-                <div><h4>{t.email}</h4><p>trinityprayerhouse.mdk@gmail.com</p></div>
-              </div>
-              <div className={styles.socialIconsRow}>
-                <a href="https://www.instagram.com/trinityprayerhouse_church?igsh=MXEwcXpiaXh6a21jaQ==" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconInsta}`} aria-label="Instagram">
-                  <FaInstagram />
-                </a>
-                <a href="https://www.facebook.com/share/1HXvvKSbNE/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconFb}`} aria-label="Facebook">
-                  <FaFacebookF />
-                </a>
-                <a href="https://wa.me/919786888999" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconWa}`} aria-label="WhatsApp">
-                  <FaWhatsapp />
-                </a>
-              </div>
+              {[
+                { icon: <MapPin size={20} />, title: t.address, text: 'Trinity Prayer House\u000A16/300, Gandhi Nagar,\u000AMadukkarai, Coimbatore - 641105' },
+                { icon: <Phone size={20} />, title: t.phone, text: <><a href="tel:+919786888999">+91 9786888999</a><br /><a href="tel:+919345902228">+91 9345902228</a></> },
+                { icon: <Mail size={20} />, title: t.email, text: 'trinityprayerhouse.mdk@gmail.com' },
+              ].map((item, i) => (
+                <div className={styles.infoItem} key={i}>
+                  <div className={styles.iconWrap}>{item.icon}</div>
+                  <div>
+                    <h4>{item.title}</h4>
+                    <p>{item.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={styles.socialIconsRow}>
+              <a href="https://www.instagram.com/trinityprayerhouse_church" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconInsta}`} aria-label="Instagram">
+                <FaInstagram />
+              </a>
+              <a href="https://www.facebook.com/share/1HXvvKSbNE/" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconFb}`} aria-label="Facebook">
+                <FaFacebookF />
+              </a>
+              <a href="https://wa.me/919786888999" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconWa}`} aria-label="WhatsApp">
+                <FaWhatsapp />
+              </a>
             </div>
           </div>
-          <div className={styles.formCol}>
-            <div className={`${styles.formCard} pres-card-static hover-lift`}>
-              <h3>{t.sendMessage}</h3>
+
+          {/* Form column */}
+          <div className={`${styles.formCol} hover-lift shine-frame`}>
+            <div className={styles.formCard}>
               {submitted ? (
                 <div className={styles.successMsg}>
-                  <div className={styles.successIcon}>✓</div>
+                  <CheckCircle size={48} strokeWidth={1.5} />
                   <h4>{t.successTitle}</h4>
                   <p>{t.successDesc}</p>
+                  <button className={`btn-outline ${styles.resetBtn}`} onClick={() => setSubmitted(false)}>
+                    Send Another Message
+                  </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} noValidate>
+                  <h3>{t.sendMessage}</h3>
+                  {errors.form && <div className={styles.formError}>{errors.form}</div>}
                   <div className={styles.formRow}>
-                    <div className={`${styles.inputGroup} ${focused.firstName || formData.firstName ? styles.hasValue : ''}`}>
-                      <label>{t.firstName}</label>
-                      <input type="text" value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} onFocus={() => handleFocus('firstName')} onBlur={() => handleBlur('firstName')} className={errors.firstName ? styles.errorInput : ''} />
+                    <div className={`${styles.inputGroup} ${focused.firstName || formData.firstName ? styles.hasValue : ''} ${errors.firstName ? styles.errorInput : ''}`}>
+                      <label htmlFor="contactFirstName">{t.firstName}</label>
+                      <input
+                        id="contactFirstName"
+                        type="text"
+                        value={formData.firstName}
+                        onChange={e => setFormData({ ...formData, firstName: e.target.value })}
+                        onFocus={() => setFocused({ ...focused, firstName: true })}
+                        onBlur={() => setFocused({ ...focused, firstName: false })}
+                        aria-invalid={!!errors.firstName}
+                      />
                     </div>
                     <div className={`${styles.inputGroup} ${focused.lastName || formData.lastName ? styles.hasValue : ''}`}>
-                      <label>{t.lastName}</label>
-                      <input type="text" value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} onFocus={() => handleFocus('lastName')} onBlur={() => handleBlur('lastName')} />
+                      <label htmlFor="contactLastName">{t.lastName}</label>
+                      <input
+                        id="contactLastName"
+                        type="text"
+                        value={formData.lastName}
+                        onChange={e => setFormData({ ...formData, lastName: e.target.value })}
+                        onFocus={() => setFocused({ ...focused, lastName: true })}
+                        onBlur={() => setFocused({ ...focused, lastName: false })}
+                      />
                     </div>
                   </div>
-                  <div className={`${styles.inputGroup} ${focused.email || formData.email ? styles.hasValue : ''}`}>
-                    <label>{t.emailLabel}</label>
-                    <input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} onFocus={() => handleFocus('email')} onBlur={() => handleBlur('email')} className={errors.email ? styles.errorInput : ''} />
+                  <div className={`${styles.inputGroup} ${focused.email || formData.email ? styles.hasValue : ''} ${errors.email ? styles.errorInput : ''}`}>
+                    <label htmlFor="contactEmail">{t.emailLabel}</label>
+                    <input
+                      id="contactEmail"
+                      type="email"
+                      value={formData.email}
+                      onChange={e => setFormData({ ...formData, email: e.target.value })}
+                      onFocus={() => setFocused({ ...focused, email: true })}
+                      onBlur={() => setFocused({ ...focused, email: false })}
+                      aria-invalid={!!errors.email}
+                    />
                   </div>
-                  <div className={`${styles.inputGroup} ${focused.message || formData.message ? styles.hasValue : ''}`}>
-                    <label>{t.message}</label>
-                    <textarea rows={4} value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} onFocus={() => handleFocus('message')} onBlur={() => handleBlur('message')} className={errors.message ? styles.errorInput : ''}></textarea>
+                  <div className={`${styles.inputGroup} ${focused.phone || formData.phone ? styles.hasValue : ''}`}>
+                    <label htmlFor="contactPhone">Phone (Optional)</label>
+                    <input
+                      id="contactPhone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                      onFocus={() => setFocused({ ...focused, phone: true })}
+                      onBlur={() => setFocused({ ...focused, phone: false })}
+                    />
                   </div>
-                  <button type="submit" className={styles.submitBtn}>{t.sendBtn} <ArrowRight size={18} /></button>
+                  <div style={{ display: 'none' }}>
+                     <label htmlFor="contactWebsite">Leave this field empty if you are human</label>
+                     <input
+                       id="contactWebsite"
+                       type="text"
+                       value={formData.website}
+                       onChange={e => setFormData({ ...formData, website: e.target.value })}
+                       autoComplete="off"
+                       tabIndex={-1}
+                       aria-hidden="true"
+                     />
+                   </div>
+                   <div className={`${styles.inputGroup} ${focused.message || formData.message ? styles.hasValue : ''} ${errors.message ? styles.errorInput : ''}`}>
+                    <label htmlFor="contactMessage">{t.message}</label>
+                    <textarea
+                      id="contactMessage"
+                      rows={5}
+                      value={formData.message}
+                      onChange={e => setFormData({ ...formData, message: e.target.value })}
+                      onFocus={() => setFocused({ ...focused, message: true })}
+                      onBlur={() => setFocused({ ...focused, message: false })}
+                      aria-invalid={!!errors.message}
+                    />
+                  </div>
+                  <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <><Loader2 size={18} className={styles.spinner} /> Sending…</>
+                    ) : (
+                      <>{t.sendBtn} <ArrowRight size={18} /></>
+                    )}
+                  </button>
                 </form>
               )}
             </div>
@@ -111,7 +211,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* ===== MAP ===== */}
       <section className={styles.mapSection}>
         <div className="container">
           <iframe
