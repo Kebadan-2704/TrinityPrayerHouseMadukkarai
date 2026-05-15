@@ -312,21 +312,18 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const [showPicker, setShowPicker] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('tph-lang') as Language | null;
-      if (saved && translations[saved]) return false;
+      return !(saved && translations[saved]);
     }
     return true;
   });
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    document.documentElement.lang = lang === 'ta' ? 'ta' : lang === 'hi' ? 'hi' : 'en';
+  }, [lang]);
+
+  useEffect(() => {
     // One-shot hydration from localStorage on mount — runs exactly once, empty dep[]
-    const saved = localStorage.getItem('tph-lang') as Language | null;
-    if (saved && translations[saved]) {
-      setLangState(saved);
-      document.documentElement.lang = saved;
-    } else {
-      setShowPicker(true);
-    }
     setMounted(true);
   }, []);
 
