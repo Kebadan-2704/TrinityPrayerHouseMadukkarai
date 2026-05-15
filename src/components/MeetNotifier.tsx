@@ -145,19 +145,21 @@ export default function MeetNotifier() {
 
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ y: 50, opacity: 0, x: '-50%' }}
-        animate={{ y: 0, opacity: 1, x: '-50%' }}
-        exit={{ y: 50, opacity: 0, x: '-50%' }}
-        style={{
-          position: 'fixed',
-          bottom: '24px',
-          left: '50%',
-          zIndex: 9999,
-          width: 'calc(100% - 32px)',
-          maxWidth: '420px',
-        }}
-      >
+       <motion.div
+         initial={{ y: 50, opacity: 0, x: '-50%' }}
+         animate={{ y: 0, opacity: 1, x: '-50%' }}
+         exit={{ y: 50, opacity: 0, x: '-50%' }}
+         aria-live="polite"
+         role="region"
+         style={{
+           position: 'fixed',
+           bottom: '95px',
+           left: '50%',
+           zIndex: 9999,
+           width: 'calc(100% - 32px)',
+           maxWidth: '420px',
+         }}
+       >
         <div style={{
           background: isLiveActive ? '#c7a760' : '#121420',
           color: isLiveActive ? '#121420' : '#fff',

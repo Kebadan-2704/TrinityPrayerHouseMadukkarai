@@ -99,3 +99,30 @@
   position: relative;
   z-index: 1;
 }
+
+@media (max-width: 380px) {
+  .statCard {
+    padding: 1rem 0.65rem 1.15rem;
+    border-radius: var(--radius-md);
+  }
+  .value {
+    font-size: 1.85rem;
+  }
+  .label {
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    margin-top: 0.45rem;
+  }
+}
+
+@media (min-width: 381px) and (max-width: 480px) {
+  .statCard {
+    padding: 1.1rem 0.75rem 1.25rem;
+  }
+  .value {
+    font-size: 2rem;
+  }
+  .label {
+    font-size: 0.58rem;
+  }
+}

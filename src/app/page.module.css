@@ -79,6 +79,7 @@
 .heroTextWrap { max-width: 820px; }
 @media (max-width: 480px) {
   .heroContent { padding-top: 5.5rem; }
+  .heroTextWrap { padding-right: 0.5rem; }
 }
 
 .animSlideRight { opacity: 0; transform: translateX(-28px); animation: slideRight 0.85s var(--ease-out) 0.25s forwards; }
@@ -131,7 +132,7 @@
 }
 
 .heroHeadline {
-  font-size: clamp(2.2rem, 8vw, 5.75rem);
+  font-size: clamp(1.8rem, 7vw, 5.75rem);
   color: #fff;
   line-height: 1.05;
   margin-bottom: 1rem;
@@ -300,6 +301,9 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
 }
+@media (max-width: 380px) {
+  .statsGrid { gap: 0.5rem; }
+}
 @media (min-width: 768px) {
   .statsGrid { grid-template-columns: repeat(4, 1fr); gap: 1.35rem; }
 }
@@ -319,7 +323,7 @@
 }
 
 .sectionHeading {
-  font-size: clamp(2.1rem, 4.5vw, 3.25rem);
+  font-size: clamp(1.7rem, 4.5vw, 3.25rem);
   margin-bottom: 2rem;
   text-wrap: balance;
 }
@@ -394,7 +398,7 @@
 @media (min-width: 992px) { .welcomeGrid { grid-template-columns: 1fr 1fr; gap: 5.5rem; } }
 
 .welcomeText h2 {
-  font-size: clamp(2.15rem, 5vw, 3.35rem);
+  font-size: clamp(1.7rem, 5vw, 3.35rem);
   line-height: 1.08;
   margin-bottom: 1.5rem;
 }
@@ -486,7 +490,7 @@
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(1.85rem, 4.2vw, 3.1rem);
+  font-size: clamp(1.5rem, 4.2vw, 3.1rem);
   color: #fff;
   line-height: 1.28;
   max-width: 38rem;
@@ -497,8 +501,9 @@
 /* ===== SERVICES ===== */
 .serviceStrip {
   background: linear-gradient(180deg, var(--surface-alt) 0%, var(--surface) 100%);
-  padding: 3rem 0;
+  padding: 2.5rem 0;
 }
+@media (max-width: 480px) { .serviceStrip { padding: 2rem 0; } }
 @media (min-width: 768px) { .serviceStrip { padding: 7.5rem 0; } }
 
 .serviceGrid {
@@ -598,7 +603,12 @@
 }
 .desc { color: var(--text-body); font-size: 0.82rem; line-height: 1.55; }
 @media (max-width: 480px) {
-  .desc { font-size: 0.78rem; }
+  .desc { font-size: 0.75rem; line-height: 1.45; }
+  .serviceCard { padding: 0.95rem 0.8rem; }
+  .serviceIcon { margin-bottom: 0.3rem; }
+  .serviceItem h3 { font-size: 0.92rem; margin-bottom: 0.3rem; }
+  .time { font-size: 1.55rem; }
+  .time span { font-size: 0.6rem; }
 }
 
 /* ===== LATEST SERMON ===== */
@@ -619,6 +629,7 @@
   background: radial-gradient(circle, rgba(212, 185, 120, 0.08) 0%, transparent 60%);
   pointer-events: none;
 }
+@media (max-width: 480px) { .latestSermonSection { padding: 2rem 0; } }
 @media (min-width: 768px) { .latestSermonSection { padding: 7.5rem 0; } }
 
 .latestSermonGrid {
@@ -634,7 +645,7 @@
 }
 
 .latestSermonText h2 {
-  font-size: clamp(1.85rem, 4vw, 2.85rem);
+  font-size: clamp(1.5rem, 4vw, 2.85rem);
   color: #fff;
   margin-bottom: 1rem;
   line-height: 1.12;
@@ -680,6 +691,7 @@
 }
 @media (max-width: 768px) {
   .communityGrid { grid-template-columns: 1fr; gap: 0.85rem; }
+  .communityImgWrap { padding-bottom: 55%; }
 }
 
 .communityImgWrap {
@@ -784,9 +796,10 @@
   position: relative;
   background: var(--primary-deep);
   color: #fff;
-  padding: 3rem 0;
+  padding: 2.5rem 0;
   overflow: hidden;
 }
+@media (max-width: 480px) { .ytSection { padding: 2rem 0; } }
 @media (min-width: 768px) { .ytSection { padding: 7.5rem 0; } }
 
 .ytSection::before {

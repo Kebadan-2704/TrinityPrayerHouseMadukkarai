@@ -49,6 +49,10 @@
   .footerGrid { grid-template-columns: 2fr 1fr 1.5fr 1.5fr; gap: 3.5rem; padding-bottom: 3.25rem; }
 }
 
+@media (max-width: 599px) {
+  .footerGrid { gap: 1.5rem; padding-bottom: 1.5rem; }
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -250,4 +254,15 @@
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.4);
   font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .bottomBar {
+    padding: 1.5rem 0;
+  }
+  .bottomBar p {
+    font-size: 0.72rem;
+    text-align: center;
+    width: 100%;
+  }
 }

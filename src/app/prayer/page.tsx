@@ -112,23 +112,21 @@ const handleSubmit = async (e: React.FormEvent) => {
                   </div>
                 </div>
 
-                {/* Honeypot field — hidden from real users */}
-                <div style={{ display: 'none' }}>
-                  <label htmlFor="prayerWebsite">Leave this empty if you are human</label>
-                  <input
-                    type="text"
-                    id="prayerWebsite"
-                    value={website}
-                    onChange={e => setWebsite(e.target.value)}
-                    autoComplete="off"
-                    tabIndex={-1}
-                    aria-hidden="true"
-                  />
-                </div>
+                 {/* Honeypot field — hidden from real users */}
+                 <div style={{ display: 'none' }}>
+                   <label htmlFor="prayerWebsite">Leave this empty if you are human</label>
+                   <input
+                     type="text"
+                     id="prayerWebsite"
+                     value={website}
+                     onChange={e => setWebsite(e.target.value)}
+                     autoComplete="off"
+                     tabIndex={-1}
+                     aria-hidden="true"
+                   />
+                 </div>
 
-                <div className={styles.inputGroup}>
-
-                <div className={styles.inputGroup}>
+                 <div className={styles.inputGroup}>
                   <textarea
                     id="prayerDetails"
                     required

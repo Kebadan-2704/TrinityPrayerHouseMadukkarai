@@ -14,7 +14,13 @@
   z-index: 9999;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+  .chatWrapper {
+    left: 1.15rem;
+    bottom: 1.15rem;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px) {
   .chatWrapper {
     left: 1.35rem;
     bottom: 1.35rem;
@@ -42,10 +48,16 @@
   animation: fabEntry 0.75s var(--ease-spring) 2s both;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .toggleBtn {
-    width: 58px;
-    height: 58px;
+    width: 50px;
+    height: 50px;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  .toggleBtn {
+    width: 56px;
+    height: 56px;
   }
 }
 

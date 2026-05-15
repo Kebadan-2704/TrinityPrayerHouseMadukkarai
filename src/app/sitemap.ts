@@ -5,7 +5,6 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trinityprayerhouse.
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     '',
-    '/about',
     '/vision',
     '/mission',
     '/sermons',

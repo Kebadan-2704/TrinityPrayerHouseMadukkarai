@@ -9,9 +9,9 @@ export default function BranchChurchesPage() {
   return (
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
-        <div className={styles.headerBg}>
-          <Image src="/prayer_ministry.png" alt="Branch Churches" fill style={{ objectFit: 'cover' }} priority />
-          <div className={styles.headerOverlay}></div>
+         <div className={styles.headerBg}>
+           <Image src="/prayer_ministry.png" alt="Branch Churches" fill style={{ objectFit: 'cover' }} />
+           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <ScrollReveal delay={100}>

@@ -144,18 +144,17 @@ export default function SpecialMeeting() {
     <div className={styles.pageWrap}>
       {/* ── Hero Banner ── */}
       <section className={`${styles.headerSection} mesh-editorial-header`}>
-        <div className={styles.headerBg}>
+           <div className={styles.headerBg}>
 <Image
-             src="/special-meetings/meeting1/photo1.jpg"
-             alt="Special meetings at Trinity Prayer House"
-             fill
-            priority
-            sizes="100vw"
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center 70%' /* ← Adjust to reposition: 'center top', 'center bottom', 'center 60%', etc. */
-            }}
-          />
+              src="/special-meetings/meeting1/photo1.jpg"
+              alt="Special meetings at Trinity Prayer House"
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center 70%' /* ← Adjust to reposition: 'center top', 'center bottom', 'center 60%', etc. */
+              }}
+            />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

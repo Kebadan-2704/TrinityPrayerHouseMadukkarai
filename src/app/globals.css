@@ -116,7 +116,13 @@ img { display: block; max-width: 100%; }
 @media (min-width: 768px) { .container { padding: 0 2rem; } }
 
 .section-padding { padding: 2.75rem 0; }
+@media (max-width: 480px) { .section-padding { padding: 2rem 0; } }
 @media (min-width: 768px) { .section-padding { padding: 7rem 0; } }
+
+/* Scroll offset for fixed navbar */
+section[id], [id] {
+  scroll-margin-top: 5rem;
+}
 
 .pageWrap { padding-top: 0; }
 
@@ -343,8 +349,8 @@ img { transition: filter 0.35s ease, transform 0.35s var(--ease-out); }
 }
 .glow-hover:hover::after { opacity: 1; }
 
-/* Custom Cursor */
-@media (pointer: fine) {
+/* Custom Cursor — only on non-touch desktop devices */
+@media (pointer: fine) and (hover: hover) and (min-width: 992px) {
   body {
     cursor: none;
   }

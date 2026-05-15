@@ -20,18 +20,17 @@ export default function Ministries() {
   return (
     <div className="pageWrap">
       <section className={`${styles.headerSection} mesh-editorial-header`}>
-        <div className={styles.headerBg}>
+         <div className={styles.headerBg}>
 <Image
-             src="/youth.jpg"
-             alt="Youth Ministry header"
-             fill
-             priority
-             sizes="100vw"
-             style={{
-               objectFit: 'cover',
-               objectPosition: 'center 80%',
-             }}
-           />
+              src="/youth.jpg"
+              alt="Youth Ministry header"
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center 80%',
+              }}
+            />
           <div className={styles.headerOverlay} />
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

@@ -3,7 +3,7 @@
 import styles from './page.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Users, MapPin, Clock, Heart } from 'lucide-react';
+import { Users, MapPin, Clock, Heart } from 'lucide-react';
 
 export default function NewHere() {
   return (
@@ -11,13 +11,12 @@ export default function NewHere() {
       {/* Hero */}
       <section className={styles.heroSection}>
         <div className={styles.heroBg}>
-          <Image
-            src="/worship.jpg"
-            alt="Welcome to Trinity Prayer House"
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
+           <Image
+             src="/worship.jpg"
+             alt="Welcome to Trinity Prayer House"
+             fill
+             style={{ objectFit: 'cover' }}
+           />
           <div className={styles.heroOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

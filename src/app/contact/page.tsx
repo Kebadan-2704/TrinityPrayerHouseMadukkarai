@@ -50,7 +50,7 @@ const validate = () => {
 
       if (res.ok) {
         setSubmitted(true);
-        setFormData({ firstName: '', lastName: '', email: '', phone: '', reason: 'General Enquiry', message: '' });
+        setFormData({ firstName: '', lastName: '', email: '', phone: '', reason: 'General Enquiry', message: '', website: '' });
         setErrors({});
         setTimeout(() => setSubmitted(false), 6000);
       } else {

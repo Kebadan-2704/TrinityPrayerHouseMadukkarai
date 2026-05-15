@@ -27,14 +27,13 @@ export default function PhotoCarousel({ images, interval = 5000 }: PhotoCarousel
 
   return (
     <>
-      <Image
-        src={images[currentIdx]}
-        alt="Gallery activity"
-        fill
-        sizes="100vw"
-        style={{ objectFit: 'cover' }}
-        priority
-      />
+       <Image
+         src={images[currentIdx]}
+         alt="Gallery activity"
+         fill
+         sizes="100vw"
+         style={{ objectFit: 'cover' }}
+       />
 
       {images.length > 1 && (
         <>

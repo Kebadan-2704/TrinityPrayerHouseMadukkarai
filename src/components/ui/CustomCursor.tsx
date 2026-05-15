@@ -9,11 +9,14 @@ export default function CustomCursor() {
   const [isTouchDevice, setIsTouchDevice] = useState(true);
 
   useEffect(() => {
-    // Check if device is touch-enabled
+    // Check if device is touch-enabled or small screen
     const checkTouch = () => {
-      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth < 992;
+      setIsTouchDevice(isTouch || isSmallScreen);
     };
     checkTouch();
+    window.addEventListener('resize', checkTouch);
 
     if (isTouchDevice) return;
 
@@ -46,6 +49,7 @@ export default function CustomCursor() {
     return () => {
       window.removeEventListener('mousemove', mouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('resize', checkTouch);
     };
   }, [isTouchDevice]);
 

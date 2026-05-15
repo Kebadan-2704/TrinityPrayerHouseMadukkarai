@@ -24,6 +24,13 @@
   }
 }
 
+@media (max-width: 480px) {
+  .navbar.scrolled {
+    top: 0.65rem;
+    width: calc(100% - 1rem);
+  }
+}
+
 .navInner {
   display: flex;
   align-items: center;

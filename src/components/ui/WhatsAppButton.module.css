@@ -43,6 +43,18 @@
   }
 }
 
+@media (max-width: 480px) {
+  .fab {
+    width: 50px;
+    height: 50px;
+    bottom: 1.15rem;
+    right: 1.15rem;
+  }
+  .fab svg {
+    width: 22px;
+    height: 22px;
+  }
+}
 @media (min-width: 768px) {
   .fab {
     bottom: 2rem;

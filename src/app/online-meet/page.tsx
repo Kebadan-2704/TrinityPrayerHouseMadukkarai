@@ -37,16 +37,15 @@ export default function OnlineMeet() {
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image
-            src="/prayer.png"
-            alt="Online Meet"
-            fill
-            priority
-            sizes="100vw"
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center 40%'
-            }}
-          />
+             src="/prayer.png"
+             alt="Online Meet"
+             fill
+             sizes="100vw"
+             style={{
+               objectFit: 'cover',
+               objectPosition: 'center 40%'
+             }}
+           />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
