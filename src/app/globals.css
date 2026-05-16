@@ -353,38 +353,3 @@ img { transition: filter 0.35s ease, transform 0.35s var(--ease-out); }
 }
 .glow-hover:hover::after { opacity: 1; }
 
-/* Custom Cursor — only on non-touch desktop devices */
-@media (pointer: fine) and (hover: hover) and (min-width: 992px) {
-  body {
-    cursor: none;
-  }
-  a, button, input, textarea, select, [role="button"] {
-    cursor: none !important;
-  }
-}
-
-.custom-cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  background-color: var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 999999;
-  mix-blend-mode: exclusion;
-}
-
-.custom-cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 999998;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-}

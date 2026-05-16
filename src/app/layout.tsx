@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import './presentation.css';
 import ClientProviders from '@/components/ClientProviders';
-import CustomCursor from '@/components/ui/CustomCursor';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://trinityprayerhouse.com'),
@@ -115,7 +114,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main-content" className="skip-link" id="skip-link">
           Skip to main content
         </a>
-        <CustomCursor />
         <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
