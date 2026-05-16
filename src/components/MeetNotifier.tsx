@@ -101,7 +101,7 @@ export default function MeetNotifier() {
     checkTime();
     const interval = setInterval(checkTime, 20000); // Check every 20 seconds
     return () => clearInterval(interval);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const subscribeToPush = async () => {
     if (!('serviceWorker' in navigator && 'PushManager' in window)) {

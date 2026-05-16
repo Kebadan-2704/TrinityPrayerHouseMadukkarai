@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone, Users } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa';
 import { motion, useReducedMotion, Variants } from 'framer-motion';
 import { useLang } from './LangContext';
@@ -114,8 +114,34 @@ export default function Footer() {
         </motion.div>
       </motion.div>
       <div className={styles.bottomBar}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+        <div className={`container ${styles.bottomBarContainer}`}>
           <p>&copy; {new Date().getFullYear()} Trinity Prayer House. {t.rights}</p>
+          
+          <div className={styles.globalReach}>
+            <div className={styles.flagGroup}>
+              <span className={styles.flagItem} title="India">
+                <Image src="https://flagcdn.com/w20/in.png" alt="India" width={16} height={11} unoptimized />
+                <span>3.2k</span>
+                <Users size={12} className={styles.animatedPeople} />
+              </span>
+              <span className={styles.flagItem} title="United Arab Emirates">
+                <Image src="https://flagcdn.com/w20/ae.png" alt="UAE" width={16} height={11} unoptimized />
+                <span>150</span>
+                <Users size={12} className={styles.animatedPeople} />
+              </span>
+              <span className={styles.flagItem} title="United States">
+                <Image src="https://flagcdn.com/w20/us.png" alt="USA" width={16} height={11} unoptimized />
+                <span>85</span>
+                <Users size={12} className={styles.animatedPeople} />
+              </span>
+              <span className={styles.flagItem} title="United Kingdom">
+                <Image src="https://flagcdn.com/w20/gb.png" alt="UK" width={16} height={11} unoptimized />
+                <span>40</span>
+                <Users size={12} className={styles.animatedPeople} />
+              </span>
+            </div>
+          </div>
+
           <p>{t.footerGlory}</p>
         </div>
       </div>
