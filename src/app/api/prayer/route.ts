@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 export async function POST(request: Request) {
   try {
@@ -10,19 +10,22 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Name and prayer need are required.' }, { status: 400 });
     }
 
-    // ── 1. Save to Supabase ──────────────────────────────────────────────────
-    const { error: dbError } = await supabase.from('prayer_requests').insert({
-      name,
-      phone: phone || '',
-      prayer_need: prayerNeed,
-      status: 'new',
-    });
+    const supabase = getSupabase();
+    if (supabase) {
+      const { error: dbError } = await supabase.from('prayer_requests').insert({
+        name,
+        phone: phone || '',
+        prayer_need: prayerNeed,
+        status: 'new',
+      });
 
-    if (dbError) {
-      console.error('Supabase prayer save error:', dbError);
+      if (dbError) {
+        console.error('Supabase prayer save error:', dbError);
+      }
+    } else {
+      console.error('Supabase prayer save skipped: missing environment variables');
     }
 
-    // ── 2. Send email via Web3Forms ──────────────────────────────────────────
     const web3formsKey = process.env.WEB3FORMS_API_KEY;
     if (web3formsKey) {
       try {

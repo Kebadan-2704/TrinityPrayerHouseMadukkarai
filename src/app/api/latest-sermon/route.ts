@@ -234,7 +234,7 @@ async function getSermonsFromYouTubeApi(apiKey: string) {
           actualStartTime: parseDate(liveStreamingDetails.actualStartTime),
           actualEndTime: parseDate(liveStreamingDetails.actualEndTime),
           scheduledStartTime: parseDate(liveStreamingDetails.scheduledStartTime),
-          liveBroadcastContent: snippet.liveBroadcastContent,
+          liveBroadcastContent: details?.snippet?.liveBroadcastContent,
         };
       })
     );

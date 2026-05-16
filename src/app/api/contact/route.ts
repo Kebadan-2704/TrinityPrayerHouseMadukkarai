@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 export async function POST(request: Request) {
   try {
@@ -10,22 +10,25 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'First name, email, and message are required.' }, { status: 400 });
     }
 
-    // ── 1. Save to Supabase ──────────────────────────────────────────────────
-    const { error: dbError } = await supabase.from('contact_submissions').insert({
-      first_name: firstName,
-      last_name: lastName || '',
-      email,
-      phone: phone || '',
-      subject: subject || 'General Enquiry',
-      message,
-      status: 'new',
-    });
+    const supabase = getSupabase();
+    if (supabase) {
+      const { error: dbError } = await supabase.from('contact_submissions').insert({
+        first_name: firstName,
+        last_name: lastName || '',
+        email,
+        phone: phone || '',
+        subject: subject || 'General Enquiry',
+        message,
+        status: 'new',
+      });
 
-    if (dbError) {
-      console.error('Supabase contact save error:', dbError);
+      if (dbError) {
+        console.error('Supabase contact save error:', dbError);
+      }
+    } else {
+      console.error('Supabase contact save skipped: missing environment variables');
     }
 
-    // ── 2. Send email via Web3Forms ──────────────────────────────────────────
     const web3formsKey = process.env.WEB3FORMS_API_KEY;
     if (web3formsKey) {
       try {
@@ -44,7 +47,6 @@ export async function POST(request: Request) {
         });
       } catch (emailErr) {
         console.error('Web3Forms send error:', emailErr);
-        // Non-fatal — data already saved to Supabase
       }
     }
 

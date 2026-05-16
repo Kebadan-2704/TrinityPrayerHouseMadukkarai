@@ -1,9 +1,16 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-// Supabase REST URL (do NOT include /rest/v1 suffix — the client adds it)
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-// Strip any path the user may have accidentally pasted
-const cleanUrl = supabaseUrl.replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+let supabase: SupabaseClient | null = null;
 
-export const supabase = createClient(cleanUrl, supabaseAnonKey);
+export function getSupabase() {
+  if (supabase) return supabase;
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const cleanUrl = supabaseUrl.replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+
+  if (!cleanUrl || !supabaseAnonKey) return null;
+
+  supabase = createClient(cleanUrl, supabaseAnonKey);
+  return supabase;
+}

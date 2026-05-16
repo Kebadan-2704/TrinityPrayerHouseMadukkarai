@@ -1,34 +1,54 @@
 import { NextResponse } from 'next/server';
 import webpush from 'web-push';
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseAdmin = createClient(
-  (process.env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, ''),
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-);
+let supabaseAdmin: SupabaseClient | null = null;
 
-// Configure Web Push with VAPID keys
-webpush.setVapidDetails(
-  'mailto:contact@trinityprayerhouse.com',
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || '',
-  process.env.VAPID_PRIVATE_KEY || ''
-);
+function getSupabaseAdmin() {
+  if (supabaseAdmin) return supabaseAdmin;
+
+  const supabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+  if (!supabaseUrl || !serviceRoleKey) return null;
+
+  supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+  return supabaseAdmin;
+}
+
+function configureWebPush() {
+  const publicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || '';
+  const privateKey = process.env.VAPID_PRIVATE_KEY || '';
+
+  if (!publicKey || !privateKey) return false;
+
+  webpush.setVapidDetails('mailto:contact@trinityprayerhouse.com', publicKey, privateKey);
+  return true;
+}
 
 export async function GET(request: Request) {
-  // Enforce auth: reject if CRON_SECRET is unset or header is missing/wrong
   const expectedSecret = process.env.CRON_SECRET;
   if (!expectedSecret) {
     console.error('CRON_SECRET is not configured');
-    return new Response('Server misconfigured — CRON_SECRET not set', { status: 500 });
+    return new Response('Server misconfigured - CRON_SECRET not set', { status: 500 });
   }
+
   const authHeader = request.headers.get('authorization');
   if (authHeader !== `Bearer ${expectedSecret}`) {
     return new Response('Unauthorized', { status: 401 });
   }
 
   try {
-    // 1. Fetch all subscriptions from Supabase using the admin client
-    const { data: subscriptions, error } = await supabaseAdmin
+    const supabase = getSupabaseAdmin();
+    if (!supabase) {
+      return NextResponse.json({ error: 'Push subscription storage is not configured' }, { status: 500 });
+    }
+
+    if (!configureWebPush()) {
+      return NextResponse.json({ error: 'Web push is not configured' }, { status: 500 });
+    }
+
+    const { data: subscriptions, error } = await supabase
       .from('push_subscriptions')
       .select('*');
 
@@ -41,14 +61,12 @@ export async function GET(request: Request) {
       return NextResponse.json({ success: true, message: 'No subscriptions found' });
     }
 
-    // 2. Prepare the payload
     const payload = JSON.stringify({
       title: 'Trinity Prayer House',
       body: 'We will be having a meet in 10 minutes. Join us!',
       url: '/online-meet',
     });
 
-    // 3. Send pushes to everyone in parallel
     const sendPromises = subscriptions.map(async (sub: { id: string; endpoint: string; p256dh: string; auth: string }) => {
       const pushSubscription = {
         endpoint: sub.endpoint,
@@ -61,12 +79,11 @@ export async function GET(request: Request) {
       try {
         await webpush.sendNotification(pushSubscription, payload);
       } catch (err: unknown) {
-        // If a subscription is no longer valid (e.g. user revoked permission), we delete it
         if (typeof err === 'object' && err !== null && 'statusCode' in err) {
           const statusCode = (err as { statusCode: number }).statusCode;
           if (statusCode === 404 || statusCode === 410) {
             console.log(`Subscription ${sub.id} expired or unsubscribed. Deleting...`);
-            await supabaseAdmin.from('push_subscriptions').delete().eq('id', sub.id);
+            await supabase.from('push_subscriptions').delete().eq('id', sub.id);
           } else {
             console.error('Failed to send push to subscription:', sub.id, err);
           }
