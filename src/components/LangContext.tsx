@@ -316,16 +316,10 @@ export function LangProvider({ children }: { children: ReactNode }) {
     }
     return true;
   });
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     document.documentElement.lang = lang === 'ta' ? 'ta' : lang === 'hi' ? 'hi' : 'en';
   }, [lang]);
-
-  useEffect(() => {
-    // One-shot hydration from localStorage on mount — runs exactly once, empty dep[]
-    setMounted(true);
-  }, []);
 
   const setLang = (l: Language) => {
     setLangState(l);
@@ -333,8 +327,6 @@ export function LangProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = l === 'ta' ? 'ta' : l === 'hi' ? 'hi' : 'en';
     setShowPicker(false);
   };
-
-  if (!mounted) return null;
 
   return (
     <LangContext.Provider value={{ lang, setLang, t: translations[lang], showPicker, setShowPicker }}>

@@ -184,52 +184,9 @@ const meetings: Meeting[] = [
   },
 ];
 
-// ── Per-meeting photo carousel component ──
-function PhotoCarousel({ photos, title }: { photos: string[]; title: string }) {
-  const [photoIndex, setPhotoIndex] = useState(0);
-  const hasPrev = photoIndex > 0;
-  const hasNext = photoIndex < photos.length - 1;
 
-  return (
-    <div className={styles.photoCarousel}>
-      <Image
-        key={photos[photoIndex]}
-        src={photos[photoIndex]}
-        alt={`${title} — photo ${photoIndex + 1}`}
-        fill
-        style={{ objectFit: 'cover' }}
-        sizes="(max-width: 768px) 100vw, 50vw"
-      />
 
-      {/* Arrows */}
-      {photos.length > 1 && (
-        <div className={styles.photoArrows}>
-          <button
-            className={styles.photoArrow}
-            onClick={() => setPhotoIndex(i => i - 1)}
-            disabled={!hasPrev}
-            aria-label="Previous photo"
-          >
-            ‹
-          </button>
-          <span className={styles.photoDots}>
-            {photoIndex + 1} / {photos.length}
-          </span>
-          <button
-            className={styles.photoArrow}
-            onClick={() => setPhotoIndex(i => i + 1)}
-            disabled={!hasNext}
-            aria-label="Next photo"
-          >
-            ›
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-void PhotoCarousel;
+import PhotoCarousel from '@/components/ui/PhotoCarousel';
 
 const DEFAULT_GALLERY_WIDTH = 960;
 
@@ -476,7 +433,7 @@ export default function SpecialMeeting() {
                   {meeting.photoDisplay === 'single-card' ? (
                     <div className={styles.photoSingle}>
                       <div className={styles.photoCard}>
-                        <PhotoCarousel photos={meeting.photos} title={meeting.title} />
+                        <PhotoCarousel images={meeting.photos} />
                       </div>
                     </div>
                   ) : (
