@@ -12,7 +12,14 @@
 
 .mainText h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
 .leadText { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 1rem; line-height: 1.7; }
-.mainText p:not(.leadText) { color: var(--text-muted); margin-bottom: 2.5rem; line-height: 1.7; }
+.mainText p:not(.leadText) { color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7; }
+
+.highlight {
+  color: var(--accent-dark);
+  font-weight: 700;
+  display: inline-block;
+  padding: 0 2px;
+}
 
 .coreValues { display: flex; flex-direction: column; gap: 1.5rem; }
 .valueItem { border-left: 2px solid var(--accent); padding-left: 1.25rem; }

@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import styles from './page.module.css';
 import { useLang } from '@/components/LangContext';
-import { HeartHandshake, Loader2, CheckCircle } from 'lucide-react';
+import { HeartHandshake, Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 export default function PrayerPage() {
   const { t } = useLang();
@@ -10,7 +11,7 @@ export default function PrayerPage() {
   const [phone, setPhone] = useState('');
   const [prayerNeed, setPrayerNeed] = useState('');
   const [website, setWebsite] = useState(''); // honeypot for spam
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
 const handleSubmit = async (e: React.FormEvent) => {
@@ -22,7 +23,8 @@ const handleSubmit = async (e: React.FormEvent) => {
      // Honeypot check
      if (website.trim()) {
        setErrorMsg('');
-       setStatus('success');
+       setStatus('idle');
+       toast.success(t.prayerSuccess, { description: t.prayerSuccessDesc });
        return;
      }
      setErrorMsg('');
@@ -34,7 +36,8 @@ const handleSubmit = async (e: React.FormEvent) => {
          body: JSON.stringify({ name: name.trim(), phone: phone.trim(), prayerNeed: prayerNeed.trim() }),
        });
        if (res.ok) {
-         setStatus('success');
+         setStatus('idle');
+         toast.success(t.prayerSuccess, { description: t.prayerSuccessDesc });
          setName('');
          setPhone('');
          setPrayerNeed('');
@@ -68,18 +71,6 @@ const handleSubmit = async (e: React.FormEvent) => {
 
       <section className={`section-padding ${styles.formSection}`}>
         <div className="container">
-          {status === 'success' ? (
-            <div className={`${styles.formContainer} ${styles.successContainer}`}>
-              <div className={styles.successMsg}>
-                <CheckCircle size={56} strokeWidth={1.5} />
-                <h4>{t.prayerSuccess}</h4>
-                <p>{t.prayerSuccessDesc}</p>
-                <button className={`btn-outline ${styles.resetBtn}`} onClick={handleReset}>
-                  Submit Another Request
-                </button>
-              </div>
-            </div>
-          ) : (
             <div className={styles.formContainer}>
               <form onSubmit={handleSubmit} className={styles.formCard}>
                 <div className={styles.formIcon}>
@@ -148,7 +139,6 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <p className={styles.privacyNote}>Your request will remain confidential with our prayer team.</p>
               </form>
             </div>
-          )}
         </div>
       </section>
     </div>

@@ -33,7 +33,7 @@ export default function SplashScreen() {
               transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
               className={styles.logoWrap}
             >
-               <Image src="/tph-logo.png" alt="Trinity Prayer House" width={140} height={140} className={styles.logoImg} />
+               <Image src="/tph-logo.png" alt="Trinity Prayer House" width={140} height={140} className={styles.logoImg} priority={true} />
             </motion.div>
             
             <motion.div

@@ -10,10 +10,12 @@ import AmbientSiteBackground from './ui/AmbientSiteBackground';
 import Chatbot from './Chatbot';
 import SplashScreen from './ui/SplashScreen';
 import MeetNotifier from './MeetNotifier';
+import { Toaster } from 'sonner';
 
 export default function ClientProviders({ children }: { children: ReactNode }) {
   return (
     <LangProvider>
+      <Toaster position="bottom-center" toastOptions={{ style: { background: 'var(--surface-elevated)', color: 'var(--text-primary)', border: '1px solid var(--border)' } }} />
       <SplashScreen />
       <AmbientSiteBackground />
       <LangPicker />

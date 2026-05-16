@@ -63,13 +63,13 @@ export default function Home() {
           <div
             className={`${styles.heroSlidesWrap} ${heroBgVideoPlaying ? styles.heroSlidesHidden : ''}`}
           >
-{heroImages.map((src, idx) => (
-               <div
-                 key={src}
-                 className={`${styles.heroImgSlide} ${idx === currentImgIndex ? styles.active : ''}`}
-                 style={{ position: 'absolute', inset: 0 }}
-               >
-                 <Image
+            {heroImages.map((src, idx) => (
+              <div
+                key={src}
+                className={`${styles.heroImgSlide} ${idx === currentImgIndex ? styles.active : ''}`}
+                style={{ position: 'absolute', inset: 0 }}
+              >
+                <Image
                   src={src}
                   alt="Trinity Prayer House - Church community"
                   fill
@@ -88,7 +88,7 @@ export default function Home() {
             <div className={styles.heroTextWrap}>
               <h2 className={`${styles.heroEyebrow} ${styles.animSlideRight}`}>{t.eyebrow}</h2>
               <h1 className={`${styles.heroHeadline} ${styles.animFadeUp}`}>
-                {t.heroTitle1}<br/><i>{t.heroTitle2}</i> {t.heroTitle3} <i>{t.heroTitle4}</i>
+                {t.heroTitle1}<br /><i>{t.heroTitle2}</i> {t.heroTitle3} <i>{t.heroTitle4}</i>
               </h1>
               <p className={`${styles.heroSubtext} ${styles.animFadeUpDelay}`}>{t.heroSub}</p>
               <div className={`${styles.heroCtas} ${styles.animFadeUpDelay2}`}>
@@ -139,8 +139,8 @@ export default function Home() {
               {(() => {
                 const objectPositionX = '50%'; // ← adjust horizontal crop
                 const objectPositionY = '20%'; // ← adjust vertical crop
-                const imageScale      = 1.0;   // ← base zoom level
-                const hoverScale      = 1.06;  // ← zoom on hover (1.06 = 6% bigger)
+                const imageScale = 1.0;   // ← base zoom level
+                const hoverScale = 1.06;  // ← zoom on hover (1.06 = 6% bigger)
                 return (
                   <div
                     onMouseEnter={() => setFoundersHovered(true)}
@@ -178,12 +178,12 @@ export default function Home() {
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.welcomeText}>
             <div className={styles.secLabel}>{t.ourStory}</div>
-            <h2><StaggeredText text={t.welcomeH2a} el="span" /><br/><StaggeredText text={t.welcomeH2b} el="span" /></h2>
-            <p className={styles.leadText}>{t.welcomeP1}</p>
-            <p>{t.welcomeP2}</p>
+            <h2><StaggeredText text={t.welcomeH2a} el="span" /><br /><StaggeredText text={t.welcomeH2b} el="span" /></h2>
+            <StaggeredText text={t.welcomeP1} el="p" className={styles.leadText} />
+            <StaggeredText text={t.welcomeP2} el="p" />
             <Link href="/vision" className={styles.editorialLink}>
               {t.discoverHistory}
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
             </Link>
           </ScrollReveal>
         </div>
@@ -194,18 +194,19 @@ export default function Home() {
         <div className={`container ${styles.welcomeGrid}`}>
           <ScrollReveal delay={100} className={styles.welcomeText}>
             <div className={styles.secLabel}>Our Legacy</div>
-            <h2>Continuing a Legacy of<br/><i>Faith &amp; Service</i></h2>
-            <p className={styles.leadText}>
-              Following in the footsteps of Pastor Sathyanathan, Pastor Vasanthh Sathyanathan
-              continues the divine calling of serving the Lord with faith, humility, and compassion.
-            </p>
-            <p>
-              Through prayer, ministry, and the preaching of God&apos;s Word, he remains committed
-              to leading souls to Christ and carrying forward a legacy of spiritual guidance and service.
-            </p>
+            <h2><StaggeredText text="Continuing a Legacy of" el="span" /><br /><i><StaggeredText text="Faith & Service" el="span" /></i></h2>
+            <StaggeredText 
+              text="Following in the footsteps of Pastor Sathyanathan, Pastor Vasanth Sathyanathan continues the divine calling of serving the Lord with faith, humility, and compassion." 
+              el="p" 
+              className={styles.leadText} 
+            />
+            <StaggeredText 
+              text="Through prayer, ministry, and the preaching of God's Word, he remains committed to leading souls to Christ and carrying forward a legacy of spiritual guidance and service." 
+              el="p" 
+            />
             <Link href="/mission" className={styles.editorialLink}>
               Discover Our Mission
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
             </Link>
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.welcomeImageWrap}>
@@ -219,8 +220,8 @@ export default function Home() {
               {(() => {
                 const objectPositionX = '50%'; // ← adjust horizontal crop
                 const objectPositionY = '20%'; // ← adjust vertical crop
-                const imageScale      = 1.0;   // ← base zoom level
-                const hoverScale      = 1.06;  // ← zoom on hover (1.06 = 6% bigger)
+                const imageScale = 1.0;   // ← base zoom level
+                const hoverScale = 1.06;  // ← zoom on hover (1.06 = 6% bigger)
                 return (
                   <div
                     onMouseEnter={() => setMissionHovered(true)}
@@ -280,7 +281,7 @@ export default function Home() {
         <div className="container">
           <ScrollReveal delay={100}>
             <div className={`${styles.secLabel} text-center`}>{t.joinUs}</div>
-            <h2 className={`text-center ${styles.sectionHeading}`}>{t.serviceTimes} <i>{t.serviceTimesI}</i></h2>
+            <h2 className={`text-center ${styles.sectionHeading}`}><StaggeredText text={t.serviceTimes} el="span" /> <i><StaggeredText text={t.serviceTimesI} el="span" /></i></h2>
           </ScrollReveal>
           <div className={styles.serviceGrid}>
             {[
@@ -301,7 +302,7 @@ export default function Home() {
                 </div>
               </ScrollReveal>
             ))}
-            
+
             {/* View More Ministries Card */}
             <ScrollReveal delay={120 * 8} className={`${styles.serviceItem} ${styles.viewMoreWrapper}`}>
               <Link href="/ministries" className={`${styles.serviceCard} ${styles.viewMoreCard}`}>
@@ -310,8 +311,8 @@ export default function Home() {
                   <p>Discover our Kids, Youth, Womens, Mens & Old Age ministries.</p>
                 </div>
                 <div className={styles.viewMoreBtn}>
-                  View More 
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  View More
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                 </div>
               </Link>
             </ScrollReveal>
@@ -328,7 +329,7 @@ export default function Home() {
             <p>{latestSermon?.date || t.latestDesc}</p>
             <Link href="/sermons" className={`${styles.editorialLink} ${styles.editorialLinkLight}`}>
               {t.seeAllSermons}
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
             </Link>
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.latestSermonVideo}>
@@ -379,7 +380,7 @@ export default function Home() {
             <p className={styles.ytDesc}>{t.ytSubDesc}</p>
             <MagneticEffect strength={0.15}>
               <a href="https://www.youtube.com/@Pas.Vasanth?sub_confirmation=1" target="_blank" rel="noopener noreferrer" className={`btn-primary ${styles.ytBtn}`}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z" /></svg>
                 {t.subscribeYT}
               </a>
             </MagneticEffect>

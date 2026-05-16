@@ -322,6 +322,13 @@
   .secLabel { font-size: 0.68rem; margin-bottom: 1rem; color: var(--accent); }
 }
 
+/* Ensure accessible contrast on light backgrounds */
+.welcomeSection .secLabel,
+.serviceStrip .secLabel,
+.communityBand .secLabel {
+  color: var(--accent-dark);
+}
+
 .sectionHeading {
   font-size: clamp(1.7rem, 4.5vw, 3.25rem);
   margin-bottom: 2rem;

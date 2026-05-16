@@ -1,9 +1,10 @@
 'use client';
 import { useState } from 'react';
 import styles from './page.module.css';
-import { MapPin, Phone, Mail, ArrowRight, Loader2, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowRight, Loader2 } from 'lucide-react';
 import { FaInstagram, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
 import { useLang } from '@/components/LangContext';
+import { toast } from 'sonner';
 
 export default function Contact() {
   const { t } = useLang();
@@ -17,7 +18,6 @@ const [formData, setFormData] = useState({
      website: '', // honeypot field for spam bots
    });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState(false);
   const [focused, setFocused] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -49,10 +49,9 @@ const validate = () => {
       });
 
       if (res.ok) {
-        setSubmitted(true);
+        toast.success(t.successTitle, { description: t.successDesc });
         setFormData({ firstName: '', lastName: '', email: '', phone: '', reason: 'General Enquiry', message: '', website: '' });
         setErrors({});
-        setTimeout(() => setSubmitted(false), 6000);
       } else {
         const data = await res.json().catch(() => ({}));
         setErrors({ form: data.error || 'Something went wrong. Please try again.' });
@@ -112,16 +111,6 @@ const validate = () => {
           {/* Form column */}
           <div className={`${styles.formCol} hover-lift shine-frame`}>
             <div className={styles.formCard}>
-              {submitted ? (
-                <div className={styles.successMsg}>
-                  <CheckCircle size={48} strokeWidth={1.5} />
-                  <h4>{t.successTitle}</h4>
-                  <p>{t.successDesc}</p>
-                  <button className={`btn-outline ${styles.resetBtn}`} onClick={() => setSubmitted(false)}>
-                    Send Another Message
-                  </button>
-                </div>
-              ) : (
                 <form onSubmit={handleSubmit} noValidate>
                   <h3>{t.sendMessage}</h3>
                   {errors.form && <div className={styles.formError}>{errors.form}</div>}
@@ -205,7 +194,6 @@ const validate = () => {
                     )}
                   </button>
                 </form>
-              )}
             </div>
           </div>
         </div>

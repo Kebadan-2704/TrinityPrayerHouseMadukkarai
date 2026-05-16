@@ -15,7 +15,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isMeetActive, setIsMeetActive] = useState(false);
   const pathname = usePathname();
-  const { t, setShowPicker } = useLang();
+  const { t, showPicker, setShowPicker } = useLang();
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -150,6 +150,9 @@ export default function Navbar() {
                 type="button"
                 className={styles.langToggle}
                 onClick={() => setShowPicker(true)}
+                aria-haspopup="dialog"
+                aria-expanded={showPicker}
+                aria-controls="lang-picker-modal"
                 aria-label="Change language"
               >
                 <Globe size={17} strokeWidth={1.75} />

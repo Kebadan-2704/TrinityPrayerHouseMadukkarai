@@ -105,6 +105,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="alternate" hrefLang="ta" href={`${siteUrl}/?lang=ta`} />
         <link rel="alternate" hrefLang="hi" href={`${siteUrl}/?lang=hi`} />
         <link rel="alternate" hrefLang="x-default" href={siteUrl} />
+        <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+        <link rel="preconnect" href="https://i.ytimg.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
