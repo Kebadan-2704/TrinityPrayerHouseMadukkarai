@@ -46,38 +46,39 @@ function MediaCarousel() {
   const next = () => setIdx((p) => (p + 1) % mediaImages.length);
   const { src, position } = mediaImages[idx];
 
-   return (
-     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-       <Image
-         src={src}
-         alt={`Youth Ministry media ${idx + 1}`}
-         fill
-         style={{
-           objectFit: 'cover',
-           objectPosition: position,
-         }}
-       />
-       {mediaImages.length > 1 && (
-         <>
-           <button
-             onClick={prev}
-             style={{ position: 'absolute', top: '50%', left: 10, transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.3)', border: 'none', borderRadius: '50%', width: 36, height: 36, cursor: 'pointer', zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-             aria-label="Previous image"
-           ><ChevronLeft size={20} color="#fff" /></button>
-           <button
-             onClick={next}
-             style={{ position: 'absolute', top: '50%', right: 10, transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.3)', border: 'none', borderRadius: '50%', width: 36, height: 36, cursor: 'pointer', zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-             aria-label="Next image"
-           ><ChevronRight size={20} color="#fff" /></button>
-           <div style={{ position: 'absolute', bottom: 15, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 6, zIndex: 10 }}>
-             {mediaImages.map((_, i) => (
-               <div key={i} style={{ width: i === idx ? 18 : 7, height: 7, borderRadius: 4, background: i === idx ? '#fff' : 'rgba(255,255,255,0.4)', transition: 'all 0.3s' }} />
-             ))}
-           </div>
-         </>
-       )}
-     </div>
-   );
+  return (
+    <>
+      <Image
+        src={src}
+        alt={`Youth Ministry media ${idx + 1}`}
+        fill
+        sizes="(max-width: 991px) 100vw, 50vw"
+        style={{
+          objectFit: 'cover',
+          objectPosition: position,
+        }}
+      />
+      {mediaImages.length > 1 && (
+        <>
+          <button
+            onClick={prev}
+            style={{ position: 'absolute', top: '50%', left: 10, transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.3)', border: 'none', borderRadius: '50%', width: 36, height: 36, cursor: 'pointer', zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            aria-label="Previous image"
+          ><ChevronLeft size={20} color="#fff" /></button>
+          <button
+            onClick={next}
+            style={{ position: 'absolute', top: '50%', right: 10, transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.3)', border: 'none', borderRadius: '50%', width: 36, height: 36, cursor: 'pointer', zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            aria-label="Next image"
+          ><ChevronRight size={20} color="#fff" /></button>
+          <div style={{ position: 'absolute', bottom: 15, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 6, zIndex: 10 }}>
+            {mediaImages.map((_, i) => (
+              <div key={i} style={{ width: i === idx ? 18 : 7, height: 7, borderRadius: 4, background: i === idx ? '#fff' : 'rgba(255,255,255,0.4)', transition: 'all 0.3s' }} />
+            ))}
+          </div>
+        </>
+      )}
+    </>
+  );
 }
 
 export default function YouthMinistryPage() {
@@ -142,10 +143,8 @@ export default function YouthMinistryPage() {
               </p>
               <p>Our Trinity Youth Media team is actively involved in ministry beyond our own church, partnering with other churches, ministries, and outreach programs to serve through media excellence and creative support.</p>
             </ScrollReveal>
-            <ScrollReveal delay={200}>
-              <div className={styles.galleryImageWrap} style={{ paddingBottom: '125%' }}>
-                <MediaCarousel />
-              </div>
+            <ScrollReveal delay={200} className={`${styles.galleryImageWrap} ${styles.mediaGalleryImageWrap}`}>
+              <MediaCarousel />
             </ScrollReveal>
           </div>
         </div>

@@ -20,6 +20,7 @@
 @media (min-width: 768px) { .galleryGrid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
 
 .galleryImageWrap { position: relative; width: 100%; padding-bottom: 75%; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.mediaGalleryImageWrap { padding-bottom: 125%; }
 .galleryImageWrap:hover img { transform: scale(1.05); }
 .galleryImageWrap img { transition: transform 0.6s var(--ease-out); }
 

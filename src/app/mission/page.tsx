@@ -10,7 +10,7 @@ export default function Mission() {
     <div className="pageWrap">
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/old.jpg" alt="Mission history photo" fill style={{ objectFit: 'cover' }} />
+          <Image src="/bm.jpg" alt="Mission history photo" fill style={{ objectFit: 'cover', objectPosition: 'center 68%'}} />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -76,7 +76,7 @@ export default function Mission() {
           </div>
           <ScrollReveal delay={320} variant="fadeLeft" className={styles.sideContent}>
             <div className={styles.pastorCard}>
-              <div className={styles.pastorImageWrap}><Image src="/vmain.jpeg" alt="Pastor Vasanth Sathyanathan" fill style={{ objectFit: 'cover', objectPosition: '50% 3%' }} /></div>
+              <div className={styles.pastorImageWrap}><Image src="/vmain.jpeg" alt="Pastor Vasanth Sathyanathan" fill style={{ objectFit: 'cover', objectPosition: '55% 17%' }} /></div>
               <div className={styles.pastorInfo}>
                 <div className={styles.secLabel}>{t.seniorPastor}</div>
                 <h3>Pastor Vasanth Sathyanathan</h3>
