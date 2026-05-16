@@ -9,6 +9,10 @@ import StaggeredText from '@/components/ui/StaggeredText';
 import Image from 'next/image';
 
 const driveImage = (id: string) => `https://drive.google.com/uc?export=view&id=${id}`;
+type MeetingPhoto = string | {
+  src: string;
+  objectPosition?: string;
+};
 
 // ── Meeting data — add more photos as arrays, one entry per meeting ──
 type MeetingSession = {
@@ -22,7 +26,7 @@ type Meeting = {
   title: string;
   ytId?: string;
   description?: string;
-  photos: string[];
+  photos: MeetingPhoto[];
   sessions?: MeetingSession[];
   photoDisplay?: 'stack' | 'single-card';
 };
@@ -34,12 +38,16 @@ const meetings: Meeting[] = [
     ytId: 'sHjLhuEItM0',
     description: 'A landmark celebration marking 50 years since the Lord first gave Rev. Davy Sathyanathan Adhisayaraj the vision for this ministry. The congregation gathered in heartfelt thanksgiving, remembering God\'s faithfulness across five decades of ministry at the foothill of Madukkarai.',
     photos: [
-      '/special-meetings/meeting1/photo1.jpg',
-      '/special-meetings/meeting1/photo2.jpg',
-      '/special-meetings/meeting1/photo3.jpg',
-      '/special-meetings/meeting1/photo5.jpg',
-      '/special-meetings/meeting1/photo6.jpg',
-      '/special-meetings/meeting1/photo7.jpg',
+      driveImage('1jGBZHgP5r0Ixu80frG_b110ewCAmLp7F'),
+      driveImage('1XLjubmACdmxLp5QtqKdUeX_HTji4dXBB'),
+      { src: driveImage('1OWFVMIJ019rJPah90s8WWzVe_E5Z0K1a'), objectPosition: 'center top' },
+      driveImage('1qocMB0jWhKnm36pWCNGwDBiKB3GpFBJs'),
+      driveImage('1WnsROQxc41FdxS3QwubgR5bOuZxiHMpI'),
+      driveImage('1uuxb8twBwKIlx9_XjP1kSQJbXQtE8f-V'),
+      driveImage('1OCcePpl0FVl_s-biGApk6zWevd2C7HNe'),
+      driveImage('1mxCcnJzADGpGMU4X1wp9XFLd5Wpr6g6G'),
+      driveImage('1bZ8n9Petslc5wCpUiGTXxc2bVgWBXNzn'),
+      driveImage('1PVQP5hGwanbfPS1Ab4-0rEk6MFh1SA7B'),
     ],
   },
   {
@@ -49,7 +57,7 @@ const meetings: Meeting[] = [
     description: 'An electrifying evening of live praise and worship that drew the presence of God in a powerful way. Hearts were lifted in adoration as the congregation experienced the joy and freedom found only in sincere worship.',
     photos: [
       '/special-meetings/meeting2/photo1.jpg',
-      '/special-meetings/meeting2/photo2.jpg',
+      { src: '/special-meetings/meeting2/photo2.jpg', objectPosition: 'center 30%' },
       '/special-meetings/meeting2/photo3.jpg',
       '/special-meetings/meeting2/photo4.jpg',
       '/special-meetings/meeting2/photo5.jpg',
@@ -78,10 +86,9 @@ const meetings: Meeting[] = [
     id: 4,
     title: 'Pentecostal Festival and Special Sunday Service with Pas.Davidsam Joyson',
     photos: [
-      '/community-new-2.jpg',
-      '/community-new-2.jpg',
-      '/community-new-2.jpg',
-      '/community-new-2.jpg',
+      driveImage('1daCv33vOvVYLbw9uVjMotJ9f-skEhhAm'),
+      driveImage('1dUJx0a1YOMX2cbFzibuq2LJwCxlIb1aP'),
+      driveImage('1f1TPOZo9crw2sDIZZu-OdcTVSXtqfuQT'),
     ],
     sessions: [
       {
@@ -104,6 +111,9 @@ const meetings: Meeting[] = [
     photos: [
       driveImage('1zpqbRrMaauIgVzLhrTumsN46PlojySQ3'),
       driveImage('1CboiacQJuS4FmQ-dFZbzMO0Kq5bTMg5M'),
+      driveImage('1Txn71mLQjg2-YJ7fr0Hfehkx4PCeJTYW'),
+      driveImage('19jht7J5GOlFxEHwgoIkpNpfldH50D8WB'),
+      driveImage('1gpmTqlhT9utg31mtFhA_JOULdg57AbyW'),
     ],
   },
   {
@@ -112,6 +122,9 @@ const meetings: Meeting[] = [
     photos: [
       driveImage('1oCKlPdAgzT69gqS9iTt5njHqHB7QA_jA'),
       driveImage('148of4-gR9X4TMQuy7BbptG1sd6WuJQO1'),
+      driveImage('1FmYJJQla0TuclLYxcZk7nEvh9wl69_xm'),
+      driveImage('10iaggW8ZmxUNG4gTVZqqKrbzMMcXow91'),
+      driveImage('1irKIZmGyfuuAi9nAFKQCoiGc2XYF808j'),
     ],
     sessions: [
       {
@@ -128,23 +141,32 @@ const meetings: Meeting[] = [
   },
   {
     id: 7,
-    title: 'BreakThrough Worship Night',
+    title: 'BreakThrough Worship Night with Benny John Joseph',
     ytId: 'K9wxb_oXWsw',
     description: 'An intense night of worship and intercession where chains were broken and burdens lifted. Believers pressed in together in prayer, believing God for personal and corporate breakthroughs in every area of life.',
     photos: [
       driveImage('1jR_BORM_3gCLHoB8Zt97Y7hMjIioCW3b'),
       driveImage('1iE0lVpDWhBN9xQijL1q1lQycMSEAShFz'),
       driveImage('1SVuByL7jUYYiYIT5zvyFsCpDovou73cH'),
+      driveImage('1ESH81x7Iz-botAxyS_BuyEXKLqiVMc2G'),
+      driveImage('1Qnfb2PFShNxHr-y7VvYSiB35xh7zyXg4'),
+      driveImage('1c8dYHrzp9VD8rfqapP5ciLizOztPOFFq'),
     ],
   },
   {
     id: 8,
     title: 'Family Blessing Retreat 2024',
     photos: [
-      '/community-new-2.jpg',
-      '/community-new-2.jpg',
-      '/community-new-2.jpg',
-      '/community-new-2.jpg',
+      driveImage('1lvTHSYnJJ13v5oJw5UPetTMY793pyqdc'),
+      driveImage('1r9v4bpRHkOa_GdVYWP_GJvM0_sztXPnc'),
+      driveImage('1ohXci2feDVyQrwbC7UO4-Pdirm8kGeMh'),
+      driveImage('1eQJpeRS16Itrn5JKg6bD5V5iQTMwRqIM'),
+      driveImage('1KNpBpWGHS_Z_pXWmqtxRhD5FTwnHnVBN'),
+      driveImage('1nUJkZb6mdykevstbi8l2v6qCG8ZuHNAN'),
+      driveImage('1SzF9AAXJPkqaaxo5TuioL-pm3MakHEkY'),
+      driveImage('1-3Rn6ncvXt94Mgga_DyA5-zvPiZbpTFp'),
+      driveImage('1LDgQTrAPuxI0xBxV_5nzssB0zA8qV4uW'),
+      driveImage('1-1jfd0cZNgyscExgVtG7ZmVdVyqFZadP'),
     ],
     sessions: [
       {
@@ -259,7 +281,19 @@ function getFanPose(index: number, count: number, width: number) {
   };
 }
 
-function PhotoStackGallery({ photos, title }: { photos: string[]; title: string }) {
+function getPhotoSource(photo: MeetingPhoto) {
+  return typeof photo === 'string' ? photo : photo.src;
+}
+
+function getPhotoSources(photos: MeetingPhoto[]) {
+  return photos.map(getPhotoSource);
+}
+
+function getPhotoObjectPosition(photo: MeetingPhoto) {
+  return typeof photo === 'string' ? 'center' : photo.objectPosition ?? 'center';
+}
+
+function PhotoStackGallery({ photos, title }: { photos: MeetingPhoto[]; title: string }) {
   const [expanded, setExpanded] = useState(false);
   const [galleryRef, width] = useElementWidth<HTMLDivElement>();
   const reduceMotion = useReducedMotion();
@@ -303,6 +337,7 @@ function PhotoStackGallery({ photos, title }: { photos: string[]; title: string 
         transition={transition}
       >
         {photos.map((photo, i) => {
+          const photoSrc = getPhotoSource(photo);
           const fanPose = getFanPose(i, photos.length, width);
           const cardHover = reduceMotion
             ? undefined
@@ -315,7 +350,7 @@ function PhotoStackGallery({ photos, title }: { photos: string[]; title: string 
           return (
             <motion.div
               layout
-              key={`${photo}-${i}`}
+              key={`${photoSrc}-${i}`}
               className={styles.photoCardItem}
               style={{ position: 'relative', zIndex: i + 1 }}
               animate={
@@ -327,11 +362,11 @@ function PhotoStackGallery({ photos, title }: { photos: string[]; title: string 
               transition={transition}
             >
               <Image
-                src={photo}
+                src={photoSrc}
                 alt={`${title} photo ${i + 1}`}
                 fill
                 sizes={expanded ? '(max-width: 768px) 100vw, 33vw' : '(max-width: 768px) 58vw, 300px'}
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: 'cover', objectPosition: getPhotoObjectPosition(photo) }}
               />
             </motion.div>
           );
@@ -433,7 +468,7 @@ export default function SpecialMeeting() {
                   {meeting.photoDisplay === 'single-card' ? (
                     <div className={styles.photoSingle}>
                       <div className={styles.photoCard}>
-                        <PhotoCarousel images={meeting.photos} />
+                        <PhotoCarousel images={getPhotoSources(meeting.photos)} />
                       </div>
                     </div>
                   ) : (
