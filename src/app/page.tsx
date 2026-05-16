@@ -15,6 +15,14 @@ import StaggeredText from '@/components/ui/StaggeredText';
 import { Sun, Heart, BookOpen, Sparkles, Video } from 'lucide-react';
 import { useLang } from '@/components/LangContext';
 
+const heroImages = [
+  '/hero-bg.jpg',
+  '/slide-2.jpg',
+  '/slide-3.jpg',
+  '/slide-4.jpg',
+  '/slide-5.jpg'
+];
+
 export default function Home() {
   const { t } = useLang();
   const [latestSermon, setLatestSermon] = useState<{
@@ -34,52 +42,20 @@ export default function Home() {
       .catch((err) => console.error('Failed to fetch latest sermon:', err));
   }, []);
 
-  const heroImages = [
-    '/hero-bg.jpg',
-    '/slide-2.jpg',
-    '/slide-3.jpg',
-    '/slide-4.jpg',
-    '/slide-5.jpg'
-  ];
-
-  const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [heroBgVideoPlaying, setHeroBgVideoPlaying] = useState(false);
   const [foundersHovered, setFoundersHovered] = useState(false);
   const [missionHovered, setMissionHovered] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImgIndex((prev) => (prev + 1) % heroImages.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, [heroImages.length]);
 
   return (
     <>
       {/* ===== HERO with Particles ===== */}
       <section className={styles.hero}>
         <div className={styles.heroBg}>
-          <CinematicHeroBackdrop onVideoActive={setHeroBgVideoPlaying} />
-          <div
-            className={`${styles.heroSlidesWrap} ${heroBgVideoPlaying ? styles.heroSlidesHidden : ''}`}
-          >
-            {heroImages.map((src, idx) => (
-              <div
-                key={src}
-                className={`${styles.heroImgSlide} ${idx === currentImgIndex ? styles.active : ''}`}
-                style={{ position: 'absolute', inset: 0 }}
-              >
-                <Image
-                  src={src}
-                  alt="Trinity Prayer House - Church community"
-                  fill
-                  priority={idx === 0}
-                  sizes="100vw"
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-            ))}
-          </div>
+          <CinematicHeroBackdrop
+            onVideoActive={setHeroBgVideoPlaying}
+            images={heroImages}
+          />
+
           <div className={styles.heroOverlay} />
           <FloatingParticles />
         </div>
@@ -130,17 +106,11 @@ export default function Home() {
         <div className={`container ${styles.welcomeGrid}`}>
           <ScrollReveal delay={100} className={styles.welcomeImageWrap}>
             <Parallax speed={0.15}>
-              {/* ── FOUNDERS IMAGE POSITION CONTROLS ────────────────────────────
-                  objectPositionX : move image left (0%) ↔ right (100%)
-                  objectPositionY : move image up   (0%) ↔ down  (100%)
-                  imageScale      : zoom in (>1) or out (<1), e.g. 1.2 = 20% zoom
-                  hoverScale      : extra zoom applied only on hover
-              ─────────────────────────────────────────────────────────────── */}
               {(() => {
-                const objectPositionX = '50%'; // ← adjust horizontal crop
-                const objectPositionY = '20%'; // ← adjust vertical crop
-                const imageScale = 1.0;   // ← base zoom level
-                const hoverScale = 1.06;  // ← zoom on hover (1.06 = 6% bigger)
+                const objectPositionX = '50%';
+                const objectPositionY = '20%';
+                const imageScale = 1.0;
+                const hoverScale = 1.06;
                 return (
                   <div
                     onMouseEnter={() => setFoundersHovered(true)}
@@ -196,7 +166,7 @@ export default function Home() {
             <div className={styles.secLabel}>Our Legacy</div>
             <h2><StaggeredText text="Continuing a Legacy of" el="span" /><br /><i><StaggeredText text="Faith & Service" el="span" /></i></h2>
             <StaggeredText 
-              text="Following in the footsteps of Pastor Sathyanathan, Pastor Vasanth Sathyanathan continues the divine calling of serving the Lord with faith, humility, and compassion." 
+              text="Following in the footsteps of Pastor Davy Sathyanathan, Pastor Vasanth Sathyanathan continues the divine calling of serving the Lord with faith, humility, and compassion." 
               el="p" 
               className={styles.leadText} 
             />
@@ -211,17 +181,11 @@ export default function Home() {
           </ScrollReveal>
           <ScrollReveal delay={300} className={styles.welcomeImageWrap}>
             <Parallax speed={0.15}>
-              {/* ── MISSION IMAGE POSITION CONTROLS ──────────────────────────────
-                  objectPositionX : move image left (0%) ↔ right (100%)
-                  objectPositionY : move image up   (0%) ↔ down  (100%)
-                  imageScale      : base zoom level (1.0 = no zoom)
-                  hoverScale      : extra zoom applied only on hover
-              ─────────────────────────────────────────────────────────────── */}
               {(() => {
-                const objectPositionX = '50%'; // ← adjust horizontal crop
-                const objectPositionY = '20%'; // ← adjust vertical crop
-                const imageScale = 1.0;   // ← base zoom level
-                const hoverScale = 1.06;  // ← zoom on hover (1.06 = 6% bigger)
+                const objectPositionX = '50%';
+                const objectPositionY = '20%';
+                const imageScale = 1.0;
+                const hoverScale = 1.06;
                 return (
                   <div
                     onMouseEnter={() => setMissionHovered(true)}
@@ -303,7 +267,6 @@ export default function Home() {
               </ScrollReveal>
             ))}
 
-            {/* View More Ministries Card */}
             <ScrollReveal delay={120 * 8} className={`${styles.serviceItem} ${styles.viewMoreWrapper}`}>
               <Link href="/ministries" className={`${styles.serviceCard} ${styles.viewMoreCard}`}>
                 <div className={styles.viewMoreText}>
@@ -341,7 +304,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== COMMUNITY GALLERY with hover effects ===== */}
+      {/* ===== COMMUNITY GALLERY ===== */}
       <section className={styles.communityBand}>
         <div className="container">
           <ScrollReveal delay={100}>
@@ -371,7 +334,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== YOUTUBE CTA with particles ===== */}
+      {/* ===== YOUTUBE CTA ===== */}
       <section className={styles.ytSection}>
         <div className={styles.ytContent}>
           <ScrollReveal delay={100}>

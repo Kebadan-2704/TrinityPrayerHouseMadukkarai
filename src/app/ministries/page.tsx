@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styles from './ministries.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import StaggerIn, { StaggerItem } from '@/components/ui/StaggerIn';
+import StaggeredText from '@/components/ui/StaggeredText';
 import { useLang } from '@/components/LangContext';
 
 export default function Ministries() {
@@ -15,29 +16,32 @@ export default function Ministries() {
     { id: 'womens', title: t.womenMin, subtitle: t.ministriesLabel, desc: t.womenDesc, image: '/womens_ministry_new.jpg' },
     { id: 'hindi', title: t.hindiMin, subtitle: t.ministriesLabel, desc: t.hindiMinDesc, image: '/hindi_ministry_new.jpg' },
     { id: 'oldage', title: t.oldAgeMin, subtitle: t.ministriesLabel, desc: t.oldAgeMinDesc, image: '/oldage_ministry_new.jpg' },
-    { id: 'branches', title: t.branchMin, subtitle: t.ministriesLabel, desc: t.branchMinDesc, image: '/prayer_ministry.png' },
   ];
+
   return (
     <div className="pageWrap">
       <section className={`${styles.headerSection} mesh-editorial-header`}>
-         <div className={styles.headerBg}>
-<Image
-              src="/youth.jpg"
-              alt="Youth Ministry header"
-              fill
-              sizes="100vw"
-              style={{
-                objectFit: 'cover',
-                objectPosition: 'center 80%',
-              }}
-            />
+        <div className={styles.headerBg}>
+          <Image
+            src="/youth.jpg"
+            alt="Youth Ministry header"
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center 80%',
+            }}
+          />
           <div className={styles.headerOverlay} />
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <ScrollReveal delay={100} variant="blurIn">
             <div className={styles.secLabel}>{t.ministriesLabel}</div>
-            <h1>{t.ministriesH1a} <i>{t.ministriesH1b}</i></h1>
-            <p className={styles.headerSubtext}>{t.ministriesSub}</p>
+            <h1>
+              <StaggeredText text={t.ministriesH1a} el="span" /> 
+              <i><StaggeredText text={t.ministriesH1b} el="span" /></i>
+            </h1>
+            <p className={styles.headerSubtext}><StaggeredText text={t.ministriesSub} el="span" /></p>
           </ScrollReveal>
         </div>
       </section>
@@ -53,7 +57,7 @@ export default function Ministries() {
                       <div className={styles.cardImageOverlay} />
                     </div>
                     <div className={styles.cardContent}>
-                      <h2>{min.title}</h2>
+                      <h2><StaggeredText text={min.title} el="span" /></h2>
                       <p>{min.desc}</p>
                       <span className={styles.exploreLink}>Explore ministry →</span>
                     </div>
