@@ -54,7 +54,7 @@ export default function Navbar() {
   }, [isOpen]);
 
   useEffect(() => {
-    const mq = window.matchMedia('(min-width: 992px)');
+    const mq = window.matchMedia('(min-width: 1200px)');
     const onChange = () => {
       if (mq.matches) setIsOpen(false);
     };

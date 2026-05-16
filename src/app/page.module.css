@@ -168,6 +168,11 @@
     flex-direction: column;
     align-items: stretch;
   }
+
+  .heroCtas > div,
+  .heroBtn {
+    width: 100%;
+  }
 }
 
 .heroVideoLink {

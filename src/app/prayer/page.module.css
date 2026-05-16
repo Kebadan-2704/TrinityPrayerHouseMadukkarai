@@ -11,6 +11,10 @@
 
 .formCard { background: var(--surface-alt); padding: 2.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border); text-align: center; }
 @media (min-width: 768px) { .formCard { padding: 3.5rem; } }
+@media (max-width: 600px) {
+  .formCard { padding: 1.5rem; }
+  .formContainer { margin-top: -4.5rem; }
+}
 
 .formIcon { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(201,169,110,0.1); color: var(--accent); margin-bottom: 2rem; }
 

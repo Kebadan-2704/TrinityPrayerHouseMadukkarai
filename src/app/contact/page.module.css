@@ -21,7 +21,8 @@
 .infoItem { display: flex; gap: 1rem; align-items: flex-start; }
 .iconWrap { width: 40px; height: 40px; background: rgba(255,255,255,0.08); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
 .infoItem h4 { font-family: 'Inter', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-dark); margin-bottom: 0.3rem; font-weight: 700; }
-.infoItem p { color: var(--text-body); font-size: 0.95rem; line-height: 1.5; }
+.infoItem p { color: var(--text-body); font-size: 0.95rem; line-height: 1.5; overflow-wrap: anywhere; }
+.infoItem > div:last-child { min-width: 0; }
 
 .socialIconsRow { display: flex; gap: 1.2rem; margin-top: 1.5rem; padding-left: 3.5rem; }
 .socialIcon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: #fff; text-decoration: none; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -178,6 +179,11 @@
   color: var(--text-body);
   font-size: 0.95rem;
   line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.infoItem > div:last-child {
+  min-width: 0;
 }
 
 .socialIconsRow {
@@ -226,6 +232,12 @@
 
 .formCol {}
 
+@media (max-width: 991px) {
+  .formCol {
+    margin-top: 0;
+  }
+}
+
 .formCard {
   background: var(--surface-alt);
   padding: 1.75rem;
@@ -262,6 +274,18 @@
   .formRow {
     grid-template-columns: 1fr;
     gap: 0;
+  }
+
+  .contactGrid {
+    margin-top: -2.5rem;
+  }
+
+  .formCard {
+    padding: 1.5rem;
+  }
+
+  .socialIconsRow {
+    padding-left: 0;
   }
 }
 
