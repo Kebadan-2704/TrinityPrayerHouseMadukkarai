@@ -309,13 +309,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
     }
     return 'en';
   });
-  const [showPicker, setShowPicker] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('tph-lang') as Language | null;
-      return !(saved && translations[saved]);
-    }
-    return true;
-  });
+  const [showPicker, setShowPicker] = useState(false);
 
   useEffect(() => {
     document.documentElement.lang = lang === 'ta' ? 'ta' : lang === 'hi' ? 'hi' : 'en';
