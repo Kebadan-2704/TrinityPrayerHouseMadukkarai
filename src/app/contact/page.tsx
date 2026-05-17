@@ -68,9 +68,11 @@ const validate = () => {
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg} />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className={styles.secLabel}>{t.connectWithUs}</div>
-          <h1>{t.contactH1a} <i>{t.contactH1b}</i></h1>
-          <p>{t.contactSub}</p>
+          <div className={styles.headerContent}>
+            <div className={styles.secLabel}>{t.connectWithUs}</div>
+            <h1>{t.contactH1a} <i>{t.contactH1b}</i></h1>
+            <p>{t.contactSub}</p>
+          </div>
         </div>
       </section>
 
