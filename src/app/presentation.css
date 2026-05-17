@@ -4,23 +4,11 @@
   width: 100%;
 }
 
-/* Alternating rhythm for marketing sections (optional class on wrappers) */
-.pres-band {
-  position: relative;
-  overflow: clip;
-}
-
 .pres-band-soft {
   background:
     radial-gradient(ellipse 85% 50% at 100% -10%, rgba(212, 185, 120, 0.06), transparent),
     radial-gradient(ellipse 70% 40% at 0% 100%, rgba(28, 28, 56, 0.04), transparent),
     var(--surface);
-}
-
-.pres-band-elevated {
-  background:
-    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(212, 185, 120, 0.07), transparent 55%),
-    var(--surface-alt);
 }
 
 .pres-band-muted {
@@ -47,58 +35,11 @@
   .pres-rail::before { display: none; }
 }
 
-.pres-kicker {
-  font-family: var(--font-sans);
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--accent-muted);
-}
-
-.pres-kicker-light {
-  color: var(--accent-bright);
-}
-
-/* Glass / keynote card */
-.pres-card {
-  background: rgba(255, 252, 247, 0.85);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(212, 185, 120, 0.18);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.95) inset,
-    var(--shadow-lg);
-}
-
 .pres-card-static {
   background: var(--surface-elevated);
   border-radius: var(--radius-xl);
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-md);
-}
-
-/* Typography scale for keynote titles inside light sections */
-.pres-display {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4.5vw, 3.35rem);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: var(--text-primary);
-}
-
-.pres-display i {
-  color: var(--accent-muted);
-  font-style: italic;
-}
-
-.pres-lede {
-  font-size: clamp(1rem, 1.85vw, 1.125rem);
-  line-height: 1.72;
-  color: var(--text-muted);
-  max-width: 36rem;
 }
 
 /* Lift on hover utility */

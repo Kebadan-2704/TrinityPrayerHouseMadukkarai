@@ -11,24 +11,7 @@ import styles from './Chatbot.module.css';
 let _nextMsgId = 0;
 const nextMsgId = () => (++_nextMsgId).toString(36);
 
-
-// ── Church info for bot prompt — sourced from env so it stays in sync ──
-const CHURCH_INFO = [
-  `Promise Service: 1st of every month, 6:30 AM`,
-  `Sunday Worship (Tamil): Every Sunday, 9:30 AM`,
-  `Hindi Service: Every Sunday, 6:30 PM`,
-  `Bible Study: Every Thursday, 7:30 PM`,
-  `Online Meet (Google Meet): Daily, 9:00 PM IST`,
-  `Fasting Prayer: 1st Saturday of every month, 10:30 AM`,
-  `Night Prayer: 4th Friday of every month, 10:00 PM`,
-  `Address: 16/300, Gandhi Nagar, Madukkarai, Coimbatore – 641105`,
-  `Phone / WhatsApp: +91 9786888999`,
-  `Email: trinityprayerhouse.mdk@gmail.com`,
-  `YouTube: @Pas.Vasanth`,
-  `Instagram: @trinityprayerhouse_church`,
-].join('\n');
-
-// ── Build system prompt from env vars to keep it in sync ──────────────────────
+// ── Build system prompt with all church info in one place ──────────────────────
 function buildSystemPrompt(): string {
   const address    = process.env.NEXT_PUBLIC_CHURCH_ADDRESS    ?? '16/300, Gandhi Nagar, Madukkarai, Coimbatore - 641105';
   const phone      = process.env.NEXT_PUBLIC_CHURCH_PHONE      ?? '+91 9786888999';
@@ -40,8 +23,13 @@ function buildSystemPrompt(): string {
 Keep answers concise, polite, friendly, and helpful. Use plain markdown formatting only (bold with **text**).
 
 Here is important church info you should know:
-${CHURCH_INFO}
-
+Promise Service: 1st of every month, 6:30 AM
+Sunday Worship (Tamil): Every Sunday, 9:30 AM
+Hindi Service: Every Sunday, 6:30 PM
+Bible Study: Every Thursday, 7:30 PM
+Online Meet (Google Meet): Daily, 9:00 PM IST
+Fasting Prayer: 1st Saturday of every month, 10:30 AM
+Night Prayer: 4th Friday of every month, 10:00 PM
 Address: ${address}
 Phone / WhatsApp: ${phone}
 Email: ${email}

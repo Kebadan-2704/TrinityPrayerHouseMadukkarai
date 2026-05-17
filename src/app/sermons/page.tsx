@@ -130,7 +130,7 @@ export default function Sermons() {
                       <div className={styles.playBtn}><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></div>
                     </div>
                     <div className={styles.scBody}>
-                      <div className={styles.scSeries}>Sunday Service</div>
+                      <div className={styles.scSeries}>{t.sundayService}</div>
                       <h3 className={styles.scTitle}>{title}</h3>
                       <div className={styles.scDate}>{date}</div>
                     </div>

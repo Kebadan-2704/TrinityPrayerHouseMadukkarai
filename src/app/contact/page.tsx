@@ -23,10 +23,10 @@ const [formData, setFormData] = useState({
 
 const validate = () => {
      const newErrors: Record<string, string> = {};
-     if (!formData.firstName.trim()) newErrors.firstName = 'Required';
-     if (!formData.email.trim()) newErrors.email = 'Required';
-     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Invalid email';
-     if (!formData.message.trim()) newErrors.message = 'Required';
+     if (!formData.firstName.trim()) newErrors.firstName = t.required;
+     if (!formData.email.trim()) newErrors.email = t.required;
+     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = t.invalidEmail;
+     if (!formData.message.trim()) newErrors.message = t.required;
      // Simple bot check: hidden field should remain empty
      if (formData.reason !== 'General Enquiry') {
        setErrors({}); // silently ignore
@@ -54,10 +54,10 @@ const validate = () => {
         setErrors({});
       } else {
         const data = await res.json().catch(() => ({}));
-        setErrors({ form: data.error || 'Something went wrong. Please try again.' });
+        setErrors({ form: data.error || t.somethingWrong });
       }
     } catch {
-      setErrors({ form: 'Network error. Please check your connection and try again.' });
+      setErrors({ form: t.networkError });
     } finally {
       setIsSubmitting(false);
     }
@@ -152,7 +152,7 @@ const validate = () => {
                     />
                   </div>
                   <div className={`${styles.inputGroup} ${focused.phone || formData.phone ? styles.hasValue : ''}`}>
-                    <label htmlFor="contactPhone">Phone (Optional)</label>
+                    <label htmlFor="contactPhone">{t.phoneOptional}</label>
                     <input
                       id="contactPhone"
                       type="tel"
@@ -188,7 +188,7 @@ const validate = () => {
                   </div>
                   <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
                     {isSubmitting ? (
-                      <><Loader2 size={18} className={styles.spinner} /> Sending…</>
+                      <><Loader2 size={18} className={styles.spinner} /> {t.sending}</>
                     ) : (
                       <>{t.sendBtn} <ArrowRight size={18} /></>
                     )}

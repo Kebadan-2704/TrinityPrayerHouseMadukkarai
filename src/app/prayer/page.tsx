@@ -17,7 +17,7 @@ export default function PrayerPage() {
 const handleSubmit = async (e: React.FormEvent) => {
      e.preventDefault();
      if (!name.trim() || !prayerNeed.trim()) {
-       setErrorMsg('Please provide your name and prayer need.');
+       setErrorMsg(t.validationError);
        return;
      }
      // Honeypot check
@@ -44,19 +44,14 @@ const handleSubmit = async (e: React.FormEvent) => {
          setWebsite('');
        } else {
          const data = await res.json().catch(() => (null));
-         setErrorMsg(data?.error || 'Something went wrong. Please try again.');
+         setErrorMsg(data?.error || t.somethingWrong);
          setStatus('error');
        }
      } catch {
-       setErrorMsg('Network error. Please try again.');
+       setErrorMsg(t.networkError);
        setStatus('error');
      }
    };
-
-  const handleReset = () => {
-    setStatus('idle');
-    setErrorMsg('');
-  };
 
   return (
     <div className={styles.pageWrap}>
@@ -91,7 +86,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                      />
                      <label htmlFor="prayerName">{t.firstName}</label>
                    </div>
-                   <div className={styles.inputGroup}>
+                    <div className={styles.inputGroup}>
                      <input
                        type="tel"
                        id="prayerPhone"
@@ -99,7 +94,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                        value={phone}
                        onChange={e => setPhone(e.target.value)}
                      />
-                     <label htmlFor="prayerPhone">Phone (Optional)</label>
+                     <label htmlFor="prayerPhone">{t.phoneOptional}</label>
                    </div>
 
                    {/* Honeypot field — hidden from real users */}
@@ -131,12 +126,12 @@ const handleSubmit = async (e: React.FormEvent) => {
 
                 <button type="submit" className={styles.submitBtn} disabled={status === 'submitting'}>
                   {status === 'submitting' ? (
-                    <><Loader2 size={18} className={styles.spinner} /> Submitting…</>
+                    <><Loader2 size={18} className={styles.spinner} /> {t.submitting}</>
                   ) : (
                     t.submitPrayer
                   )}
                 </button>
-                <p className={styles.privacyNote}>Your request will remain confidential with our prayer team.</p>
+                <p className={styles.privacyNote}>{t.confidentialNote}</p>
               </form>
             </div>
         </div>

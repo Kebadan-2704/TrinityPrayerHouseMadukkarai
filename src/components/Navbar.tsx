@@ -64,19 +64,7 @@ export default function Navbar() {
 
   const closeMenu = () => setIsOpen(false);
 
-  const desktopNavItems = [
-    { href: '/vision', label: t.about },
-    { href: '/mission', label: t.mission },
-    { href: '/sermons', label: t.sermons },
-    { href: '/ministries', label: t.ministries },
-    { href: '/special-meeting', label: t.events },
-    { href: '/online-meet', label: t.googleMeet },
-    { href: '/prayer', label: t.prayerPage },
-    { href: '/give', label: t.giving },
-    { href: '/contact', label: t.contact },
-  ];
-
-  const mobileNavItems = [
+  const navItems = [
     { href: '/vision', label: t.about },
     { href: '/mission', label: t.mission },
     { href: '/sermons', label: t.sermons },
@@ -110,7 +98,7 @@ export default function Navbar() {
           </MagneticEffect>
 
           <div className={styles.desktopNav}>
-            {desktopNavItems.map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -200,7 +188,7 @@ export default function Navbar() {
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className={styles.mobileMenuInner}>
-              {mobileNavItems.map((item, i) => (
+              {navItems.map((item, i) => (
                 <motion.div
                   key={item.href}
                   initial={reduceMotion ? false : { opacity: 0, x: -16 }}

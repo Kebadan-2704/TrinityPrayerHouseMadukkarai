@@ -87,19 +87,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href="/tph-icon-192.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/tph-icon-192.png" />
         <link rel="manifest" href="/manifest.json" />
-        {/* Skip link for keyboard accessibility */}
-        <style dangerouslySetInnerHTML={{ __html: `
-           body { scroll-behavior: smooth; }
-           .skip-link { position: absolute; top: -100%; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--primary-deep); padding: 0.75rem 1.5rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 0.8rem; z-index: 100000; transition: top 0.2s ease; }
-           .skip-link:focus { top: 1rem; }
-         `}} />
-        {/* Open Graph / Social Meta */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Trinity Prayer House | Madukkarai, Coimbatore" />
-        <meta name="twitter:description" content="A house of prayer for all nations. Spirit-filled church in Coimbatore since 1976." />
+        {/* Twitter image and site handle (base twitter config is in metadata export) */}
         <meta name="twitter:image" content="https://trinityprayerhouse.com/hero-bg.jpg" />
         <meta name="twitter:site" content="@PasVasanth" />
-        <link rel="canonical" href={siteUrl} />
         {/* Hreflang — alternate language versions */}
         <link rel="alternate" hrefLang="en" href={`${siteUrl}/`} />
         <link rel="alternate" hrefLang="ta" href={`${siteUrl}/?lang=ta`} />

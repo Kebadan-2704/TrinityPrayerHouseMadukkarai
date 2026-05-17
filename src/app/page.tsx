@@ -23,8 +23,75 @@ const heroImages = [
   '/slide-5.jpg'
 ];
 
+const localTranslations = {
+  en: {
+    ourLegacy: 'Our Legacy',
+    legacyTitle: 'Continuing a Legacy of',
+    legacyTitleI: 'Faith & Service',
+    legacyP1: "Following in the footsteps of Pastor Davy Sathyanathan, Pastor Vasanth Sathyanathan continues the divine calling of serving the Lord with faith, humility, and compassion.",
+    legacyP2: "Through prayer, ministry, and the preaching of God's Word, he remains committed to leading souls to Christ and carrying forward a legacy of spiritual guidance and service.",
+    discoverOurMission: 'Discover Our Mission',
+    dailyMeet: 'Daily Online Meet',
+    dailyMeetDesc: 'Join Everyday via Google Meet',
+    fastingPrayer: 'Fasting Prayer',
+    fastingPrayerDesc: '1st Saturday of Every Month',
+    nightPrayer: 'Night Prayer',
+    nightPrayerDesc: '4th Friday of Every Month',
+    exploreAllMin: 'Explore All Ministries',
+    exploreAllMinDesc: 'Discover our Kids, Youth, Womens, Mens & Old Age ministries.',
+    viewMore: 'View More',
+    discover: 'Discover',
+    ourCommunity: 'Our',
+    ourCommunityI: 'Community',
+    specialMeetings: 'Special Meetings',
+  },
+  ta: {
+    ourLegacy: 'எங்கள் பாரம்பரியம்',
+    legacyTitle: 'தொடரும் பாரம்பரியம்',
+    legacyTitleI: 'விசுவாசம் & சேவை',
+    legacyP1: "போதகர் டேவி சத்தியநாதன் அவர்களின் அடியொற்றி, போதகர் வசந்த் சத்தியநாதன் அவர்கள் விசுவாசம், தாழ்மை மற்றும் இரக்கத்துடன் கர்த்தருக்கு சேவை செய்யும் தெய்வீக அழைப்பைத் தொடர்கிறார்.",
+    legacyP2: "ஜெபங்கள், ஊழியங்கள் மற்றும் தேவனுடைய வார்த்தையைப் பிரசங்கிப்பதன் மூலம், அவர் ஆத்துமாக்களை கிறிஸ்துவிடம் வழிநடத்தவும், ஆவிக்குரிய வழிகாட்டுதல் மற்றும் சேவையின் பாரம்பரியத்தை முன்னோக்கி கொண்டு செல்லவும் அர்ப்பணிப்புடன் இருக்கிறார்.",
+    discoverOurMission: 'எங்கள் பணியைக் கண்டறியுங்கள்',
+    dailyMeet: 'தினசரி ஆன்லைன் கூட்டம்',
+    dailyMeetDesc: 'ஒவ்வொரு நாளும் கூகுள் மீட் வழியாக இணையுங்கள்',
+    fastingPrayer: 'உபவாச ஜெபம்',
+    fastingPrayerDesc: 'ஒவ்வொரு மாதமும் முதல் சனிக்கிழமை',
+    nightPrayer: 'இரவு ஜெபம்',
+    nightPrayerDesc: 'ஒவ்வொரு மாதமும் 4-வது வெள்ளிக்கிழமை',
+    exploreAllMin: 'எல்லா ஊழியங்களையும் ஆராயுங்கள்',
+    exploreAllMinDesc: 'எங்கள் குழந்தைகள், இளைஞர்கள், பெண்கள், ஆண்கள் மற்றும் முதியோர் இல்ல ஊழியங்களைக் கண்டறியுங்கள்.',
+    viewMore: 'மேலும் பார்க்க',
+    discover: 'கண்டறியுங்கள்',
+    ourCommunity: 'எங்கள்',
+    ourCommunityI: 'சமூகம்',
+    specialMeetings: 'சிறப்பு கூட்டங்கள்',
+  },
+  hi: {
+    ourLegacy: 'हमारी विरासत',
+    legacyTitle: 'एक विरासत को जारी रखना',
+    legacyTitleI: 'विश्वास और सेवा',
+    legacyP1: "पादरी डेवी सत्यनाथन के पदचिह्नों पर चलते हुए, पादरी वसंत सत्यनाथन विश्वास, नम्रता और करुणा के साथ प्रभु की सेवा करने की दिव्य बुलाहट को जारी रखे हुए हैं।",
+    legacyP2: "प्रार्थना, सेवकाई और परमेश्वर के वचन के प्रचार के माध्यम से, वे आत्माओं को मसीह के पास ले जाने और आध्यात्मिक मार्गदर्शन और सेवा की विरासत को आगे बढ़ाने के लिए प्रतिबद्ध हैं।",
+    discoverOurMission: 'हमारे मिशन की खोज करें',
+    dailyMeet: 'दैनिक ऑनलाइन मीट',
+    dailyMeetDesc: 'Google Meet के माध्यम से प्रतिदिन जुड़ें',
+    fastingPrayer: 'उपवास प्रार्थना',
+    fastingPrayerDesc: 'हर महीने का पहला शनिवार',
+    nightPrayer: 'रात्रि प्रार्थना',
+    nightPrayerDesc: 'हर महीने का चौथा शुक्रवार',
+    exploreAllMin: 'सभी सेवकाइयों का अन्वेषण करें',
+    exploreAllMinDesc: 'हमारे बच्चों, युवाओं, महिलाओं, पुरुषों और वृद्धाश्रम सेवकाइयों की खोज करें।',
+    viewMore: 'अधिक देखें',
+    discover: 'खोजें',
+    ourCommunity: 'हमारा',
+    ourCommunityI: 'समुदाय',
+    specialMeetings: 'विशेष बैठकें',
+  }
+};
+
 export default function Home() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const content = localTranslations[lang] || localTranslations.en;
   const [latestSermon, setLatestSermon] = useState<{
     videoId: string;
     title: string;
@@ -42,7 +109,6 @@ export default function Home() {
       .catch((err) => console.error('Failed to fetch latest sermon:', err));
   }, []);
 
-  const [heroBgVideoPlaying, setHeroBgVideoPlaying] = useState(false);
   const [foundersHovered, setFoundersHovered] = useState(false);
   const [missionHovered, setMissionHovered] = useState(false);
 
@@ -52,7 +118,6 @@ export default function Home() {
       <section className={styles.hero}>
         <div className={styles.heroBg}>
           <CinematicHeroBackdrop
-            onVideoActive={setHeroBgVideoPlaying}
             images={heroImages}
           />
 
@@ -163,19 +228,19 @@ export default function Home() {
       <section className={`section-padding ${styles.welcomeSection}`} style={{ paddingTop: 0 }}>
         <div className={`container ${styles.welcomeGrid}`}>
           <ScrollReveal delay={100} className={styles.welcomeText}>
-            <div className={styles.secLabel}>Our Legacy</div>
-            <h2><StaggeredText text="Continuing a Legacy of" el="span" /><br /><i><StaggeredText text="Faith & Service" el="span" /></i></h2>
+            <div className={styles.secLabel}>{content.ourLegacy}</div>
+            <h2><StaggeredText text={content.legacyTitle} el="span" /><br /><i><StaggeredText text={content.legacyTitleI} el="span" /></i></h2>
             <StaggeredText 
-              text="Following in the footsteps of Pastor Davy Sathyanathan, Pastor Vasanth Sathyanathan continues the divine calling of serving the Lord with faith, humility, and compassion." 
+              text={content.legacyP1} 
               el="p" 
               className={styles.leadText} 
             />
             <StaggeredText 
-              text="Through prayer, ministry, and the preaching of God's Word, he remains committed to leading souls to Christ and carrying forward a legacy of spiritual guidance and service." 
+              text={content.legacyP2} 
               el="p" 
             />
             <Link href="/mission" className={styles.editorialLink}>
-              Discover Our Mission
+              {content.discoverOurMission}
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
             </Link>
           </ScrollReveal>
@@ -253,9 +318,9 @@ export default function Home() {
               { h: t.hindiService, time: '6:30', ampm: 'PM', desc: t.hindiDesc, icon: <Heart size={22} strokeWidth={1.5} /> },
               { h: t.bibleStudy, time: '6:30', ampm: 'PM', desc: t.bibleDesc, icon: <BookOpen size={22} strokeWidth={1.5} /> },
               { h: t.promiseService, time: '6:30', ampm: 'AM', desc: t.promiseDesc, icon: <Sparkles size={22} strokeWidth={1.5} /> },
-              { h: 'Daily Online Meet', time: '9:00', ampm: 'PM', desc: <Link href="/online-meet" style={{ color: '#c7a760' }}>Join Everyday via Google Meet</Link>, icon: <Video size={22} strokeWidth={1.5} /> },
-              { h: 'Fasting Prayer', time: '10:30', ampm: 'AM', desc: '1st Saturday of Every Month', icon: <Sun size={22} strokeWidth={1.5} /> },
-              { h: 'Night Prayer', time: '10:00', ampm: 'PM', desc: '4th Friday of Every Month', icon: <Heart size={22} strokeWidth={1.5} /> },
+              { h: content.dailyMeet, time: '9:00', ampm: 'PM', desc: <Link href="/online-meet" style={{ color: '#c7a760' }}>{content.dailyMeetDesc}</Link>, icon: <Video size={22} strokeWidth={1.5} /> },
+              { h: content.fastingPrayer, time: '10:30', ampm: 'AM', desc: content.fastingPrayerDesc, icon: <Sun size={22} strokeWidth={1.5} /> },
+              { h: content.nightPrayer, time: '10:00', ampm: 'PM', desc: content.nightPrayerDesc, icon: <Heart size={22} strokeWidth={1.5} /> },
             ].map((s, i) => (
               <ScrollReveal key={i} delay={120 * (i + 1)} className={styles.serviceItem}>
                 <div className={styles.serviceCard}>
@@ -270,11 +335,11 @@ export default function Home() {
             <ScrollReveal delay={120 * 8} className={`${styles.serviceItem} ${styles.viewMoreWrapper}`}>
               <Link href="/ministries" className={`${styles.serviceCard} ${styles.viewMoreCard}`}>
                 <div className={styles.viewMoreText}>
-                  <h3>Explore All Ministries</h3>
-                  <p>Discover our Kids, Youth, Womens, Mens & Old Age ministries.</p>
+                  <h3>{content.exploreAllMin}</h3>
+                  <p>{content.exploreAllMinDesc}</p>
                 </div>
                 <div className={styles.viewMoreBtn}>
-                  View More
+                  {content.viewMore}
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                 </div>
               </Link>
@@ -308,14 +373,14 @@ export default function Home() {
       <section className={styles.communityBand}>
         <div className="container">
           <ScrollReveal delay={100}>
-            <div className={`${styles.secLabel} text-center`}>Discover</div>
-            <h2 className={`text-center ${styles.sectionHeading}`}>Our <i>Community</i></h2>
+            <div className={`${styles.secLabel} text-center`}>{content.discover}</div>
+            <h2 className={`text-center ${styles.sectionHeading}`}>{content.ourCommunity} <i>{content.ourCommunityI}</i></h2>
           </ScrollReveal>
         </div>
         <div className={`container ${styles.communityGrid}`}>
           {[
             { href: '/vision', src: '/community-new-1.jpg', alt: 'Church Community', label: t.about },
-            { href: '/special-meeting', src: '/community-new-2.jpg', alt: 'Special Meetings', label: 'Special Meetings' },
+            { href: '/special-meeting', src: '/community-new-2.jpg', alt: 'Special Meetings', label: content.specialMeetings },
             { href: '/ministries', src: '/community-new-3.jpg', alt: 'Youth Ministry', label: t.ministries },
           ].map((item, i) => (
             <ScrollReveal key={i} delay={100 * (i + 1)}>

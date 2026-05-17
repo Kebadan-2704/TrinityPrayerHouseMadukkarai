@@ -59,7 +59,7 @@ export default function Ministries() {
                     <div className={styles.cardContent}>
                       <h2><StaggeredText text={min.title} el="span" /></h2>
                       <p>{min.desc}</p>
-                      <span className={styles.exploreLink}>Explore ministry →</span>
+                      <span className={styles.exploreLink}>{t.exploreMinistry}</span>
                     </div>
                   </article>
                 </Link>

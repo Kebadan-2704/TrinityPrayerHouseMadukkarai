@@ -69,7 +69,7 @@ const translations = {
     featuredTitle: 'Sunday Worship Service', featuredDate: 'May 10, 2025 · Sunday Service',
     featuredDesc: 'A powerful worship service delivered by Pastor Vasanth Sathyanathan from Trinity Prayer House Madukkarai.',
     visitYT: 'Visit YouTube Channel', messages: 'MESSAGES', recentSermons: 'Recent', recentSermonsI: 'Sermons',
-    allMessages: 'All Messages',
+    allMessages: 'All Messages', sundayService: 'Sunday Service',
     // Ministries
     ministriesLabel: 'OUR MINISTRIES', ministriesH1a: 'Our', ministriesH1b: 'Ministries',
     ministriesSub: 'Discover how we serve God and our community across different areas.',
@@ -80,6 +80,7 @@ const translations = {
     hindiMin: 'Hindi Ministry', hindiMinDesc: 'Reaching out to the Hindi-speaking community with worship and the Word.',
     oldAgeMin: 'Old Age Home', oldAgeMinDesc: 'Providing care, love, and spiritual support for the elderly.',
     branchMin: 'Branch Churches', branchMinDesc: 'Expanding the Kingdom of God through our network of local branch churches.',
+    exploreMinistry: 'Explore ministry →',
     // Events
     calendar: 'CALENDAR', eventsH1a: 'Upcoming', eventsH1b: 'Special Meetings',
     eventsSub: 'Gather with us. Find community, grow in your faith, and participate in the life of our church.',
@@ -108,6 +109,15 @@ const translations = {
     // Prayer Request
     prayerRequest: 'Prayer Request', prayerNeed: 'Share your prayer need...', submitPrayer: 'Submit Prayer Request',
     prayerSuccess: 'Prayer Received', prayerSuccessDesc: 'Our intercessory team will be praying for you. God bless you.',
+    validationError: 'Please provide your name and prayer need.',
+    somethingWrong: 'Something went wrong. Please try again.',
+    networkError: 'Network error. Please check your connection and try again.',
+    phoneOptional: 'Phone (Optional)',
+    submitting: 'Submitting…',
+    sending: 'Sending…',
+    confidentialNote: 'Your request will remain confidential with our prayer team.',
+    required: 'Required',
+    invalidEmail: 'Invalid email',
   },
   ta: {
     home: 'முகப்பு', about: 'தரிசனம்', mission: 'பணி', sermons: 'பிரசங்கங்கள்', ministries: 'ஊழியங்கள்',
@@ -161,7 +171,7 @@ const translations = {
     featuredTitle: 'ஞாயிறு ஆராதனை', featuredDate: 'மே 10, 2025 · ஞாயிறு ஆராதனை',
     featuredDesc: 'டிரினிட்டி ஜெப இல்லம் மடுக்கரையிலிருந்து போதகர் வசந்த் சத்தியநாதன் அவர்களால் வழங்கப்பட்ட சக்திவாய்ந்த ஆராதனை.',
     visitYT: 'YouTube சேனலைப் பார்வையிடுங்கள்', messages: 'செய்திகள்', recentSermons: 'சமீபத்திய', recentSermonsI: 'பிரசங்கங்கள்',
-    allMessages: 'அனைத்து செய்திகள்',
+    allMessages: 'அனைத்து செய்திகள்', sundayService: 'ஞாயிறு ஆராதனை',
     ministriesLabel: 'எங்கள் ஊழியங்கள்', ministriesH1a: 'எங்கள்', ministriesH1b: 'ஊழியங்கள்',
     ministriesSub: 'வெவ்வேறு பகுதிகளில் நாங்கள் கடவுளுக்கும் எங்கள் சமூகத்திற்கும் எவ்வாறு சேவை செய்கிறோம் என்பதைக் கண்டறியுங்கள்.',
     youthMin: 'இளைஞர் ஊழியம்', youthDesc: 'ஆராதனை, ஐக்கியம் மற்றும் சீடத்துவம் மூலம் கிறிஸ்துவில் தங்கள் அடையாளத்தைக் கண்டறிய இளைஞர்களை வலுப்படுத்துதல்.',
@@ -171,6 +181,7 @@ const translations = {
     hindiMin: 'இந்தி ஊழியம்', hindiMinDesc: 'ஆராதனை மற்றும் வார்த்தையுடன் இந்தி பேசும் சமூகத்தை அடைதல்.',
     oldAgeMin: 'முதியோர் இல்லம்', oldAgeMinDesc: 'முதியோர்களுக்கு கவனிப்பு, அன்பு மற்றும் ஆன்மீக ஆதரவை வழங்குதல்.',
     branchMin: 'கிளை திருச்சபைகள்', branchMinDesc: 'எங்கள் உள்ளூர் கிளை திருச்சபைகள் மூலம் கடவுளின் ராஜ்யத்தை விரிவுபடுத்துதல்.',
+    exploreMinistry: 'ஊழியத்தை ஆராயுங்கள் →',
     calendar: 'நாட்காட்டி', eventsH1a: 'வரவிருக்கும்', eventsH1b: 'சிறப்பு கூட்டங்கள்',
     eventsSub: 'எங்களுடன் சேருங்கள். சமூகத்தைக் கண்டறியுங்கள், உங்கள் விசுவாசத்தில் வளருங்கள்.',
     details: 'விவரங்கள்',
@@ -191,8 +202,17 @@ const translations = {
     successTitle: 'செய்தி அனுப்பப்பட்டது!', successDesc: 'தொடர்பு கொண்டதற்கு நன்றி. எங்கள் குழு விரைவில் உங்களைத் தொடர்பு கொள்ளும்.',
     statsYears: 'ஊழிய ஆண்டுகள்', statsLives: 'வாழ்க்கைகள் தொடப்பட்டன', statsSermons: 'YouTube பிரசங்கங்கள்', statsServices: 'வாராந்திர ஆராதனைகள்',
     footerGlory: 'கடவுளுக்கே மகிமை.',
-    prayerRequest: 'ஜெப வேண்டுகோள்', prayerNeed: 'உங்கள் ஜெப தேவையை பகிருங்கள்...', submitPrayer: 'ஜெப வேண்டுகோள் சமர்ப்பிக்கவும்',
+    prayerRequest: 'ஜெப விண்ணப்பம்', prayerNeed: 'உங்கள் ஜெப தேவையைப் பகிர்ந்து கொள்ளுங்கள்...', submitPrayer: 'ஜெப விண்ணப்பத்தைச் சமர்ப்பிக்கவும்',
     prayerSuccess: 'ஜெபம் பெறப்பட்டது', prayerSuccessDesc: 'எங்கள் பரிந்துரை குழு உங்களுக்காக ஜெபிக்கும். கடவுள் உங்களை ஆசீர்வதிப்பார்.',
+    validationError: 'உங்கள் பெயர் மற்றும் ஜெப தேவையை வழங்கவும்.',
+    somethingWrong: 'ஏதோ தவறு நடந்துவிட்டது. மீண்டும் முயற்சிக்கவும்.',
+    networkError: 'பிணைய பிழை. மீண்டும் முயற்சிக்கவும்.',
+    phoneOptional: 'தொலைபேசி (விருப்பத்திற்குரியது)',
+    submitting: 'சமர்ப்பிக்கப்படுகிறது…',
+    sending: 'அனுப்பப்படுகிறது…',
+    confidentialNote: 'உங்கள் வேண்டுகோள் எங்கள் ஜெபக் குழுவுடன் ரகசியமாக வைக்கப்படும்.',
+    required: 'தேவை',
+    invalidEmail: 'செல்லுபடியாகாத மின்னஞ்சல்',
   },
   hi: {
     home: 'होम', about: 'दर्शन', mission: 'मिशन', sermons: 'उपदेश', ministries: 'सेवकाई',
@@ -246,7 +266,7 @@ const translations = {
     featuredTitle: 'रविवार आराधना सेवा', featuredDate: '10 मई, 2025 · रविवार सेवा',
     featuredDesc: 'ट्रिनिटी प्रेयर हाउस मदुक्करै से पादरी वसंत सत्यनाथन द्वारा प्रस्तुत शक्तिशाली आराधना।',
     visitYT: 'YouTube चैनल देखें', messages: 'संदेश', recentSermons: 'हाल के', recentSermonsI: 'उपदेश',
-    allMessages: 'सभी संदेश',
+    allMessages: 'सभी संदेश', sundayService: 'रविवार आराधना',
     ministriesLabel: 'हमारी सेवकाई', ministriesH1a: 'हमारी', ministriesH1b: 'सेवकाई',
     ministriesSub: 'जानें कि हम विभिन्न क्षेत्रों में परमेश्वर और हमारे समुदाय की सेवा कैसे करते हैं।',
     youthMin: 'युवा सेवकाई', youthDesc: 'आराधना, संगति और शिष्यत्व के माध्यम से मसीह में अपनी पहचान खोजने के लिए युवाओं को सशक्त बनाना।',
@@ -256,6 +276,7 @@ const translations = {
     hindiMin: 'हिंदी सेवकाई', hindiMinDesc: 'आराधना और वचन के साथ हिंदी भाषी समुदाय तक पहुँचना।',
     oldAgeMin: 'वृद्धाश्रम', oldAgeMinDesc: 'बुजुर्गों के लिए देखभाल, प्रेम और आध्यात्मिक सहायता प्रदान करना।',
     branchMin: 'शाखा चर्च', branchMinDesc: 'हमारे स्थानीय शाखा चर्चों के नेटवर्क के माध्यम से परमेश्वर के राज्य का विस्तार करना।',
+    exploreMinistry: 'मंत्रालय का पता लगाएं →',
     calendar: 'कैलेंडर', eventsH1a: 'आगामी', eventsH1b: 'विशेष बैठकें',
     eventsSub: 'हमारे साथ जुड़ें। समुदाय खोजें, अपने विश्वास में बढ़ें।',
     details: 'विवरण',
@@ -276,8 +297,17 @@ const translations = {
     successTitle: 'संदेश भेजा गया!', successDesc: 'संपर्क करने के लिए धन्यवाद। हमारी टीम जल्द ही आपसे संपर्क करेगी।',
     statsYears: 'सेवकाई के वर्ष', statsLives: 'जीवन प्रभावित', statsSermons: 'YouTube उपदेश', statsServices: 'साप्ताहिक सेवाएं',
     footerGlory: 'परमेश्वर की महिमा हो।',
-    prayerRequest: 'प्रार्थना अनुरोध', prayerNeed: 'अपनी प्रार्थना आवश्यकता साझा करें...', submitPrayer: 'प्रार्थना अनुरोध भेजें',
+    prayerRequest: 'प्रार्थना अनुरोध', prayerNeed: 'अपनी प्रार्थना की आवश्यकता साझा करें...', submitPrayer: 'प्रार्थना अनुरोध भेजें',
     prayerSuccess: 'प्रार्थना प्राप्त', prayerSuccessDesc: 'हमारी मध्यस्थ टीम आपके लिए प्रार्थना करेगी। ईश्वर आपको आशीर्वाद दें।',
+    validationError: 'कृपया अपना नाम और प्रार्थना की आवश्यकता प्रदान करें।',
+    somethingWrong: 'कुछ गलत हो गया। कृपया पुन: प्रयास करें।',
+    networkError: 'नेटवर्क त्रुटि। कृपया पुन: प्रयास करें।',
+    phoneOptional: 'फ़ोन (वैकल्पिक)',
+    submitting: 'भेज रहा है…',
+    sending: 'भेज रहा है…',
+    confidentialNote: 'आपका अनुरोध हमारी प्रार्थना टीम के पास गोपनीय रहेगा।',
+    required: 'आवश्यक',
+    invalidEmail: 'अमान्य ईमेल',
   },
 };
 
@@ -320,7 +350,6 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const setLang = (l: Language) => {
     setLangState(l);
     localStorage.setItem('tph-lang', l);
-    document.documentElement.lang = l === 'ta' ? 'ta' : l === 'hi' ? 'hi' : 'en';
     setShowPicker(false);
   };
 
