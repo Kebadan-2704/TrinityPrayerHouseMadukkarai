@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/cron/send-meet-notification",
-      "schedule": "20 15 * * *"
+      "schedule": "20 15 * * 1-6"
     }
   ],
   "rewrites": [

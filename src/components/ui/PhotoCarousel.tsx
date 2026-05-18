@@ -4,8 +4,15 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+interface CarouselImageObj {
+  src: string;
+  position?: string;
+}
+
+type CarouselImage = string | CarouselImageObj;
+
 interface PhotoCarouselProps {
-  images: string[];
+  images: CarouselImage[];
   interval?: number;
 }
 
@@ -25,14 +32,18 @@ export default function PhotoCarousel({ images, interval = 5000 }: PhotoCarousel
 
   if (!images || images.length === 0) return null;
 
+  const currentImg = images[currentIdx];
+  const src = typeof currentImg === 'string' ? currentImg : currentImg.src;
+  const position = typeof currentImg === 'string' ? 'center' : (currentImg.position || 'center');
+
   return (
     <>
        <Image
-         src={images[currentIdx]}
+         src={src}
          alt="Gallery activity"
          fill
          sizes="100vw"
-         style={{ objectFit: 'cover' }}
+         style={{ objectFit: 'cover', objectPosition: position }}
        />
 
       {images.length > 1 && (

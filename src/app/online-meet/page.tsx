@@ -14,12 +14,12 @@ const localTranslations = {
     liveNow: "LIVE NOW",
     onlineMinistry: "Online Ministry",
     dailyOnlineMeet: "Daily Online Meet",
-    subtitle: "Join us every day at 9:00 PM for our virtual gathering and prayer session.",
+    subtitle: "Join us at 9:00 PM for our virtual gathering and prayer session.",
     inProgress: "MEETING IN PROGRESS",
-    joinEveryday: "Join Our Everyday Meet",
+    joinEveryday: "Join Our Google Meet",
     cardDesc: "We invite you to be part of our daily spiritual fellowship from the comfort of your home. Let's come together to pray, share the word, and grow in faith.",
-    everyDay: "Every Day",
-    monSun: "Monday to Sunday",
+    everyDay: "Mon to Sat",
+    monSun: "Monday to Saturday",
     pmTime: "9:00 PM",
     istZone: "Indian Standard Time",
     joinBtnText: "Join Google Meet Now"
@@ -33,7 +33,7 @@ const localTranslations = {
     joinEveryday: "எங்கள் தினசரி கூட்டத்தில் இணையுங்கள்",
     cardDesc: "உங்கள் வீட்டின் வசதியிலிருந்து எங்கள் தினசரி ஆன்மீகக் கூட்டத்தில் பங்கேற்க உங்களை அன்போடு அழைக்கிறோம். நாம் ஒன்றிணைந்து ஜெபிக்கவும், வார்த்தையைப் பகிர்ந்து கொள்ளவும், விசுவாசத்தில் வளரவும் கடந்து வருவோம்.",
     everyDay: "ஒவ்வொரு நாளும்",
-    monSun: "திங்கள் முதல் ஞாயிறு வரை",
+    monSun: "திங்கள் முதல் சனி வரை",
     pmTime: "இரவு 9:00 மணி",
     istZone: "இந்திய நேரப்படி",
     joinBtnText: "இப்போது கூகுள் மீட்டில் இணையுங்கள்"
@@ -47,7 +47,7 @@ const localTranslations = {
     joinEveryday: "हमारी दैनिक बैठक में शामिल हों",
     cardDesc: "हम आपको अपने घर के आराम से हमारी दैनिक आध्यात्मिक संगति का हिस्सा बनने के लिए आमंत्रित करते हैं। आइए प्रार्थना करने, वचन साझा करने और विश्वास में बढ़ने के लिए एक साथ आएं।",
     everyDay: "हर दिन",
-    monSun: "सोमवार से रविवार",
+    monSun: "सोमवार से शनिवार",
     pmTime: "रात 9:00 बजे",
     istZone: "भारतीय मानक समय",
     joinBtnText: "अभी गूगल मीट में शामिल हों"
@@ -68,9 +68,10 @@ export default function OnlineMeet() {
       
       const hours = istTime.getHours();
       const minutes = istTime.getMinutes();
+      const day = istTime.getDay();
 
-      // Between 8:50 PM and 10:00 PM (20:50 - 21:59)
-      if ((hours === 20 && minutes >= 50) || hours === 21) {
+      // Between 8:50 PM and 10:00 PM (20:50 - 21:59) from Monday (1) to Saturday (6)
+      if (day !== 0 && ((hours === 20 && minutes >= 50) || hours === 21)) {
         setIsMeetActive(true);
       } else {
         setIsMeetActive(false);

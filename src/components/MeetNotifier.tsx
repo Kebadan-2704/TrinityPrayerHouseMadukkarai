@@ -61,6 +61,21 @@ export default function MeetNotifier() {
 
       const hours = istTime.getHours();
       const minutes = istTime.getMinutes();
+      const day = istTime.getDay();
+
+      // Skip all meet notifications on Sundays
+      if (day === 0) {
+        notifiedRef.current = false;
+        if (warnRef.current) {
+          setShowWarning(false);
+          setDismissedWarning(false);
+        }
+        if (liveRef.current) {
+          setShowLive(false);
+          setDismissedLive(false);
+        }
+        return;
+      }
 
       // Native Push Notification at exactly 8:50 PM (20:50 IST)
       if (hours === 20 && minutes === 50) {

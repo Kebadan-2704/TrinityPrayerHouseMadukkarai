@@ -66,7 +66,7 @@ export default function WomensMinistryPage() {
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/womens_ministry.png" alt="Women's Ministry gathering" fill style={{ objectFit: 'cover' }} />
+          <Image src="/IMG_9061.jpg" alt="Women's Ministry gathering" fill style={{ objectFit: 'cover', objectPosition: 'center' }} />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

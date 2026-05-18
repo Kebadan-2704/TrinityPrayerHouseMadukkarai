@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import PhotoCarousel from '@/components/ui/PhotoCarousel';
 import { useLang } from '@/components/LangContext';
 
 const localTranslations = {
@@ -70,7 +71,7 @@ export default function OldAgeHomeMinistryPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>
-               <Image src="/prayer_gallery_2.png" alt="Old age home ministry activities" fill style={{ objectFit: 'cover' }} />
+               <PhotoCarousel images={['/prayer_gallery_2.png', '/oldage-new-1.jpg', '/oldage-new-2.jpg']} />
             </ScrollReveal>
           </div>
         </div>

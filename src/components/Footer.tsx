@@ -99,8 +99,8 @@ export default function Footer() {
               <span className={styles.serviceTime}>Thursdays, 6:30 PM</span>
             </li>
             <li className={styles.serviceItem}>
-              <Link href="/online-meet" className={styles.serviceName} style={{ color: '#c7a760' }}>Daily Online Meet</Link>
-              <span className={styles.serviceTime}>Everyday, 9:00 PM</span>
+              <Link href="/online-meet" className={styles.serviceName} style={{ color: '#c7a760' }}>Google Online Meet</Link>
+              <span className={styles.serviceTime}>Mon to Sat, 9:00 PM</span>
             </li>
           </ul>
         </motion.div>
@@ -109,7 +109,7 @@ export default function Footer() {
           <ul>
             <li><Phone size={16} /><div><span>{t.phone}</span><p>+91 9786888999</p></div></li>
             <li><Mail size={16} /><div><span>{t.email}</span><p>trinityprayerhouse.mdk@gmail.com</p></div></li>
-            <li><MapPin size={16} /><div><span>{t.address}</span><p>16/300, Gandhi Nagar, Madukkarai, Coimbatore - 641105</p></div></li>
+            <li><MapPin size={16} /><div><span>{t.address}</span><p><a href="https://www.google.com/maps/dir/?api=1&destination=Trinity+Prayer+House+Madukkarai+Coimbatore" target="_blank" rel="noopener noreferrer" className={styles.addressLink}>16/300, Gandhi Nagar, Madukkarai, Coimbatore - 641105</a></p></div></li>
           </ul>
         </motion.div>
       </motion.div>

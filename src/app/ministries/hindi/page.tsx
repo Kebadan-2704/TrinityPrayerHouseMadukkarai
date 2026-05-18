@@ -8,14 +8,14 @@ import PhotoCarousel from '@/components/ui/PhotoCarousel';
 import { useLang } from '@/components/LangContext';
 
 const worshipImages = [
-  '/hindi-ministry/worship-1.jpg',
-  '/hindi-ministry/worship-2.jpg',
-  '/hindi-ministry/worship-3.jpg',
-  '/hindi-ministry/worship-4.jpg',
-  '/hindi-ministry/worship-5.jpg',
-  '/hindi-ministry/worship-6.jpg',
-  '/hindi-ministry/worship-7.jpg',
-  '/hindi-ministry/worship-8.jpg',
+  { src: '/hindi-ministry/worship-1.jpg', position: 'center' },
+  { src: '/hindi-ministry/worship-2.jpg', position: 'center' },
+  { src: '/hindi-ministry/worship-3.jpg', position: 'center' },
+  { src: '/hindi-ministry/worship-4.jpg', position: 'center' },
+  { src: '/hindi-ministry/worship-5.jpg', position: 'center' },
+  { src: '/hindi-ministry/worship-6.jpg', position: 'center' },
+  { src: '/hindi-ministry/worship-7.jpg', position: 'center' },
+  { src: '/hindi-ministry/worship-8.jpg', position: 'center' },
 ];
 
 const serviceMapUrl = 'https://maps.app.goo.gl/9k8FbskNZ5gP7mfL7';
@@ -77,7 +77,7 @@ export default function HindiMinistryPage() {
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/prayer_ministry.png" alt="Hindi Ministry gathering" fill style={{ objectFit: 'cover' }} />
+          <Image src="/adff.jpg" alt="Hindi Ministry gathering" fill style={{ objectFit: 'cover', objectPosition: 'center' }} />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

@@ -51,7 +51,7 @@ export default function MensMinistryPage() {
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/prayer_ministry.png" alt="Men's Ministry gathering" fill style={{ objectFit: 'cover' }} />
+          <Image src="/hjbxdhvds.jpg" alt="Men's Ministry gathering" fill style={{ objectFit: 'cover',objectPosition:'90%' }} />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
