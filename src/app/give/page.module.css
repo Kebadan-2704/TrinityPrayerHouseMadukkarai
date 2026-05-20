@@ -8,7 +8,7 @@
 .headerSection p { max-width: 600px; margin: 0 auto; font-size: 1rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
 
 .giveSection { padding-top: 0; }
-.giveGrid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1100px; margin: -3rem auto 0; position: relative; z-index: 10; }
+.giveGrid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1100px; margin: -3rem auto 0; position: relative; z-index: 10; align-items: start; }
 @media (min-width: 992px) { .giveGrid { grid-template-columns: 1.2fr 1fr; gap: 2.5rem; } }
 
 .primaryGiveCard, .secondaryCard { background: var(--surface-alt); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
@@ -29,8 +29,12 @@
 .detailRow strong { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: var(--text-body); text-align: right; }
 @media (max-width: 600px) { .detailRow { flex-direction: column; align-items: flex-start; gap: 0.3rem; } .detailRow strong { text-align: left; } }
 
-.upiNumber { font-family: 'EB Garamond', serif; font-size: 2.2rem; color: var(--text-primary); margin: 1rem 0 0.8rem; line-height: 1; }
+.upiNumber { font-family: 'EB Garamond', serif; font-size: 2rem; color: var(--text-primary); margin: 0.6rem 0 0; line-height: 1; text-align: center; }
 .subNote { font-size: 0.75rem; color: var(--text-muted); font-style: italic; }
+
+.qrWrap { display: flex; justify-content: center; margin: 1.25rem 0 0.75rem; }
+.qrImage { border-radius: var(--radius-md); border: 4px solid var(--border); box-shadow: var(--shadow-sm); display: block; }
+.upiId { text-align: center; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.03em; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.6rem 1rem; margin-top: 0.25rem; overflow-wrap: anywhere; }
 
 @media (max-width: 600px) {
   .cardHeader {
