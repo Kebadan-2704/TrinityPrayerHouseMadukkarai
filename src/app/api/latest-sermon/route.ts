@@ -10,7 +10,7 @@ const FALLBACK_SERMON = {
   date: '',
   displayTitle: 'Sunday Worship Service',
 };
-const ARCHIVE_SERMON_COUNT = 12;
+const ARCHIVE_SERMON_COUNT = 30;
 const LIVE_REPLAY_BUFFER_HOURS = 4;
 
 type RawSermon = {
