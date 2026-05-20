@@ -108,14 +108,22 @@ function shouldShowSermon(sermon: RawSermon, now = new Date()) {
     return false;
   }
 
+  // Reject titles with 2+ hashtags — strong signal of a reel/promotional short
+  const hashtagCount = (sermon.title.match(/#\w/g) ?? []).length;
+  if (hashtagCount >= 2) return false;
+
+  // Strip hashtag segments before keyword-checking so "#churchservice" doesn't
+  // accidentally match the keyword "service"
+  const titleWithoutTags = titleLower.replace(/#\S+/g, '').trim();
+
   const looksLikeService =
-    titleLower.includes('service') ||
-    titleLower.includes('sermon') ||
-    titleLower.includes('bible study') ||
-    titleLower.includes('message') ||
-    titleLower.includes('worship') ||
-    titleLower.includes('promise') ||
-    titleLower.includes('communion');
+    titleWithoutTags.includes('service') ||
+    titleWithoutTags.includes('sermon') ||
+    titleWithoutTags.includes('bible study') ||
+    titleWithoutTags.includes('message') ||
+    titleWithoutTags.includes('worship') ||
+    titleWithoutTags.includes('promise') ||
+    titleWithoutTags.includes('communion');
 
   if (!looksLikeService) return false;
 
