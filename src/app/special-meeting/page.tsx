@@ -38,7 +38,7 @@ const localizedMeetingsData: { en: Meeting[]; ta: Meeting[]; hi: Meeting[] } = {
       id: 1,
       title: '50th Year of Vision Day Thanksgiving Service',
       ytId: 'sHjLhuEItM0',
-      description: 'A landmark celebration marking 50 years since the Lord first gave Rev. Davy Sathyanathan Adhisayaraj the vision for this ministry. The congregation gathered in heartfelt thanksgiving, remembering God\'s faithfulness across five decades of ministry at the foothill of Madukkarai.',
+      description: 'A landmark celebration marking 50 years since the Lord first gave Rev. Dowy Sathyanathan Adhisayaraj the vision for this ministry. The congregation gathered in heartfelt thanksgiving, remembering God\'s faithfulness across five decades of ministry at the foothill of Madukkarai.',
       photos: [
         driveImage('1jGBZHgP5r0Ixu80frG_b110ewCAmLp7F'),
         driveImage('1XLjubmACdmxLp5QtqKdUeX_HTji4dXBB'),

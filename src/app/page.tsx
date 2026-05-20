@@ -28,7 +28,7 @@ const localTranslations = {
     ourLegacy: 'Our Legacy',
     legacyTitle: 'Continuing a Legacy of',
     legacyTitleI: 'Faith & Service',
-    legacyP1: "Following in the footsteps of Pastor Davy Sathyanathan, Pastor Vasanth Sathyanathan continues the divine calling of serving the Lord with faith, humility, and compassion.",
+    legacyP1: "Following in the footsteps of Pastor Dowy Sathyanathan, Pastor Vasanth Sathyanathan continues the divine calling of serving the Lord with faith, humility, and compassion.",
     legacyP2: "Through prayer, ministry, and the preaching of God's Word, he remains committed to leading souls to Christ and carrying forward a legacy of spiritual guidance and service.",
     discoverOurMission: 'Discover Our Mission',
     dailyMeet: 'Daily Online Meet',
