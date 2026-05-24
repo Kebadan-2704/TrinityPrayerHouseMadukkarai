@@ -18,7 +18,9 @@ const localTranslations = {
     p7: "As the years passed, the Lord began to use him more and more powerfully both within India and abroad. He has ministered extensively in countries such as the United States of America, Abu Dhabi, Kuwait, and the United Arab Emirates.",
     p8: "At present, he is faithfully serving as the Senior Pastor of Trinity Prayer House according to the will of God.",
     p9: "We lovingly invite you to join our live services to hear life-transforming messages that heal broken hearts, restore wounded souls, and bring prophetic words from the Lord. For further details and prayer support, please feel free to contact us.",
-    pastorName: "Pastor Vasanth Sathyanathan"
+    pastorName: "Pastor Vasanth Sathyanathan",
+    familyLabel: "Our Family",
+    familyDesc: "United in Faith & Purpose"
   },
   ta: {
     legacyTitle: "ஒரு ஆசீர்வதிக்கப்பட்ட பாரம்பரியம்",
@@ -31,7 +33,9 @@ const localTranslations = {
     p7: "ஆண்டுகள் கடந்து செல்ல செல்ல, கர்த்தர் அவரை இந்தியாவிலும் வெளிநாட்டிலும் மேலும் மேலும் வல்லமையாகப் பயன்படுத்தத் தொடங்கினார். அமெரிக்கா, அபுதாபி, குவைத் மற்றும் ஐக்கிய அரபு அமீரகம் போன்ற நாடுகளில் அவர் விரிவாக ஊழியப் பணியாற்றியுள்ளார்.",
     p8: "தற்போது, தேவனுடைய சித்தத்தின்படி டிரினிட்டி ஜெப இல்லத்தின் மூத்த போதகராக உண்மையுடன் பணியாற்றி வருகிறார்.",
     p9: "உடைந்த இதயங்களை குணப்படுத்தும், காயப்பட்ட ஆத்துமாக்களை மீட்டெடுக்கும் மற்றும் கர்த்தரிடமிருந்து தீர்க்கதரிசன வார்த்தைகளைக் கொண்டுவரும் வாழ்க்கை மாற்றும் செய்திகளைக் கேட்க எங்களது நேரடி ஆராதனைகளில் இணைய உங்களை அன்புடன் அழைக்கிறோம். கூடுதல் விவரங்கள் மற்றும் ஜெப ஆதரவுக்கு, எங்களைத் தொடர்பு கொள்ள தயங்க வேண்டாம்.",
-    pastorName: "போதகர் வசந்த் சத்தியநாதன்"
+    pastorName: "போதகர் வசந்த் சத்தியநாதன்",
+    familyLabel: "எங்கள் குடும்பம்",
+    familyDesc: "விசுவாசம் & நோக்கத்தில் ஒன்றிணைந்து"
   },
   hi: {
     legacyTitle: "एक धन्य विरासत",
@@ -44,7 +48,9 @@ const localTranslations = {
     p7: "जैसे-जैसे वर्ष बीतते गए, प्रभु ने भारत और विदेशों दोनों में उनका अधिक से अधिक शक्तिशाली रूप से उपयोग करना शुरू कर दिया। उन्होंने संयुक्त राज्य अमेरिका, अबू धाबी, कुवैत और संयुक्त अरब इराद (UAE) जैसे देशों में बड़े पैमाने पर सेवकाई की है।",
     p8: "वर्तमान में, वह परमेश्वर की इच्छा के अनुसार ट्रिनिटी प्रेयर हाउस के वरिष्ठ पादरी के रूप में वफादारी से सेवा कर रहे हैं।",
     p9: "हम आपको जीवन बदलने वाले संदेशों को सुनने के लिए हमारी लाइव सेवाओं में शामिल होने के लिए प्यार से आमंत्रित करते हैं जो टूटे हुए दिलों को चंगा करते हैं, घायल आत्माओं को बहाल करते हैं, और प्रभु से भविष्यद्वाणी के शब्द लाते हैं। अधिक जानकारी और प्रार्थना सहायता के लिए, कृपया हमसे बेझिझक संपर्क करें।",
-    pastorName: "पादरी वसंत सत्यनाथन"
+    pastorName: "पादरी वसंत सत्यनाथन",
+    familyLabel: "हमारा परिवार",
+    familyDesc: "विश्वास और उद्देश्य में एकजुट"
   }
 };
 
@@ -56,7 +62,7 @@ export default function Mission() {
     <div className="pageWrap">
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/bm.jpg" alt="Mission history photo" fill style={{ objectFit: 'cover', objectPosition: 'center 68%'}} />
+          <Image src="/bm.jpg" alt="Mission history photo" fill style={{ objectFit: 'cover', objectPosition: 'center 68%'}} priority />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -119,6 +125,15 @@ export default function Mission() {
             </div>
             <div className={styles.quoteBlock}>
               <h3>&ldquo;<StaggeredText text={t.aboutQuote || 'We are not just building a church; we are building people.'} el="span" />&rdquo;</h3>
+            </div>
+            <div className={styles.pastorCard} style={{ marginTop: '2rem' }}>
+              <div className={styles.pastorImageWrap} style={{ paddingBottom: '70%' }}>
+                <Image src="/Family Pic.jpeg" alt={content.familyLabel} fill style={{ objectFit: 'cover', objectPosition: 'center' }} />
+              </div>
+              <div className={styles.pastorInfo}>
+                <div className={styles.secLabel}>{content.familyLabel}</div>
+                <p>{content.familyDesc}</p>
+              </div>
             </div>
           </ScrollReveal>
         </div>

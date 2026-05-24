@@ -1,0 +1,83 @@
+.versePopup {
+  position: fixed;
+  bottom: 6.5rem;
+  right: 2rem;
+  width: 320px;
+  background: rgba(20, 20, 40, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--white);
+  transform: translateY(150%);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
+}
+
+.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.closeBtn:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.verseText {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-style: italic;
+  font-family: var(--font-secondary), serif;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.verseRef {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: right;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .versePopup {
+    bottom: 5.5rem;
+    right: 1rem;
+    left: 1rem;
+    width: auto;
+  }
+}

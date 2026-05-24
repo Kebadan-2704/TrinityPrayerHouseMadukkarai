@@ -121,22 +121,32 @@ export default function Footer() {
             <div className={styles.flagGroup}>
               <span className={styles.flagItem} title="India">
                 <Image src="https://flagcdn.com/w20/in.png" alt="India" width={16} height={11} unoptimized />
-                <span>3.2k</span>
+                <span>4.5k</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="United Arab Emirates">
                 <Image src="https://flagcdn.com/w20/ae.png" alt="UAE" width={16} height={11} unoptimized />
-                <span>150</span>
+                <span>280</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="United States">
                 <Image src="https://flagcdn.com/w20/us.png" alt="USA" width={16} height={11} unoptimized />
-                <span>85</span>
+                <span>145</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="United Kingdom">
                 <Image src="https://flagcdn.com/w20/gb.png" alt="UK" width={16} height={11} unoptimized />
-                <span>40</span>
+                <span>90</span>
+                <Users size={12} className={styles.animatedPeople} />
+              </span>
+              <span className={styles.flagItem} title="Kuwait">
+                <Image src="https://flagcdn.com/w20/kw.png" alt="Kuwait" width={16} height={11} unoptimized />
+                <span>65</span>
+                <Users size={12} className={styles.animatedPeople} />
+              </span>
+              <span className={styles.flagItem} title="Canada">
+                <Image src="https://flagcdn.com/w20/ca.png" alt="Canada" width={16} height={11} unoptimized />
+                <span>55</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
             </div>

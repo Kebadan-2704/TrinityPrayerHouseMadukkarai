@@ -52,7 +52,7 @@ export default function Sermons() {
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/worship.jpg" alt="Sermons and worship" fill style={{ objectFit: 'cover' }} />
+          <Image src="/worship.jpg" alt="Sermons and worship" fill style={{ objectFit: 'cover' }} priority />
           <div className={styles.headerOverlay} />
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

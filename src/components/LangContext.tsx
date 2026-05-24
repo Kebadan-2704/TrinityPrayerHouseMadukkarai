@@ -338,8 +338,10 @@ export function LangProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const saved = localStorage.getItem('tph-lang') as Language | null;
     if (saved && translations[saved]) {
-      setLangState(saved as Language);
-      setShowPicker(false);
+      setTimeout(() => {
+        setLangState(saved as Language);
+        setShowPicker(false);
+      }, 0);
     }
   }, []);
 

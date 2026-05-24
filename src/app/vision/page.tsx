@@ -97,7 +97,7 @@ export default function About() {
     <div className="pageWrap">
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/old.jpg" alt="Vision history photo" fill style={{ objectFit: 'cover' }} />
+          <Image src="/old.jpg" alt="Vision history photo" fill style={{ objectFit: 'cover' }} priority />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

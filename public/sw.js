@@ -53,7 +53,7 @@ self.addEventListener('push', (event) => {
       let data = {};
       try {
         data = event.data ? await event.data.json() : {};
-      } catch (_) { /* ignore malformed push payload */ }
+      } catch { /* ignore malformed push payload */ }
 
       try {
         await self.registration.showNotification(
@@ -65,7 +65,7 @@ self.addEventListener('push', (event) => {
             data: { url: data.url || '/online-meet' }
           }
         );
-      } catch (_) { /* ignore notification permission errors */ }
+      } catch { /* ignore notification permission errors */ }
     })()
   );
 });
@@ -82,7 +82,7 @@ self.addEventListener('notificationclick', (event) => {
           }
         }
         await clients.openWindow(event.notification.data.url);
-      } catch (_) { /* ignore */ }
+      } catch { /* ignore */ }
     })()
   );
 });

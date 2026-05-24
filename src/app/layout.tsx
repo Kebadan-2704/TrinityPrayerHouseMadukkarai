@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import './presentation.css';
 import ClientProviders from '@/components/ClientProviders';
+import DailyVerse from '@/components/ui/DailyVerse';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://trinityprayerhouse.com'),
@@ -107,6 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         <ClientProviders>{children}</ClientProviders>
+        <DailyVerse />
       </body>
     </html>
   );

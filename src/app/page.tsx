@@ -9,7 +9,8 @@ import Counter from '@/components/ui/Counter';
 import Parallax from '@/components/ui/Parallax';
 import FloatingParticles from '@/components/ui/FloatingParticles';
 import CinematicHeroBackdrop from '@/components/ui/CinematicHeroBackdrop';
-import YouTubeEmbed from '@/components/ui/YouTubeEmbed';
+import dynamic from 'next/dynamic';
+const YouTubeEmbed = dynamic(() => import('@/components/ui/YouTubeEmbed'), { ssr: false });
 import MagneticEffect from '@/components/ui/MagneticEffect';
 import StaggeredText from '@/components/ui/StaggeredText';
 import { Sun, Heart, BookOpen, Sparkles, Video } from 'lucide-react';
@@ -44,6 +45,11 @@ const localTranslations = {
     ourCommunity: 'Our',
     ourCommunityI: 'Community',
     specialMeetings: 'Special Meetings',
+    ourFamily: 'Our Family',
+    familyTitle: 'United in',
+    familyTitleI: 'Faith & Purpose',
+    familyP1: "Our family is dedicated to serving the Lord and our community with unwavering devotion and love.",
+    familyP2: "Together, we strive to reflect Christ's teachings in everything we do, welcoming all to join our spiritual journey.",
   },
   ta: {
     ourLegacy: 'எங்கள் பாரம்பரியம்',
@@ -65,6 +71,11 @@ const localTranslations = {
     ourCommunity: 'எங்கள்',
     ourCommunityI: 'சமூகம்',
     specialMeetings: 'சிறப்பு கூட்டங்கள்',
+    ourFamily: 'எங்கள் குடும்பம்',
+    familyTitle: 'ஒன்றிணைந்து',
+    familyTitleI: 'விசுவாசம் & நோக்கம்',
+    familyP1: "எங்கள் குடும்பம் கர்த்தருக்கும் எங்கள் சமூகத்திற்கும் அசைக்க முடியாத பக்தியுடனும் அன்புடனும் சேவை செய்ய அர்ப்பணித்துள்ளது.",
+    familyP2: "ஒன்றாக, நாங்கள் செய்யும் அனைத்திலும் கிறிஸ்துவின் போதனைகளைப் பிரதிபலிக்க முயல்கிறோம், எங்கள் ஆன்மீக பயணத்தில் சேர அனைவரையும் வரவேற்கிறோம்.",
   },
   hi: {
     ourLegacy: 'हमारी विरासत',
@@ -86,6 +97,11 @@ const localTranslations = {
     ourCommunity: 'हमारा',
     ourCommunityI: 'समुदाय',
     specialMeetings: 'विशेष बैठकें',
+    ourFamily: 'हमारा परिवार',
+    familyTitle: 'एकजुट',
+    familyTitleI: 'विश्वास और उद्देश्य में',
+    familyP1: "हमारा परिवार अटूट भक्ति और प्रेम के साथ प्रभु और हमारे समुदाय की सेवा करने के लिए समर्पित है।",
+    familyP2: "हम सब मिलकर, जो कुछ भी करते हैं उसमें मसीह की शिक्षाओं को प्रतिबिंबित करने का प्रयास करते हैं, और सभी को हमारी आध्यात्मिक यात्रा में शामिल होने के लिए स्वागत करते हैं।",
   }
 };
 
@@ -111,6 +127,7 @@ export default function Home() {
 
   const [foundersHovered, setFoundersHovered] = useState(false);
   const [missionHovered, setMissionHovered] = useState(false);
+  const [familyHovered, setFamilyHovered] = useState(false);
 
   return (
     <>
@@ -285,6 +302,71 @@ export default function Home() {
                 );
               })()}
             </Parallax>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ===== FAMILY Section ===== */}
+      <section className={`section-padding ${styles.welcomeSection}`} style={{ paddingTop: 0 }}>
+        <div className={`container ${styles.welcomeGrid}`}>
+          <ScrollReveal delay={100} className={styles.welcomeImageWrap}>
+            <Parallax speed={0.15}>
+              {(() => {
+                const objectPositionX = '50%';
+                const objectPositionY = '20%';
+                const imageScale = 1.0;
+                const hoverScale = 1.06;
+                return (
+                  <div
+                    onMouseEnter={() => setFamilyHovered(true)}
+                    onMouseLeave={() => setFamilyHovered(false)}
+                    style={{
+                      position: 'relative',
+                      paddingBottom: '80%',
+                      borderRadius: 'var(--radius-lg)',
+                      overflow: 'hidden',
+                      cursor: 'pointer',
+                      transition: 'box-shadow 0.4s ease, transform 0.4s ease',
+                      boxShadow: familyHovered
+                        ? '0 24px 60px rgba(16, 0, 59, 1)'
+                        : 'var(--shadow-lg)',
+                      transform: familyHovered ? 'translateY(-4px)' : 'translateY(0)',
+                    }}
+                  >
+                    <Image
+                      src="/Family Pic.jpeg"
+                      alt="Our Family"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      style={{
+                        objectFit: 'cover',
+                        objectPosition: `${objectPositionX} ${objectPositionY}`,
+                        transform: `scale(${familyHovered ? hoverScale : imageScale})`,
+                        transformOrigin: `${objectPositionX} ${objectPositionY}`,
+                        transition: 'transform 0.5s ease',
+                      }}
+                    />
+                  </div>
+                );
+              })()}
+            </Parallax>
+          </ScrollReveal>
+          <ScrollReveal delay={300} className={styles.welcomeText}>
+            <div className={styles.secLabel}>{content.ourFamily}</div>
+            <h2><StaggeredText text={content.familyTitle} el="span" /><br /><i><StaggeredText text={content.familyTitleI} el="span" /></i></h2>
+            <StaggeredText 
+              text={content.familyP1} 
+              el="p" 
+              className={styles.leadText} 
+            />
+            <StaggeredText 
+              text={content.familyP2} 
+              el="p" 
+            />
+            <Link href="/mission" className={styles.editorialLink}>
+              {content.discoverOurMission}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+            </Link>
           </ScrollReveal>
         </div>
       </section>
