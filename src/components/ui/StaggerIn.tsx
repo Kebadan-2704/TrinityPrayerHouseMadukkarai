@@ -44,7 +44,7 @@ export default function StaggerIn({ children, className = '', amount = 0.08 }: P
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount, margin: '0px 0px -8% 0px' }}
+      viewport={{ once: true, amount }}
       variants={container}
     >
       {children}
