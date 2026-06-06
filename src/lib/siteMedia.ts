@@ -7,7 +7,11 @@ export const HERO_BG_POSTER = '/hero-bg.jpg';
 
 /**
  * Hero background loop — direct file URLs only (not Drive “view” links).
+ * Default: `public/videos/hero-bg.mov`. Optional: `.webm` / `.mp4` for broader browser support.
  */
+export const HERO_BG_VIDEO_MOV =
+  process.env.NEXT_PUBLIC_HERO_BG_VIDEO_MOV ?? '/videos/hero-bg.mov';
+
 export const HERO_BG_VIDEO_MP4 =
   process.env.NEXT_PUBLIC_HERO_BG_VIDEO_MP4 ?? '/videos/hero-bg.mp4';
 

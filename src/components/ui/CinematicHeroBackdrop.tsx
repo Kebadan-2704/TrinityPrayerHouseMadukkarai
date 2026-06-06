@@ -7,6 +7,7 @@ import { useReducedMotion } from 'framer-motion';
 import styles from './CinematicHeroBackdrop.module.css';
 import {
   HERO_BG_POSTER,
+  HERO_BG_VIDEO_MOV,
   HERO_BG_VIDEO_MP4,
   HERO_BG_VIDEO_WEBM,
 } from '@/lib/siteMedia';
@@ -102,6 +103,7 @@ export default function CinematicHeroBackdrop({ onVideoActive, images }: Props) 
               aria-hidden
             >
               <source src={HERO_BG_VIDEO_WEBM} type="video/webm" />
+              <source src={HERO_BG_VIDEO_MOV} type="video/quicktime" />
               <source src={HERO_BG_VIDEO_MP4} type="video/mp4" />
             </video>
           );

@@ -62,7 +62,17 @@ body {
   font-size: 16px;
 }
 
-/* Film grain removed for performance */
+/* Subtle film grain — static, performant */
+body::after {
+  content: '';
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
@@ -249,11 +259,59 @@ img { transition: filter 0.35s ease, transform 0.35s var(--ease-out); }
   min-height: 100vh;
 }
 
-/* ===== Editorial page hero — Simplified for performance ===== */
+/* ===== Editorial page hero — Claude-style layered mesh behind photo ===== */
 .mesh-editorial-header {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(135deg, rgba(20,20,40,0.95) 0%, rgba(10,10,20,0.98) 100%);
+}
+
+.mesh-editorial-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 70% at 15% 20%, rgba(212, 185, 120, 0.2) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 90% 30%, rgba(120, 100, 220, 0.14) 0%, transparent 52%),
+    radial-gradient(ellipse 65% 55% at 45% 95%, rgba(80, 130, 220, 0.12) 0%, transparent 55%);
+  animation: editorialMesh 24s ease-in-out infinite alternate;
+}
+
+.mesh-editorial-header::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background: conic-gradient(
+    from 200deg at 50% 40%,
+    rgba(212, 185, 120, 0.15),
+    rgba(90, 70, 200, 0.12),
+    rgba(212, 185, 120, 0.12),
+    rgba(40, 70, 160, 0.14),
+    rgba(212, 185, 120, 0.15)
+  );
+  animation: editorialSpin 48s linear infinite;
+  mix-blend-mode: soft-light;
+}
+
+@keyframes editorialMesh {
+  0% { transform: scale(1) translate(0, 0); opacity: 1; }
+  100% { transform: scale(1.05) translate(-1%, 1%); opacity: 0.92; }
+}
+
+@keyframes editorialSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce), (max-width: 768px) {
+  .mesh-editorial-header::before,
+  .mesh-editorial-header::after {
+    animation: none;
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
