@@ -153,7 +153,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <ClientProviders>{children}</ClientProviders>
         <DailyVerse />
-        {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-6VR5XTSV4F"} />
       </body>
     </html>
   );
