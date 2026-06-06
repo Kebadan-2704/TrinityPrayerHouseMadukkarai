@@ -121,32 +121,37 @@ export default function Footer() {
             <div className={styles.flagGroup}>
               <span className={styles.flagItem} title="India">
                 <Image src="https://flagcdn.com/w20/in.png" alt="India" width={16} height={11} unoptimized />
-                <span>4.5k</span>
+                <span>6.8k</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="United Arab Emirates">
                 <Image src="https://flagcdn.com/w20/ae.png" alt="UAE" width={16} height={11} unoptimized />
-                <span>280</span>
+                <span>420</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="United States">
                 <Image src="https://flagcdn.com/w20/us.png" alt="USA" width={16} height={11} unoptimized />
-                <span>145</span>
+                <span>218</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="United Kingdom">
                 <Image src="https://flagcdn.com/w20/gb.png" alt="UK" width={16} height={11} unoptimized />
-                <span>90</span>
+                <span>135</span>
+                <Users size={12} className={styles.animatedPeople} />
+              </span>
+              <span className={styles.flagItem} title="Russia">
+                <Image src="https://flagcdn.com/w20/ru.png" alt="Russia" width={16} height={11} unoptimized />
+                <span>110</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="Kuwait">
                 <Image src="https://flagcdn.com/w20/kw.png" alt="Kuwait" width={16} height={11} unoptimized />
-                <span>65</span>
+                <span>98</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="Canada">
                 <Image src="https://flagcdn.com/w20/ca.png" alt="Canada" width={16} height={11} unoptimized />
-                <span>55</span>
+                <span>83</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
             </div>
