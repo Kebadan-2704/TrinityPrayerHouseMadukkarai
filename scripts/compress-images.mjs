@@ -29,6 +29,8 @@ const TARGETS = [
   { src: 'public/kids_ministry.png',     out: 'public/kids_ministry.png',     maxWidth: 1600 },
   { src: 'public/youth_ministry.png',    out: 'public/youth_ministry.png',    maxWidth: 1600 },
   { src: 'public/sam-avatar-v3.png',     out: 'public/sam-avatar-v3.png',     maxWidth: 200  },
+  { src: 'public/mens_ministry_new.jpg',  out: 'public/mens_ministry_new.jpg',  maxWidth: 1600 },
+  { src: 'public/kids_ministry_new.jpg',  out: 'public/kids_ministry_new.jpg',  maxWidth: 1600 },
   // Ministry photos - large ones
   { src: 'public/mens-ministry/growing-1.jpg',   out: 'public/mens-ministry/growing-1.jpg',   maxWidth: 1800 },
   { src: 'public/mens-ministry/growing-3.jpg',   out: 'public/mens-ministry/growing-3.jpg',   maxWidth: 1800 },

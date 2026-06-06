@@ -93,6 +93,41 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        {/* ── Font performance: preconnect + preload + non-blocking stylesheet ── */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preload the actual woff2 files so the browser fetches them ASAP */}
+        <link
+          rel="preload"
+          href="https://fonts.gstatic.com/s/plusjakartasans/v3/Y9aHTaVXtbhi9-dkYwnJxYQ.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="https://fonts.gstatic.com/s/cormorantgaramond/v37/4V8rIHyDQ0UT-T_DdVIbKRqHcd5JGEkE.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        {/* Non-render-blocking stylesheet load */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+          media="print"
+          // @ts-expect-error – valid HTML attribute, not typed in React
+          onLoad="this.media='all'"
+        />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+          />
+        </noscript>
+
         <link rel="apple-touch-icon" href="/tph-icon-192.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/tph-icon-192.png" />
         <link rel="manifest" href="/manifest.json" />
