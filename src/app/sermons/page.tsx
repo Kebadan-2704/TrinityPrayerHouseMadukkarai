@@ -153,7 +153,7 @@ export default async function Sermons() {
       {/* Hero header */}
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/worship.jpg" alt="Sermons and worship" fill style={{ objectFit: 'cover' }} priority />
+          <Image src="/slide-4.jpg" alt="Sermons and worship" fill style={{ objectFit: 'cover' }} priority />
           <div className={styles.headerOverlay} />
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

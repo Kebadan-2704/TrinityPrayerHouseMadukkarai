@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -84,12 +84,6 @@ const localTranslations = {
 
 function MediaCarousel() {
   const [idx, setIdx] = useState(0);
-
-  useEffect(() => {
-    if (mediaImages.length <= 1) return;
-    const timer = setInterval(() => setIdx((p) => (p + 1) % mediaImages.length), 5000);
-    return () => clearInterval(timer);
-  }, []);
 
   const prev = () => setIdx((p) => (p - 1 + mediaImages.length) % mediaImages.length);
   const next = () => setIdx((p) => (p + 1) % mediaImages.length);

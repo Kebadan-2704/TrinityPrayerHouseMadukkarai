@@ -120,7 +120,7 @@ export default function NewHere() {
       <section className={styles.heroSection}>
         <div className={styles.heroBg}>
           <Image
-            src="/worship.jpg"
+            src="/slide-4.jpg"
             alt="Welcome to Trinity Prayer House"
             fill
             style={{ objectFit: 'cover' }}

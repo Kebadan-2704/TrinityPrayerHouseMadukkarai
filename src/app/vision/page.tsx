@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import styles from './vision.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import StaggeredText from '@/components/ui/StaggeredText';
@@ -87,11 +87,7 @@ export default function About() {
   const next = useCallback(() => setCurrent(c => (c + 1) % CAROUSEL_PHOTOS.length), []);
   const prev = useCallback(() => setCurrent(c => (c - 1 + CAROUSEL_PHOTOS.length) % CAROUSEL_PHOTOS.length), []);
 
-  // Auto-advance every 5000ms - Always scrolling to satisfy user request
-  useEffect(() => {
-    const id = setInterval(next, 5000);
-    return () => clearInterval(id);
-  }, [next]);
+
 
   return (
     <div className="pageWrap">
