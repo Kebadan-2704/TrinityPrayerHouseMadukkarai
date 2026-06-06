@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 
-export const dynamic = 'force-dynamic';
+// Cache the route for 1 hour — Vercel/Next.js serves the cached response instantly
+// and revalidates in the background so users never wait on YouTube API.
+export const revalidate = 3600;
 
 const CHANNEL_ID = 'UCSkJ9TGwrQNb0CJdP4lwItw';
 const UPLOADS_PLAYLIST_ID = 'UUSkJ9TGwrQNb0CJdP4lwItw';

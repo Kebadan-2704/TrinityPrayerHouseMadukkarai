@@ -1,55 +1,156 @@
-'use client';
-import { useState, useEffect, useRef } from 'react';
+// Server Component — data is fetched at request time on the server.
+// No client-side fetch delay; sermons are embedded in the HTML sent to the browser.
 import Image from 'next/image';
 import styles from './page.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import StaggerIn, { StaggerItem } from '@/components/ui/StaggerIn';
 import StaggeredText from '@/components/ui/StaggeredText';
-import { useLang } from '@/components/LangContext';
+import SermonsClient from './SermonsClient';
 
-export default function Sermons() {
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  const { t } = useLang();
-  const [latestSermon, setLatestSermon] = useState<{ videoId: string; title: string; date: string; displayTitle?: string } | null>(null);
-  const [archiveSermons, setArchiveSermons] = useState<Array<Record<string, unknown>>>([]);
-  const modalRef = useRef<HTMLDivElement>(null);
+// Re-use the same cache window as the API route.
+export const revalidate = 3600;
 
-  // ── Focus trap for video modal ─────────────────────────────────────────────
-  useEffect(() => {
-    if (!activeVideo || !modalRef.current) return;
-    const container = modalRef.current;
-    const focusable = container.querySelectorAll<HTMLElement>(
-      'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])'
-    );
-    const visible = Array.from(focusable).filter(el => !el.hasAttribute('disabled') && el.tabIndex !== -1);
-    (visible[0] ?? container).focus();
+const CHANNEL_ID = 'UCSkJ9TGwrQNb0CJdP4lwItw';
+const UPLOADS_PLAYLIST_ID = 'UUSkJ9TGwrQNb0CJdP4lwItw';
+const ARCHIVE_SERMON_COUNT = 30;
+const LIVE_REPLAY_BUFFER_HOURS = 4;
 
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key !== 'Tab') return;
-      const first = visible[0];
-      const last  = visible[visible.length - 1];
-      if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last?.focus(); } }
-      else            { if (document.activeElement === last)  { e.preventDefault(); first?.focus(); } }
-    };
-    container.addEventListener('keydown', onKey);
-    return () => container.removeEventListener('keydown', onKey);
-  }, [activeVideo]);
+const FALLBACK_SERMON = {
+  videoId: 'dngkoXyTIFU',
+  title: 'Sunday Worship Service',
+  date: '',
+  displayTitle: 'Sunday Worship Service',
+};
 
-  useEffect(() => {
-    fetch('/api/latest-sermon')
-      .then((res) => res.json())
-      .then((data) => {
-        const latest = data?.latest ?? data;
-        if (latest?.videoId) setLatestSermon(latest);
-        setArchiveSermons(data.archive ?? []);
-      })
-      .catch((err) => console.error('Failed to fetch sermons:', err));
-  }, []);
+type Sermon = { videoId: string; title: string; date: string; displayTitle: string };
 
-  const filteredSermons = archiveSermons;
+// ── helpers (shared with API route) ─────────────────────────────────────────
+
+function decodeXml(value: string) {
+  return value
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/&#x([0-9a-f]+);/gi, (_, h: string) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d: string) => String.fromCodePoint(parseInt(d, 10)));
+}
+
+function parseDate(v?: string) { if (!v) return undefined; const d = new Date(v); return isNaN(d.getTime()) ? undefined : d; }
+
+function cleanTitle(title: string) {
+  return title
+    .replace(/^[^|]*\|\|\s*/u, '').replace(/🔴\s*🅻🅸🆅🅴\s*\|\|\s*/gu, '')
+    .replace(/LIVE\s*\|\|\s*/gi, '').replace(/\s*\|\|\s*Trinity Ministries\.?/gi, '')
+    .replace(/\s+/g, ' ').trim();
+}
+
+function getEventDate(title: string) {
+  const m = title.match(/(\d{1,2})(?:st|nd|rd|th)?\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})/i);
+  return m ? new Date(`${m[2]} ${m[1]}, ${m[3]}`) : null;
+}
+
+type RawSermon = {
+  videoId: string; title: string; publishedDate: Date; link?: string;
+  actualStartTime?: Date; actualEndTime?: Date; scheduledStartTime?: Date;
+  liveBroadcastContent?: string;
+};
+
+function shouldShow(s: RawSermon, now = new Date()) {
+  const tl = s.title.toLowerCase();
+  if ((s.link ?? '').toLowerCase().includes('/shorts/') || tl.includes('#short') || tl.includes('#reel')) return false;
+  if ((s.title.match(/#\w/g) ?? []).length >= 2) return false;
+  const twt = tl.replace(/#\S+/g, '').trim();
+  const service = ['service','sermon','bible study','message','worship','promise','communion'].some(k => twt.includes(k));
+  if (!service) return false;
+  const isLive = s.liveBroadcastContent === 'upcoming' || s.liveBroadcastContent === 'live' ||
+    !!(s.scheduledStartTime || s.actualStartTime || s.actualEndTime);
+  if (isLive) {
+    if (!s.actualEndTime) return false;
+    return now >= new Date(s.actualEndTime.getTime() + LIVE_REPLAY_BUFFER_HOURS * 3600000);
+  }
+  const ed = getEventDate(s.title);
+  if (ed) return now >= new Date(ed.getTime() + (tl.includes('sunday') ? 17 : 26) * 3600000);
+  return s.publishedDate <= now && (now.getTime() - s.publishedDate.getTime()) / 3600000 >= 7;
+}
+
+function formatSermons(raw: RawSermon[]): Sermon[] {
+  const seen = new Set<string>();
+  return raw
+    .filter(s => { if (!s.videoId || seen.has(s.videoId)) return false; seen.add(s.videoId); return shouldShow(s); })
+    .map(s => {
+      const d = cleanTitle(s.title);
+      return { videoId: s.videoId, title: d, date: s.publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), displayTitle: d };
+    });
+}
+
+// ── data fetching ────────────────────────────────────────────────────────────
+
+async function fetchFromApi(apiKey: string): Promise<Sermon[]> {
+  const sermons: RawSermon[] = [];
+  let pageToken = '';
+  for (let page = 0; page < 5; page++) {
+    const params = new URLSearchParams({ part: 'snippet', maxResults: '50', playlistId: UPLOADS_PLAYLIST_ID, key: apiKey });
+    if (pageToken) params.set('pageToken', pageToken);
+    const res = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?${params}`, { next: { revalidate: 3600 } });
+    if (!res.ok) throw new Error(`playlistItems ${res.status}`);
+    const data = await res.json();
+    const items: { snippet?: { title?: string; publishedAt?: string; resourceId?: { videoId?: string } } }[] = data.items ?? [];
+    const ids = items.map(i => i.snippet?.resourceId?.videoId ?? '').filter(Boolean);
+
+    const vRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?${new URLSearchParams({ part: 'snippet,liveStreamingDetails', id: ids.join(','), key: apiKey })}`, { next: { revalidate: 3600 } });
+    const vData = vRes.ok ? await vRes.json() : { items: [] };
+    const vMap = new Map((vData.items ?? []).map((v: { id?: string }) => [v.id, v]));
+
+    sermons.push(...items.map(item => {
+      const ps = item.snippet ?? {};
+      const vid = String(ps.resourceId?.videoId ?? '');
+      const d = vMap.get(vid) as { snippet?: { title?: string; publishedAt?: string; liveBroadcastContent?: string }; liveStreamingDetails?: { actualStartTime?: string; actualEndTime?: string; scheduledStartTime?: string } } | undefined;
+      const sn = d?.snippet ?? ps;
+      const ls = d?.liveStreamingDetails ?? {};
+      return { videoId: vid, title: String(sn.title ?? ''), publishedDate: new Date(sn.publishedAt ?? ''), actualStartTime: parseDate(ls.actualStartTime), actualEndTime: parseDate(ls.actualEndTime), scheduledStartTime: parseDate(ls.scheduledStartTime), liveBroadcastContent: d?.snippet?.liveBroadcastContent } satisfies RawSermon;
+    }));
+
+    pageToken = data.nextPageToken ?? '';
+    if (!pageToken || formatSermons(sermons).length >= ARCHIVE_SERMON_COUNT) break;
+  }
+  return formatSermons(sermons).slice(0, ARCHIVE_SERMON_COUNT);
+}
+
+async function fetchFromFeed(): Promise<Sermon[]> {
+  const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`, { next: { revalidate: 3600 } });
+  if (!res.ok) throw new Error(`feed ${res.status}`);
+  const xml = await res.text();
+  const entries = xml.match(/<entry>[\s\S]*?<\/entry>/g) ?? [];
+  const raw: RawSermon[] = entries.map(e => ({
+    videoId: decodeXml(e.match(/<yt:videoId>([\s\S]*?)<\/yt:videoId>/)?.[1] ?? ''),
+    title: decodeXml(e.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? ''),
+    publishedDate: new Date(decodeXml(e.match(/<published>([\s\S]*?)<\/published>/)?.[1] ?? '')),
+    link: decodeXml(e.match(/<link rel="alternate" href="([^"]+)"/)?.[1] ?? ''),
+  }));
+  return formatSermons(raw).slice(0, ARCHIVE_SERMON_COUNT);
+}
+
+async function getSermons(): Promise<{ latest: Sermon; archive: Sermon[] }> {
+  const apiKey = process.env.YOUTUBE_API_KEY;
+  try {
+    if (apiKey) {
+      const s = await fetchFromApi(apiKey);
+      if (s.length > 0) return { latest: s[0], archive: s };
+    }
+  } catch (e) { console.error('YouTube API error:', e); }
+  try {
+    const s = await fetchFromFeed();
+    return { latest: s[0] ?? FALLBACK_SERMON, archive: s };
+  } catch (e) { console.error('YouTube feed error:', e); }
+  return { latest: FALLBACK_SERMON, archive: [FALLBACK_SERMON] };
+}
+
+// ── page ─────────────────────────────────────────────────────────────────────
+
+export default async function Sermons() {
+  const { latest, archive } = await getSermons();
 
   return (
     <div className={styles.pageWrap}>
+      {/* Hero header */}
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image src="/worship.jpg" alt="Sermons and worship" fill style={{ objectFit: 'cover' }} priority />
@@ -57,118 +158,20 @@ export default function Sermons() {
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <ScrollReveal delay={80} variant="blurIn">
-            <div className={styles.secLabel}>{t.theWord}</div>
+            <div className={styles.secLabel}>The Word</div>
             <h1>
-              <StaggeredText text={t.sermonsH1a} el="span" /> 
-              <i><StaggeredText text={t.sermonsH1b} el="span" /></i>
+              <StaggeredText text="Sermons &" el="span" />{' '}
+              <i><StaggeredText text="Messages" el="span" /></i>
             </h1>
-            <p className={styles.headerP}><StaggeredText text={t.sermonsSub} el="span" /></p>
+            <p className={styles.headerP}>
+              <StaggeredText text="Be transformed by the Word of God. Watch our latest messages and explore our library of sermons." el="span" />
+            </p>
           </ScrollReveal>
         </div>
       </section>
 
-      <section className={`${styles.featuredSection} pres-band-muted`}>
-        <div className={`container ${styles.featuredGrid}`}>
-          <ScrollReveal delay={100} variant="fadeLeft" className={styles.featuredVideo}>
-            <div className={`${styles.embedWrap} pres-card-static hover-lift`}>
-              <iframe
-                src={`https://www.youtube.com/embed/${latestSermon?.videoId || 'dngkoXyTIFU'}?rel=0&modestbranding=1`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Latest Sermon"
-              />
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={220} variant="fadeRight" className={styles.featuredInfo}>
-            <div className={styles.secLabel}>{t.latestMessage}</div>
-            <h2><StaggeredText text={latestSermon?.displayTitle ?? latestSermon?.title ?? t.featuredTitle} el="span" /></h2>
-            <p className={styles.featuredDate}>{latestSermon?.date || t.featuredDate}</p>
-            <div className={styles.featuredDesc}>
-              <StaggeredText text={t.featuredDesc} />
-            </div>
-            <a href="https://www.youtube.com/@Pas.Vasanth" target="_blank" rel="noopener noreferrer" className={styles.editorialLink}>
-              {t.visitYT}
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-            </a>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section className={`section-padding ${styles.sermonsSection} pres-band-soft pres-rail`}>
-        <div className="container">
-          <ScrollReveal amount={0.2} variant="scale" className={styles.filterWrap}>
-            <div className={styles.secLabel}>{t.messages}</div>
-            <h2 className={styles.archiveTitle}>
-              <StaggeredText text={t.recentSermons} el="span" /> 
-              <i><StaggeredText text={t.recentSermonsI} el="span" /></i>
-            </h2>
-          </ScrollReveal>
-          <StaggerIn className={styles.sermonGrid}>
-            {filteredSermons.map((sermon) => {
-              const videoId = String(sermon.videoId);
-              const title = String(sermon.displayTitle ?? sermon.title);
-              const date = String(sermon.date ?? '');
-              return (
-                <StaggerItem key={videoId}>
-                  <div className={`${styles.sermonCard} hover-lift shine-frame`}>
-                    <div
-                      className={`${styles.scVideoThumb} ${styles.scVideoThumbFill}`}
-                      onClick={() => setActiveVideo(videoId)}
-                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveVideo(videoId); } }}
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`Play ${title}`}
-                    >
-                      <Image
-                        src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
-                        alt={title}
-                        priority={false}
-                        fill
-                        unoptimized
-                      />
-                      <div className={styles.thumbOverlay} />
-                      <div className={styles.playBtn}><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></div>
-                    </div>
-                    <div className={styles.scBody}>
-                      <div className={styles.scSeries}>{t.sundayService}</div>
-                      <h3 className={styles.scTitle}>{title}</h3>
-                      <div className={styles.scDate}>{date}</div>
-                    </div>
-                  </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerIn>
-
-          <ScrollReveal delay={100} variant="fadeUp">
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '3rem' }}>
-              <a
-                href="https://www.youtube.com/@Pas.Vasanth"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.moreSermonBtn}
-              >
-                More Sermons
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </a>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {activeVideo ? (
-        <div ref={modalRef} className={styles.modalOverlay} onClick={() => setActiveVideo(null)} role="presentation">
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Video player">
-            <button type="button" className={styles.closeBtn} onClick={() => setActiveVideo(null)} aria-label="Close video">&times;</button>
-            <div className={styles.videoWrapper}>
-              <iframe src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1&rel=0&modestbranding=1`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="Sermon Video" />
-            </div>
-          </div>
-        </div>
-      ) : null}
+      {/* Interactive sections — modal, video grid etc. */}
+      <SermonsClient latest={latest} archive={archive} />
     </div>
   );
 }
