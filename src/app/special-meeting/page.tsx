@@ -576,6 +576,7 @@ const localTranslations = {
 };
 
 import PhotoCarousel from '@/components/ui/PhotoCarousel';
+import YouTubeEmbed from '@/components/ui/YouTubeEmbed';
 
 const DEFAULT_GALLERY_WIDTH = 960;
 
@@ -800,12 +801,7 @@ export default function SpecialMeeting() {
                         <div key={session.label} className={styles.sessionCol}>
                           <div className={styles.sessionLabel}>{session.label}</div>
                           <div className={styles.videoWrap}>
-                            <iframe
-                              src={`https://www.youtube.com/embed/${session.ytId}?rel=0&modestbranding=1`}
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
-                              title={`${meeting.title} ${session.label}`}
-                            />
+                            <YouTubeEmbed videoId={session.ytId} title={`${meeting.title} ${session.label}`} />
                           </div>
                           <div className={styles.meetingDescription}>
                             <StaggeredText text={session.description} el="p" />
@@ -818,12 +814,7 @@ export default function SpecialMeeting() {
                       <div className={styles.videoCol}>
                         {/* Video */}
                         <div className={styles.videoWrap}>
-                          <iframe
-                            src={`https://www.youtube.com/embed/${meeting.ytId}?rel=0&modestbranding=1`}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            title={meeting.title}
-                          />
+                          {meeting.ytId && <YouTubeEmbed videoId={meeting.ytId} title={meeting.title} />}
                         </div>
                       </div>
 
