@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import './presentation.css';
 import ClientProviders from '@/components/ClientProviders';
@@ -152,6 +153,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <ClientProviders>{children}</ClientProviders>
         <DailyVerse />
+        <Analytics />
       </body>
     </html>
   );
