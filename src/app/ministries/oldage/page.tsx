@@ -71,7 +71,7 @@ export default function OldAgeHomeMinistryPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200} className={styles.galleryImageWrap}>
-               <PhotoCarousel images={['/prayer_gallery_2.png', '/oldage-new-1.jpg', '/oldage-new-2.jpg']} />
+               <PhotoCarousel images={[ '/oldage-new-1.jpg', '/oldage-new-2.jpg']} />
             </ScrollReveal>
           </div>
         </div>

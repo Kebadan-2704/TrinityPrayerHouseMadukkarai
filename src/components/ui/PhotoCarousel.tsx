@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -13,19 +13,10 @@ type CarouselImage = string | CarouselImageObj;
 
 interface PhotoCarouselProps {
   images: CarouselImage[];
-  interval?: number;
 }
 
-export default function PhotoCarousel({ images, interval = 5000 }: PhotoCarouselProps) {
+export default function PhotoCarousel({ images }: PhotoCarouselProps) {
   const [currentIdx, setCurrentIdx] = useState(0);
-
-  useEffect(() => {
-    if (images.length <= 1) return;
-    const timer = setInterval(() => {
-      setCurrentIdx((prev) => (prev + 1) % images.length);
-    }, interval);
-    return () => clearInterval(timer);
-  }, [images.length, interval]);
 
   const nextImg = () => setCurrentIdx((prev) => (prev + 1) % images.length);
   const prevImg = () => setCurrentIdx((prev) => (prev - 1 + images.length) % images.length);

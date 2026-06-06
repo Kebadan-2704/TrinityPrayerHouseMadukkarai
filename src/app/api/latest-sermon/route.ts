@@ -12,7 +12,7 @@ const FALLBACK_SERMON = {
   date: '',
   displayTitle: 'Sunday Worship Service',
 };
-const ARCHIVE_SERMON_COUNT = 30;
+const ARCHIVE_SERMON_COUNT = 10;
 const LIVE_REPLAY_BUFFER_HOURS = 4;
 
 type RawSermon = {
@@ -205,7 +205,7 @@ async function getSermonsFromYouTubeApi(apiKey: string) {
   let pageToken = '';
   let pageCount = 0;
 
-  while (pageCount < 5) {
+  while (pageCount < 2) {
     const params = new URLSearchParams({
       part: 'snippet',
       maxResults: '50',

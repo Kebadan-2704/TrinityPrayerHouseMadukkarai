@@ -11,7 +11,7 @@ export const revalidate = 3600;
 
 const CHANNEL_ID = 'UCSkJ9TGwrQNb0CJdP4lwItw';
 const UPLOADS_PLAYLIST_ID = 'UUSkJ9TGwrQNb0CJdP4lwItw';
-const ARCHIVE_SERMON_COUNT = 30;
+const ARCHIVE_SERMON_COUNT = 10;
 const LIVE_REPLAY_BUFFER_HOURS = 4;
 
 const FALLBACK_SERMON = {
@@ -86,7 +86,7 @@ function formatSermons(raw: RawSermon[]): Sermon[] {
 async function fetchFromApi(apiKey: string): Promise<Sermon[]> {
   const sermons: RawSermon[] = [];
   let pageToken = '';
-  for (let page = 0; page < 5; page++) {
+  for (let page = 0; page < 2; page++) {
     const params = new URLSearchParams({ part: 'snippet', maxResults: '50', playlistId: UPLOADS_PLAYLIST_ID, key: apiKey });
     if (pageToken) params.set('pageToken', pageToken);
     const res = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?${params}`, { next: { revalidate: 3600 } });
