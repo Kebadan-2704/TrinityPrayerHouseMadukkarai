@@ -148,30 +148,61 @@ async function getSermons(): Promise<{ latest: Sermon; archive: Sermon[] }> {
 export default async function Sermons() {
   const { latest, archive } = await getSermons();
 
-  return (
-    <div className={styles.pageWrap}>
-      {/* Hero header */}
-      <section className={`${styles.headerSection} mesh-editorial-header`}>
-        <div className={styles.headerBg}>
-          <Image src="/slide-4.jpg" alt="Sermons and worship" fill style={{ objectFit: 'cover' }} priority />
-          <div className={styles.headerOverlay} />
-        </div>
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <ScrollReveal delay={80} variant="blurIn">
-            <div className={styles.secLabel}>The Word</div>
-            <h1>
-              <StaggeredText text="Sermons &" el="span" />{' '}
-              <i><StaggeredText text="Messages" el="span" /></i>
-            </h1>
-            <p className={styles.headerP}>
-              <StaggeredText text="Be transformed by the Word of God. Watch our latest messages and explore our library of sermons." el="span" />
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Trinity Prayer House Sermons',
+    description: 'Latest sermons and messages from Trinity Prayer House Madukkarai.',
+    itemListElement: archive.map((sermon, index) => {
+      let isoDate = new Date().toISOString();
+      try { isoDate = new Date(sermon.date).toISOString(); } catch (e) {}
+      
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'VideoObject',
+          name: sermon.displayTitle,
+          description: `Watch ${sermon.displayTitle} by Trinity Prayer House.`,
+          thumbnailUrl: `https://img.youtube.com/vi/${sermon.videoId}/maxresdefault.jpg`,
+          uploadDate: isoDate,
+          embedUrl: `https://www.youtube.com/embed/${sermon.videoId}`,
+          contentUrl: `https://www.youtube.com/watch?v=${sermon.videoId}`
+        }
+      };
+    })
+  };
 
-      {/* Interactive sections — modal, video grid etc. */}
-      <SermonsClient latest={latest} archive={archive} />
-    </div>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className={styles.pageWrap}>
+        {/* Hero header */}
+        <section className={`${styles.headerSection} mesh-editorial-header`}>
+          <div className={styles.headerBg}>
+            <Image src="/slide-4.jpg" alt="Sermons and worship" fill style={{ objectFit: 'cover' }} priority />
+            <div className={styles.headerOverlay} />
+          </div>
+          <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+            <ScrollReveal delay={80} variant="blurIn">
+              <div className={styles.secLabel}>The Word</div>
+              <h1>
+                <StaggeredText text="Sermons &" el="span" />{' '}
+                <i><StaggeredText text="Messages" el="span" /></i>
+              </h1>
+              <p className={styles.headerP}>
+                <StaggeredText text="Be transformed by the Word of God. Watch our latest messages and explore our library of sermons." el="span" />
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* Interactive sections — modal, video grid etc. */}
+        <SermonsClient latest={latest} archive={archive} />
+      </div>
+    </>
   );
 }

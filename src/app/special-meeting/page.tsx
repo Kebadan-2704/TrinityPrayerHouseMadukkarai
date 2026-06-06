@@ -750,8 +750,42 @@ export default function SpecialMeeting() {
   const content = localTranslations[lang] || localTranslations.en;
   const meetings = localizedMeetingsData[lang] || localizedMeetingsData.en;
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: content.heroTitle,
+    description: content.subtitle,
+    itemListElement: meetings.map((meeting, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Event',
+        name: meeting.title,
+        description: meeting.description || `Special meeting at Trinity Prayer House: ${meeting.title}`,
+        location: {
+          '@type': 'Place',
+          name: 'Trinity Prayer House Madukkarai',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: '16/300, Gandhi Nagar',
+            addressLocality: 'Madukkarai',
+            addressRegion: 'Coimbatore',
+            postalCode: '641105',
+            addressCountry: 'IN'
+          }
+        },
+        image: meeting.photos.length > 0 ? (typeof meeting.photos[0] === 'string' ? meeting.photos[0] : meeting.photos[0].src) : undefined
+      }
+    }))
+  };
+
   return (
-    <div className={styles.pageWrap}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className={styles.pageWrap}>
       {/* ── Hero Banner ── */}
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
@@ -846,6 +880,7 @@ export default function SpecialMeeting() {
         </div>
       </section>
     </div>
+    </>
   );
 }
 
