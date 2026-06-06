@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Analytics } from '@vercel/analytics/react';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import './presentation.css';
 import ClientProviders from '@/components/ClientProviders';
@@ -153,7 +153,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <ClientProviders>{children}</ClientProviders>
         <DailyVerse />
-        <Analytics />
+        {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
       </body>
     </html>
   );
