@@ -10,6 +10,7 @@ import AmbientSiteBackground from './ui/AmbientSiteBackground';
 import Chatbot from './Chatbot';
 import SplashScreen from './ui/SplashScreen';
 import MeetNotifier from './MeetNotifier';
+import BackToTop from './ui/BackToTop';
 import { Toaster } from 'sonner';
 
 export default function ClientProviders({ children }: { children: ReactNode }) {
@@ -24,7 +25,9 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
       <main className="site-main" id="main-content">{children}</main>
       <Footer />
       <WhatsAppButton />
+      <BackToTop />
       <Chatbot />
     </LangProvider>
   );
 }
+
