@@ -22,7 +22,9 @@
 .featuredDesc { color: var(--text-body); line-height: 1.7; margin-bottom: 1.5rem; font-size: 0.92rem; }
 
 .editorialLink { display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-primary); border-bottom: 1px solid var(--accent); padding-bottom: 0.4rem; transition: gap 0.3s ease, color 0.3s ease; }
-.editorialLink:hover { gap: 1rem; color: var(--accent); }
+@media (hover: hover) {
+  .editorialLink:hover { gap: 1rem; color: var(--accent); }
+}
 
 .sermonsSection { background: var(--surface); }
 .filterWrap { margin-bottom: 2rem; }
@@ -34,7 +36,9 @@
 .filterBtn { padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid var(--border); background: var(--surface-alt); color: var(--text-body); transition: all 0.25s ease; -webkit-tap-highlight-color: transparent; }
 @media (min-width: 768px) { .filterBtn { padding: 0.6rem 1.4rem; font-size: 0.75rem; } }
 .filterBtn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-.filterBtn:hover:not(.active) { border-color: var(--primary); }
+@media (hover: hover) {
+  .filterBtn:hover:not(.active) { border-color: var(--primary); }
+}
 
 .sermonGrid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
 @media (min-width: 600px) { .sermonGrid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
@@ -42,16 +46,20 @@
 
 .sermonCard { background: var(--surface-elevated); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(212, 185, 120, 0.12); box-shadow: var(--shadow-sm), 0 1px 0 rgba(255,255,255,0.85) inset; }
 
-.scVideoThumb { position: relative; padding-bottom: 56.25%; cursor: pointer; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+.scVideoThumb { display: block; width: 100%; text-align: left; position: relative; padding-bottom: 56.25%; cursor: pointer; overflow: hidden; -webkit-tap-highlight-color: transparent; }
 .scVideoThumbFill { position: relative; }
-.thumbImg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease-out); }
-.scVideoThumb:hover .thumbImg { transform: scale(1.06); }
-.thumbOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(15,15,30,0.5) 0%, transparent 60%); z-index: 1; }
+.thumbImg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease-out); pointer-events: none; }
+@media (hover: hover) {
+  .scVideoThumb:hover .thumbImg { transform: scale(1.06); }
+}
+.thumbOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(15,15,30,0.5) 0%, transparent 60%); z-index: 1; pointer-events: none; }
 
-.playBtn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: rgba(255,255,255,0.12); backdrop-filter: blur(6px); border: 1.5px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); transition: all 0.3s var(--ease-out); z-index: 2; }
+.playBtn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: rgba(255,255,255,0.12); backdrop-filter: blur(6px); border: 1.5px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); transition: all 0.3s var(--ease-out); z-index: 2; pointer-events: none; }
 @media (min-width: 768px) { .playBtn { width: 52px; height: 52px; } }
 .playBtn svg { width: 18px; height: 18px; margin-left: 2px; }
-.scVideoThumb:hover .playBtn { background: var(--accent); color: #fff; transform: translate(-50%, -50%) scale(1.1); }
+@media (hover: hover) {
+  .scVideoThumb:hover .playBtn { background: var(--accent); color: #fff; transform: translate(-50%, -50%) scale(1.1); }
+}
 
 .scBody { padding: 1.1rem; }
 @media (min-width: 768px) { .scBody { padding: 1.4rem; } }
@@ -86,10 +94,12 @@
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
 }
-.waShare:hover {
-  background: #25D366;
-  color: #fff;
-  border-color: #25D366;
+@media (hover: hover) {
+  .waShare:hover {
+    background: #25D366;
+    color: #fff;
+    border-color: #25D366;
+  }
 }
 
 .modalOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15,15,30,0.96); backdrop-filter: blur(12px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem; animation: modalFadeIn 0.3s ease; }
@@ -97,14 +107,18 @@
 .modalContent { position: relative; width: 100%; max-width: 900px; background: #000; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); animation: modalScaleUp 0.35s var(--ease-out); }
 @keyframes modalScaleUp { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
 .closeBtn { position: absolute; top: -38px; right: 4px; color: #fff; font-size: 1.8rem; cursor: pointer; background: none; border: none; transition: color 0.2s; padding: 0.5rem; }
-.closeBtn:hover { color: var(--accent); }
+@media (hover: hover) {
+  .closeBtn:hover { color: var(--accent); }
+}
 .videoWrapper { position: relative; padding-bottom: 56.25%; height: 0; }
 .videoWrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
 .moreSermonBtn { display: inline-flex; align-items: center; gap: 0.65rem; padding: 0.85rem 2rem; background: var(--primary); color: #fff; border-radius: var(--radius-pill); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; transition: gap 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.25); border: 1.5px solid var(--accent); }
-.moreSermonBtn:hover { background: var(--accent); color: #fff; gap: 1rem; box-shadow: 0 6px 28px rgba(212,185,120,0.35); transform: translateY(-2px); }
 .moreSermonBtn svg { flex-shrink: 0; transition: transform 0.3s ease; }
-.moreSermonBtn:hover svg { transform: translateX(4px); }
+@media (hover: hover) {
+  .moreSermonBtn:hover { background: var(--accent); color: #fff; gap: 1rem; box-shadow: 0 6px 28px rgba(212,185,120,0.35); transform: translateY(-2px); }
+  .moreSermonBtn:hover svg { transform: translateX(4px); }
+}
 
 /* ── Skeleton loading ─────────────────────────────────────────────────────── */
 @keyframes shimmer {

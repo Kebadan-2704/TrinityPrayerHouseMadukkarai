@@ -53,7 +53,7 @@ export default function SermonsClient({ latest, archive }: Props) {
           <ScrollReveal delay={100} variant="fadeLeft" className={styles.featuredVideo}>
             <div className={`${styles.embedWrap} pres-card-static hover-lift`}>
               <iframe
-                src={`https://www.youtube.com/embed/${latest.videoId}?rel=0&modestbranding=1`}
+                src={`https://www.youtube.com/embed/${latest.videoId}?rel=0&modestbranding=1&playsinline=1`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 title="Latest Sermon"
@@ -92,12 +92,10 @@ export default function SermonsClient({ latest, archive }: Props) {
               return (
                 <StaggerItem key={sermon.videoId}>
                   <div className={`${styles.sermonCard} hover-lift shine-frame`}>
-                    <div
+                    <button
+                      type="button"
                       className={`${styles.scVideoThumb} ${styles.scVideoThumbFill}`}
                       onClick={() => setActiveVideo(sermon.videoId)}
-                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveVideo(sermon.videoId); } }}
-                      role="button"
-                      tabIndex={0}
                       aria-label={`Play ${title}`}
                     >
                       <Image
@@ -109,7 +107,7 @@ export default function SermonsClient({ latest, archive }: Props) {
                       />
                       <div className={styles.thumbOverlay} />
                       <div className={styles.playBtn}><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></div>
-                    </div>
+                    </button>
                     <div className={styles.scBody}>
                       <div className={styles.scSeries}>{t.sundayService}</div>
                       <h3 className={styles.scTitle}>{title}</h3>
@@ -162,7 +160,7 @@ export default function SermonsClient({ latest, archive }: Props) {
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Video player">
             <button type="button" className={styles.closeBtn} onClick={() => setActiveVideo(null)} aria-label="Close video">&times;</button>
             <div className={styles.videoWrapper}>
-              <iframe src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1&rel=0&modestbranding=1`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="Sermon Video" />
+              <iframe src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1&rel=0&modestbranding=1&playsinline=1`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="Sermon Video" />
             </div>
           </div>
         </div>
