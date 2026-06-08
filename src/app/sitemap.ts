@@ -33,7 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Supporting pages
     { path: '/give',                  changeFrequency: 'yearly',   priority: 0.65 },
-    { path: '/prayer',                changeFrequency: 'yearly',   priority: 0.65 },
   ];
 
   return pages.map(({ path, changeFrequency, priority }) => ({

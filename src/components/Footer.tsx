@@ -74,7 +74,6 @@ export default function Footer() {
             <li><Link href="/sermons">{t.sermons}</Link></li>
             <li><Link href="/special-meeting">{t.events}</Link></li>
             <li><Link href="/online-meet">{t.googleMeet}</Link></li>
-            <li><Link href="/prayer">{t.prayerPage}</Link></li>
             <li><Link href="/give">{t.giving}</Link></li>
             <li><Link href="/contact">{t.contact}</Link></li>
           </ul>

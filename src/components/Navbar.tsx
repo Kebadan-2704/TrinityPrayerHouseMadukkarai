@@ -71,7 +71,6 @@ export default function Navbar() {
     { href: '/ministries', label: t.ministries },
     { href: '/special-meeting', label: t.events },
     { href: '/online-meet', label: t.googleMeet },
-    { href: '/prayer', label: t.prayerPage },
     { href: '/give', label: t.giving },
     { href: '/contact', label: t.contact },
   ];
