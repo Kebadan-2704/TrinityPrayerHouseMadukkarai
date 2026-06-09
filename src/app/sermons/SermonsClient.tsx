@@ -21,8 +21,24 @@ type Props = {
 
 export default function SermonsClient({ latest, archive }: Props) {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [modalReady, setModalReady] = useState(false);
   const { t } = useLang();
   const modalRef = useRef<HTMLDivElement>(null);
+
+  // Prevent modal from being dismissed instantly on mobile
+  // by delaying when overlay-clicks are honoured
+  useEffect(() => {
+    if (activeVideo) {
+      setModalReady(false);
+      const id = setTimeout(() => setModalReady(true), 350);
+      return () => clearTimeout(id);
+    }
+  }, [activeVideo]);
+
+  const closeModal = () => {
+    setActiveVideo(null);
+    setModalReady(false);
+  };
 
   // ── Focus trap for video modal ─────────────────────────────────────────────
   useEffect(() => {
@@ -93,8 +109,16 @@ export default function SermonsClient({ latest, archive }: Props) {
                 <StaggerItem key={sermon.videoId}>
                   <div 
                     className={`${styles.sermonCard} hover-lift shine-frame`}
-                    onClick={() => setActiveVideo(sermon.videoId)}
-                    style={{ cursor: 'pointer' }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveVideo(sermon.videoId);
+                    }}
+                    onTouchEnd={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setActiveVideo(sermon.videoId);
+                    }}
+                    style={{ cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => {
@@ -151,11 +175,42 @@ export default function SermonsClient({ latest, archive }: Props) {
 
       {/* ── Video modal ───────────────────────────────────────────────────── */}
       {activeVideo ? (
-        <div ref={modalRef} className={styles.modalOverlay} onClick={() => setActiveVideo(null)} role="presentation">
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Video player">
-            <button type="button" className={styles.closeBtn} onClick={() => setActiveVideo(null)} aria-label="Close video">&times;</button>
+        <div
+          ref={modalRef}
+          className={styles.modalOverlay}
+          onClick={() => { if (modalReady) closeModal(); }}
+          onTouchEnd={(e) => {
+            if (modalReady) {
+              e.preventDefault();
+              closeModal();
+            }
+          }}
+          role="presentation"
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Video player"
+          >
+            <button
+              type="button"
+              className={styles.closeBtn}
+              onClick={(e) => { e.stopPropagation(); closeModal(); }}
+              onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); closeModal(); }}
+              aria-label="Close video"
+            >
+              &times;
+            </button>
             <div className={styles.videoWrapper}>
-              <iframe src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1&rel=0&modestbranding=1&playsinline=1`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="Sermon Video" />
+              <iframe
+                src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="Sermon Video"
+              />
             </div>
           </div>
         </div>

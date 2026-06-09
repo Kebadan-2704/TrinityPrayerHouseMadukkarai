@@ -44,7 +44,7 @@
 @media (min-width: 600px) { .sermonGrid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
 @media (min-width: 992px) { .sermonGrid { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
 
-.sermonCard { background: var(--surface-elevated); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(212, 185, 120, 0.12); box-shadow: var(--shadow-sm), 0 1px 0 rgba(255,255,255,0.85) inset; }
+.sermonCard { background: var(--surface-elevated); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(212, 185, 120, 0.12); box-shadow: var(--shadow-sm), 0 1px 0 rgba(255,255,255,0.85) inset; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
 
 .scVideoThumb { display: block; width: 100%; text-align: left; position: relative; padding-bottom: 56.25%; cursor: pointer; overflow: hidden; -webkit-tap-highlight-color: transparent; }
 .scVideoThumbFill { position: relative; }
@@ -104,13 +104,16 @@
 
 .modalOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15,15,30,0.96); backdrop-filter: blur(12px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem; animation: modalFadeIn 0.3s ease; }
 @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
-.modalContent { position: relative; width: 100%; max-width: 900px; background: #000; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); animation: modalScaleUp 0.35s var(--ease-out); }
+.modalContent { position: relative; width: 100%; max-width: 900px; background: #000; border-radius: var(--radius-md); overflow: visible; box-shadow: 0 30px 60px rgba(0,0,0,0.5); animation: modalScaleUp 0.35s var(--ease-out); }
 @keyframes modalScaleUp { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
-.closeBtn { position: absolute; top: -38px; right: 4px; color: #fff; font-size: 1.8rem; cursor: pointer; background: none; border: none; transition: color 0.2s; padding: 0.5rem; }
+.closeBtn { position: absolute; top: -44px; right: 4px; color: #fff; font-size: 2rem; cursor: pointer; background: none; border: none; transition: color 0.2s; padding: 0.75rem; min-width: 48px; min-height: 48px; display: flex; align-items: center; justify-content: center; z-index: 10; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+@media (max-width: 767px) {
+  .closeBtn { top: 8px; right: 8px; background: rgba(0,0,0,0.7); border-radius: 50%; width: 44px; height: 44px; font-size: 1.6rem; }
+}
 @media (hover: hover) {
   .closeBtn:hover { color: var(--accent); }
 }
-.videoWrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+.videoWrapper { position: relative; padding-bottom: 56.25%; height: 0; border-radius: var(--radius-md); overflow: hidden; }
 .videoWrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
 .moreSermonBtn { display: inline-flex; align-items: center; gap: 0.65rem; padding: 0.85rem 2rem; background: var(--primary); color: #fff; border-radius: var(--radius-pill); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; transition: gap 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.25); border: 1.5px solid var(--accent); }
