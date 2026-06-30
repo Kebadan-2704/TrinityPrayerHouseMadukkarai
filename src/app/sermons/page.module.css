@@ -44,7 +44,7 @@
 @media (min-width: 600px) { .sermonGrid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
 @media (min-width: 992px) { .sermonGrid { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
 
-.sermonCard { background: var(--surface-elevated); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(212, 185, 120, 0.12); box-shadow: var(--shadow-sm), 0 1px 0 rgba(255,255,255,0.85) inset; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
+.sermonCard { display: block; text-decoration: none; color: inherit; background: var(--surface-elevated); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(212, 185, 120, 0.12); box-shadow: var(--shadow-sm), 0 1px 0 rgba(255,255,255,0.85) inset; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
 
 .scVideoThumb { display: block; width: 100%; text-align: left; position: relative; padding-bottom: 56.25%; cursor: pointer; overflow: hidden; -webkit-tap-highlight-color: transparent; }
 .scVideoThumbFill { position: relative; }
