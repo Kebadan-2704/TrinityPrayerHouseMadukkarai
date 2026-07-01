@@ -123,6 +123,53 @@
   .moreSermonBtn:hover svg { transform: translateX(4px); }
 }
 
+/* ── Touch / active-state feedback (iPhone & iPad) ───────────────────────── */
+
+/* Sermon card: scale-down press + glow ring on tap */
+.sermonCard {
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), border-color 0.25s ease;
+}
+.sermonCard:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 0 3px rgba(212, 185, 120, 0.35), var(--shadow-sm);
+  border-color: rgba(212, 185, 120, 0.4);
+}
+
+/* Thumbnail image: slight zoom on tap */
+.sermonCard:active .thumbImg {
+  transform: scale(1.06);
+}
+
+/* Play button: fill + pulse on tap */
+.sermonCard:active .playBtn {
+  background: var(--accent);
+  color: #fff;
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* Editorial "Visit YouTube" link: arrow slides + color on tap */
+.editorialLink:active {
+  gap: 1rem;
+  color: var(--accent);
+}
+
+/* "More Sermons" button: press + glow on tap */
+.moreSermonBtn:active {
+  transform: scale(0.96);
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 6px 28px rgba(212, 185, 120, 0.4);
+}
+.moreSermonBtn:active svg {
+  transform: translateX(4px);
+}
+
+/* Featured video wrapper: subtle press on tap */
+.embedWrap:active {
+  transform: scale(0.985);
+  transition: transform 0.2s var(--ease-out);
+}
+
 /* ── Skeleton loading ─────────────────────────────────────────────────────── */
 @keyframes shimmer {
   0%   { background-position: -400px 0; }
