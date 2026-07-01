@@ -70,7 +70,6 @@ export default function Navbar() {
     { href: '/sermons', label: t.sermons },
     { href: '/ministries', label: t.ministries },
     { href: '/special-meeting', label: t.events },
-    { href: '/gallery', label: t.gallery },
     { href: '/online-meet', label: t.googleMeet },
     { href: '/give', label: t.giving },
     { href: '/contact', label: t.contact },

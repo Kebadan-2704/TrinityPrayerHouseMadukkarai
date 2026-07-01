@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, MapPin, Phone, Users } from 'lucide-react';
+import { Mail, MapPin, Phone, Users, Globe } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa';
 import { motion, useReducedMotion, Variants } from 'framer-motion';
 import { useLang } from './LangContext';
@@ -73,7 +73,6 @@ export default function Footer() {
             <li><Link href="/mission">{t.mission}</Link></li>
             <li><Link href="/sermons">{t.sermons}</Link></li>
             <li><Link href="/special-meeting">{t.events}</Link></li>
-            <li><Link href="/gallery">{t.gallery}</Link></li>
             <li><Link href="/online-meet">{t.googleMeet}</Link></li>
             <li><Link href="/give">{t.giving}</Link></li>
             <li><Link href="/contact">{t.contact}</Link></li>
@@ -119,39 +118,44 @@ export default function Footer() {
           
           <div className={styles.globalReach}>
             <div className={styles.flagGroup}>
+              <span className={styles.flagItem} title="Global Overall">
+                <Globe size={16} color="#60A5FA" />
+                <span>12.5k</span>
+                <Users size={12} className={styles.animatedPeople} />
+              </span>
               <span className={styles.flagItem} title="India">
                 <Image src="https://flagcdn.com/w20/in.png" alt="India" width={16} height={11} unoptimized />
-                <span>6.8k</span>
+                <span>8.2k</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="United Arab Emirates">
                 <Image src="https://flagcdn.com/w20/ae.png" alt="UAE" width={16} height={11} unoptimized />
-                <span>420</span>
+                <span>504</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="United States">
                 <Image src="https://flagcdn.com/w20/us.png" alt="USA" width={16} height={11} unoptimized />
-                <span>218</span>
+                <span>262</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="United Kingdom">
                 <Image src="https://flagcdn.com/w20/gb.png" alt="UK" width={16} height={11} unoptimized />
-                <span>135</span>
+                <span>162</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="Russia">
                 <Image src="https://flagcdn.com/w20/ru.png" alt="Russia" width={16} height={11} unoptimized />
-                <span>110</span>
+                <span>132</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="Kuwait">
                 <Image src="https://flagcdn.com/w20/kw.png" alt="Kuwait" width={16} height={11} unoptimized />
-                <span>98</span>
+                <span>118</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
               <span className={styles.flagItem} title="Canada">
                 <Image src="https://flagcdn.com/w20/ca.png" alt="Canada" width={16} height={11} unoptimized />
-                <span>83</span>
+                <span>100</span>
                 <Users size={12} className={styles.animatedPeople} />
               </span>
             </div>
