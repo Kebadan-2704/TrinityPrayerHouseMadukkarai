@@ -8,7 +8,7 @@ const translations = {
   en: {
     // Nav
     home: 'Home', about: 'Vision', mission: 'Mission', sermons: 'Sermons', ministries: 'Ministries',
-    events: 'Special Meetings', googleMeet: 'Google Meet', giving: 'Giving', contact: 'Contact', planVisit: 'Plan a Visit', prayerPage: 'Prayer', newHere: 'New Here?',
+    events: 'Special Meetings', gallery: 'Gallery', googleMeet: 'Google Meet', giving: 'Giving', contact: 'Contact', planVisit: 'Plan a Visit', prayerPage: 'Prayer', newHere: 'New Here?',
     // Hero
     eyebrow: 'TRINITY PRAYER HOUSE · MADUKKARAI',
     heroTitle1: 'A Place of', heroTitle2: 'Encounter', heroTitle3: '&', heroTitle4: 'Peace',
@@ -121,7 +121,7 @@ const translations = {
   },
   ta: {
     home: 'முகப்பு', about: 'தரிசனம்', mission: 'பணி', sermons: 'பிரசங்கங்கள்', ministries: 'ஊழியங்கள்',
-    events: 'சிறப்பு கூட்டங்கள்', googleMeet: 'கூகுள் மீட்', giving: 'காணிக்கை', contact: 'தொடர்பு', prayerPage: 'ஜெபம்', planVisit: 'வருகை திட்டம்', newHere: 'புதிதாக வந்தவரா?',
+    events: 'சிறப்பு கூட்டங்கள்', gallery: 'கேலரி', googleMeet: 'கூகுள் மீட்', giving: 'காணிக்கை', contact: 'தொடர்பு', prayerPage: 'ஜெபம்', planVisit: 'வருகை திட்டம்', newHere: 'புதிதாக வந்தவரா?',
     eyebrow: 'டிரினிட்டி ஜெப இல்லம் · மடுக்கரை',
     heroTitle1: 'ஒரு இடம்', heroTitle2: 'சந்திப்பு', heroTitle3: '&', heroTitle4: 'அமைதி',
     heroSub: '1976 ஆம் ஆண்டு முதல் கடவுளுடன் ஆழமான உறவுகளை பின்பற்றும் ஆவிக்குரிய திருச்சபை குடும்பம்.',
@@ -216,7 +216,7 @@ const translations = {
   },
   hi: {
     home: 'होम', about: 'दर्शन', mission: 'मिशन', sermons: 'उपदेश', ministries: 'सेवकाई',
-    events: 'विशेष बैठकें', googleMeet: 'गूगल मीट', giving: 'दान', contact: 'संपर्क', prayerPage: 'प्रार्थना', planVisit: 'यात्रा की योजना', newHere: 'क्या आप नए हैं?',
+    events: 'विशेष बैठकें', gallery: 'गैलरी', googleMeet: 'गूगल मीट', giving: 'दान', contact: 'संपर्क', prayerPage: 'प्रार्थना', planVisit: 'यात्रा की योजना', newHere: 'क्या आप नए हैं?',
     eyebrow: 'ट्रिनिटी प्रेयर हाउस · मदुक्करै',
     heroTitle1: 'एक स्थान', heroTitle2: 'मुलाकात', heroTitle3: 'और', heroTitle4: 'शांति',
     heroSub: '1976 से परमेश्वर के साथ गहरे संबंधों का अनुसरण करने वाला आत्मा से भरा चर्च परिवार।',

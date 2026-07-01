@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/new-here',              changeFrequency: 'monthly',  priority: 0.9  },
     { path: '/online-meet',           changeFrequency: 'weekly',   priority: 0.85 },
     { path: '/special-meeting',       changeFrequency: 'monthly',  priority: 0.85 },
+    { path: '/gallery',               changeFrequency: 'monthly',  priority: 0.8  },
     { path: '/contact',               changeFrequency: 'yearly',   priority: 0.8  },
 
     // About & mission
