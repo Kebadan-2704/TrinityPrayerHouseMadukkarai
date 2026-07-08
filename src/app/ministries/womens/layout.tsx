@@ -1,16 +1,29 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Women's Ministry | Trinity Prayer House Madukkarai",
-  description: "Women's Ministry at Trinity Prayer House Madukkarai — Daughters of the King and Women's Outreach Program. Equipping and encouraging women in Coimbatore to grow in faith, leadership, and community.",
-  keywords: "women's ministry Coimbatore, Daughters of the King, women's fellowship Madukkarai, Christian women Coimbatore, women's outreach Coimbatore",
+  title: "Women's Ministry — Tamil Christian Women's Fellowship Coimbatore Madukkarai | Trinity Prayer House",
+  description: "Trinity Prayer House Madukkarai's Women's Ministry — empowering Tamil Christian women in Coimbatore through faith, fellowship, and service. Best women's church ministry Coimbatore Madukkarai.",
+  keywords: [
+    "women's church Coimbatore", "women's church Madukkarai", "women's church Coimbatore Madukkarai",
+    "Tamil women's ministry Coimbatore", "Tamil women's ministry Madukkarai",
+    "Tamil women's ministry Coimbatore Madukkarai",
+    "Christian women's fellowship Coimbatore", "Christian women's fellowship Madukkarai",
+    "best women's ministry Coimbatore", "best women's ministry Madukkarai",
+    "best women's church Coimbatore Madukkarai",
+    'women fellowship Tamil church Coimbatore', 'women fellowship Tamil church Madukkarai',
+    'women prayer group Coimbatore', 'women prayer group Madukkarai',
+    'Trinity Prayer House women', "women's ministry Trinity Prayer House Coimbatore",
+    'church for women Coimbatore', 'church for women Madukkarai',
+    'Tamil Christian women Coimbatore', 'Tamil Christian women Madukkarai',
+  ],
+  alternates: { canonical: '/ministries/womens' },
   openGraph: {
-    title: "Women's Ministry — Trinity Prayer House Madukkarai",
-    description: "A place of faith, encouragement, and genuine fellowship where women of all ages come together to grow in God's presence — Daughters of the King at Trinity Prayer House.",
-    images: [{ url: '/womens_ministry.png', width: 1200, height: 630, alt: "Trinity Women's Ministry" }],
+    title: "Women's Ministry | Trinity Prayer House — Tamil Church Coimbatore Madukkarai",
+    description: "Tamil Christian women's ministry at Trinity Prayer House Madukkarai, Coimbatore — faith, fellowship and service.",
+    url: '/ministries/womens',
   },
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function WomensLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

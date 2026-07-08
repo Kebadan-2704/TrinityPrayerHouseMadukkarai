@@ -1,16 +1,22 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Online Meeting | Trinity Prayer House Madukkarai — Daily Prayer',
-  description: 'Join the daily online prayer meeting at Trinity Prayer House Madukkarai via Google Meet. Morning and evening prayer sessions open to all believers from anywhere in the world.',
-  keywords: 'online prayer meeting Trinity Prayer House, daily prayer Coimbatore online, Google Meet church prayer, Trinity Prayer House live prayer',
+  title: 'Online Prayer Meeting — Tamil Church Live | Trinity Prayer House Coimbatore',
+  description: 'Join the daily online prayer meeting of Trinity Prayer House Madukkarai at 9:00 PM IST. Tamil Christian worship and prayer live from Coimbatore. Led by Pastor Vasanth Sathyanathan.',
+  keywords: [
+    'online Tamil church prayer', 'Tamil church online Coimbatore', 'Trinity Prayer House online meeting',
+    'Christian prayer meeting online Tamil', 'live prayer Tamil Nadu', 'Tamil church live worship',
+    'online church Madukkarai', 'Pastor Vasanth online prayer', 'Tamil church Google Meet',
+    'join Tamil church online', 'nightly prayer meeting Tamil', 'online prayer Coimbatore',
+  ],
+  alternates: { canonical: '/online-meet' },
   openGraph: {
-    title: 'Online Prayer Meeting — Trinity Prayer House Madukkarai',
-    description: 'Join us online for daily prayer and fellowship. Connect with our prayer community from anywhere in the world through Google Meet.',
-    images: [{ url: '/hero-bg.jpg', width: 1200, height: 630, alt: 'Trinity Prayer House Online Meeting' }],
+    title: 'Online Prayer Meeting | Trinity Prayer House — Tamil Church Coimbatore',
+    description: 'Join daily online prayer at 9:00 PM IST with Trinity Prayer House Madukkarai. Tamil Christian worship from Coimbatore.',
+    url: '/online-meet',
   },
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function OnlineMeetLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

@@ -1,16 +1,22 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Special Meetings | Trinity Prayer House Madukkarai',
-  description: 'Special meetings, conventions, and prayer gatherings at Trinity Prayer House Madukkarai. View our gallery of Spirit-filled special services, conferences, and outreach events in Coimbatore.',
-  keywords: 'special meetings Coimbatore church, convention Trinity Prayer House, prayer conference Coimbatore, Trinity Prayer House special service, Madukkarai church events',
+  title: 'Special Meetings & Events — Tamil Church Coimbatore | Trinity Prayer House',
+  description: 'Attend special meetings, revival services, conferences, and events at Trinity Prayer House Madukkarai — the best Tamil Christian church in Coimbatore. Led by Pastor Vasanth Sathyanathan.',
+  keywords: [
+    'Tamil church special meeting Coimbatore', 'Christian revival meeting Madukkarai',
+    'Tamil church conference Coimbatore', 'church events Coimbatore', 'Trinity Prayer House events',
+    'Tamil revival service Tamil Nadu', 'Pastor Vasanth special meeting', 'church retreat Coimbatore',
+    'Tamil church celebration Coimbatore', 'Christian conference Madukkarai', 'gospel meeting Coimbatore',
+  ],
+  alternates: { canonical: '/special-meeting' },
   openGraph: {
-    title: 'Special Meetings — Trinity Prayer House Madukkarai',
-    description: 'Relive the powerful moments from our special conventions, prayer conferences, and outreach events at Trinity Prayer House Madukkarai.',
-    images: [{ url: '/hero-bg.jpg', width: 1200, height: 630, alt: 'Trinity Prayer House Special Meetings' }],
+    title: 'Special Meetings | Trinity Prayer House — Tamil Church Coimbatore',
+    description: 'Revivals, conferences, and special events at Trinity Prayer House Madukkarai, the best Tamil Christian church in Coimbatore.',
+    url: '/special-meeting',
   },
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function SpecialMeetingLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

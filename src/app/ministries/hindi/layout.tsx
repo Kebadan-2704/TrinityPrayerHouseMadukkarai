@@ -1,16 +1,28 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Hindi Ministry | Trinity Prayer House Madukkarai',
-  description: 'Hindi Ministry at Trinity Prayer House Madukkarai — a welcoming spiritual home for Hindi-speaking believers in Coimbatore to worship, pray, and grow in faith in their mother tongue.',
-  keywords: 'Hindi ministry Coimbatore, Hindi church Coimbatore, Hindi worship Madukkarai, Hindi believers Coimbatore, Trinity Prayer House Hindi',
+  title: 'Hindi Ministry — Hindi Christian Church Coimbatore Madukkarai | Trinity Prayer House',
+  description: 'Hindi Ministry at Trinity Prayer House Madukkarai, Coimbatore — worship, prayer, and teaching in Hindi for Hindi-speaking believers. Best Hindi church in Coimbatore Madukkarai.',
+  keywords: [
+    'Hindi church Coimbatore', 'Hindi church Madukkarai', 'Hindi church Coimbatore Madukkarai',
+    'Hindi Christian church Coimbatore', 'Hindi Christian church Madukkarai',
+    'Hindi speaking church Coimbatore', 'Hindi speaking church Madukkarai',
+    'Hindi worship Coimbatore', 'Hindi worship Madukkarai',
+    'Hindi ministry Tamil Nadu', 'Hindi ministry Coimbatore', 'Hindi ministry Madukkarai',
+    'Hindi prayer Coimbatore', 'Hindi prayer Madukkarai',
+    'best Hindi church Coimbatore', 'best Hindi church Madukkarai',
+    'Hindi church near me Coimbatore', 'church for Hindi speakers Coimbatore',
+    'Trinity Prayer House Hindi ministry', 'Hindi fellowship Coimbatore',
+    'North Indian church Coimbatore', 'North Indian Christian church Madukkarai',
+  ],
+  alternates: { canonical: '/ministries/hindi' },
   openGraph: {
-    title: 'Hindi Ministry — Trinity Prayer House Madukkarai',
-    description: 'Worship in your heart language. The Hindi Ministry at Trinity Prayer House provides a warm spiritual community for Hindi-speaking believers in Coimbatore.',
-    images: [{ url: '/hindi_ministry_new.jpg', width: 1200, height: 630, alt: 'Trinity Hindi Ministry' }],
+    title: 'Hindi Ministry | Trinity Prayer House — Tamil Church Coimbatore Madukkarai',
+    description: 'Hindi Christian worship and ministry at Trinity Prayer House Madukkarai, Coimbatore — best Hindi church in Coimbatore Madukkarai.',
+    url: '/ministries/hindi',
   },
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function HindiLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

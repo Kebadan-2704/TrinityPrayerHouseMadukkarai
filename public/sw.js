@@ -1,11 +1,12 @@
-const CACHE_NAME = 'tph-cache-v2';
+const CACHE_NAME = 'tph-cache-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/manifest.json',
-  '/logo-black.png',
+  '/tph-logo.png',
   '/prayer.png',
   '/youth.png',
-  '/church-interior.png'
+  '/tph-icon-192.png',
+  '/tph-icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {

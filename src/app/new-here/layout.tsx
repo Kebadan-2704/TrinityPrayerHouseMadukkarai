@@ -1,16 +1,38 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "New Here? | Trinity Prayer House Madukkarai — Welcome",
-  description: 'New to Trinity Prayer House Madukkarai? Find out what to expect when you visit, learn about our service times, location in Madukkarai, Coimbatore, and how to get connected with our community.',
-  keywords: 'new to Trinity Prayer House, first time visitor Coimbatore church, Madukkarai church visit, what to expect church Coimbatore, Trinity Prayer House welcome',
+  title: 'New Here? Visit Trinity Prayer House — Best Tamil Church in Coimbatore Madukkarai',
+  description: 'Visiting Trinity Prayer House Madukkarai for the first time? The best Tamil Christian church in Coimbatore. Led by Pastor Vasanth Sathyanathan. Service times, what to expect, and how to connect.',
+  keywords: [
+    'visit Tamil church Coimbatore', 'visit Tamil church Madukkarai',
+    'visit Tamil church Madukkarai Coimbatore', 'visit Tamil church Coimbatore Madukkarai',
+    'new to church Madukkarai', 'new to church Coimbatore',
+    'new to church Madukkarai Coimbatore', 'new to church Coimbatore Madukkarai',
+    'join church Coimbatore', 'join church Madukkarai',
+    'join church Coimbatore Madukkarai', 'join church Madukkarai Coimbatore',
+    'best Tamil church to visit Coimbatore', 'best Tamil church to visit Madukkarai',
+    'best Tamil church to visit Madukkarai Coimbatore',
+    'Trinity Prayer House first visit', 'first time visit church Coimbatore',
+    'first time visit church Madukkarai',
+    'church service times Madukkarai', 'church service times Coimbatore',
+    'church service times Madukkarai Coimbatore', 'church service times Coimbatore Madukkarai',
+    'Christian church for newcomers Coimbatore', 'Christian church for newcomers Madukkarai',
+    'Tamil church Sunday service Coimbatore', 'Tamil church Sunday service Madukkarai',
+    'Tamil church Sunday service Madukkarai Coimbatore',
+    'welcome to church Madukkarai', 'welcome to church Coimbatore',
+    'church community Coimbatore', 'church community Madukkarai',
+    'church community Coimbatore Madukkarai',
+    'join Trinity Prayer House Madukkarai', 'join Trinity Prayer House Coimbatore',
+    'Sunday church Coimbatore Madukkarai', 'Sunday church Madukkarai Coimbatore',
+  ],
+  alternates: { canonical: '/new-here' },
   openGraph: {
-    title: 'New Here? Welcome to Trinity Prayer House Madukkarai',
-    description: "We're so glad you're here! Find everything you need to plan your first visit to Trinity Prayer House in Madukkarai, Coimbatore.",
-    images: [{ url: '/slide-4.jpg', width: 1200, height: 630, alt: 'Welcome to Trinity Prayer House Madukkarai' }],
+    title: 'New Here? | Trinity Prayer House Madukkarai — Best Tamil Church Coimbatore',
+    description: 'Planning your first visit to the best Tamil Christian church in Coimbatore? Everything you need to know about Trinity Prayer House Madukkarai.',
+    url: '/new-here',
   },
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function NewHereLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

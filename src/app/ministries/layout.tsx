@@ -1,16 +1,23 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Our Ministries | Trinity Prayer House Madukkarai',
-  description: "Explore all the ministries of Trinity Prayer House Madukkarai — Youth Fellowship, Kids Ministry, Men's Ministry, Women's Ministry, Hindi Ministry, and Old Age Home Ministry. Serving God and our community in Coimbatore, Tamil Nadu.",
-  keywords: "church ministries Coimbatore, Trinity Prayer House ministries, youth ministry Coimbatore, kids church Coimbatore, women's ministry Coimbatore, men's ministry Coimbatore, Hindi ministry Coimbatore",
+  title: 'Ministries — Tamil Church Coimbatore Madukkarai | Trinity Prayer House',
+  description: 'Explore all ministries of Trinity Prayer House Madukkarai — Youth, Kids, Men\'s, Women\'s, Hindi, and Old Age ministries. Best Tamil Christian church in Coimbatore serving all ages.',
+  keywords: [
+    'Tamil church ministries Coimbatore', 'Christian church ministries Madukkarai',
+    'church youth ministry Coimbatore', 'church kids ministry Tamil Nadu',
+    'Trinity Prayer House ministries', 'Tamil church programs Coimbatore',
+    'women ministry Tamil church Coimbatore', 'men ministry church Coimbatore',
+    'Hindi ministry Tamil Nadu', 'church for all ages Coimbatore', 'Tamil Christian ministries',
+  ],
+  alternates: { canonical: '/ministries' },
   openGraph: {
-    title: 'Ministries — Trinity Prayer House Madukkarai',
-    description: "From youth to seniors, from Tamil to Hindi — our ministries serve every generation and community in Coimbatore with the love of Christ.",
-    images: [{ url: '/hero-bg.jpg', width: 1200, height: 630, alt: 'Trinity Prayer House Ministries' }],
+    title: 'Ministries | Trinity Prayer House — Tamil Church Madukkarai Coimbatore',
+    description: 'Youth, Kids, Men\'s, Women\'s, Hindi, Old Age — all ministries of Trinity Prayer House Madukkarai, the best Tamil Christian church in Coimbatore.',
+    url: '/ministries',
   },
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function MinistriesLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

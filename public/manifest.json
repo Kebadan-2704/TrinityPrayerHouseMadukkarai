@@ -1,12 +1,16 @@
 {
-  "name": "Trinity Prayer House",
-  "short_name": "Trinity",
-  "description": "Trinity Prayer House Madukkarai — A Spirit-filled church in Coimbatore",
+  "name": "Trinity Prayer House Madukkarai",
+  "short_name": "Trinity Prayer",
+  "description": "Trinity Prayer House Madukkarai — A Spirit-filled church in Coimbatore. Join us for worship, prayer, and fellowship.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#141428",
   "theme_color": "#141428",
-  "orientation": "portrait-primary",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["religion", "lifestyle", "education"],
   "icons": [
     {
       "src": "/tph-icon-192.png",
@@ -19,6 +23,35 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Watch Sermons",
+      "short_name": "Sermons",
+      "description": "Watch the latest sermons and messages",
+      "url": "/sermons",
+      "icons": [{ "src": "/tph-icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Join Online Meeting",
+      "short_name": "Online Meet",
+      "description": "Join our daily online prayer meeting at 9:00 PM IST",
+      "url": "/online-meet",
+      "icons": [{ "src": "/tph-icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with Trinity Prayer House",
+      "url": "/contact",
+      "icons": [{ "src": "/tph-icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
