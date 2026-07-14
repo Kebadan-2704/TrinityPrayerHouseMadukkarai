@@ -24,8 +24,15 @@ function buildSystemPrompt(): string {
   const address   = process.env.NEXT_PUBLIC_CHURCH_ADDRESS   ?? '16/300, Gandhi Nagar, Madukkarai, Coimbatore - 641105';
   const phone     = process.env.NEXT_PUBLIC_CHURCH_PHONE     ?? '+91 9786888999';
   const email     = process.env.NEXT_PUBLIC_CHURCH_EMAIL     ?? 'trinityprayerhouse.mdk@gmail.com';
-  const youtube   = process.env.NEXT_PUBLIC_CHURCH_YOUTUBE   ?? '@Pas.Vasanth';
-  const instagram = process.env.NEXT_PUBLIC_CHURCH_INSTAGRAM ?? '@trinityprayerhouse_church';
+  const youtubeHandle   = process.env.NEXT_PUBLIC_CHURCH_YOUTUBE   ?? '@Pas.Vasanth';
+  const instagramHandle = process.env.NEXT_PUBLIC_CHURCH_INSTAGRAM ?? '@trinityprayerhouse_church';
+  const youtube = youtubeHandle.startsWith('http')
+    ? youtubeHandle
+    : `https://www.youtube.com/${youtubeHandle}`;
+  const instagram = instagramHandle.startsWith('http')
+    ? instagramHandle
+    : `https://www.instagram.com/${instagramHandle.replace(/^@/, '')}`;
+  const whatsapp = `https://wa.me/${phone.replace(/\D/g, '')}`;
 
   // ── Auto-sync current date/time (IST) ──────────────────────────────────
   // We compute in IST by offsetting UTC → +5:30
@@ -117,6 +124,7 @@ CRITICAL RULES:
 - Keep answers concise, polite, friendly, and helpful.
 - Use plain markdown bold (**text**) for emphasis. Use line breaks for readability.
 - When asked about next service dates, use the EXACT pre-computed dates above. Do NOT calculate dates yourself.
+- When sharing maps, social media, Google Meet, WhatsApp, email, YouTube, Instagram, or website details, include the full clickable URL.
 
 ═══ CHURCH IDENTITY ═══
 Name: Trinity Prayer House Madukkarai
@@ -175,8 +183,9 @@ Dedicated to preaching the uncompromised Gospel and equipping the next generatio
 Address: ${address}
 Phone / WhatsApp: ${phone}
 Email: ${email}
-YouTube: https://www.youtube.com/${youtube}
+YouTube: ${youtube}
 Instagram: ${instagram}
+WhatsApp: ${whatsapp}
 Google Maps: https://www.google.com/maps/dir/?api=1&destination=Trinity+Prayer+House+Madukkarai+Coimbatore
 
 ═══ GIVING / DONATIONS ═══
@@ -234,17 +243,109 @@ function formatTime(date: Date): string {
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-/** Renders bold markdown (**text**) and respects line breaks */
+const INLINE_TOKEN_PATTERN = /(\*\*[^*]+\*\*|\[[^\]]+\]\((?:https?:\/\/|mailto:|tel:)[^)]+\)|https?:\/\/[^\s<]+|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|\+?\d[\d\s().-]{7,}\d)/g;
+
+function splitTrailingPunctuation(value: string) {
+  let core = value;
+  let trailing = '';
+
+  while (/[.,!?;:]$/.test(core)) {
+    trailing = core.slice(-1) + trailing;
+    core = core.slice(0, -1);
+  }
+
+  while (core.endsWith(')')) {
+    const openCount = (core.match(/\(/g) ?? []).length;
+    const closeCount = (core.match(/\)/g) ?? []).length;
+
+    if (closeCount <= openCount) break;
+
+    trailing = ')' + trailing;
+    core = core.slice(0, -1);
+  }
+
+  return { core, trailing };
+}
+
+function renderLinkedText(value: string, key: string): React.ReactNode[] {
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+
+  for (const match of value.matchAll(INLINE_TOKEN_PATTERN)) {
+    const rawToken = match[0];
+    const tokenIndex = match.index ?? 0;
+
+    if (tokenIndex > lastIndex) {
+      nodes.push(<span key={`${key}-text-${lastIndex}`}>{value.slice(lastIndex, tokenIndex)}</span>);
+    }
+
+    if (rawToken.startsWith('**') && rawToken.endsWith('**')) {
+      const content = rawToken.slice(2, -2);
+      nodes.push(<strong key={`${key}-strong-${tokenIndex}`}>{renderLinkedText(content, `${key}-strong-${tokenIndex}`)}</strong>);
+    } else if (rawToken.startsWith('[')) {
+      const markdownLink = rawToken.match(/^\[([^\]]+)\]\(((?:https?:\/\/|mailto:|tel:)[^)]+)\)$/);
+
+      if (markdownLink) {
+        nodes.push(
+          <a
+            key={`${key}-link-${tokenIndex}`}
+            href={markdownLink[2]}
+            target={markdownLink[2].startsWith('http') ? '_blank' : undefined}
+            rel={markdownLink[2].startsWith('http') ? 'noopener noreferrer' : undefined}
+          >
+            {markdownLink[1]}
+          </a>
+        );
+      } else {
+        nodes.push(<span key={`${key}-raw-${tokenIndex}`}>{rawToken}</span>);
+      }
+    } else {
+      const { core, trailing } = splitTrailingPunctuation(rawToken);
+      const digitCount = core.replace(/\D/g, '').length;
+      let href = core;
+
+      if (core.startsWith('http')) {
+        href = core;
+      } else if (core.includes('@')) {
+        href = `mailto:${core}`;
+      } else if (digitCount >= 10) {
+        href = `tel:${core.replace(/[^\d+]/g, '')}`;
+      }
+
+      if (core.startsWith('http') || core.includes('@') || digitCount >= 10) {
+        nodes.push(
+          <React.Fragment key={`${key}-link-wrap-${tokenIndex}`}>
+            <a
+              href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            >
+              {core}
+            </a>
+            {trailing && <span>{trailing}</span>}
+          </React.Fragment>
+        );
+      } else {
+        nodes.push(<span key={`${key}-raw-${tokenIndex}`}>{rawToken}</span>);
+      }
+    }
+
+    lastIndex = tokenIndex + rawToken.length;
+  }
+
+  if (lastIndex < value.length) {
+    nodes.push(<span key={`${key}-text-${lastIndex}`}>{value.slice(lastIndex)}</span>);
+  }
+
+  return nodes;
+}
+
+/** Renders clickable links, bold markdown (**text**), and respects line breaks */
 function renderMessageText(text: string) {
   return text.split('\n').map((line, lineIdx) => (
     <React.Fragment key={lineIdx}>
       {lineIdx > 0 && <br />}
-      {line.split(/(\*\*.*?\*\*)/g).map((part, i) => {
-        if (part.startsWith('**') && part.endsWith('**')) {
-          return <strong key={i}>{part.slice(2, -2)}</strong>;
-        }
-        return <span key={i}>{part}</span>;
-      })}
+      {renderLinkedText(line, `line-${lineIdx}`)}
     </React.Fragment>
   ));
 }

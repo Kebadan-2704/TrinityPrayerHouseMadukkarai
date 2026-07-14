@@ -408,6 +408,22 @@
 }
 
 /* ── Timestamp ─────────────────────────────────────────────────────────── */
+.message a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-word;
+}
+
+.userMsg a {
+  color: var(--primary-deep);
+}
+
+.message a:hover {
+  text-decoration-thickness: 2px;
+}
+
 .timestamp {
   font-size: 0.65rem;
   color: var(--text-muted);
