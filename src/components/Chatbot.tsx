@@ -27,27 +27,96 @@ function buildSystemPrompt(): string {
   const youtube   = process.env.NEXT_PUBLIC_CHURCH_YOUTUBE   ?? '@Pas.Vasanth';
   const instagram = process.env.NEXT_PUBLIC_CHURCH_INSTAGRAM ?? '@trinityprayerhouse_church';
 
-  // Auto-sync current date/time (IST)
+  // ── Auto-sync current date/time (IST) ──────────────────────────────────
+  // We compute in IST by offsetting UTC → +5:30
   const now = new Date();
-  const istOptions: Intl.DateTimeFormatOptions = {
-    timeZone: 'Asia/Kolkata',
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const istNow = new Date(now.getTime() + istOffset + now.getTimezoneOffset() * 60 * 1000);
+
+  const fmt = (d: Date) =>
+    d.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+  const currentDateTime = istNow.toLocaleString('en-IN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
     hour: '2-digit', minute: '2-digit', hour12: true,
-  };
-  const currentDateTime = now.toLocaleString('en-IN', istOptions);
-  const currentDay = now.toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'long' });
+  });
+  const currentDay = istNow.toLocaleDateString('en-IN', { weekday: 'long' });
+
+  // ── Pre-compute next service dates so the LLM doesn't have to ─────────
+  function nextWeekday(from: Date, targetDay: number): Date {
+    const d = new Date(from);
+    const diff = (targetDay - d.getDay() + 7) % 7;
+    d.setDate(d.getDate() + (diff === 0 ? 7 : diff));
+    return d;
+  }
+
+  function nextNthWeekdayOfMonth(from: Date, weekday: number, nth: number): Date {
+    // Find the nth occurrence of a weekday in the current or next month
+    let month = from.getMonth(), year = from.getFullYear();
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const firstDay = new Date(year, month, 1);
+      const firstOccurrence = ((weekday - firstDay.getDay() + 7) % 7) + 1;
+      const targetDate = firstOccurrence + (nth - 1) * 7;
+      if (targetDate <= new Date(year, month + 1, 0).getDate()) {
+        const result = new Date(year, month, targetDate);
+        if (result > from || (result.toDateString() === from.toDateString())) return result;
+      }
+      month++;
+      if (month > 11) { month = 0; year++; }
+    }
+    return from; // fallback
+  }
+
+  const todayDay = istNow.getDay(); // 0=Sun, 4=Thu, 5=Fri, 6=Sat
+
+  // Next Sunday (0)
+  const nextSunday = todayDay === 0 ? new Date(istNow) : nextWeekday(istNow, 0);
+  // Next Thursday (4)
+  const nextThursday = todayDay === 4 ? new Date(istNow) : nextWeekday(istNow, 4);
+  // 1st of next/current month
+  let next1st: Date;
+  if (istNow.getDate() === 1) {
+    next1st = new Date(istNow);
+  } else {
+    const m = istNow.getMonth() + 1;
+    next1st = new Date(istNow.getFullYear(), m > 11 ? 0 : m, 1);
+  }
+  // 1st Saturday of month (6)
+  const next1stSat = nextNthWeekdayOfMonth(istNow, 6, 1);
+  // 4th Friday of month (5)
+  const next4thFri = nextNthWeekdayOfMonth(istNow, 5, 4);
+
+  const todayServices: string[] = [];
+  if (todayDay === 0) todayServices.push('Sunday Worship (Tamil) at 9:30 AM', 'Hindi Service at 6:30 PM');
+  if (todayDay === 4) todayServices.push('Bible Study at 7:30 PM');
+  todayServices.push('Daily Online Meet at 9:00 PM IST');
+  if (istNow.getDate() === 1) todayServices.push('Promise Service at 6:30 AM');
+
+  const todayServicesStr = todayServices.length > 0
+    ? todayServices.join(', ')
+    : 'Daily Online Meet at 9:00 PM IST (no other regular service today)';
 
   return `You are Trinity Bot, the official AI assistant for Trinity Prayer House Madukkarai, Coimbatore, India.
 
 CURRENT DATE & TIME (IST): ${currentDateTime}
 TODAY IS: ${currentDay}
 
+SERVICES TODAY: ${todayServicesStr}
+
+UPCOMING SERVICE DATES (pre-computed, use these exact dates):
+• Next Sunday Worship: ${fmt(nextSunday)} at 9:30 AM (Tamil) & 6:30 PM (Hindi)
+• Next Bible Study: ${fmt(nextThursday)} at 7:30 PM
+• Next Promise Service: ${fmt(next1st)} at 6:30 AM
+• Next Fasting Prayer: ${fmt(next1stSat)} at 10:30 AM
+• Next Night Prayer: ${fmt(next4thFri)} at 10:00 PM
+• Daily Online Meet: Every day at 9:00 PM IST
+
 CRITICAL RULES:
 - ONLY answer using the information provided below. NEVER make up or hallucinate any information.
 - If you don't know something, say: "I don't have that information. Please contact us at ${phone} or ${email} for more details."
 - Keep answers concise, polite, friendly, and helpful.
 - Use plain markdown bold (**text**) for emphasis. Use line breaks for readability.
-- You can use the current date/time to help answer questions like "What's the next service?" or "Is there a service today?"
+- When asked about next service dates, use the EXACT pre-computed dates above. Do NOT calculate dates yourself.
 
 ═══ CHURCH IDENTITY ═══
 Name: Trinity Prayer House Madukkarai
