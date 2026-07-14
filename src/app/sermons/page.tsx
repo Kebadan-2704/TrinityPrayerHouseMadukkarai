@@ -11,8 +11,8 @@ export const revalidate = 3600;
 
 const CHANNEL_ID = 'UCSkJ9TGwrQNb0CJdP4lwItw';
 const UPLOADS_PLAYLIST_ID = 'UUSkJ9TGwrQNb0CJdP4lwItw';
-const ARCHIVE_SERMON_COUNT = 10;
-const LIVE_REPLAY_BUFFER_HOURS = 4;
+const ARCHIVE_SERMON_COUNT = 9;
+const LIVE_REPLAY_BUFFER_HOURS = 0.1;
 
 const FALLBACK_SERMON = {
   videoId: 'dngkoXyTIFU',
@@ -58,7 +58,7 @@ function shouldShow(s: RawSermon, now = new Date()) {
   if ((s.link ?? '').toLowerCase().includes('/shorts/') || tl.includes('#short') || tl.includes('#reel')) return false;
   if ((s.title.match(/#\w/g) ?? []).length >= 2) return false;
   const twt = tl.replace(/#\S+/g, '').trim();
-  const service = ['service','sermon','bible study','message','worship','promise','communion'].some(k => twt.includes(k));
+  const service = ['service', 'sermon', 'bible study', 'message', 'worship', 'promise', 'communion'].some(k => twt.includes(k));
   if (!service) return false;
   const isLive = s.liveBroadcastContent === 'upcoming' || s.liveBroadcastContent === 'live' ||
     !!(s.scheduledStartTime || s.actualStartTime || s.actualEndTime);
@@ -155,8 +155,8 @@ export default async function Sermons() {
     description: 'Latest sermons and messages from Trinity Prayer House Madukkarai.',
     itemListElement: archive.map((sermon, index) => {
       let isoDate = new Date().toISOString();
-      try { isoDate = new Date(sermon.date).toISOString(); } catch (e) {}
-      
+      try { isoDate = new Date(sermon.date).toISOString(); } catch (e) { }
+
       return {
         '@type': 'ListItem',
         position: index + 1,
