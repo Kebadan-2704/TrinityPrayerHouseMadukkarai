@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send } from 'lucide-react';
+import { MessageSquare, X, Send, Trash2 } from 'lucide-react';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import styles from './Chatbot.module.css';
 
 // Monotonic counter for stable message IDs — avoids calling impure functions during render
@@ -103,6 +105,20 @@ function buildSystemPrompt(): string {
     ? todayServices.join(', ')
     : 'Daily Online Meet at 9:00 PM IST (no other regular service today)';
 
+  // ── Sort upcoming events by date (ascending — closest first) ──────────
+  const upcomingEvents: { date: Date; label: string }[] = [
+    { date: nextSunday, label: `Sunday Worship: ${fmt(nextSunday)} at 9:30 AM (Tamil) & 6:30 PM (Hindi) — IN-PERSON at church` },
+    { date: nextThursday, label: `Bible Study: ${fmt(nextThursday)} at 7:30 PM — IN-PERSON at church (NOT online)` },
+    { date: next1st, label: `Promise Service: ${fmt(next1st)} at 6:30 AM — IN-PERSON at church` },
+    { date: next1stSat, label: `Fasting Prayer: ${fmt(next1stSat)} at 10:30 AM — IN-PERSON at church` },
+    { date: next4thFri, label: `Night Prayer: ${fmt(next4thFri)} at 10:00 PM — IN-PERSON at church` },
+  ];
+  upcomingEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
+
+  const upcomingEventsStr = upcomingEvents
+    .map((ev, i) => `${i + 1}. ${ev.label}`)
+    .join('\n');
+
   return `You are Trinity Bot, the official AI assistant for Trinity Prayer House Madukkarai, Coimbatore, India.
 
 CURRENT DATE & TIME (IST): ${currentDateTime}
@@ -110,21 +126,29 @@ TODAY IS: ${currentDay}
 
 SERVICES TODAY: ${todayServicesStr}
 
-UPCOMING SERVICE DATES (pre-computed, use these exact dates):
-• Next Sunday Worship: ${fmt(nextSunday)} at 9:30 AM (Tamil) & 6:30 PM (Hindi)
-• Next Bible Study: ${fmt(nextThursday)} at 7:30 PM
-• Next Promise Service: ${fmt(next1st)} at 6:30 AM
-• Next Fasting Prayer: ${fmt(next1stSat)} at 10:30 AM
-• Next Night Prayer: ${fmt(next4thFri)} at 10:00 PM
-• Daily Online Meet: Every day at 9:00 PM IST
+═══ UPCOMING IN-PERSON SERVICES (sorted by nearest date first — ALWAYS present in this exact order) ═══
+${upcomingEventsStr}
+
+═══ DAILY ONLINE MEET (SEPARATE from the above in-person services) ═══
+This is a DIFFERENT event from Bible Study or any other service listed above.
+• Daily Online Meet via Google Meet: Every day at 9:00 PM IST
+• Google Meet Link: https://meet.google.com/gct-xkdh-cni
+Only share this link when the user asks about the "online meet", "Google Meet", "daily meet", or "9 PM meet". NEVER attach this link to Bible Study, Sunday Worship, or any other in-person service.
 
 CRITICAL RULES:
 - ONLY answer using the information provided below. NEVER make up or hallucinate any information.
 - If you don't know something, say: "I don't have that information. Please contact us at ${phone} or ${email} for more details."
 - Keep answers concise, polite, friendly, and helpful.
 - Use plain markdown bold (**text**) for emphasis. Use line breaks for readability.
-- When asked about next service dates, use the EXACT pre-computed dates above. Do NOT calculate dates yourself.
+- When asked about upcoming events or next service dates, ALWAYS list them in the EXACT order shown above (nearest date first). Do NOT reorder them.
 - When sharing maps, social media, Google Meet, WhatsApp, email, YouTube, Instagram, or website details, include the full clickable URL.
+- NEVER mix up Bible Study with the Daily Online Meet. Bible Study is IN-PERSON at church on Thursdays at 7:30 PM. The Daily Online Meet is a SEPARATE event on Google Meet every day at 9:00 PM.
+
+LANGUAGE TOLERANCE (VERY IMPORTANT):
+- Many users type in broken English, Tanglish (Tamil + English mix), or with heavy spelling/grammar mistakes. You MUST try your best to understand and respond helpfully.
+- Common misspellings to recognise: "servis" = service, "paster" / "pastur" = pastor, "chruch" / "chuch" = church, "worshp" = worship, "prayr" / "pryer" = prayer, "tims" / "timings" = times, "whr" / "wer" = where, "wen" = when, "wat" / "wht" = what, "evnts" / "evens" = events, "dirction" / "dirctn" = direction, "locaton" / "locatn" = location, "onlin" / "onlne" = online, "donaton" / "donasion" = donation, "contct" / "contac" = contact, "upcomng" = upcoming, "tomoro" / "tmrw" / "tomorow" = tomorrow, "ystrdy" = yesterday, "pls" / "plz" = please, "thx" / "thnks" = thanks, "hw" = how, "abt" = about, "giv" / "givng" = giving, "bibel" / "bibl" = bible, "fastin" / "fastng" = fasting, "nite" / "nght" = night.
+- If a user message is unclear, make your best guess at what they mean based on context. Only ask for clarification as a last resort.
+- Always reply in clear, proper English regardless of how the user types.
 
 ═══ CHURCH IDENTITY ═══
 Name: Trinity Prayer House Madukkarai
@@ -243,112 +267,7 @@ function formatTime(date: Date): string {
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-const INLINE_TOKEN_PATTERN = /(\*\*[^*]+\*\*|\[[^\]]+\]\((?:https?:\/\/|mailto:|tel:)[^)]+\)|https?:\/\/[^\s<]+|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|\+?\d[\d\s().-]{7,}\d)/g;
 
-function splitTrailingPunctuation(value: string) {
-  let core = value;
-  let trailing = '';
-
-  while (/[.,!?;:]$/.test(core)) {
-    trailing = core.slice(-1) + trailing;
-    core = core.slice(0, -1);
-  }
-
-  while (core.endsWith(')')) {
-    const openCount = (core.match(/\(/g) ?? []).length;
-    const closeCount = (core.match(/\)/g) ?? []).length;
-
-    if (closeCount <= openCount) break;
-
-    trailing = ')' + trailing;
-    core = core.slice(0, -1);
-  }
-
-  return { core, trailing };
-}
-
-function renderLinkedText(value: string, key: string): React.ReactNode[] {
-  const nodes: React.ReactNode[] = [];
-  let lastIndex = 0;
-
-  for (const match of value.matchAll(INLINE_TOKEN_PATTERN)) {
-    const rawToken = match[0];
-    const tokenIndex = match.index ?? 0;
-
-    if (tokenIndex > lastIndex) {
-      nodes.push(<span key={`${key}-text-${lastIndex}`}>{value.slice(lastIndex, tokenIndex)}</span>);
-    }
-
-    if (rawToken.startsWith('**') && rawToken.endsWith('**')) {
-      const content = rawToken.slice(2, -2);
-      nodes.push(<strong key={`${key}-strong-${tokenIndex}`}>{renderLinkedText(content, `${key}-strong-${tokenIndex}`)}</strong>);
-    } else if (rawToken.startsWith('[')) {
-      const markdownLink = rawToken.match(/^\[([^\]]+)\]\(((?:https?:\/\/|mailto:|tel:)[^)]+)\)$/);
-
-      if (markdownLink) {
-        nodes.push(
-          <a
-            key={`${key}-link-${tokenIndex}`}
-            href={markdownLink[2]}
-            target={markdownLink[2].startsWith('http') ? '_blank' : undefined}
-            rel={markdownLink[2].startsWith('http') ? 'noopener noreferrer' : undefined}
-          >
-            {markdownLink[1]}
-          </a>
-        );
-      } else {
-        nodes.push(<span key={`${key}-raw-${tokenIndex}`}>{rawToken}</span>);
-      }
-    } else {
-      const { core, trailing } = splitTrailingPunctuation(rawToken);
-      const digitCount = core.replace(/\D/g, '').length;
-      let href = core;
-
-      if (core.startsWith('http')) {
-        href = core;
-      } else if (core.includes('@')) {
-        href = `mailto:${core}`;
-      } else if (digitCount >= 10) {
-        href = `tel:${core.replace(/[^\d+]/g, '')}`;
-      }
-
-      if (core.startsWith('http') || core.includes('@') || digitCount >= 10) {
-        nodes.push(
-          <React.Fragment key={`${key}-link-wrap-${tokenIndex}`}>
-            <a
-              href={href}
-              target={href.startsWith('http') ? '_blank' : undefined}
-              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            >
-              {core}
-            </a>
-            {trailing && <span>{trailing}</span>}
-          </React.Fragment>
-        );
-      } else {
-        nodes.push(<span key={`${key}-raw-${tokenIndex}`}>{rawToken}</span>);
-      }
-    }
-
-    lastIndex = tokenIndex + rawToken.length;
-  }
-
-  if (lastIndex < value.length) {
-    nodes.push(<span key={`${key}-text-${lastIndex}`}>{value.slice(lastIndex)}</span>);
-  }
-
-  return nodes;
-}
-
-/** Renders clickable links, bold markdown (**text**), and respects line breaks */
-function renderMessageText(text: string) {
-  return text.split('\n').map((line, lineIdx) => (
-    <React.Fragment key={lineIdx}>
-      {lineIdx > 0 && <br />}
-      {renderLinkedText(line, `line-${lineIdx}`)}
-    </React.Fragment>
-  ));
-}
 
 // ── Types ──────────────────────────────────────────────────────────────────
 interface Message {
@@ -362,14 +281,43 @@ interface Message {
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesRef = useRef<Message[]>(messages);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setIsMounted(true);
+    const saved = localStorage.getItem('tph_chatbot_messages');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setMessages(parsed.map((m: any) => ({ ...m, time: new Date(m.time) })));
+          setShowSuggestions(false);
+        }
+      } catch (e) {
+        console.error('Failed to parse saved chat messages', e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isMounted) {
+      localStorage.setItem('tph_chatbot_messages', JSON.stringify(messages));
+    }
+  }, [messages, isMounted]);
+
   // Keep ref in sync so handleSend always reads the latest context
   useEffect(() => { messagesRef.current = messages; }, [messages]);
+
+  const clearChat = () => {
+    setMessages([]);
+    setShowSuggestions(true);
+    localStorage.removeItem('tph_chatbot_messages');
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -474,9 +422,16 @@ export default function Chatbot() {
                   <span>Online</span>
                 </div>
               </div>
-              <button onClick={() => setIsOpen(false)} className={styles.closeBtn} aria-label="Close chat">
-                <X size={18} />
-              </button>
+              <div style={{ display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
+                {messages.length > 0 && (
+                  <button onClick={clearChat} className={styles.closeBtn} aria-label="Clear chat" title="Clear chat">
+                    <Trash2 size={16} />
+                  </button>
+                )}
+                <button onClick={() => setIsOpen(false)} className={styles.closeBtn} aria-label="Close chat">
+                  <X size={18} />
+                </button>
+              </div>
             </div>
 
             {/* ── Chat body ───────────────────────────────────────── */}
@@ -536,7 +491,14 @@ export default function Chatbot() {
                   )}
                   <div className={styles.messageBubble}>
                     <div className={`${styles.message} ${msg.role === 'user' ? styles.userMsg : styles.botMsg}`}>
-                      {renderMessageText(msg.text)}
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          a: ({ node, ...props }) => <a {...props} target="_blank" rel="noopener noreferrer" />
+                        }}
+                      >
+                        {msg.text}
+                      </ReactMarkdown>
                     </div>
                     <div className={styles.timestamp}>{formatTime(msg.time)}</div>
                   </div>

@@ -388,7 +388,24 @@
   font-size: 0.92rem;
   line-height: 1.55;
   word-wrap: break-word;
-  white-space: pre-line;
+}
+
+/* React Markdown Styles */
+.message p {
+  margin: 0 0 0.5rem 0;
+}
+.message p:last-child {
+  margin: 0;
+}
+.message ul, .message ol {
+  margin: 0.25rem 0 0.5rem 0;
+  padding-left: 1.25rem;
+}
+.message li {
+  margin-bottom: 0.25rem;
+}
+.message strong {
+  font-weight: 600;
 }
 
 .userMsg {

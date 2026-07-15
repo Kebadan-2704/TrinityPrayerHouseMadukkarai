@@ -325,7 +325,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* ── Font performance: preconnect + preload + non-blocking stylesheet ── */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
@@ -347,20 +347,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        {/* Non-render-blocking stylesheet load */}
+        {/* Google Fonts – display=swap ensures non-blocking load */}
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-          media="print"
-          // @ts-expect-error – valid HTML attribute, not typed in React
-          onLoad="this.media='all'"
         />
-        <noscript>
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-          />
-        </noscript>
 
         <link rel="apple-touch-icon" href="/tph-icon-192.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/tph-icon-192.png" />
@@ -380,7 +371,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <a href="#main-content" className="skip-link" id="skip-link">
           Skip to main content
         </a>
