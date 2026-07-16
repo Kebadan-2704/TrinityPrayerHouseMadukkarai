@@ -30,7 +30,7 @@ export const localizedMeetingsData: { en: Meeting[]; ta: Meeting[]; hi: Meeting[
       photos: [
         '/special-meetings/meeting1/photo1.jpg',
         '/special-meetings/meeting1/photo2.jpg',
-        { src: '/special-meetings/meeting1/photo3.jpg', objectPosition: 'center top' },
+        { src: '/special-meetings/meeting1/photo3.jpg', objectPosition: '50% 45%' },
         '/special-meetings/meeting1/photo4.jpg',
         '/special-meetings/meeting1/photo5.jpg',
         '/special-meetings/meeting1/photo6.jpg',
