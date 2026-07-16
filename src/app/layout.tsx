@@ -327,6 +327,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* ── Inline script to prevent flash of splash screen on reload ── */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (sessionStorage.getItem('tph-splash-seen')) {
+                  document.documentElement.classList.add('skip-splash');
+                }
+              } catch (e) {}
+            `
+          }}
+        />
+
         {/* ── LCP: preload hero image so browser fetches it before any JS runs ── */}
         <link rel="preload" as="image" href="/hero-bg.jpg" />
 

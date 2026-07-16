@@ -357,3 +357,8 @@ img { transition: filter 0.35s ease, transform 0.35s var(--ease-out); }
 @media (prefers-reduced-motion: reduce) {
   .page-transition-root { animation: none; }
 }
+
+/* ===== Hide splash screen on repeat visits via inline script class ===== */
+.skip-splash #splash-screen {
+  display: none !important;
+}

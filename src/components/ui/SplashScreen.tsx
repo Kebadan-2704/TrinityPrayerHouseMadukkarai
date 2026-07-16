@@ -5,15 +5,18 @@ import Image from 'next/image';
 import styles from './SplashScreen.module.css';
 
 export default function SplashScreen() {
-  const [isVisible, setIsVisible] = useState(false);
+  // Default to true so it renders on the server and covers the UI immediately
+  const [isVisible, setIsVisible] = useState(true);
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Only show splash once per session
+    // Check if seen on client side
     const hasSeenSplash = sessionStorage.getItem('tph-splash-seen');
-    if (hasSeenSplash) return;
+    if (hasSeenSplash) {
+      setIsVisible(false);
+      return;
+    }
 
-    setIsVisible(true);
     sessionStorage.setItem('tph-splash-seen', 'true');
 
     // Start exit animation at 2s, fully hidden by 2.8s
@@ -29,7 +32,10 @@ export default function SplashScreen() {
   if (!isVisible) return null;
 
   return (
-    <div className={`${styles.splashContainer} ${isExiting ? styles.splashExiting : ''}`}>
+    <div 
+      id="splash-screen"
+      className={`${styles.splashContainer} ${isExiting ? styles.splashExiting : ''}`}
+    >
       <div className={styles.splashContent}>
         <div className={styles.logoWrap}>
           <Image
