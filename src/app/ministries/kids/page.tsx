@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import PhotoCarousel from '@/components/ui/PhotoCarousel';
+import dynamic from 'next/dynamic';
+const PhotoCarousel = dynamic(() => import('@/components/ui/PhotoCarousel'), { ssr: false });
 import { useLang } from '@/components/LangContext';
 
 const sundaySchoolImages = [
@@ -62,7 +63,7 @@ export default function KidsMinistryPage() {
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/kids-ministry/kids-1.jpg" alt="Kids Ministry activities" fill style={{ objectFit: 'cover', objectPosition: 'center 60%' }} />
+          <Image src="/kids-ministry/kids-1.jpg" alt="Kids Ministry activities" fill priority={true} fetchPriority="high" style={{ objectFit: 'cover', objectPosition: 'center 60%' }} />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

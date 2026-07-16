@@ -88,7 +88,7 @@ export default function OnlineMeet() {
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
           <Image
-             src="/prayer.png"
+             src="/prayer.webp"
              alt="Online Meet"
              fill
              sizes="100vw"

@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import PhotoCarousel from '@/components/ui/PhotoCarousel';
+import dynamic from 'next/dynamic';
+const PhotoCarousel = dynamic(() => import('@/components/ui/PhotoCarousel'), { ssr: false });
 import { useLang } from '@/components/LangContext';
 
 const daughtersImages = [
@@ -14,9 +15,9 @@ const daughtersImages = [
 ];
 
 const outreachImages = [
-  '/womens-ministry/outreach-1.jpg',
-  '/womens-ministry/outreach-2.jpg',
-  '/womens-ministry/outreach-3.jpg',
+  '/womens-ministry/outreach-1.webp',
+  '/womens-ministry/outreach-2.webp',
+  '/womens-ministry/outreach-3.webp',
 ];
 
 const localTranslations = {

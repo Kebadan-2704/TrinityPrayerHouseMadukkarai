@@ -69,7 +69,7 @@ const localTranslations = {
 
 // ── PHOTO CONFIG ────────────────────────────────────────────────────────────
 const CAROUSEL_PHOTOS = [
-  { src: '/sath.png', objectPosition: '50% 5%', scale: 1.0 }, // original
+  { src: '/sath.webp', objectPosition: '50% 5%', scale: 1.0 }, // original
   { src: '/vision-photos/photo1.jpg', objectPosition: '50% 50%', scale: 1.0 },
   { src: '/vision-photos/photo3.jpg', objectPosition: '50% 10%', scale: 1.0 },
   { src: '/vision-photos/photo4.jpg', objectPosition: '50% 40%', scale: 1.0 },

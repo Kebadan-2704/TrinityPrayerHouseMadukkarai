@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import PhotoCarousel from '@/components/ui/PhotoCarousel';
+import dynamic from 'next/dynamic';
+const PhotoCarousel = dynamic(() => import('@/components/ui/PhotoCarousel'), { ssr: false });
 import { useLang } from '@/components/LangContext';
 
 const localTranslations = {
@@ -45,7 +46,7 @@ export default function OldAgeHomeMinistryPage() {
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
          <div className={styles.headerBg}>
-           <Image src="/prayer_ministry.png" alt="Old Age Home" fill style={{ objectFit: 'cover' }} />
+           <Image src="/prayer_ministry.webp" alt="Old Age Home" fill style={{ objectFit: 'cover' }} />
            <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

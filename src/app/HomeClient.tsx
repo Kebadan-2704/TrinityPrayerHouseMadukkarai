@@ -21,10 +21,10 @@ const YouTubeEmbed = dynamic(() => import('@/components/ui/YouTubeEmbed'), { ssr
 
 const heroImages = [
   '/hero-bg.jpg',
-  '/slide-2.jpg',
-  '/slide-3.jpg',
+  '/slide-2.webp',
+  '/slide-3.webp',
   '/slide-4.jpg',
-  '/slide-5.jpg'
+  '/slide-5.webp'
 ];
 
 const localTranslations = {
@@ -364,7 +364,7 @@ export default function HomeClient({ initialLatestSermon }: { initialLatestSermo
       {/* ===== PRAYER BAND with Parallax ===== */}
       <section className={styles.prayerBand}>
         <div className={styles.prayerBgWrap}>
-          <Image src="/prayer.png" alt="" fill style={{ objectFit: 'cover' }} sizes="100vw" loading="lazy" />
+          <Image src="/prayer.webp" alt="" fill style={{ objectFit: 'cover' }} sizes="100vw" loading="lazy" />
         </div>
         <div className={styles.prayerOverlay}></div>
         <div className={styles.prayerContent}>

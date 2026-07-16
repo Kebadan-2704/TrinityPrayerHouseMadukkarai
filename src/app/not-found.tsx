@@ -6,7 +6,7 @@ export default function NotFound() {
     <div style={{ minHeight: '100vh', background: 'var(--surface)', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '2rem' }}>
       <div style={{ maxWidth: '600px' }}>
         <div style={{ position: 'relative', width: '300px', height: '200px', margin: '0 auto 2rem' }}>
-          <Image src="/prayer_gallery_2.png" alt="" fill style={{ objectFit: 'cover', borderRadius: '16px' }} />
+          <Image src="/prayer_gallery_2.webp" alt="" fill style={{ objectFit: 'cover', borderRadius: '16px' }} />
           <div style={{
             position: 'absolute', inset: 0,
             display: 'flex', alignItems: 'center', justifyContent: 'center',

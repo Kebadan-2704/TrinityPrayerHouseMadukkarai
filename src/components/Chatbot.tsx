@@ -433,7 +433,7 @@ export default function Chatbot() {
             <div className={styles.chatHeader}>
               <div className={styles.headerTitle}>
                 <div className={styles.headerIconWrap}>
-                  <Image src="/sam-avatar-v3.png" alt="Trinity Bot" width={40} height={40} className={styles.headerAvatar} />
+                  <Image src="/sam-avatar-v3.webp" alt="Trinity Bot" width={40} height={40} className={styles.headerAvatar} />
                 </div>
                 <div>
                   <h4>Trinity Bot</h4>
@@ -463,7 +463,7 @@ export default function Chatbot() {
                   transition={{ delay: 0.15, duration: 0.4 }}
                 >
                   <div className={styles.welcomeAvatarLarge}>
-                    <Image src="/sam-avatar-v3.png" alt="Trinity Bot" width={56} height={56} />
+                    <Image src="/sam-avatar-v3.webp" alt="Trinity Bot" width={56} height={56} />
                   </div>
                   <h3>Welcome to Trinity Bot 👋</h3>
                   <p>
@@ -504,7 +504,7 @@ export default function Chatbot() {
                 >
                   {msg.role === 'bot' && (
                     <div className={styles.avatar}>
-                      <Image src="/sam-avatar-v3.png" alt="Trinity Bot" width={28} height={28} className={styles.msgAvatar} />
+                      <Image src="/sam-avatar-v3.webp" alt="Trinity Bot" width={28} height={28} className={styles.msgAvatar} />
                     </div>
                   )}
                   <div className={styles.messageBubble}>
@@ -532,7 +532,7 @@ export default function Chatbot() {
                   transition={{ duration: 0.2 }}
                 >
                   <div className={styles.avatar}>
-                    <Image src="/sam-avatar-v3.png" alt="Trinity Bot" width={28} height={28} className={styles.msgAvatar} />
+                    <Image src="/sam-avatar-v3.webp" alt="Trinity Bot" width={28} height={28} className={styles.msgAvatar} />
                   </div>
                   <div className={`${styles.message} ${styles.botMsg} ${styles.loadingMsg}`}>
                     <div className={styles.typingDots}>

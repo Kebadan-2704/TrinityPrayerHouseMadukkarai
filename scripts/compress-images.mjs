@@ -60,32 +60,21 @@ async function compress({ src, out, maxWidth }) {
     return;
   }
 
-  const tmp = out + '.tmp';
-  const ext = extname(src).toLowerCase();
+    const ext = extname(src).toLowerCase();
+    // Change output extension to .webp
+    const outWebp = out.replace(new RegExp(`${ext}$`), '.webp');
+    const tmp = outWebp + '.tmp';
 
-  try {
-    let pipeline = sharp(src).resize({ width: maxWidth, withoutEnlargement: true });
+    try {
+      let pipeline = sharp(src).resize({ width: maxWidth, withoutEnlargement: true }).webp({ quality: QUALITY, effort: 6 });
 
-    if (ext === '.png') {
-      pipeline = pipeline.png({ quality: QUALITY, compressionLevel: 9 });
-    } else {
-      pipeline = pipeline.jpeg({ quality: QUALITY, mozjpeg: true });
-    }
+      await pipeline.toFile(tmp);
+      const afterSize = (await stat(tmp)).size;
 
-    await pipeline.toFile(tmp);
-    const afterSize = (await stat(tmp)).size;
-
-    if (afterSize < beforeSize) {
-      await rename(tmp, out);
+      await rename(tmp, outWebp);
       const saved = beforeSize - afterSize;
       const pct = ((saved / beforeSize) * 100).toFixed(1);
-      console.log(`  ✓ ${src.padEnd(55)} ${formatBytes(beforeSize)} → ${formatBytes(afterSize)}  (saved ${pct}%)`);
-    } else {
-      // Original is already well-compressed, remove temp
-      const { unlink } = await import('fs/promises');
-      await unlink(tmp);
-      console.log(`  – ${src.padEnd(55)} already optimal (${formatBytes(beforeSize)}), kept as-is`);
-    }
+      console.log(`  ✓ ${src.padEnd(55)} ${formatBytes(beforeSize)} → ${formatBytes(afterSize)}  (saved ${pct}%) -> ${outWebp}`);
   } catch (err) {
     console.error(`  ✗ Error compressing ${src}:`, err.message);
     try { const { unlink } = await import('fs/promises'); await unlink(tmp); } catch {}

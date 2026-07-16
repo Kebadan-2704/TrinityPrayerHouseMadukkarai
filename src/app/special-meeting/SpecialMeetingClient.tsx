@@ -11,8 +11,10 @@ import { useLang } from '@/components/LangContext';
 
 import { type MeetingPhoto, type Meeting, localizedMeetingsData, localTranslations } from './meetingsData';
 
-import PhotoCarousel from '@/components/ui/PhotoCarousel';
-import YouTubeEmbed from '@/components/ui/YouTubeEmbed';
+import dynamic from 'next/dynamic';
+
+const PhotoCarousel = dynamic(() => import('@/components/ui/PhotoCarousel'), { ssr: false });
+const YouTubeEmbed = dynamic(() => import('@/components/ui/YouTubeEmbed'), { ssr: false });
 
 const DEFAULT_GALLERY_WIDTH = 960;
 
@@ -250,6 +252,8 @@ export default function SpecialMeeting() {
             src="/special-meetings/meeting1/photo1.jpg"
             alt="Special meetings at Trinity Prayer House"
             fill
+            priority={true}
+            fetchPriority="high"
             sizes="100vw"
             style={{
               objectFit: 'cover',

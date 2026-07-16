@@ -4,13 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import PhotoCarousel from '@/components/ui/PhotoCarousel';
+import dynamic from 'next/dynamic';
+const PhotoCarousel = dynamic(() => import('@/components/ui/PhotoCarousel'), { ssr: false });
 import { useLang } from '@/components/LangContext';
 
 const mensImages = [
-  '/mens-ministry/growing-1.jpg',
+  '/mens-ministry/growing-1.webp',
   '/mens-ministry/growing-2.jpg',
-  '/mens-ministry/growing-3.jpg',
+  '/mens-ministry/growing-3.webp',
 ];
 
 const localTranslations = {
@@ -51,7 +52,7 @@ export default function MensMinistryPage() {
     <div className={styles.pageWrap}>
       <section className={`${styles.headerSection} mesh-editorial-header`}>
         <div className={styles.headerBg}>
-          <Image src="/mens-ministry/growing-2.jpg" alt="Men's Ministry gathering" fill style={{ objectFit: 'cover',objectPosition:'90%' }} />
+          <Image src="/mens-ministry/growing-2.jpg" alt="Men's Ministry gathering" fill priority={true} fetchPriority="high" style={{ objectFit: 'cover',objectPosition:'90%' }} />
           <div className={styles.headerOverlay}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

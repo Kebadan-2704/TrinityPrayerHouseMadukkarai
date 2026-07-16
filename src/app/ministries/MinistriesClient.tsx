@@ -10,10 +10,10 @@ import { useLang } from '@/components/LangContext';
 export default function Ministries() {
   const { t } = useLang();
   const ministries = [
-    { id: 'kids', title: t.kidsMin, subtitle: t.ministriesLabel, desc: t.kidsDesc, image: '/kids_ministry_new.jpg' },
+    { id: 'kids', title: t.kidsMin, subtitle: t.ministriesLabel, desc: t.kidsDesc, image: '/kids_ministry_new.webp' },
     { id: 'youth', title: t.youthMin, subtitle: t.ministriesLabel, desc: t.youthDesc, image: '/youth_ministry_new.jpg' },
-    { id: 'mens', title: t.mensMin, subtitle: t.ministriesLabel, desc: t.mensDesc, image: '/mens_ministry_new.jpg' },
-    { id: 'womens', title: t.womenMin, subtitle: t.ministriesLabel, desc: t.womenDesc, image: '/womens_ministry_new.jpg' },
+    { id: 'mens', title: t.mensMin, subtitle: t.ministriesLabel, desc: t.mensDesc, image: '/mens_ministry_new.webp' },
+    { id: 'womens', title: t.womenMin, subtitle: t.ministriesLabel, desc: t.womenDesc, image: '/womens_ministry_new.webp' },
     { id: 'hindi', title: t.hindiMin, subtitle: t.ministriesLabel, desc: t.hindiMinDesc, image: '/hindi_ministry_new.jpg' },
     { id: 'oldage', title: t.oldAgeMin, subtitle: t.ministriesLabel, desc: t.oldAgeMinDesc, image: '/oldage_ministry_new.jpg' },
   ];

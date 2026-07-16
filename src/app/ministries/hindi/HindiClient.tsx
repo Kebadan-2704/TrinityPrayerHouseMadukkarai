@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import PhotoCarousel from '@/components/ui/PhotoCarousel';
+import dynamic from 'next/dynamic';
+const PhotoCarousel = dynamic(() => import('@/components/ui/PhotoCarousel'), { ssr: false });
 import { useLang } from '@/components/LangContext';
 
 const worshipImages = [
@@ -12,10 +13,10 @@ const worshipImages = [
   { src: '/hindi-ministry/worship-2.jpg', position: 'center' },
   { src: '/hindi-ministry/worship-3.jpg', position: 'center' },
   { src: '/hindi-ministry/worship-4.jpg', position: 'center' },
-  { src: '/hindi-ministry/worship-5.jpg', position: 'center' },
-  { src: '/hindi-ministry/worship-6.jpg', position: 'center' },
-  { src: '/hindi-ministry/worship-7.jpg', position: 'center' },
-  { src: '/hindi-ministry/worship-8.jpg', position: 'center' },
+  { src: '/hindi-ministry/worship-5.webp', position: 'center' },
+  { src: '/hindi-ministry/worship-6.webp', position: 'center' },
+  { src: '/hindi-ministry/worship-7.webp', position: 'center' },
+  { src: '/hindi-ministry/worship-8.webp', position: 'center' },
 ];
 
 const serviceMapUrl = 'https://maps.app.goo.gl/9k8FbskNZ5gP7mfL7';

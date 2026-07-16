@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from '../ministry-detail.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import PhotoCarousel from '@/components/ui/PhotoCarousel';
+import dynamic from 'next/dynamic';
+const PhotoCarousel = dynamic(() => import('@/components/ui/PhotoCarousel'), { ssr: false });
 import { useLang } from '@/components/LangContext';
 
 const fellowshipImages = [
@@ -16,9 +17,9 @@ const fellowshipImages = [
 ];
 
 const outreachImages = [
-  '/youth-ministry/outreach-1.jpg',
-  '/youth-ministry/outreach-2.jpg',
-  '/youth-ministry/outreach-3.jpg',
+  '/youth-ministry/outreach-1.webp',
+  '/youth-ministry/outreach-2.webp',
+  '/youth-ministry/outreach-3.webp',
   '/youth-ministry/outreach-4.jpg',
   '/youth-ministry/outreach-5.jpg',
   '/youth-ministry/outreach-6.jpg',

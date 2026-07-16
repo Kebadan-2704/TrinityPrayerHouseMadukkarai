@@ -49,7 +49,7 @@ export default function CinematicHeroBackdrop({ onVideoActive, images }: Props) 
 
   // On mobile: skip video slide entirely, only show images
   const slides = useMemo(() => {
-    const imageSlides = (images || ['/hero-bg.jpg', '/slide-2.jpg', '/slide-3.jpg', '/slide-4.jpg', '/slide-5.jpg']).map(img => ({ type: 'image' as const, src: img }));
+    const imageSlides = (images || ['/hero-bg.jpg', '/slide-2.webp', '/slide-3.webp', '/slide-4.jpg', '/slide-5.webp']).map(img => ({ type: 'image' as const, src: img }));
     if (isMobile) return imageSlides;
     return [{ type: 'video' as const }, ...imageSlides];
   }, [images, isMobile]);
