@@ -4,17 +4,20 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
-import ScrollReveal from '@/components/ui/ScrollReveal';
-import Counter from '@/components/ui/Counter';
-import Parallax from '@/components/ui/Parallax';
-import FloatingParticles from '@/components/ui/FloatingParticles';
-import CinematicHeroBackdrop from '@/components/ui/CinematicHeroBackdrop';
 import dynamic from 'next/dynamic';
-const YouTubeEmbed = dynamic(() => import('@/components/ui/YouTubeEmbed'), { ssr: false });
+import CinematicHeroBackdrop from '@/components/ui/CinematicHeroBackdrop';
+import FloatingParticles from '@/components/ui/FloatingParticles';
 import MagneticEffect from '@/components/ui/MagneticEffect';
 import StaggeredText from '@/components/ui/StaggeredText';
 import { Sun, Heart, BookOpen, Sparkles, Video } from 'lucide-react';
 import { useLang } from '@/components/LangContext';
+
+// Below-fold heavy interactive components — dynamically import them to reduce initial JS
+const ScrollReveal = dynamic(() => import('@/components/ui/ScrollReveal'), { ssr: true });
+const Counter = dynamic(() => import('@/components/ui/Counter'), { ssr: false });
+const Parallax = dynamic(() => import('@/components/ui/Parallax'), { ssr: true });
+
+const YouTubeEmbed = dynamic(() => import('@/components/ui/YouTubeEmbed'), { ssr: false });
 
 const heroImages = [
   '/hero-bg.jpg',
@@ -105,25 +108,12 @@ const localTranslations = {
   }
 };
 
-export default function HomeClient() {
+export default function HomeClient({ initialLatestSermon }: { initialLatestSermon?: any }) {
   const { t, lang } = useLang();
   const content = localTranslations[lang as keyof typeof localTranslations] || localTranslations.en;
-  const [latestSermon, setLatestSermon] = useState<{
-    videoId: string;
-    title: string;
-    date: string;
-    displayTitle?: string;
-  } | null>(null);
-
-  useEffect(() => {
-    fetch('/api/latest-sermon')
-      .then((res) => res.json())
-      .then((data) => {
-        const latest = data?.latest ?? data;
-        if (latest?.videoId) setLatestSermon(latest);
-      })
-      .catch((err) => console.error('Failed to fetch latest sermon:', err));
-  }, []);
+  
+  // Use SSR data directly, eliminating the client-side data waterfall
+  const [latestSermon] = useState(initialLatestSermon || null);
 
   const [foundersHovered, setFoundersHovered] = useState(false);
   const [missionHovered, setMissionHovered] = useState(false);

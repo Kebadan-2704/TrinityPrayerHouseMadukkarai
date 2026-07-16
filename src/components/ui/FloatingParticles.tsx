@@ -7,10 +7,12 @@ export default function FloatingParticles() {
   const [isLowEnd, setIsLowEnd] = useState(false);
 
   useEffect(() => {
-    // Skip particles on low-end devices
+    // Skip particles on low-end devices OR all mobile devices
     const cores = navigator.hardwareConcurrency ?? 4;
     const mem = (navigator as unknown as { deviceMemory?: number }).deviceMemory ?? 8;
-    if (cores <= 2 || mem <= 2) {
+    const isMobile = window.innerWidth < 768;
+    
+    if (cores <= 2 || mem <= 2 || isMobile) {
       setIsLowEnd(true);
       return;
     }
