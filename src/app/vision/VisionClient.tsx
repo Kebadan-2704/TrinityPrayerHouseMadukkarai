@@ -76,10 +76,6 @@ const CAROUSEL_PHOTOS = [
   { src: '/vision-photos/photo5.jpg', objectPosition: '50% 40%', scale: 1.0 },
   { src: '/vision-photos/photo6.jpg', objectPosition: '50% 50%', scale: 1.0 },
   { src: '/vision-photos/photo7.jpg', objectPosition: '50% 20%', scale: 1.0 },
-  { src: '/vision-photos/vision_photo_8.jpg', objectPosition: '50% 50%', scale: 1.0 },
-  { src: '/vision-photos/vision_photo_9.jpg', objectPosition: '50% 50%', scale: 1.0 },
-  { src: '/vision-photos/vision_photo_10.jpg', objectPosition: '50% 50%', scale: 1.0 },
-  { src: '/vision-photos/vision_photo_11.jpg', objectPosition: '50% 50%', scale: 1.0 },
 ];
 
 export default function About() {

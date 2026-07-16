@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { useState, useCallback } from 'react';
 import styles from './mission.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import StaggeredText from '@/components/ui/StaggeredText';
@@ -54,9 +55,22 @@ const localTranslations = {
   }
 };
 
+// ── PHOTO CONFIG ────────────────────────────────────────────────────────────
+const MISSION_CAROUSEL_PHOTOS = [
+  { src: '/vmain.jpeg', objectPosition: '55% 17%', scale: 1.0 },
+  { src: '/vision-photos/vision_photo_8.jpg', objectPosition: '50% 50%', scale: 1.0 },
+  { src: '/vision-photos/vision_photo_9.jpg', objectPosition: '50% 50%', scale: 1.0 },
+  { src: '/vision-photos/vision_photo_10.jpg', objectPosition: '50% 50%', scale: 1.0 },
+  { src: '/vision-photos/vision_photo_11.jpg', objectPosition: '50% 50%', scale: 1.0 },
+];
+
 export default function Mission() {
   const { t, lang } = useLang();
   const content = localTranslations[lang] || localTranslations.en;
+  const [current, setCurrent] = useState(0);
+
+  const next = useCallback(() => setCurrent(c => (c + 1) % MISSION_CAROUSEL_PHOTOS.length), []);
+  const prev = useCallback(() => setCurrent(c => (c - 1 + MISSION_CAROUSEL_PHOTOS.length) % MISSION_CAROUSEL_PHOTOS.length), []);
 
   return (
     <div className="pageWrap">
@@ -116,7 +130,58 @@ export default function Mission() {
           </div>
           <ScrollReveal delay={320} variant="fadeLeft" className={styles.sideContent}>
             <div className={styles.pastorCard}>
-              <div className={styles.pastorImageWrap}><Image src="/vmain.jpeg" alt="Pastor Vasanth Sathyanathan" fill style={{ objectFit: 'cover', objectPosition: '55% 17%' }} /></div>
+              <div className={styles.pastorImageWrap} style={{ position: 'relative' }}>
+                {MISSION_CAROUSEL_PHOTOS.map((photo, i) => (
+                  <div
+                    key={photo.src}
+                    style={{
+                      position: 'absolute', inset: 0,
+                      opacity: i === current ? 1 : 0,
+                      transition: 'opacity 0.8s ease',
+                      pointerEvents: i === current ? 'auto' : 'none',
+                      transform: `scale(${photo.scale})`,
+                    }}
+                  >
+                    <Image
+                      src={photo.src}
+                      alt={`Photo ${i + 1}`}
+                      fill
+                      style={{ objectFit: 'cover', objectPosition: photo.objectPosition }}
+                      priority={i === 0}
+                    />
+                  </div>
+                ))}
+
+                <button
+                  onClick={prev}
+                  aria-label="Previous photo"
+                  style={{
+                    position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)',
+                    zIndex: 10, background: 'rgba(0,0,0,0.2)',
+                    border: 'none', padding: '12px 8px', borderRadius: '4px',
+                    cursor: 'pointer', lineHeight: 0,
+                  }}
+                >
+                  <svg width="14" height="24" viewBox="0 0 14 24" fill="none">
+                    <polyline points="11,2 3,12 11,22" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+
+                <button
+                  onClick={next}
+                  aria-label="Next photo"
+                  style={{
+                    position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)',
+                    zIndex: 10, background: 'rgba(0,0,0,0.2)',
+                    border: 'none', padding: '12px 8px', borderRadius: '4px',
+                    cursor: 'pointer', lineHeight: 0,
+                  }}
+                >
+                  <svg width="14" height="24" viewBox="0 0 14 24" fill="none">
+                    <polyline points="3,2 11,12 3,22" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
               <div className={styles.pastorInfo}>
                 <div className={styles.secLabel}>{t.seniorPastor}</div>
                 <h3>{content.pastorName}</h3>
