@@ -7,12 +7,12 @@ import LangPicker from './LangPicker';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import WhatsAppButton from './ui/WhatsAppButton';
-import AmbientSiteBackground from './ui/AmbientSiteBackground';
 import SplashScreen from './ui/SplashScreen';
 import BackToTop from './ui/BackToTop';
 import { Toaster } from 'sonner';
 
-// Lazy-load heavy components that aren't needed at first paint
+// Lazy-load heavy/decorative components that aren't needed at first paint
+const AmbientSiteBackground = dynamic(() => import('./ui/AmbientSiteBackground'), { ssr: false });
 const Chatbot = dynamic(() => import('./Chatbot'), { ssr: false });
 const MeetNotifier = dynamic(() => import('./MeetNotifier'), { ssr: false });
 

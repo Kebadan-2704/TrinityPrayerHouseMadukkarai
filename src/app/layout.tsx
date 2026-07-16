@@ -327,6 +327,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* ── LCP: preload hero image so browser fetches it before any JS runs ── */}
+        <link rel="preload" as="image" href="/hero-bg.jpg" />
+
         {/* ── Font performance: preconnect + preload + non-blocking stylesheet ── */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
@@ -347,11 +350,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        {/* Google Fonts – display=swap ensures non-blocking load */}
+        {/* Google Fonts — non-render-blocking: load as print, swap to all on load */}
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+          media="print"
+          // @ts-expect-error — onLoad is valid on link but TS complains
+          onLoad="this.media='all'"
         />
+        {/* Fallback for JS-disabled: renders the fonts synchronously */}
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+          />
+        </noscript>
 
         <link rel="apple-touch-icon" href="/tph-icon-192.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/tph-icon-192.png" />

@@ -130,6 +130,11 @@ export default function CinematicHeroBackdrop({ onVideoActive, images }: Props) 
             </video>
           );
         } else {
+          // The first image slide is the LCP element — give it maximum priority
+          const isFirstImageSlide = !isMobile
+            ? index === 1  // on desktop: slot 0 is video, first image is slot 1
+            : index === 0; // on mobile: no video, first image is slot 0
+
           return (
             <div 
               key={slide.src}
@@ -142,7 +147,8 @@ export default function CinematicHeroBackdrop({ onVideoActive, images }: Props) 
                 fill
                 style={{ objectFit: 'cover' }}
                 sizes="100vw"
-                priority={index <= 1}
+                priority={isFirstImageSlide}
+                fetchPriority={isFirstImageSlide ? 'high' : 'low'}
                 aria-hidden
               />
             </div>
