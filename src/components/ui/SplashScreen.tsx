@@ -19,9 +19,9 @@ export default function SplashScreen() {
 
     sessionStorage.setItem('tph-splash-seen', 'true');
 
-    // Start exit animation at 2s, fully hidden by 2.8s
-    const exitTimer = setTimeout(() => setIsExiting(true), 2000);
-    const hideTimer = setTimeout(() => setIsVisible(false), 2800);
+    // Start exit animation at 1s, fully hidden by 1.4s (50% faster!)
+    const exitTimer = setTimeout(() => setIsExiting(true), 1000);
+    const hideTimer = setTimeout(() => setIsVisible(false), 1400);
 
     return () => {
       clearTimeout(exitTimer);
