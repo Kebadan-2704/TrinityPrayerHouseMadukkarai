@@ -1,17 +1,20 @@
 'use client';
 
 import { ReactNode } from 'react';
+import dynamic from 'next/dynamic';
 import { LangProvider } from './LangContext';
 import LangPicker from './LangPicker';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import WhatsAppButton from './ui/WhatsAppButton';
 import AmbientSiteBackground from './ui/AmbientSiteBackground';
-import Chatbot from './Chatbot';
 import SplashScreen from './ui/SplashScreen';
-import MeetNotifier from './MeetNotifier';
 import BackToTop from './ui/BackToTop';
 import { Toaster } from 'sonner';
+
+// Lazy-load heavy components that aren't needed at first paint
+const Chatbot = dynamic(() => import('./Chatbot'), { ssr: false });
+const MeetNotifier = dynamic(() => import('./MeetNotifier'), { ssr: false });
 
 export default function ClientProviders({ children }: { children: ReactNode }) {
   return (
@@ -30,3 +33,4 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
     </LangProvider>
   );
 }
+

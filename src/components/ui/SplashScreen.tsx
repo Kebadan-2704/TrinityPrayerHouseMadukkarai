@@ -6,9 +6,16 @@ import Image from 'next/image';
 import styles from './SplashScreen.module.css';
 
 export default function SplashScreen() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Only show splash once per session
+    const hasSeenSplash = sessionStorage.getItem('tph-splash-seen');
+    if (hasSeenSplash) return;
+
+    setIsVisible(true);
+    sessionStorage.setItem('tph-splash-seen', 'true');
+
     // Hide the splash screen after 2.5 seconds
     const timer = setTimeout(() => {
       setIsVisible(false);
@@ -16,6 +23,9 @@ export default function SplashScreen() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Don't render splash DOM at all if already seen
+  if (!isVisible) return null;
 
   return (
     <AnimatePresence>
@@ -69,3 +79,4 @@ export default function SplashScreen() {
     </AnimatePresence>
   );
 }
+

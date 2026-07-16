@@ -1,17 +1,27 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './FloatingParticles.module.css';
 
 export default function FloatingParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isLowEnd, setIsLowEnd] = useState(false);
 
   useEffect(() => {
+    // Skip particles on low-end devices
+    const cores = navigator.hardwareConcurrency ?? 4;
+    const mem = (navigator as unknown as { deviceMemory?: number }).deviceMemory ?? 8;
+    if (cores <= 2 || mem <= 2) {
+      setIsLowEnd(true);
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     let animId: number;
+    let isVisible = true;
     const particles: { x: number; y: number; size: number; speedY: number; opacity: number; }[] = [];
 
     const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
@@ -29,6 +39,7 @@ export default function FloatingParticles() {
     }
 
     const animate = () => {
+      if (!isVisible) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
         p.y += p.speedY;
@@ -40,10 +51,32 @@ export default function FloatingParticles() {
       });
       animId = requestAnimationFrame(animate);
     };
+
+    // Only animate when visible
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          animId = requestAnimationFrame(animate);
+        } else {
+          cancelAnimationFrame(animId);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
     animate();
 
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
+    return () => {
+      cancelAnimationFrame(animId);
+      observer.disconnect();
+      window.removeEventListener('resize', resize);
+    };
   }, []);
+
+  if (isLowEnd) return null;
 
   return <canvas ref={canvasRef} className={styles.canvas} />;
 }
+

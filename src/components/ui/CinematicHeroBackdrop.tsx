@@ -7,7 +7,6 @@ import { useReducedMotion } from 'framer-motion';
 import styles from './CinematicHeroBackdrop.module.css';
 import {
   HERO_BG_POSTER,
-  HERO_BG_VIDEO_MOV,
   HERO_BG_VIDEO_MP4,
   HERO_BG_VIDEO_WEBM,
 } from '@/lib/siteMedia';
@@ -23,12 +22,37 @@ export default function CinematicHeroBackdrop({ onVideoActive, images }: Props) 
   const reduceMotion = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Combine video with images for the full rotation
-  const slides = useMemo(() => [
-    { type: 'video' as const },
-    ...(images || ['/hero-bg.jpg', '/slide-2.jpg', '/slide-3.jpg', '/slide-4.jpg', '/slide-5.jpg']).map(img => ({ type: 'image' as const, src: img }))
-  ], [images]);
+  // Detect mobile on mount
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  // IntersectionObserver — only activate when visible
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // On mobile: skip video slide entirely, only show images
+  const slides = useMemo(() => {
+    const imageSlides = (images || ['/hero-bg.jpg', '/slide-2.jpg', '/slide-3.jpg', '/slide-4.jpg', '/slide-5.jpg']).map(img => ({ type: 'image' as const, src: img }));
+    if (isMobile) return imageSlides;
+    return [{ type: 'video' as const }, ...imageSlides];
+  }, [images, isMobile]);
 
   const IMAGE_DURATION = 5000;
 
@@ -44,9 +68,8 @@ export default function CinematicHeroBackdrop({ onVideoActive, images }: Props) 
   }, [slides.length]);
 
   useEffect(() => {
-    // We still want auto-scroll even if reduced motion is on, 
-    // just maybe without the heavy effects (handled in render).
-    
+    if (!isVisible) return; // Don't auto-advance when off-screen
+
     const currentSlide = slides[currentIndex];
     
     if (currentSlide.type === 'video') {
@@ -77,10 +100,10 @@ export default function CinematicHeroBackdrop({ onVideoActive, images }: Props) 
       const timer = setTimeout(nextSlide, IMAGE_DURATION);
       return () => clearTimeout(timer);
     }
-  }, [currentIndex, notify, nextSlide, slides]);
+  }, [currentIndex, notify, nextSlide, slides, isVisible]);
 
   return (
-    <div className={styles.wrap}>
+    <div className={styles.wrap} ref={wrapRef}>
       <div className={styles.mesh} aria-hidden />
       <div className={styles.aurora} aria-hidden />
 
@@ -95,7 +118,7 @@ export default function CinematicHeroBackdrop({ onVideoActive, images }: Props) 
               className={`${styles.mediaLayer} ${isActive ? styles.mediaVisible : ''}`}
               muted
               playsInline
-              preload="auto"
+              preload="none"
               poster={HERO_BG_POSTER}
               onPlaying={() => notify(true)}
               onEnded={nextSlide}
@@ -103,7 +126,6 @@ export default function CinematicHeroBackdrop({ onVideoActive, images }: Props) 
               aria-hidden
             >
               <source src={HERO_BG_VIDEO_WEBM} type="video/webm" />
-              <source src={HERO_BG_VIDEO_MOV} type="video/quicktime" />
               <source src={HERO_BG_VIDEO_MP4} type="video/mp4" />
             </video>
           );
@@ -132,3 +154,4 @@ export default function CinematicHeroBackdrop({ onVideoActive, images }: Props) 
     </div>
   );
 }
+

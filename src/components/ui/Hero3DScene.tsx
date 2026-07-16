@@ -162,6 +162,14 @@ export default function Hero3DScene() {
   const [isStatic, setIsStatic] = useState(false);
 
   useEffect(() => {
+    // Skip WebGL on low-end devices
+    const cores = navigator.hardwareConcurrency ?? 4;
+    const mem = (navigator as unknown as { deviceMemory?: number }).deviceMemory ?? 8;
+    if (cores <= 2 || mem <= 2) {
+      setIsStatic(true);
+      return;
+    }
+
     const mount = mountRef.current;
     if (!mount) return;
 
@@ -185,7 +193,7 @@ export default function Hero3DScene() {
 
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.65));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1.0 : 1.65));
     mount.appendChild(renderer.domElement);
     renderer.domElement.className = styles.canvas;
 
@@ -255,11 +263,33 @@ export default function Hero3DScene() {
     observer.observe(mount);
     resize();
     window.addEventListener('pointermove', onPointerMove, { passive: true });
-    render();
+
+    // IntersectionObserver — pause render loop when off-screen
+    let isVisible = true;
+    const visObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !reducedMotion) {
+          frameId = window.requestAnimationFrame(renderLoop);
+        } else if (!isVisible && frameId) {
+          window.cancelAnimationFrame(frameId);
+          frameId = 0;
+        }
+      },
+      { threshold: 0.05 }
+    );
+    visObserver.observe(mount);
+
+    const renderLoop = () => {
+      if (!isVisible) return;
+      render();
+    };
+    renderLoop();
 
     return () => {
       window.removeEventListener('pointermove', onPointerMove);
       observer.disconnect();
+      visObserver.disconnect();
       if (frameId) window.cancelAnimationFrame(frameId);
       scene.traverse((object) => {
         if (object instanceof THREE.Mesh || object instanceof THREE.LineSegments || object instanceof THREE.Points) {

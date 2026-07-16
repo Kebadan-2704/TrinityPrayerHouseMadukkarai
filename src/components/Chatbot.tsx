@@ -98,12 +98,23 @@ function buildSystemPrompt(): string {
   const todayServices: string[] = [];
   if (todayDay === 0) todayServices.push('Sunday Worship (Tamil) at 9:30 AM', 'Hindi Service at 6:30 PM');
   if (todayDay === 4) todayServices.push('Bible Study at 7:30 PM');
-  todayServices.push('Daily Online Meet at 9:00 PM IST');
   if (istNow.getDate() === 1) todayServices.push('Promise Service at 6:30 AM');
+  if (todayDay === 6) {
+    // Check if it's the 1st Saturday
+    const firstDay = new Date(istNow.getFullYear(), istNow.getMonth(), 1);
+    const firstSatDay = ((6 - firstDay.getDay() + 7) % 7) + 1;
+    if (istNow.getDate() === firstSatDay) todayServices.push('Fasting Prayer at 10:30 AM');
+  }
+  if (todayDay === 5) {
+    // Check if it's the 4th Friday
+    const firstDay = new Date(istNow.getFullYear(), istNow.getMonth(), 1);
+    const firstFriDay = ((5 - firstDay.getDay() + 7) % 7) + 1;
+    if (istNow.getDate() === firstFriDay + 21) todayServices.push('Night Prayer at 10:00 PM');
+  }
 
   const todayServicesStr = todayServices.length > 0
     ? todayServices.join(', ')
-    : 'Daily Online Meet at 9:00 PM IST (no other regular service today)';
+    : 'No in-person service today';
 
   // ── Sort upcoming events by date (ascending — closest first) ──────────
   const upcomingEvents: { date: Date; label: string }[] = [
@@ -143,6 +154,13 @@ CRITICAL RULES:
 - When asked about upcoming events or next service dates, ALWAYS list them in the EXACT order shown above (nearest date first). Do NOT reorder them.
 - When sharing maps, social media, Google Meet, WhatsApp, email, YouTube, Instagram, or website details, include the full clickable URL.
 - NEVER mix up Bible Study with the Daily Online Meet. Bible Study is IN-PERSON at church on Thursdays at 7:30 PM. The Daily Online Meet is a SEPARATE event on Google Meet every day at 9:00 PM.
+
+MEETING QUERY RULES (VERY IMPORTANT):
+- When a user asks "is there a meeting today?", "any meeting tomorrow?", "next meeting?", or "upcoming meetings?" — ONLY list IN-PERSON services first. Do NOT mention the Daily Online Meet in your initial answer.
+- If there are NO in-person services on the asked day (today/tomorrow), clearly say "There is no meeting today" or "There is no meeting tomorrow" FIRST.
+- AFTER saying there is no in-person meeting, you may THEN add: "However, you can join our **Daily Online Prayer Meet** every day at 9:00 PM IST on Google Meet: https://meet.google.com/gct-xkdh-cni"
+- If the user specifically asks about "online meet", "Google Meet", "daily meet", or "9 PM meet", THEN directly share the Google Meet details.
+- The Daily Online Meet should NEVER be the primary answer to "is there a meeting today/tomorrow?" — it should only appear as a secondary option after stating whether any in-person service exists.
 
 LANGUAGE TOLERANCE (VERY IMPORTANT):
 - Many users type in broken English, Tanglish (Tamil + English mix), or with heavy spelling/grammar mistakes. You MUST try your best to understand and respond helpfully.

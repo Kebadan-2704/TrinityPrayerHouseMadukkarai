@@ -113,9 +113,37 @@ export default function MeetNotifier() {
       }
     };
 
+    // Smart scheduling: compute ms until next relevant boundary instead of polling every 20s
+    const getNextCheckDelay = () => {
+      const now = new Date();
+      const istString = now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+      const istTime = new Date(istString);
+      const h = istTime.getHours();
+      const m = istTime.getMinutes();
+      const totalMin = h * 60 + m;
+
+      // During active window (20:50 - 22:00): check every 30s for accuracy
+      if (totalMin >= 1250 && totalMin < 1320) return 30_000;
+
+      // Before active window: sleep until 20:50
+      if (totalMin < 1250) {
+        return Math.max((1250 - totalMin) * 60_000 - istTime.getSeconds() * 1000, 60_000);
+      }
+
+      // After active window: sleep for 1 hour (next check doesn't matter until tomorrow)
+      return 3_600_000;
+    };
+
     checkTime();
-    const interval = setInterval(checkTime, 20000); // Check every 20 seconds
-    return () => clearInterval(interval);
+    let timerId: ReturnType<typeof setTimeout>;
+    const scheduleNext = () => {
+      timerId = setTimeout(() => {
+        checkTime();
+        scheduleNext();
+      }, getNextCheckDelay());
+    };
+    scheduleNext();
+    return () => clearTimeout(timerId);
   }, []);
 
   const subscribeToPush = async () => {

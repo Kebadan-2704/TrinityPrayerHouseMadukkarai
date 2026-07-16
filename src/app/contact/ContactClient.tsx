@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import styles from './page.module.css';
 import { MapPin, Phone, Mail, ArrowRight, Loader2 } from 'lucide-react';
-import { FaInstagram, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
+import { InstagramIcon, FacebookIcon, WhatsAppIcon } from '@/components/ui/SocialIcons';
 import { useLang } from '@/components/LangContext';
 import { toast } from 'sonner';
 
@@ -99,13 +99,13 @@ const validate = () => {
             </div>
             <div className={styles.socialIconsRow}>
               <a href="https://www.instagram.com/trinityprayerhouse_church" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconInsta}`} aria-label="Instagram">
-                <FaInstagram />
+                <InstagramIcon />
               </a>
               <a href="https://www.facebook.com/share/1HXvvKSbNE/" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconFb}`} aria-label="Facebook">
-                <FaFacebookF />
+                <FacebookIcon />
               </a>
               <a href="https://wa.me/919786888999" target="_blank" rel="noopener noreferrer" className={`${styles.socialIcon} ${styles.iconWa}`} aria-label="WhatsApp">
-                <FaWhatsapp />
+                <WhatsAppIcon />
               </a>
             </div>
           </div>

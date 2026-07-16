@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, MapPin, Phone, Users, Globe } from 'lucide-react';
-import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa';
+import { FacebookIcon, InstagramIcon, YouTubeIcon, WhatsAppIcon } from './ui/SocialIcons';
 import { motion, useReducedMotion, Variants } from 'framer-motion';
 import { useLang } from './LangContext';
 import styles from './Footer.module.css';
@@ -59,10 +59,10 @@ export default function Footer() {
           </div>
           <p className={styles.mission}>{t.footerMission}</p>
           <div className={styles.socials}>
-            <MagneticEffect strength={0.4}><a href="https://www.facebook.com/share/1HXvvKSbNE/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF size={16} /></a></MagneticEffect>
-            <MagneticEffect strength={0.4}><a href="https://www.instagram.com/trinityprayerhouse_church?igsh=MXEwcXpiaXh6a21jaQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram size={16} /></a></MagneticEffect>
-            <MagneticEffect strength={0.4}><a href="https://www.youtube.com/@Pas.Vasanth" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube size={16} /></a></MagneticEffect>
-            <MagneticEffect strength={0.4}><a href="https://wa.me/919786888999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><FaWhatsapp size={16} /></a></MagneticEffect>
+            <MagneticEffect strength={0.4}><a href="https://www.facebook.com/share/1HXvvKSbNE/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FacebookIcon size={16} /></a></MagneticEffect>
+            <MagneticEffect strength={0.4}><a href="https://www.instagram.com/trinityprayerhouse_church?igsh=MXEwcXpiaXh6a21jaQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><InstagramIcon size={16} /></a></MagneticEffect>
+            <MagneticEffect strength={0.4}><a href="https://www.youtube.com/@Pas.Vasanth" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><YouTubeIcon size={16} /></a></MagneticEffect>
+            <MagneticEffect strength={0.4}><a href="https://wa.me/919786888999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><WhatsAppIcon size={16} /></a></MagneticEffect>
           </div>
         </motion.div>
         <motion.div className={styles.navCol} variants={footerColVariants}>
