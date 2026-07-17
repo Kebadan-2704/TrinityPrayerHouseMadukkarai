@@ -66,7 +66,7 @@ export default function Footer() {
           </div>
         </motion.div>
         <motion.div className={styles.navCol} variants={footerColVariants}>
-          <h4 className={styles.heading}>{t.navigate}</h4>
+          <h2 className={styles.heading}>{t.navigate}</h2>
           <ul className={styles.linkList}>
             <li><Link href="/">{t.home}</Link></li>
             <li><Link href="/vision">{t.about}</Link></li>
@@ -79,7 +79,7 @@ export default function Footer() {
           </ul>
         </motion.div>
         <motion.div className={styles.navCol} variants={footerColVariants}>
-          <h4 className={styles.heading}>{t.services}</h4>
+          <h2 className={styles.heading}>{t.services}</h2>
           <ul className={styles.serviceList}>
             <li className={styles.serviceItem}>
               <span className={styles.serviceName}>{t.promiseService}</span>
@@ -104,7 +104,7 @@ export default function Footer() {
           </ul>
         </motion.div>
         <motion.div className={styles.contactCol} variants={footerColVariants}>
-          <h4 className={styles.heading}>{t.contactUs}</h4>
+          <h2 className={styles.heading}>{t.contactUs}</h2>
           <ul>
             <li><Phone size={16} /><div><span>{t.phone}</span><p>+91 9786888999</p></div></li>
             <li><Mail size={16} /><div><span>{t.email}</span><p>trinityprayerhouse.mdk@gmail.com</p></div></li>

@@ -16,7 +16,7 @@ import Counter from '@/components/ui/Counter';
 const ScrollReveal = dynamic(() => import('@/components/ui/ScrollReveal'), { ssr: true });
 const Parallax = dynamic(() => import('@/components/ui/Parallax'), { ssr: true });
 
-const YouTubeEmbed = dynamic(() => import('@/components/ui/YouTubeEmbed'), { ssr: false });
+const YouTubeEmbed = dynamic(() => import('@/components/ui/YouTubeEmbed'), { ssr: true });
 
 const heroImages = [
   '/hero-bg.jpg',
