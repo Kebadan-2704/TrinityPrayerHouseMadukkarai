@@ -281,7 +281,7 @@ export default function SpecialMeeting() {
 
             return (
               <LazyMeeting key={meeting.id} eager={index < 2}>
-                <ScrollReveal delay={100} className={styles.meetingRow}>
+                <ScrollReveal delay={100} variant="blurIn" margin="200px" className={styles.meetingRow}>
                   {/* Heading */}
                   <div className={styles.meetingHeading}>
                     <span className={styles.meetingNumber}>

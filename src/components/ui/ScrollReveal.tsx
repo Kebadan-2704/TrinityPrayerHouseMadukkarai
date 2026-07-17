@@ -9,7 +9,8 @@ interface ScrollRevealProps {
   children: ReactNode;
   delay?: number;
   className?: string;
-  amount?: number;
+  amount?: number | 'some' | 'all';
+  margin?: string;
   variant?: ScrollRevealVariant;
 }
 
@@ -41,6 +42,7 @@ export default function ScrollReveal({
   delay = 0,
   className = '',
   amount = 0.12,
+  margin,
   variant = 'fadeUp',
 }: ScrollRevealProps) {
   const reduce = useReducedMotion();
@@ -65,7 +67,7 @@ export default function ScrollReveal({
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount }}
+      viewport={{ once: true, amount, margin }}
       variants={{
         hidden: v.hidden,
         visible: { ...v.visible, transition },
