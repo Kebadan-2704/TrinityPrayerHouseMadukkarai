@@ -7,7 +7,6 @@ import LangPicker from './LangPicker';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import WhatsAppButton from './ui/WhatsAppButton';
-import SplashScreen from './ui/SplashScreen';
 import BackToTop from './ui/BackToTop';
 import { Toaster } from 'sonner';
 
@@ -20,7 +19,6 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
   return (
     <LangProvider>
       <Toaster position="bottom-center" toastOptions={{ style: { background: 'var(--surface-elevated)', color: 'var(--text-primary)', border: '1px solid var(--border)' } }} />
-      <SplashScreen />
       <AmbientSiteBackground />
       <LangPicker />
       <Navbar />

@@ -6,15 +6,14 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import dynamic from 'next/dynamic';
 import CinematicHeroBackdrop from '@/components/ui/CinematicHeroBackdrop';
-import FloatingParticles from '@/components/ui/FloatingParticles';
 import MagneticEffect from '@/components/ui/MagneticEffect';
 import StaggeredText from '@/components/ui/StaggeredText';
 import { Sun, Heart, BookOpen, Sparkles, Video } from 'lucide-react';
 import { useLang } from '@/components/LangContext';
+import Counter from '@/components/ui/Counter';
 
 // Below-fold heavy interactive components — dynamically import them to reduce initial JS
 const ScrollReveal = dynamic(() => import('@/components/ui/ScrollReveal'), { ssr: true });
-const Counter = dynamic(() => import('@/components/ui/Counter'), { ssr: false });
 const Parallax = dynamic(() => import('@/components/ui/Parallax'), { ssr: true });
 
 const YouTubeEmbed = dynamic(() => import('@/components/ui/YouTubeEmbed'), { ssr: false });
@@ -129,7 +128,6 @@ export default function HomeClient({ initialLatestSermon }: { initialLatestSermo
           />
 
           <div className={styles.heroOverlay} />
-          <FloatingParticles />
         </div>
         <div className={styles.heroContent}>
           <div className="container">
