@@ -115,6 +115,7 @@
   width: 24px;
   height: 1px;
   background: linear-gradient(90deg, var(--accent), transparent);
+  transform-origin: right;
   animation: lineGrow 1s var(--ease-out) 0.15s both;
 }
 .heroEyebrow::after {
@@ -123,12 +124,13 @@
   width: 24px;
   height: 1px;
   background: linear-gradient(-90deg, var(--accent), transparent);
+  transform-origin: left;
   animation: lineGrow 1s var(--ease-out) 0.15s both;
 }
-@keyframes lineGrow { from { width: 0; opacity: 0; } to { width: 44px; opacity: 1; } }
+@keyframes lineGrow { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
 @media (min-width: 768px) {
   .heroEyebrow { font-size: 0.7rem; letter-spacing: 0.38em; gap: 0.85rem; margin-bottom: 1.35rem; }
-  .heroEyebrow::before, .heroEyebrow::after { width: 40px; }
+  .heroEyebrow::before, .heroEyebrow::after { width: 44px; }
 }
 
 .heroHeadline {
