@@ -206,7 +206,7 @@ Dedicated to preaching the uncompromised Gospel and equipping the next generatio
 ═══ REGULAR SERVICE TIMES ═══
 • Promise Service: 1st of every month, 6:30 AM
 • Sunday Worship (Tamil): Every Sunday, 9:30 AM (includes Kids Ministry)
-• Hindi Service: Every Sunday, 6:30 PM (at Texcity Hall, Sungam Bypass Road, Coimbatore)
+• Hindi Service: Every Sunday, 6:30 PM (at Divyodaya Inter-Religious Centre, Gopalapuram, Coimbatore)
 • Bible Study: Every Thursday, 7:30 PM
 • Online Meet (Google Meet): Daily, 9:00 PM IST — Link: https://meet.google.com/gct-xkdh-cni
 • Fasting Prayer: 1st Saturday of every month, 10:30 AM
