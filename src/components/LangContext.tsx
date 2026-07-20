@@ -333,15 +333,14 @@ export const useLang = () => useContext(LangContext);
 
 export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Language>('en');
-  const [showPicker, setShowPicker] = useState(true);
+  const [showPicker, setShowPicker] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('tph-lang') as Language | null;
     if (saved && translations[saved]) {
-      setTimeout(() => {
-        setLangState(saved as Language);
-        setShowPicker(false);
-      }, 0);
+      setLangState(saved as Language);
+    } else {
+      setShowPicker(true);
     }
   }, []);
 

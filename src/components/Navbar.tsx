@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useLang } from './LangContext';
-import { Globe } from 'lucide-react';
+import { Languages } from 'lucide-react';
+import CustomLangIcon from '@/components/ui/CustomLangIcon';
 import styles from './Navbar.module.css';
 import MagneticEffect from '@/components/ui/MagneticEffect';
 
@@ -126,7 +127,6 @@ export default function Navbar() {
                     1
                   </span>
                 )}
-                {pathname === item.href ? <span className={styles.navUnderline} aria-hidden /> : null}
               </Link>
             ))}
           </div>
@@ -142,7 +142,7 @@ export default function Navbar() {
                 aria-controls="lang-picker-modal"
                 aria-label="Change language"
               >
-                <Globe size={17} strokeWidth={1.75} />
+                <CustomLangIcon size={22} strokeWidth={1.75} />
               </button>
             </MagneticEffect>
             <MagneticEffect strength={0.15}>
@@ -237,7 +237,7 @@ export default function Navbar() {
                     closeMenu();
                   }}
                 >
-                  <Globe size={18} strokeWidth={1.75} /> Change language
+                  <CustomLangIcon size={24} strokeWidth={1.75} /> Change language
                 </button>
                 <Link
                   href="https://www.google.com/maps/dir/?api=1&destination=Trinity+Prayer+House+Madukkarai+Coimbatore"
