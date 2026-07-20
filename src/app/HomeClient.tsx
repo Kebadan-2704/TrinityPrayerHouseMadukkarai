@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
@@ -107,7 +107,7 @@ const localTranslations = {
   }
 };
 
-export default function HomeClient({ initialLatestSermon }: { initialLatestSermon?: any }) {
+export default function HomeClient({ initialLatestSermon }: { initialLatestSermon?: unknown }) {
   const { t, lang } = useLang();
   const content = localTranslations[lang as keyof typeof localTranslations] || localTranslations.en;
   

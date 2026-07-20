@@ -1,89 +1,18 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { CSSProperties, KeyboardEvent } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import styles from './special-meeting.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import StaggeredText from '@/components/ui/StaggeredText';
 import Image from 'next/image';
 import { useLang } from '@/components/LangContext';
 
-import { type MeetingPhoto, type Meeting, localizedMeetingsData, localTranslations } from './meetingsData';
+import { type MeetingPhoto, localizedMeetingsData, localTranslations } from './meetingsData';
 
 import Curved3DCarousel from '@/components/ui/Curved3DCarousel';
 import YouTubeEmbed from '@/components/ui/YouTubeEmbed';
 
-const DEFAULT_GALLERY_WIDTH = 960;
 
-function useElementWidth<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  const [width, setWidth] = useState(DEFAULT_GALLERY_WIDTH);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    const updateWidth = () => {
-      setWidth(node.getBoundingClientRect().width || DEFAULT_GALLERY_WIDTH);
-    };
-
-    updateWidth();
-
-    const observer = new ResizeObserver(updateWidth);
-    observer.observe(node);
-
-    return () => observer.disconnect();
-  }, []);
-
-  return [ref, width] as const;
-}
-
-function getGalleryMetrics(width: number, photoCount: number) {
-  const safeWidth = Math.max(width || DEFAULT_GALLERY_WIDTH, 280);
-  const isCompact = safeWidth < 700;
-  const columns = isCompact ? 1 : 3;
-  const gap = isCompact ? 14 : 16;
-  const gridCardWidth = (safeWidth - gap * (columns - 1)) / columns;
-  const rows = Math.ceil(photoCount / columns);
-  const expandedHeight = rows * (gridCardWidth * 0.75) + Math.max(rows - 1, 0) * gap;
-  const fanCardWidth = isCompact
-    ? Math.min(Math.max(safeWidth * 0.42, 146), 165)
-    : Math.min(Math.max(safeWidth * 0.24, 230), 300);
-  const collapsedHeight = fanCardWidth * 1.4 + (isCompact ? 64 : 82);
-
-  return {
-    gap,
-    fanCardWidth,
-    height: {
-      collapsed: collapsedHeight,
-      expanded: expandedHeight,
-    },
-  };
-}
-
-function getFanPose(index: number, count: number, width: number) {
-  const safeWidth = Math.max(width || DEFAULT_GALLERY_WIDTH, 280);
-  const isCompact = safeWidth < 700;
-  const center = (count - 1) / 2;
-  const offset = index - center;
-  const fanCardWidth = isCompact
-    ? Math.min(Math.max(safeWidth * 0.42, 146), 165)
-    : Math.min(Math.max(safeWidth * 0.24, 230), 300);
-  const baseSpread = isCompact
-    ? Math.min(Math.max(safeWidth * 0.075, 24), 30)
-    : Math.min(Math.max(safeWidth * 0.075, 58), 86);
-  const spreadLimit = (safeWidth - fanCardWidth * (isCompact ? 1.18 : 0.92)) / Math.max(count - 1, 1);
-  const spread = Math.max(16, Math.min(baseSpread, spreadLimit));
-  const lift = Math.abs(offset) * (isCompact ? 7 : 11);
-
-  return {
-    x: offset * spread,
-    y: lift + (offset > 0 ? 4 : 0),
-    rotate: offset * (isCompact ? 5.4 : 6.2),
-    scale: 1 - Math.abs(offset) * 0.018,
-  };
-}
 
 function getPhotoSource(photo: MeetingPhoto) {
   return typeof photo === 'string' ? photo : photo.src;
@@ -121,88 +50,7 @@ function LazyMeeting({ children, eager = false }: { children: React.ReactNode; e
   return <div ref={ref} style={{ minHeight: 400 }} />;
 }
 
-function PhotoStackGallery({ photos, title }: { photos: MeetingPhoto[]; title: string }) {
-  const [expanded, setExpanded] = useState(false);
-  const [galleryRef, width] = useElementWidth<HTMLDivElement>();
-  const reduceMotion = useReducedMotion();
-  const metrics = useMemo(() => getGalleryMetrics(width, photos.length), [photos.length, width]);
 
-  const galleryStyle = {
-    '--stack-card-width': `${metrics.fanCardWidth}px`,
-    '--stack-gap': `${metrics.gap}px`,
-  } as CSSProperties;
-
-  const transition = reduceMotion
-    ? { duration: 0 }
-    : { type: 'spring' as const, stiffness: 92, damping: 18, mass: 0.95 };
-
-  const toggleGallery = () => setExpanded(value => !value);
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== 'Enter' && event.key !== ' ') return;
-    event.preventDefault();
-    toggleGallery();
-  };
-
-  return (
-    <motion.div
-      ref={galleryRef}
-      className={styles.photoGalleryShell}
-      role="button"
-      tabIndex={0}
-      aria-expanded={expanded}
-      aria-label={expanded ? `Collapse ${title} photo gallery` : `Expand ${title} photo gallery`}
-      onClick={toggleGallery}
-      onKeyDown={handleKeyDown}
-      animate={{ height: expanded ? metrics.height.expanded : metrics.height.collapsed }}
-      transition={transition}
-      style={galleryStyle}
-    >
-      <motion.div
-        layout
-        className={`${styles.photoGalleryInner} ${
-          expanded ? styles.photoGalleryExpanded : styles.photoGalleryCollapsed
-        }`}
-        transition={transition}
-      >
-        {photos.map((photo, i) => {
-          const photoSrc = getPhotoSource(photo);
-          const fanPose = getFanPose(i, photos.length, width);
-          const cardHover = reduceMotion
-            ? undefined
-            : {
-                y: expanded ? -7 : fanPose.y - 12,
-                scale: expanded ? 1.025 : fanPose.scale + 0.035,
-                rotate: expanded ? 0 : fanPose.rotate * 0.94,
-              };
-
-          return (
-            <motion.div
-              layout
-              key={`${photoSrc}-${i}`}
-              className={styles.photoCardItem}
-              style={{ position: 'relative', zIndex: i + 1 }}
-              animate={
-                expanded
-                  ? { x: 0, y: 0, rotate: 0, scale: 1 }
-                  : fanPose
-              }
-              whileHover={cardHover}
-              transition={transition}
-            >
-              <Image
-                src={photoSrc}
-                alt={`${title} photo ${i + 1}`}
-                fill
-                sizes={expanded ? '(max-width: 768px) 100vw, 33vw' : '(max-width: 768px) 58vw, 300px'}
-                style={{ objectFit: 'cover', objectPosition: getPhotoObjectPosition(photo) }}
-              />
-            </motion.div>
-          );
-        })}
-      </motion.div>
-    </motion.div>
-  );
-}
 
 export default function SpecialMeeting() {
   const { lang } = useLang();

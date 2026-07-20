@@ -1,91 +1,20 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { CSSProperties, KeyboardEvent } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import styles from './special-meeting.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import StaggeredText from '@/components/ui/StaggeredText';
 import Image from 'next/image';
 import { useLang } from '@/components/LangContext';
 
-import { type MeetingPhoto, type Meeting, localizedMeetingsData, localTranslations } from './meetingsData';
+import { type MeetingPhoto, localizedMeetingsData, localTranslations } from './meetingsData';
 
 import dynamic from 'next/dynamic';
 
 const Curved3DCarousel = dynamic(() => import('@/components/ui/Curved3DCarousel'), { ssr: false });
 const YouTubeEmbed = dynamic(() => import('@/components/ui/YouTubeEmbed'), { ssr: false });
 
-const DEFAULT_GALLERY_WIDTH = 960;
 
-function useElementWidth<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  const [width, setWidth] = useState(DEFAULT_GALLERY_WIDTH);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    const updateWidth = () => {
-      setWidth(node.getBoundingClientRect().width || DEFAULT_GALLERY_WIDTH);
-    };
-
-    updateWidth();
-
-    const observer = new ResizeObserver(updateWidth);
-    observer.observe(node);
-
-    return () => observer.disconnect();
-  }, []);
-
-  return [ref, width] as const;
-}
-
-function getGalleryMetrics(width: number, photoCount: number) {
-  const safeWidth = Math.max(width || DEFAULT_GALLERY_WIDTH, 280);
-  const isCompact = safeWidth < 700;
-  const columns = isCompact ? 1 : 3;
-  const gap = isCompact ? 14 : 16;
-  const gridCardWidth = (safeWidth - gap * (columns - 1)) / columns;
-  const rows = Math.ceil(photoCount / columns);
-  const expandedHeight = rows * (gridCardWidth * 0.75) + Math.max(rows - 1, 0) * gap;
-  const fanCardWidth = isCompact
-    ? Math.min(Math.max(safeWidth * 0.42, 146), 165)
-    : Math.min(Math.max(safeWidth * 0.24, 230), 300);
-  const collapsedHeight = fanCardWidth * 1.4 + (isCompact ? 64 : 82);
-
-  return {
-    gap,
-    fanCardWidth,
-    height: {
-      collapsed: collapsedHeight,
-      expanded: expandedHeight,
-    },
-  };
-}
-
-function getFanPose(index: number, count: number, width: number) {
-  const safeWidth = Math.max(width || DEFAULT_GALLERY_WIDTH, 280);
-  const isCompact = safeWidth < 700;
-  const center = (count - 1) / 2;
-  const offset = index - center;
-  const fanCardWidth = isCompact
-    ? Math.min(Math.max(safeWidth * 0.42, 146), 165)
-    : Math.min(Math.max(safeWidth * 0.24, 230), 300);
-  const baseSpread = isCompact
-    ? Math.min(Math.max(safeWidth * 0.075, 24), 30)
-    : Math.min(Math.max(safeWidth * 0.075, 58), 86);
-  const spreadLimit = (safeWidth - fanCardWidth * (isCompact ? 1.18 : 0.92)) / Math.max(count - 1, 1);
-  const spread = Math.max(16, Math.min(baseSpread, spreadLimit));
-  const lift = Math.abs(offset) * (isCompact ? 7 : 11);
-
-  return {
-    x: offset * spread,
-    y: lift + (offset > 0 ? 4 : 0),
-    rotate: offset * (isCompact ? 5.4 : 6.2),
-    scale: 1 - Math.abs(offset) * 0.018,
-  };
-}
 
 function getPhotoSource(photo: MeetingPhoto) {
   return typeof photo === 'string' ? photo : photo.src;
