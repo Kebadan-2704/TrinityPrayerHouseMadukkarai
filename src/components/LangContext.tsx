@@ -333,16 +333,7 @@ export const useLang = () => useContext(LangContext);
 
 export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Language>('en');
-  const [showPicker, setShowPicker] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('tph-lang') as Language | null;
-    if (saved && translations[saved]) {
-      setLangState(saved as Language);
-    } else {
-      setShowPicker(true);
-    }
-  }, []);
+  const [showPicker, setShowPicker] = useState(true);
 
   useEffect(() => {
     document.documentElement.lang = lang === 'ta' ? 'ta' : lang === 'hi' ? 'hi' : 'en';
@@ -350,7 +341,6 @@ export function LangProvider({ children }: { children: ReactNode }) {
 
   const setLang = (l: Language) => {
     setLangState(l);
-    localStorage.setItem('tph-lang', l);
     setShowPicker(false);
   };
 
