@@ -107,12 +107,12 @@ const localTranslations = {
   }
 };
 
-export default function HomeClient({ initialLatestSermon }: { initialLatestSermon?: unknown }) {
+export default function HomeClient({ initialLatestSermon }: { initialLatestSermon?: any }) {
   const { t, lang } = useLang();
   const content = localTranslations[lang as keyof typeof localTranslations] || localTranslations.en;
   
   // Use SSR data directly, eliminating the client-side data waterfall
-  const [latestSermon] = useState(initialLatestSermon || null);
+  const [latestSermon] = useState<any>(initialLatestSermon || null);
 
   const [foundersHovered, setFoundersHovered] = useState(false);
   const [missionHovered, setMissionHovered] = useState(false);
