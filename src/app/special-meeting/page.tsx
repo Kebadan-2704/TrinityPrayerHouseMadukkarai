@@ -11,7 +11,7 @@ import { useLang } from '@/components/LangContext';
 
 import { type MeetingPhoto, type Meeting, localizedMeetingsData, localTranslations } from './meetingsData';
 
-import PhotoCarousel from '@/components/ui/PhotoCarousel';
+import Curved3DCarousel from '@/components/ui/Curved3DCarousel';
 import YouTubeEmbed from '@/components/ui/YouTubeEmbed';
 
 const DEFAULT_GALLERY_WIDTH = 960;
@@ -90,7 +90,10 @@ function getPhotoSource(photo: MeetingPhoto) {
 }
 
 function getPhotoSources(photos: MeetingPhoto[]) {
-  return photos.map(getPhotoSource);
+  return photos.map(photo => ({
+    src: getPhotoSource(photo),
+    position: getPhotoObjectPosition(photo)
+  }));
 }
 
 function getPhotoObjectPosition(photo: MeetingPhoto) {
@@ -320,15 +323,9 @@ export default function SpecialMeeting() {
                     )}
 
                     {/* Photos */}
-                    {meeting.photoDisplay === 'single-card' ? (
-                      <div className={styles.photoSingle}>
-                        <div className={styles.photoCard}>
-                          <PhotoCarousel images={getPhotoSources(meeting.photos)} />
-                        </div>
-                      </div>
-                    ) : (
-                      <PhotoStackGallery photos={meeting.photos} title={meeting.title} />
-                    )}
+                    <div className={styles.photoCarouselWrapper} style={{ marginTop: '3rem', width: '100%' }}>
+                      <Curved3DCarousel images={getPhotoSources(meeting.photos)} />
+                    </div>
                   </div>
 
                   {index < meetings.length - 1 && <div className={styles.divider} />}

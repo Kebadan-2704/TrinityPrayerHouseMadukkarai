@@ -13,7 +13,7 @@ import { type MeetingPhoto, type Meeting, localizedMeetingsData, localTranslatio
 
 import dynamic from 'next/dynamic';
 
-const PhotoCarousel = dynamic(() => import('@/components/ui/PhotoCarousel'), { ssr: false });
+const Curved3DCarousel = dynamic(() => import('@/components/ui/Curved3DCarousel'), { ssr: false });
 const YouTubeEmbed = dynamic(() => import('@/components/ui/YouTubeEmbed'), { ssr: false });
 
 const DEFAULT_GALLERY_WIDTH = 960;
@@ -92,7 +92,10 @@ function getPhotoSource(photo: MeetingPhoto) {
 }
 
 function getPhotoSources(photos: MeetingPhoto[]) {
-  return photos.map(getPhotoSource);
+  return photos.map(photo => ({
+    src: getPhotoSource(photo),
+    position: getPhotoObjectPosition(photo)
+  }));
 }
 
 function getPhotoObjectPosition(photo: MeetingPhoto) {
@@ -118,89 +121,6 @@ function LazyMeeting({ children, eager = false }: { children: React.ReactNode; e
 
   if (eager || visible) return <>{children}</>;
   return <div ref={ref} style={{ minHeight: 400 }} />;
-}
-
-function PhotoStackGallery({ photos, title }: { photos: MeetingPhoto[]; title: string }) {
-  const [expanded, setExpanded] = useState(false);
-  const [galleryRef, width] = useElementWidth<HTMLDivElement>();
-  const reduceMotion = useReducedMotion();
-  const metrics = useMemo(() => getGalleryMetrics(width, photos.length), [photos.length, width]);
-
-  const galleryStyle = {
-    '--stack-card-width': `${metrics.fanCardWidth}px`,
-    '--stack-gap': `${metrics.gap}px`,
-  } as CSSProperties;
-
-  const transition = reduceMotion
-    ? { duration: 0 }
-    : { type: 'spring' as const, stiffness: 92, damping: 18, mass: 0.95 };
-
-  const toggleGallery = () => setExpanded(value => !value);
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== 'Enter' && event.key !== ' ') return;
-    event.preventDefault();
-    toggleGallery();
-  };
-
-  return (
-    <motion.div
-      ref={galleryRef}
-      className={styles.photoGalleryShell}
-      role="button"
-      tabIndex={0}
-      aria-expanded={expanded}
-      aria-label={expanded ? `Collapse ${title} photo gallery` : `Expand ${title} photo gallery`}
-      onClick={toggleGallery}
-      onKeyDown={handleKeyDown}
-      animate={{ height: expanded ? metrics.height.expanded : metrics.height.collapsed }}
-      transition={transition}
-      style={galleryStyle}
-    >
-      <motion.div
-        layout
-        className={`${styles.photoGalleryInner} ${
-          expanded ? styles.photoGalleryExpanded : styles.photoGalleryCollapsed
-        }`}
-        transition={transition}
-      >
-        {photos.map((photo, i) => {
-          const photoSrc = getPhotoSource(photo);
-          const fanPose = getFanPose(i, photos.length, width);
-          const cardHover = reduceMotion
-            ? undefined
-            : {
-                y: expanded ? -7 : fanPose.y - 12,
-                scale: expanded ? 1.025 : fanPose.scale + 0.035,
-                rotate: expanded ? 0 : fanPose.rotate * 0.94,
-              };
-
-          return (
-            <motion.div
-              layout
-              key={`${photoSrc}-${i}`}
-              className={styles.photoCardItem}
-              style={{ position: 'relative', zIndex: i + 1 }}
-              animate={
-                expanded
-                  ? { x: 0, y: 0, rotate: 0, scale: 1 }
-                  : fanPose
-              }
-              whileHover={cardHover}
-              transition={transition}
-            >
-              <Image
-                src={photoSrc}
-                alt={`${title} photo ${i + 1}`}
-                fill
-                sizes={expanded ? '(max-width: 768px) 100vw, 33vw' : '(max-width: 768px) 58vw, 300px'}
-                style={{ objectFit: 'cover', objectPosition: getPhotoObjectPosition(photo) }}
-              />
-            </motion.div>
-          );
-        })}
-      </motion.div>
-    </motion.div>
-  );
 }
 
 export default function SpecialMeeting() {
@@ -324,15 +244,9 @@ export default function SpecialMeeting() {
                     )}
 
                     {/* Photos */}
-                    {meeting.photoDisplay === 'single-card' ? (
-                      <div className={styles.photoSingle}>
-                        <div className={styles.photoCard}>
-                          <PhotoCarousel images={getPhotoSources(meeting.photos)} />
-                        </div>
-                      </div>
-                    ) : (
-                      <PhotoStackGallery photos={meeting.photos} title={meeting.title} />
-                    )}
+                    <div className={styles.photoCarouselWrapper} style={{ marginTop: '3rem', width: '100%' }}>
+                      <Curved3DCarousel images={getPhotoSources(meeting.photos)} />
+                    </div>
                   </div>
 
                   {index < meetings.length - 1 && <div className={styles.divider} />}
