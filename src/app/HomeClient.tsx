@@ -11,6 +11,7 @@ import StaggeredText from '@/components/ui/StaggeredText';
 import { Sun, Heart, BookOpen, Sparkles, Video } from 'lucide-react';
 import { useLang } from '@/components/LangContext';
 import Counter from '@/components/ui/Counter';
+import GradientText from '@/components/ui/GradientText';
 
 // Below-fold heavy interactive components — dynamically import them to reduce initial JS
 const ScrollReveal = dynamic(() => import('@/components/ui/ScrollReveal'), { ssr: true });
@@ -134,7 +135,7 @@ export default function HomeClient({ initialLatestSermon }: { initialLatestSermo
             <div className={styles.heroTextWrap}>
               <h2 className={`${styles.heroEyebrow} ${styles.animSlideRight}`}>{t.eyebrow}</h2>
               <h1 className={`${styles.heroHeadline} ${styles.animFadeUp}`}>
-                {t.heroTitle1}<br /><i>{t.heroTitle2}</i> {t.heroTitle3} <i>{t.heroTitle4}</i>
+                {t.heroTitle1}<br /><i><GradientText colors={['#d4b978', '#f5e6b8', '#c9a84c', '#f5e6b8', '#d4b978']} animationSpeed={5}>{t.heroTitle2}</GradientText></i> {t.heroTitle3} <i><GradientText colors={['#d4b978', '#f5e6b8', '#c9a84c', '#f5e6b8', '#d4b978']} animationSpeed={5}>{t.heroTitle4}</GradientText></i>
               </h1>
               <p className={`${styles.heroSubtext} ${styles.animFadeUpDelay}`}>{t.heroSub}</p>
               <div className={`${styles.heroCtas} ${styles.animFadeUpDelay2}`}>
