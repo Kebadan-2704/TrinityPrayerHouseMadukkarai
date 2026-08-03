@@ -73,13 +73,22 @@ export default function PhotoCarousel({ images }: PhotoCarouselProps) {
         aria-label="Open image fullscreen"
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); } }}
       >
-        <Image
-          src={src}
-          alt="Gallery photo"
-          fill
-          sizes="(max-width: 991px) 100vw, 50vw"
-          style={{ objectFit: 'cover', objectPosition: position, transition: 'opacity 0.4s ease' }}
-        />
+        {images.map((img, i) => (
+          <Image
+            key={i}
+            src={getSrc(img)}
+            alt={`Gallery photo ${i + 1}`}
+            fill
+            sizes="(max-width: 991px) 100vw, 50vw"
+            style={{ 
+              objectFit: 'cover', 
+              objectPosition: getPosition(img),
+              opacity: i === currentIdx ? 1 : 0,
+              pointerEvents: i === currentIdx ? 'auto' : 'none'
+            }}
+            priority={i === 0}
+          />
+        ))}
 
         {/* Expand hint */}
         <div className={styles.expandHint} aria-hidden="true">

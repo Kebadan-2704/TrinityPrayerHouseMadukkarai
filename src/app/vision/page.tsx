@@ -146,7 +146,6 @@ export default function About() {
                     style={{
                       position: 'absolute', inset: 0,
                       opacity: i === current ? 1 : 0,
-                      transition: 'opacity 0.6s ease',
                       pointerEvents: i === current ? 'auto' : 'none',
                       transform: `scale(${photo.scale})`,
                     }}

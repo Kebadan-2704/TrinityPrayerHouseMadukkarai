@@ -88,20 +88,25 @@ function MediaCarousel() {
 
   const prev = () => setIdx((p) => (p - 1 + mediaImages.length) % mediaImages.length);
   const next = () => setIdx((p) => (p + 1) % mediaImages.length);
-  const { src, position } = mediaImages[idx];
 
   return (
     <>
-      <Image
-        src={src}
-        alt={`Youth Ministry media ${idx + 1}`}
-        fill
-        sizes="(max-width: 991px) 100vw, 50vw"
-        style={{
-          objectFit: 'cover',
-          objectPosition: position,
-        }}
-      />
+      {mediaImages.map((img, i) => (
+        <Image
+          key={i}
+          src={img.src}
+          alt={`Youth Ministry media ${i + 1}`}
+          fill
+          sizes="(max-width: 991px) 100vw, 50vw"
+          style={{
+            objectFit: 'cover',
+            objectPosition: img.position,
+            opacity: i === idx ? 1 : 0,
+            pointerEvents: i === idx ? 'auto' : 'none'
+          }}
+          priority={i === 0}
+        />
+      ))}
       {mediaImages.length > 1 && (
         <>
           <button
