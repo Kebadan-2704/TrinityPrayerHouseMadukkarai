@@ -14,7 +14,7 @@ const container: Variants = {
 };
 
 const item: Variants = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
@@ -44,7 +44,7 @@ export default function StaggerIn({ children, className = '', amount = 0.08 }: P
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount }}
+      viewport={{ once: true, amount, margin: '200px 0px' }}
       variants={container}
     >
       {children}

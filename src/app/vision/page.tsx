@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import styles from './vision.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import StaggeredText from '@/components/ui/StaggeredText';
@@ -87,7 +87,11 @@ export default function About() {
   const next = useCallback(() => setCurrent(c => (c + 1) % CAROUSEL_PHOTOS.length), []);
   const prev = useCallback(() => setCurrent(c => (c - 1 + CAROUSEL_PHOTOS.length) % CAROUSEL_PHOTOS.length), []);
 
-
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(next, 5000);
+    return () => clearInterval(timer);
+  }, [next]);
 
   return (
     <div className="pageWrap">
@@ -127,17 +131,22 @@ export default function About() {
             <StaggeredText text={content.p5} />
           </ScrollReveal>
 
-          <ScrollReveal delay={320} variant="fadeLeft" className={styles.sideContent}>
+          <ScrollReveal delay={100} variant="fadeLeft" className={styles.sideContent}>
             {/* ── Photo Carousel ── */}
             <div className={styles.pastorCard}>
               <div className={styles.pastorImageWrap} style={{ position: 'relative' }}>
-                {CAROUSEL_PHOTOS.map((photo, i) => (
+                {CAROUSEL_PHOTOS.map((photo, i) => {
+                  const N = CAROUSEL_PHOTOS.length;
+                  const diff = Math.abs(i - current);
+                  const isNear = diff <= 1 || diff >= N - 1;
+                  if (!isNear) return null;
+                  return (
                   <div
                     key={photo.src}
                     style={{
                       position: 'absolute', inset: 0,
                       opacity: i === current ? 1 : 0,
-                      transition: 'opacity 0.8s ease',
+                      transition: 'opacity 0.6s ease',
                       pointerEvents: i === current ? 'auto' : 'none',
                       transform: `scale(${photo.scale})`,
                     }}
@@ -146,11 +155,14 @@ export default function About() {
                       src={photo.src}
                       alt={`Photo ${i + 1}`}
                       fill
+                      sizes="(max-width: 768px) 100vw, 400px"
                       style={{ objectFit: 'cover', objectPosition: photo.objectPosition }}
                       priority={i === 0}
+                      loading={i === 0 ? 'eager' : 'lazy'}
                     />
                   </div>
-                ))}
+                  );
+                })}
 
                 <button
                   onClick={prev}

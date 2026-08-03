@@ -346,16 +346,28 @@ img { transition: filter 0.35s ease, transform 0.35s var(--ease-out); }
 
 /* ===== Page transition — CSS-only, replaces framer-motion in template.tsx ===== */
 @keyframes pageReveal {
-  from { opacity: 0; transform: translateY(22px) scale(0.985); filter: blur(3px); }
-  to   { opacity: 1; transform: translateY(0)    scale(1);     filter: blur(0px); }
+  from { opacity: 0; transform: translateY(14px) scale(0.99); filter: blur(2px); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0px); }
 }
 
 .page-transition-root {
-  animation: pageReveal 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: pageReveal 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .page-transition-root { animation: none; }
+}
+
+/* ===== Safety net: force content visible if framer-motion delays too long ===== */
+/* This catches the "doesn't load" scenario on slow connections where JS takes
+   a while to initialize IntersectionObserver. After 1.5s, everything fades in. */
+@keyframes forceVisible {
+  to { opacity: 1 !important; transform: none !important; filter: none !important; }
+}
+
+.pageWrap [style*="opacity: 0"],
+.pageWrap [style*="opacity:0"] {
+  animation: forceVisible 0s 1.5s both;
 }
 
 /* ===== Hide splash screen on repeat visits via inline script class ===== */

@@ -14,28 +14,32 @@ interface ScrollRevealProps {
   variant?: ScrollRevealVariant;
 }
 
+/* Smaller transforms → less jarring, faster perceived load */
 const variantMap: Record<ScrollRevealVariant, { hidden: Variant; visible: Variant }> = {
   fadeUp: {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 24 },
     visible: { opacity: 1, y: 0 },
   },
   fadeLeft: {
-    hidden: { opacity: 0, x: -36 },
+    hidden: { opacity: 0, x: -20 },
     visible: { opacity: 1, x: 0 },
   },
   fadeRight: {
-    hidden: { opacity: 0, x: 36 },
+    hidden: { opacity: 0, x: 20 },
     visible: { opacity: 1, x: 0 },
   },
   scale: {
-    hidden: { opacity: 0, scale: 0.94 },
+    hidden: { opacity: 0, scale: 0.96 },
     visible: { opacity: 1, scale: 1 },
   },
   blurIn: {
-    hidden: { opacity: 0, y: 24, filter: 'blur(8px)' },
+    hidden: { opacity: 0, y: 16, filter: 'blur(6px)' },
     visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
   },
 };
+
+/** Max delay cap — prevents stacked delays from making pages feel broken */
+const MAX_DELAY_MS = 300;
 
 export default function ScrollReveal({
   children,
@@ -48,14 +52,15 @@ export default function ScrollReveal({
   const reduce = useReducedMotion();
 
   const v = variantMap[variant];
+  const clampedDelay = Math.min(delay, MAX_DELAY_MS);
 
   const transition = useMemo(
     () => ({
-      duration: variant === 'blurIn' ? 0.82 : 0.68,
-      delay: delay / 1000,
+      duration: variant === 'blurIn' ? 0.7 : 0.55,
+      delay: clampedDelay / 1000,
       ease: [0.22, 1, 0.36, 1] as const,
     }),
-    [delay, variant]
+    [clampedDelay, variant]
   );
 
   if (reduce) {
@@ -67,7 +72,7 @@ export default function ScrollReveal({
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount, margin }}
+      viewport={{ once: true, amount, margin: margin || '200px 0px' }}
       variants={{
         hidden: v.hidden,
         visible: { ...v.visible, transition },

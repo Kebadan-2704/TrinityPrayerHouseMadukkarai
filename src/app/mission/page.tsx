@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import styles from './mission.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import StaggeredText from '@/components/ui/StaggeredText';
@@ -72,6 +72,12 @@ export default function Mission() {
   const next = useCallback(() => setCurrent(c => (c + 1) % MISSION_CAROUSEL_PHOTOS.length), []);
   const prev = useCallback(() => setCurrent(c => (c - 1 + MISSION_CAROUSEL_PHOTOS.length) % MISSION_CAROUSEL_PHOTOS.length), []);
 
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(next, 5000);
+    return () => clearInterval(timer);
+  }, [next]);
+
   return (
     <div className="pageWrap">
       <section className={`${styles.headerSection} mesh-editorial-header`}>
@@ -95,49 +101,54 @@ export default function Mission() {
       <section className={`section-padding ${styles.contentSection} pres-band-soft pres-rail`}>
         <div className={`container ${styles.missionGrid}`}>
           <div className={styles.mainText}>
-            <ScrollReveal delay={100}>
+            <ScrollReveal delay={0}>
               <h2><StaggeredText text={content.legacyTitle} el="span" /></h2>
             </ScrollReveal>
-            <ScrollReveal delay={200}>
+            <ScrollReveal delay={50}>
               <div className={styles.leadText}>
                 <StaggeredText text={content.leadText} />
               </div>
             </ScrollReveal>
-            <ScrollReveal delay={300}>
+            <ScrollReveal delay={80}>
               <StaggeredText text={content.p2} />
             </ScrollReveal>
-            <ScrollReveal delay={400}>
+            <ScrollReveal delay={100}>
               <StaggeredText text={content.p3} />
             </ScrollReveal>
-            <ScrollReveal delay={500}>
+            <ScrollReveal delay={120}>
               <StaggeredText text={content.p4} />
             </ScrollReveal>
-            <ScrollReveal delay={600}>
+            <ScrollReveal delay={140}>
               <StaggeredText text={content.p5} />
             </ScrollReveal>
-            <ScrollReveal delay={700}>
+            <ScrollReveal delay={160}>
               <StaggeredText text={content.p6} />
             </ScrollReveal>
-            <ScrollReveal delay={800}>
+            <ScrollReveal delay={180}>
               <StaggeredText text={content.p7} />
             </ScrollReveal>
-            <ScrollReveal delay={900}>
+            <ScrollReveal delay={200}>
               <StaggeredText text={content.p8} />
             </ScrollReveal>
-            <ScrollReveal delay={1000}>
+            <ScrollReveal delay={200}>
               <StaggeredText text={content.p9} />
             </ScrollReveal>
           </div>
-          <ScrollReveal delay={320} variant="fadeLeft" className={styles.sideContent}>
+          <ScrollReveal delay={100} variant="fadeLeft" className={styles.sideContent}>
             <div className={styles.pastorCard}>
               <div className={styles.pastorImageWrap} style={{ position: 'relative' }}>
-                {MISSION_CAROUSEL_PHOTOS.map((photo, i) => (
+                {MISSION_CAROUSEL_PHOTOS.map((photo, i) => {
+                  const N = MISSION_CAROUSEL_PHOTOS.length;
+                  const diff = Math.abs(i - current);
+                  const isNear = diff <= 1 || diff >= N - 1; // current + adjacent only
+                  if (!isNear) return null;
+                  return (
                   <div
                     key={photo.src}
                     style={{
                       position: 'absolute', inset: 0,
                       opacity: i === current ? 1 : 0,
-                      transition: 'opacity 0.8s ease',
+                      transition: 'opacity 0.6s ease',
                       pointerEvents: i === current ? 'auto' : 'none',
                       transform: `scale(${photo.scale})`,
                     }}
@@ -146,11 +157,14 @@ export default function Mission() {
                       src={photo.src}
                       alt={`Photo ${i + 1}`}
                       fill
+                      sizes="(max-width: 768px) 100vw, 400px"
                       style={{ objectFit: 'cover', objectPosition: photo.objectPosition }}
                       priority={i === 0}
+                      loading={i === 0 ? 'eager' : 'lazy'}
                     />
                   </div>
-                ))}
+                  );
+                })}
 
                 <button
                   onClick={prev}
@@ -193,7 +207,7 @@ export default function Mission() {
             </div>
             <div className={styles.pastorCard} style={{ marginTop: '2rem' }}>
               <div className={styles.pastorImageWrap} style={{ paddingBottom: '70%' }}>
-                <Image src="/Family Pic.jpeg" alt={content.familyLabel} fill style={{ objectFit: 'cover', objectPosition: 'center' }} />
+                <Image src="/Family Pic.jpeg" alt={content.familyLabel} fill sizes="(max-width: 768px) 100vw, 400px" style={{ objectFit: 'cover', objectPosition: 'center' }} loading="lazy" />
               </div>
               <div className={styles.pastorInfo}>
                 <div className={styles.secLabel}>{content.familyLabel}</div>

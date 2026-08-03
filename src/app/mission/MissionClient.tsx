@@ -81,36 +81,36 @@ export default function Mission() {
       <section className={`section-padding ${styles.contentSection} pres-band-soft pres-rail`}>
         <div className={`container ${styles.missionGrid}`}>
           <div className={styles.mainText}>
-            <ScrollReveal delay={100}>
+            <ScrollReveal delay={0}>
               <h2><StaggeredText text={content.legacyTitle} el="span" /></h2>
             </ScrollReveal>
-            <ScrollReveal delay={200}>
+            <ScrollReveal delay={50}>
               <div className={styles.leadText}>
                 <StaggeredText text={content.leadText} />
               </div>
             </ScrollReveal>
-            <ScrollReveal delay={300}>
+            <ScrollReveal delay={80}>
               <StaggeredText text={content.p2} />
             </ScrollReveal>
-            <ScrollReveal delay={400}>
+            <ScrollReveal delay={100}>
               <StaggeredText text={content.p3} />
             </ScrollReveal>
-            <ScrollReveal delay={500}>
+            <ScrollReveal delay={120}>
               <StaggeredText text={content.p4} />
             </ScrollReveal>
-            <ScrollReveal delay={600}>
+            <ScrollReveal delay={140}>
               <StaggeredText text={content.p5} />
             </ScrollReveal>
-            <ScrollReveal delay={700}>
+            <ScrollReveal delay={160}>
               <StaggeredText text={content.p6} />
             </ScrollReveal>
-            <ScrollReveal delay={800}>
+            <ScrollReveal delay={180}>
               <StaggeredText text={content.p7} />
             </ScrollReveal>
-            <ScrollReveal delay={900}>
+            <ScrollReveal delay={200}>
               <StaggeredText text={content.p8} />
             </ScrollReveal>
-            <ScrollReveal delay={1000}>
+            <ScrollReveal delay={200}>
               <StaggeredText text={content.p9} />
             </ScrollReveal>
           </div>
